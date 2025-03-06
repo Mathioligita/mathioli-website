@@ -1,0 +1,77 @@
+/* Ratings.css */
+
+/* Overall container */
+.ratings-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    max-width: 800px;
+    /* margin: 0 auto; */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Title styles */
+  .ratings-title {
+    font-size: 18px;
+    color: #333;
+    /* text-align: center; */
+    margin-bottom: 20px;
+  }
+  
+  /* Review card styles */
+  .review-card {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .reviewer-name {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #333;
+  }
+  
+  .review-rating {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Review comment styles */
+  .review-comment {
+    font-size: 1em;
+    color: #666;
+    margin-top: 10px;
+  }
+  
+  /* User rating section */
+  .user-rating {
+    margin-top: 30px;
+    text-align: center;
+  }
+  
+  .user-rating h3 {
+    font-size: 1.5em;
+    color: #444;
+  }
+  
+  /* Media query for responsiveness */
+  @media (max-width: 768px) {
+    .ratings-container {
+      padding: 15px;
+    }
+  
+    .review-card {
+      margin-bottom: 15px;
+    }
+  }
+  

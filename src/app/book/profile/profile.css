@@ -1,0 +1,153 @@
+
+.profile-page {
+ 
+}
+
+.profile-contents-adjust{
+  /* position: absolute;
+  top: 20%; */
+  margin-top: -244px !important;
+    position: static;
+    z-index: 1;
+}
+
+@media screen and (max-width:600px) {
+  .profile-contents-adjust{
+    margin-top: -246px !important;
+      position: static;
+      z-index: 1;
+  }
+  
+}
+.sidebar-Profile {
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .08);
+  top: 4rem;
+}
+
+.sidebar-Profile-1 {
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .08);
+}
+
+.sidebar-section-Profile {
+  margin-bottom: 0px;
+
+}
+
+.sidebar-section-Profile h3 {
+  margin-bottom: 0px;
+}
+
+.sidebar-item-Profile {
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.content {
+  /* flex: 1; */
+  padding: 20px;
+  /* display: flex; */
+/* align-items:; */
+  /* justify-content: center; */
+}
+
+@media screen and (max-width:600px) {
+  .content {
+    /* flex: 1; */
+    padding: 5px;}
+}
+
+.profile-information {
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.profile-information h2 {
+  margin-bottom: 20px;
+}
+
+.profile-information div {
+  margin-bottom: 10px;
+}
+
+.profile-information label {
+  margin-right: 10px;
+}
+
+.profile-information input {
+  margin-right: 10px;
+}
+
+.faqs {
+  margin-top: 20px;
+}
+
+.delete-account {
+  margin-top: 20px;
+}
+
+.delete-account button {
+  margin-right: 10px;
+}
+
+
+.sidebar-Profile {
+
+  border: 1px solid #ffff;
+  border-radius: 3px;
+  background-color: #ffff;
+
+  padding: 25px;
+  box-shadow: 0px 4px 8px 0px #00000033;
+
+
+}
+
+.sidebar-section-Profile {
+  
+  padding: 22px 23px 11px 20px;
+  border-bottom: 3px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: white;
+}
+
+.sidebar-section-Profile h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.sidebar-item-Profile-Profile {
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.sidebar-item-Profile:hover {
+  background-color: #e0e0e0;
+}
+
+.sidebar-item-Profile.active {
+  background-color: #2874f0;
+  color: #fff;
+}
+
+.sidebar-item-Profile:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.sidebar-item-Profile a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.sidebar-item-Profile a:hover {
+  text-decoration: underline;
+}

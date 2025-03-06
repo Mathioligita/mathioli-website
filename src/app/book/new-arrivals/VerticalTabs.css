@@ -1,0 +1,95 @@
+a:hover,
+a:focus {
+    text-decoration: none;
+    outline: none;
+}
+
+.vertical-tab {
+    font-family: 'Montserrat', sans-serif;
+    display: table;
+    padding-left: 10px;
+}
+
+.vertical-tab .nav-tabs {
+    width: 25%;
+    min-width: 25%;
+    border: none;
+    box-shadow: -6px 0 0 rgba(0,0,0,0.1);
+    vertical-align: top;
+    display: table-cell;
+}
+
+.vertical-tab .nav-tabs .nav-item {
+    float: none;
+}
+
+.vertical-tab .nav-tabs .nav-link {
+    color: #444;
+    background: #ddd;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    text-transform: capitalize;
+    text-align: center;
+    padding: 10px 7px 9px;
+    margin: 0 0 20px -10px;
+    border-radius: 0 20px 20px 0;
+    border: none;
+    position: relative;
+    z-index: 1;
+    transition: all 0.4s ease 0s;
+}
+
+.vertical-tab .nav-tabs .nav-link:hover,
+.vertical-tab .nav-tabs .nav-link.active {
+    color: #fff;
+    background: #7E6A63;
+    border: none;
+    text-shadow: 3px 3px rgba(0,0,0,0.4);
+}
+
+.vertical-tab .nav-tabs .nav-link::before {
+    content: '';
+    background: linear-gradient(to top right, transparent 50%, #333 50%);
+    height: 10px;
+    width: 10px;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    z-index: -1;
+}
+
+.vertical-tab .tab-content {
+    color: #555;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    line-height: 21px;
+    padding: 15px 15px 15px 20px;
+    display: table-cell;
+}
+
+.vertical-tab .tab-content h3 {
+    color: #7E6A63;
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0 0 7px;
+}
+
+@media only screen and (max-width: 479px) {
+    .vertical-tab .nav-tabs {
+        width: 100%;
+        display: block;
+    }
+
+    .vertical-tab .nav-tabs .nav-link {
+        padding: 10px 10px 9px;
+        margin: 0 0 12px -10px;
+    }
+
+    .vertical-tab .tab-content {
+        font-size: 14px;
+        display: block;
+    }
+}

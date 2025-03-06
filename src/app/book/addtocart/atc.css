@@ -1,0 +1,13 @@
+.pp-btn{
+    border: 1px solid #968585 !important;
+    border-radius: 10px !important;
+    /* justify-content: space-around; */
+    /* background: #000; */
+    width: unset;
+}
+
+.p-button-rounded{
+    color: #968585;
+    font-size: 16px !important;
+    font-weight: 500;
+}

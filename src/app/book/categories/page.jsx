@@ -1,0 +1,443 @@
+
+"use client";
+
+import React, { useState, useEffect, useContext, useRef } from "react";
+import { Row, Col } from "react-bootstrap";
+import { useRouter } from "next/navigation";
+import { BookAPI, CategoryAPI } from "../../../../api/page";
+import { Dropdown } from "primereact/dropdown";
+import { MultiSelect } from "primereact/multiselect";
+import { InputText } from "primereact/inputtext";
+import { IconField } from "primereact/iconfield";
+import { InputIcon } from "primereact/inputicon";
+import "../topselling/[name]/styles.css";
+import "./aduiostyle.css";
+import { Button } from "primereact/button";
+// import Overlayaudio from "./overlayaudio";
+import userContext from "../../UseContext/UseContext";
+import AudioPlayer from "react-h5-audio-player";
+import "react-h5-audio-player/lib/styles.css";
+import Swal from "sweetalert2";
+import '../../book/topselling/BookCard.css'
+const retryFetch = async (fn, retries = 3, delay = 1000) => {
+  try {
+    return await fn();
+  } catch (error) {
+    if (error.response && error.response.status === 429 && retries > 0) {
+      console.warn(`Rate limited. Retrying in ${delay / 1000} seconds...`);
+      await new Promise((resolve) => setTimeout(resolve, delay));
+      return retryFetch(fn, retries - 1, delay * 2);
+    }
+    throw error;
+  }
+};
+
+
+
+export default function Smartpage({ pathname }) {
+  const [categoriesData, setCategoriesData] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const { categoriesdata, setCategoriesdata } = useContext(userContext);
+  const [globalFilterValue, setGlobalFilterValue] = useState("");
+  const [selectedGenres, setSelectedGenres] = useState([]);
+  const [selectedLanguages, setSelectedLanguages] = useState([]);
+  const [selectedAuthors, setSelectedAuthors] = useState([]);
+  const [selectedFormats, setSelectedFormats] = useState([]);
+  const [booksData, setBooksData] = useState([]);
+  const [showaudioBooking, setShowaudioBooking] = useState(false);
+  const [audioBookingdetails, setAudioBokkingDetails] = useState(null);
+  const [showAudiobooksFirst, setShowAudiobooksFirst] = useState(true);
+  const router = useRouter();
+  const [audiocount, setAudiocount] = useState(30);
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedBook, setSelectedBook] = useState(null);
+  const audioRef = useRef(null);
+  // const audioRef = useRef(null);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [isEBookAvailable, setIsEBookAvailable] = useState(false);
+  const [isAudiobookAvailable, setIsAudiobookAvailable] = useState(false);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await retryFetch(CategoryAPI);
+        const data = response?.data?.categories;
+
+        console.log("Fetched categories data:", data);
+        setCategoriesdata(data || null);
+
+        // if (Array.isArray(data) && data.length > 0) {
+        setCategoriesData(data || null);
+        // }
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    // if (Array.isArray(categoriesdata) && categoriesdata.length === 0) {
+    fetchCategories();
+    // }
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await retryFetch(BookAPI);
+      const data = response?.data?.books;
+      setBooksData(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+
+    const interval = setInterval(() => {
+      setAudiocount((prevCount) => (prevCount <= 0 ? 30 : prevCount - 1));
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (audiocount === 0 && audioRef.current) {
+      // audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+  }, [audiocount]);
+
+  const handleBookClick = (book) => {
+    router.push(`/book/${book.slug}`);
+  };
+
+  const filteredBooks = booksData
+    ?.sort((a, b) => {
+      if (showAudiobooksFirst) {
+        if (a.isAudiobookAvailable && !b.isAudiobookAvailable) {
+          return -1;
+        }
+        if (!a.isAudiobookAvailable && b.isAudiobookAvailable) {
+          return 1;
+        }
+      }
+      return 0;
+    })
+    .filter((book) => {
+      const categoryMatch =
+        !selectedCategory ||
+        (book.category &&
+          book.category.toLowerCase() ===
+            selectedCategory?.name?.toLowerCase());
+
+      const genreMatch =
+        !selectedGenres.length ||
+        (book.genre && selectedGenres.includes(book.genre));
+
+      const languageMatch =
+        !selectedLanguages.length ||
+        (book.language && selectedLanguages.includes(book.language));
+
+      const authorMatch =
+        !selectedAuthors.length ||
+        (book.author && selectedAuthors.includes(book.author));
+
+      const formatMatch =
+        !selectedFormats.length ||
+        (selectedFormats.includes("EBook") && book.isEBookAvailable) ||
+        (selectedFormats.includes("Hard Copy") && book.isHardCopyAvailable);
+
+      const globalMatch =
+        (book.title &&
+          book.title
+            .toLowerCase()
+            .includes(globalFilterValue?.toLowerCase() || "")) ||
+        (book.author &&
+          book.author
+            .toLowerCase()
+            .includes(globalFilterValue?.toLowerCase() || "")) ||
+        (book.genre &&
+          book.genre
+            .toLowerCase()
+            .includes(globalFilterValue?.toLowerCase() || "")) ||
+        (book.language &&
+          book.language
+            .toLowerCase()
+            .includes(globalFilterValue?.toLowerCase() || ""));
+
+      if (!showAudiobooksFirst && book.isAudiobookAvailable) {
+        return false;
+      }
+
+      // Filter based on the current route
+      // if (pathname === 'e-books' && !book.isEBookAvailable) {
+      //   return false;
+      // }
+      if (pathname === "audio-books" && !book.isAudiobookAvailable) {
+        return false;
+      }
+
+      return (
+        categoryMatch &&
+        genreMatch &&
+        languageMatch &&
+        authorMatch &&
+        formatMatch &&
+        globalMatch
+      );
+    });
+
+  const genres = [...new Set(booksData?.map((book) => book?.genre))];
+  const languages = [...new Set(booksData?.map((book) => book?.language))];
+  const authors = [...new Set(booksData?.map((book) => book?.author))];
+  const formats = ["EBook", "Audiobook", "Hard Copy"];
+
+  const onGlobalFilterChange = (e) => {
+    const value = e.target.value;
+    setGlobalFilterValue(value);
+  };
+
+  const renderHeader = () => {
+    return (
+      <div className="table-header ">
+        <div className="">
+          <IconField iconPosition="left">
+            <InputIcon className="pi pi-search"> </InputIcon>
+            <InputText
+              type="search"
+              value={globalFilterValue ?? ""}
+              onChange={(e) => onGlobalFilterChange(e)}
+              placeholder="Global Search"
+            />
+          </IconField>
+        </div>
+      </div>
+    );
+  };
+
+  const header = renderHeader();
+
+  const groupedBooks = filteredBooks?.reduce((acc, book) => {
+    const category = book?.category;
+    if (!acc[category]) {
+      acc[category] = [];
+    }
+    acc[category]?.push(book);
+    return acc;
+  }, {});
+
+  const handlePlayButtonClick = (book) => {
+    setSelectedBook(book);
+    setShowPopup(true);
+    setAudiocount(30); // Reset the audio count when a new book is selected
+    // router.push(`/book/audio-books/${book.slug}`);
+  };
+
+  const handlepayoverflow = (book, bookType) => {
+    setShowaudioBooking(true);
+    setAudioBokkingDetails({ book, bookType });
+  };
+
+  const handleTimeUpdate = () => {
+    const audio = audioRef.current?.audio?.current;
+    if (audio && audio.currentTime >= 30) {
+      audio;
+      audio.currentTime = 30; // Lock at 30 sec
+      setIsDisabled(true);
+    }
+  };
+  const shouldRenderButtons = pathname;
+  console.log(shouldRenderButtons);
+
+  return (
+    <div className="container mt-4">
+      <div className="row mt-5  ">
+    
+        <div className="col-md-7 col-lg-9 mb-4">
+          <div className="main-content ">
+            {header}
+            <div className="book-sdbjd">
+              {categoriesData.map((category) => (
+                <div key={category.name}>
+                  <h3 className="mt-2">{category.name}</h3>
+                  <Row>
+                    {groupedBooks[category.name]?.map((book) => (
+                      <Col md={4} lg={2} sm={6} key={book._id} className=" p-1 p-md-0 book-mobile-card image-card-book" > 
+                        <div
+                          className="book-card"
+                          onClick={() => handleBookClick(book)}
+                          // style={{
+                          //   cursor: "pointer",
+                          //   justifyContent: "space-between",
+                          //   padding: "15px",
+                          //   // marginBottom: "20px",
+                          //   borderRadius: "10px",
+                          //   flexDirection: "column",
+                          // }}
+                        >
+                          <div
+                            className="book-images"
+                            // style={{
+                            //   flex: "1 0 auto",
+                            //   background: "#ffff",
+                            //   boxShadow:
+                            //     "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+                            //   borderRadius: "6px",
+                            //   padding: "15px",
+                            //   justifyContent: "center",
+                            //   display: "flex",
+                            // }}
+                          >
+                            <img
+                              src={
+                                book.bookimage && book.bookimage.length > 0
+                                  ? book.bookimage[0]
+                                  : "https://via.placeholder.com/150"
+                              }
+                              alt={book.title}
+                              width={"100%"}
+                            />
+                          </div>
+                          <div
+                            className="book-info mt-2"
+                            
+                          >
+                            <div className="d-flex mt-4">
+                              <h5
+                                className="mb-0"
+                                style={{
+                                  fontFamily: "Inter",
+                                  fontSize: "15px",
+                                  fontWeight: "700",
+                                  color: "#4D4D4D",
+                                }}
+                              >
+                                {book.title}
+                              </h5>
+                              <span
+                                className="ms-auto"
+                                style={{
+                                  fontSize: "12px",
+                                  justifyContent: "end",
+                                  textAlign: "end",
+                                }}
+                              >
+                                {book.userReadingStatus.length > 0
+                                  ? (
+                                      book.userReadingStatus.reduce(
+                                        (sum, item) => sum + item.ratings,
+                                        0
+                                      ) / book?.userReadingStatus?.length
+                                    ).toFixed(1)
+                                  : 0}
+                                /5
+                              </span>
+                            </div>
+                            <div
+                              className="ratings d-flex mt-1"
+                              style={{  fontSize: "13px !important" }}
+                            >
+                              <span>
+
+                              {book?.author}
+                              </span>
+                              <span
+                                className="ms-auto"
+                                // style={{ fontSize: "4px" }}
+                              >
+                                {Array.from({ length: 5 }, (_, index) => {
+                                  const rating =
+                                    book.userReadingStatus?.length > 0
+                                      ? book.userReadingStatus[0].ratings
+                                      : 0;
+                                  return (
+                                    <i
+                                      key={index}
+                                      className={`pi ${
+                                        index < rating
+                                          ? "pi-star-fill"
+                                          : "pi-star"
+                                      }`}
+                                      style={{
+                                        color:
+                                          index < rating
+                                            ? "#FFCB45"
+                                            : "inherit",
+                                      
+                                      }}
+                                    ></i>
+                                  );
+                                })}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      
+                      </Col>
+                    ))}
+                  </Row>
+                </div>
+              ))}
+             
+            </div>
+          </div>
+        </div>
+      </div>
+
+     
+
+      {showPopup && (
+        <div className="popup">
+          <div className="popup-content">
+            <div className="d-flex">
+              <div className="p-2">
+                <div className="d-flex">
+                  <div>
+                    <img
+                      src={selectedBook.bookimage[0]}
+                      alt=""
+                      style={{
+                        height: "100px",
+                        objectFit: "cover",
+                        borderRadius: "15px",
+                        padding: "2px",
+                      }}
+                    />
+                  </div>
+                  <div className="my-auto">
+                    {console.log(selectedBook)}
+                    <h4 className="m-2">{selectedBook.title}</h4>
+                  </div>
+                </div>
+              </div>
+              <div
+                style={{
+                  pointerEvents: isDisabled ? "none" : "auto",
+                  opacity: isDisabled ? 0.5 : 1,
+                }}
+                className="w-50 ms-auto mt-auto"
+              >
+                <AudioPlayer
+                  ref={audioRef}
+                  autoPlay
+                  src={selectedBook.audiobookUpload[0]}
+                  onPlay={(e) => console.log("onPlay")}
+                  onListen={handleTimeUpdate} // Track time and disable after 30 sec
+                  controls
+                  className="w-100"
+                />
+              </div>
+              <div onClick={() => setShowPopup(false)} className="my-auto ">
+                <i className="pi pi-times ms-4 fw-1"></i>
+              </div>
+            </div>
+
+            {/* <p>Preview will end in {audiocount} seconds...</p>
+            {audiocount === 0 && (
+              <p>You want to pay to continue listening.</p>
+            )} */}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

@@ -1,0 +1,228 @@
+.book-page {
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+.green-button {
+  background-color: green !important;
+  color: white !important;
+}
+
+
+/* popup.css */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 19px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 50%;
+  margin-top:auto;
+}
+.rhap_container{
+  box-shadow: none !important;
+}
+
+.popup-content h4 {
+  margin-bottom: 20px;
+}
+
+.popup-content audio {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.popup-content p {
+  font-size: 14px;
+  color: #555;
+}
+.book-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  /* background-color: #fff; */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* max-width: 1000px; */
+  margin: 0 auto;
+  /* color: white; */
+}
+
+.book-details {
+  text-align: left;
+  width: 100%;
+}
+
+.book-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.book-info {
+  margin: 5px 0;
+}
+.in-box {
+  padding: 10px;
+  /* margin-right: 5px; */
+}
+
+.listen-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.episodes-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.episode-card {
+  /* background-color: #fff; */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  width: 150px;
+}
+
+.episode-card p {
+  margin-bottom: 10px;
+}
+
+.episode-card audio {
+  width: 100%;
+}
+.overlay {
+  position: fixed; /* Stays in place while scrolling */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Ensures it appears on top */
+}
+
+.overlay-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+/* audio.css */
+
+.book-page {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+/* .book-page-container {
+  max-width: 800px;
+  margin: auto;
+} */
+
+.nav-tabs {
+  border-bottom: 2px solid #ddd;
+}
+
+.nav-tabs .nav-link {
+  border: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  color: #555;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.nav-tabs .nav-link.active {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #007bff;
+  color: #007bff;
+}
+
+.book-details,
+.episodes-container {
+  padding: 20px;
+  /* border: 1px solid #ddd; */
+  border-top: none;
+}
+
+.book-title {
+  /* font-size: 15px; */
+  margin-bottom: 10px;
+}
+
+.book-info {
+  font-size: 1.2em;
+  margin: 5px 0;
+}
+
+.listen-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.listen-button:hover {
+  background-color: #0056b3;
+}
+
+.episode-card {
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.episode-card p {
+  position: relative;
+  z-index: 1;
+  color: #625d5d;
+  font-size: 16px;
+  /* text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); */
+  margin: 0px !important;
+}
+
+.episode-card audio {
+  width: 100%;
+  margin-top: 10px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+}

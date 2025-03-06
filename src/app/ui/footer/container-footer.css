@@ -1,0 +1,25 @@
+.container-footer{
+    margin: 0px 80px 0px 80px !important;
+}
+
+@media screen and (max-width: 600px) {
+    .container-footer{
+        margin: 0px 40px 0px 40px !important;
+    }
+}
+
+.footer-logo{
+    width: 76%;
+    display: block;
+    /* margin-left: auto; */
+    margin-right: auto;
+}
+
+.container-footer{
+    @media (min-width: 992px) {
+        .col-lg-1 {
+            flex: 0 0 auto;
+            width: 11.333333%;
+        }
+    }
+}

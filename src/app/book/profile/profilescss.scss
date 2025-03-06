@@ -1,0 +1,47 @@
+.profile-contents-button .profile-buttonssssss-buttons {
+  display: flex;
+  justify-content: center;
+  background-color: #f5f5f5;
+  border: 1px solid #f5f5f5;
+  border-radius: 12px;
+  margin-top: 1rem;
+  color: black;
+  // transition: all 0.3s ease;
+  // /* Smooth transition effect */
+}
+
+.profile-contents-button .profile-buttonssssss-buttons:hover,
+.profile-contents-button .profile-buttonssssss-buttons:focus,
+.profile-contents-button .profile-buttonssssss-buttons:active {
+  color: white;
+  background-color: #1d5755;
+  border: 2px solid #1d5755;
+  border-radius: 12px;
+  // outline: none;
+  // /* Removes default focus outline */
+}
+.book-image {
+  position: relative;
+}
+
+.play-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff;
+  font-size: 20px;
+  z-index: 10;
+}
+
+.play-button:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
