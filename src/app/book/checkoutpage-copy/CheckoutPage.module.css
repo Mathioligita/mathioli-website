@@ -1,0 +1,14 @@
+/* styles/CheckoutPage.module.css */
+.checkout-page {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.checkout-form, .checkout-summary {
+    width: 48%;
+}
+
+.checkout-summary .p-datatable-wrapper {
+    margin-bottom: 20px;
+}

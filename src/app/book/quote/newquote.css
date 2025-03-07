@@ -1,0 +1,38 @@
+.quote-container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    /* overflow: hidden; */
+    /* text-align: center; */
+    color: white;
+    padding: 0;
+    margin: 0;
+}
+.quote-card{
+    width: 100%;
+    max-width: 100%;
+    padding: 15px;
+    opacity: 0;
+    height: 266px;
+    /* height: 200px; */
+}
+.new-arrivals-container{
+    width:100%;
+    margin-top:0px !important;
+}
+.new-arrivals-title{
+    margin-top:0px !important; 
+}
+/* .dots-container{
+    top: 170px;
+} */
+
+@media screen and (max-width:768px){
+    .quote-container{
+       margin-bottom: 20px; 
+    }
+}
+
+.quote-card{
+    justify-content: center;
+}

@@ -1,0 +1,7 @@
+/* .e-book-sidebar */
+@media screen and (min-width: 600px) {
+    .e-book-sidebar{
+        flex-wrap: wrap !important;
+    }
+    
+}

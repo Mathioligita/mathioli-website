@@ -1,0 +1,46 @@
+.icon-footer {
+  gap: 10px;
+  align-items: center;
+}
+
+.icon-footer a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-size: 20px;
+  border-radius: 50%;
+  background: #fff;
+  padding: 10px;
+  transition: transform 0.4s ease, background 0.3s ease;
+}
+
+.icon-footer .btn-item-icon:hover a {
+  background: #ffa539;
+  transform: rotateY(360deg) scale(1.2);
+}
+.footer-item {
+  transition: background-color 0.3s ease-in-out;
+}
+
+.footer-content {
+  text-decoration: none;
+  position: relative;
+}
+
+.footer-content::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #ffa539;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease-in-out;
+}
+
+.footer-item:hover .footer-content::after {
+  transform: scaleX(1);
+}

@@ -1,0 +1,318 @@
+/* Basic reset */
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  } */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/* Main Container */
+.book-detail-container {
+  /* display: flex; */
+  justify-content: space-between;
+  margin: 20px;
+  gap: 30px;
+}
+
+/* Left Side (Book Details) */
+.book-detail-left {
+  flex: 0 0 60%;
+}
+
+.book-header {
+  /* background: #fff; */
+  padding: 20px;
+  border-radius: 8px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  margin-bottom: 20px;
+}
+
+.book-header h1 {
+  font-size: 2rem;
+  color: #333;
+}
+
+.book-header p {
+  font-size: 1rem;
+  margin: 5px 0;
+}
+
+.book-details {
+  /* background: #fff; */
+  padding: 20px;
+  border-radius: 8px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+}
+
+.book-details h2,
+.book-details h3 {
+  margin-top: 20px;
+}
+
+.book-details ul {
+  padding-left: 20px;
+}
+
+.book-details li {
+  margin: 5px 0;
+}
+
+/* Right Side (Author and Buy Now) */
+.book-detail-right {
+  flex: 0 0 30%;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.author-info {
+  /* margin-bottom: 20px; */
+  margin-left: auto;
+  padding: 5px;
+  /* width: 400px; */
+  background-color: #F4F4F4;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.author-info .author-bio {
+  padding: 10px;
+  margin: 12px 12px;
+}
+
+.author-info .author-bio span {
+  font-size: small;
+}
+
+.buy-now {
+  margin-bottom: 20px;
+}
+
+.buy-now-button,
+.listen-now-button {
+  background-color: #f76c6c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.buy-now-button:hover,
+.listen-now-button:hover {
+  background-color: #e55c5c;
+}
+
+.audiobook-availability {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.audiobook-availability h3 {
+  color: #333;
+}
+
+.audiobook-availability button {
+  background-color: #34a853;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.audiobook-availability button:hover {
+  background-color: #2c8f44;
+}
+
+@media (max-width: 768px) {
+  .book-detail-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .book-detail-left,
+  .book-detail-right {
+    flex: 1;
+    margin-bottom: 20px;
+  }
+}
+
+
+
+.book-publish-date {
+  font-size: 15px;
+  color: #9A9A9A;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.availability-tick {
+  color: #fff;
+  background-color: #42BB4E;
+  font-size: 9px;
+  margin-left: 5px;
+  padding: 5px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.availability-cross {
+  color: #fff;
+  background-color: #D6D6D6;
+  font-size: 9px;
+  margin-left: 5px;
+  padding: 5px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.list-unstyled li{
+  margin-top: 10px;
+}
+/* Global overlay to darken the background */
+.review-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Modal container */
+.review-modal {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.3s ease-out;
+}
+
+/* Heading */
+.review-modal h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+/* Error message */
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Form fields */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #444;
+  display: block;
+}
+
+.rating-select, .comment-textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  color: #555;
+}
+
+/* Textarea field */
+.comment-textarea {
+  height: 120px;
+  resize: vertical;
+  font-family: Arial, sans-serif;
+}
+
+/* Buttons container */
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Submit button */
+.submit-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+
+.submit-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Cancel button */
+.cancel-btn {
+  background-color: #f8f9fa;
+  color: #333;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cancel-btn:hover {
+  background-color: #e2e6ea;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,64 @@
+@media (max-width: 320px) {
+  .top-selling {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}
+
+.top-selling-showall {
+  font-weight: 300;
+  margin-right: 54px;
+  margin-left: auto;
+  height: 40px;
+  color: black;
+  border-radius: 12px;
+  background-color: rgba(114, 114, 114, 0);
+  border: 1px solid rgba(128, 128, 128, 0.041);
+}
+.top-selling-showall:hover {
+  background-color: #1d5755 !important;
+  color:#fff !important;
+}
+
+.Top-selling {
+  /* margin: 1.5rem ; */
+  /* margin-bottom: 31px; */
+  font-size: 19px;
+  font-weight: 600;
+  margin: 0px;
+}
+
+.top-selling-tabs {
+  display: flex;
+  /* margin-bottom: 36px; */
+  /* margin-left: 3rem; */
+}
+
+@media screen and (max-width:600px) {
+  .books-view{
+    margin-right: 0px !important;
+  }
+}
+
+.books-view {
+  margin-right: 27px;
+}
+.books-view :active{
+    border-bottom: #1d5755;
+}
+
+@media (max-width: 426px) {
+  .top-selling-tabs {
+    display: grid;
+    /* padding: 10px; */
+    /* margin-bottom: 36px; */
+    margin-left: 0;
+    /* margin: 4px 45px; */
+    text-align: center;
+    gap: 13px;
+  }
+}
+
+/* .filter-section .select-cat {
+    width: 100% !important;
+} */
