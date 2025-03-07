@@ -37,6 +37,7 @@ export default function Quote() {
 
   if (item.length === 0) {
     return (
+<<<<<<< HEAD
       <div className="text-center">
         <div className="d-flex" style={{ justifyContent: "center" }}>
           <img
@@ -45,6 +46,21 @@ export default function Quote() {
             // width={"500px"}
             style={{ objectFit: "cover" }}
           />
+=======
+      <div className="quote-container">
+        <div className="quote-card active">
+          <div className="slider-header">Today’s Quote</div>
+          <div className="quote mt-5" style={{ position: "relative" }}>
+            கோபத்திலிருந்து மாயை எழுகிறது. மனம் மாயையால் குழப்பமடைகிறது. மனம்
+            குழப்பமடையும்போது பகுத்தறிவு அழிக்கப்படுகிறது.
+          </div>
+          <div
+            className="author text-end me-4"
+            style={{ position: "fixed", right: "0" }}
+          >
+            - Mathioli Gita
+          </div>
+>>>>>>> master
         </div>
       </div>
     );

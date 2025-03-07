@@ -26,7 +26,11 @@ const ProfilePage = (profileImage) => {
     router.push("/")
 
   }
+<<<<<<< HEAD
   // const [user, setUser] = useState(null);
+=======
+
+>>>>>>> master
 
 
 
@@ -34,8 +38,13 @@ const ProfilePage = (profileImage) => {
     switch (sectionName) {
       case "Profile":
         return <ProfileInformation user={user} profileImage={profileImage} />;
+<<<<<<< HEAD
       case "Bookmark":
         return <BookMark/>; // Placeholder for actual component
+=======
+      // case "Bookmark":
+      //   return <BookMark/>; // Placeholder for actual component
+>>>>>>> master
       case "Recent":
         return <Recent/>; // Placeholder for actual component
       // case "Subscription":

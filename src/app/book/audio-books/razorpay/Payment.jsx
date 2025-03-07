@@ -127,6 +127,10 @@
 // };
 
 // export default Payment;
+<<<<<<< HEAD
+=======
+'use client'
+>>>>>>> master
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { Col, Row } from "react-bootstrap";

@@ -127,7 +127,10 @@ export default function RootLayout({ children }) {
   const [categoriesdata, setCategoriesdata] = useState([]);
   const [loginPopupVisible, setLoginPopupVisible] = useState(false);
   const [usersdata, setusersdata] = useState([]);
+<<<<<<< HEAD
  
+=======
+>>>>>>> master
 
   const loginpoup = () => {
     setLoginPopupVisible(true);
@@ -175,16 +178,28 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<<<<<<< HEAD
+=======
+        <title> Mathioli Gita</title>
+        <link rel="icon" href="logo.svg" type="image/x-icon" sizes="any" />
+>>>>>>> master
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+<<<<<<< HEAD
        
           <UserContext.Provider value={defaultValue}>
            {/* Show loader when loading */}
             {children}
           </UserContext.Provider>
         
+=======
+        <UserContext.Provider value={defaultValue}>
+          {/* Show loader when loading */}
+          {children}
+        </UserContext.Provider>
+>>>>>>> master
       </body>
 
       {/* <script

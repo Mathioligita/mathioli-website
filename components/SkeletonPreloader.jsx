@@ -10,6 +10,10 @@ const SkeletonPreloader = () => {
         padding: "15px",
         display: "flex",
         justifyContent: "start",
+<<<<<<< HEAD
+=======
+        marginRight:"5px"
+>>>>>>> master
       }}
     >
       <div className=" me-4">

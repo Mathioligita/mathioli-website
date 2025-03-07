@@ -61,8 +61,11 @@ const TabComponent = () => {
           style={{
             borderTopRightRadius: "0px",
             borderBottomRightRadius: "0px",
+<<<<<<< HEAD
             // borderTopLeftRadius: "10px",
             // borderBottomLeftRadius: "10px",
+=======
+>>>>>>> master
             borderTop: "0px",
             borderLeft: "0px",
             borderRight: "0px",
@@ -95,7 +98,11 @@ const TabComponent = () => {
       {error && <p className="error-message">{error}</p>}
 
       {/* Slider Section */}
+<<<<<<< HEAD
       <div className="tab-content ">
+=======
+      <div className="tab-content">
+>>>>>>> master
         <FaArrowLeft className="slider-arrow left" onClick={slideLeft} />
         <Row className="bmc-book">
           {activeTab === "newRelease" && (
@@ -106,6 +113,7 @@ const TabComponent = () => {
                 <p>No new arrivals available.</p>
               ) : (
                 data.map((item, index) => (
+<<<<<<< HEAD
                   <Col
                     key={index}
                     lg={2}
@@ -113,6 +121,9 @@ const TabComponent = () => {
                     sm={3}
                     className="text-center "
                   >
+=======
+                  <Col key={index} lg={2} md={3} sm={3} className="text-center">
+>>>>>>> master
                     <div className="book-mobile-card">
                       <div className="new-arrivals-item new-books">
                         <img
@@ -129,10 +140,30 @@ const TabComponent = () => {
             </div>
           )}
         </Row>
+<<<<<<< HEAD
         {activeTab === "recentEpisodes" && (
           // <div className="slider-container" ref={sliderRef}>
           <div className="slider-containers" ref={sliderRef}>
             <p>No Data</p>
+=======
+        {/* {activeTab === "recentEpisodes" && (
+          <div className="slider-container" ref={sliderRef}>
+            <p style={{ textAlign: "center", padding: "10px", paddingTop: "20px"}}>
+              No Data
+            </p>
+          </div>
+        )} */}
+        {activeTab === "recentEpisodes" && (
+          <div className="slider-container" ref={sliderRef}>
+            <div>
+              <h4>Stay Tuned for Recent Episodes</h4>
+              <p>Currently, there are no recent episodes available.</p>
+              <p>
+                Check back soon, as new episodes will be added here as they
+                become available.
+              </p>
+            </div>
+>>>>>>> master
           </div>
         )}
 

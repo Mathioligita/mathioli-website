@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // "use client"
 // import React, { useState } from "react";
 // import axios from "axios";
@@ -156,6 +157,8 @@
 // }
 
 // export default Register;
+=======
+>>>>>>> master
 "use client";
 import React, { useRef, useState } from "react";
 // import axios from "axios";
@@ -169,7 +172,11 @@ import { Toast } from "primereact/toast";
 import { UsersRegisterAPi } from "api/page";
 import { useRouter } from "next/navigation";
 
+<<<<<<< HEAD
 function Register({ visible, onHide, }) {
+=======
+function Register({ visible, onHide }) {
+>>>>>>> master
   const toast = useRef(null);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -179,10 +186,16 @@ function Register({ visible, onHide, }) {
     mobile: "",
   });
 
+<<<<<<< HEAD
 
   // const [selectedCountry, setSelectedCountry] = useState("+91");
   const [loading, setLoading] = useState(false);
   const router = useRouter()
+=======
+  // const [selectedCountry, setSelectedCountry] = useState("+91");
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+>>>>>>> master
   // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -211,9 +224,13 @@ function Register({ visible, onHide, }) {
     };
 
     try {
+<<<<<<< HEAD
       const response = await UsersRegisterAPi(payload)
 
 
+=======
+      const response = await UsersRegisterAPi(payload);
+>>>>>>> master
 
       if (response.success == true) {
         // alert("coming");
@@ -238,9 +255,14 @@ function Register({ visible, onHide, }) {
           life: 3000,
         });
       }
+<<<<<<< HEAD
 
     } catch (error) {
       console.log(error)
+=======
+    } catch (error) {
+      console.log(error);
+>>>>>>> master
       toast.current.show({
         severity: "error",
         summary: "Login Failed",
@@ -249,7 +271,10 @@ function Register({ visible, onHide, }) {
       });
     } finally {
       setLoading(false);
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
     }
   };
 
@@ -368,11 +393,24 @@ function Register({ visible, onHide, }) {
               <div
                 className="d-flex justify-content-center"
                 style={{
+<<<<<<< HEAD
                   cursor: "pointer",
                   border: "1px solid black",
                   borderRadius: "10px",
                   padding: "10px",
                 }}
+=======
+                  // cursor: loading ? "not-allowed" : "pointer",
+                  cursor: "not-allowed",
+                  // border: "1px solid black",
+                  border: "0px",
+                  borderRadius: "10px",
+                  padding: "10px",
+                  opacity: loading ? 0.5 : 1,
+                  backgroundColor: "#e7e7e7",
+                }}
+                disabled={loading}
+>>>>>>> master
               >
                 <FcGoogle className="fs-3" />
                 <span className="ms-2">Continue via Google</span>

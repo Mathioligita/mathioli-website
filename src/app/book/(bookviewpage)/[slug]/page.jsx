@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // "use client";
 // import React, { useState, useEffect, useContext, useRef } from "react";
 // import { useParams, useRouter } from "next/navigation";
@@ -432,6 +433,8 @@
 //     </div>
 //   );
 // }
+=======
+>>>>>>> master
 "use client";
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
@@ -634,6 +637,7 @@ export default function BookDetailPage() {
     router.push("/book/checkout");
   };
 
+<<<<<<< HEAD
   if (loading)
     return (
       <div
@@ -648,6 +652,23 @@ export default function BookDetailPage() {
         />
       </div>
     );
+=======
+  // if (loading)
+  //   return (
+  //     <div
+  //       className="d-flex"
+  //       style={{ justifyContent: "center", height: "100vh" }}
+  //     >
+  //       {/* <img
+  //         src="../Assert/Animation - 1740485995740.gif"
+  //         alt=""
+  //         width={"500px"}
+  //         style={{ objectFit: "cover" }}
+  //       /> */}
+  //       loading ......
+  //     </div>
+  //   );
+>>>>>>> master
   if (error) return <div>{error}</div>;
 
   // Check if bookDetails and bookDetails.book are defined
@@ -655,6 +676,10 @@ export default function BookDetailPage() {
     return (
       <div>
         <Loading />
+<<<<<<< HEAD
+=======
+        {/* <h1>loading.......</h1> */}
+>>>>>>> master
       </div>
     );
   }
