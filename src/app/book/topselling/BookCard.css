@@ -54,10 +54,6 @@
   border-radius: 8px;
 }
 
-.book-image img {
-  /* width: 100%; */
-}
-
 /* Book info */
 .book-info {
   flex: 1 0 auto;
@@ -101,5 +97,3 @@
   }
 }
 
-.image-card-book {
-}
