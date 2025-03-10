@@ -1,18 +1,10 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 "use client";
 import React, { useRef, useState } from "react";
 // import axios from "axios";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
-<<<<<<< HEAD
-import { Toast } from "primereact/toast";  // Use primereact Toast
-=======
 import { Toast } from "primereact/toast"; // Use primereact Toast
->>>>>>> master
 import { FcGoogle } from "react-icons/fc";
 // import { API_BASE_URL } from "../utils";
 
@@ -51,16 +43,6 @@ function Login({ visible, onHide }) {
     };
 
     try {
-<<<<<<< HEAD
-
-      const response = await LoginAPi(payload)
-      // const response = await axios.post(`${API_BASE_URL}/users/login`, payload);
-
-      if (response) {
-        console.log(response);
-        const Data = response.data;
-        console.log(Data)
-=======
       const response = await LoginAPi(payload);
       // const response = await axios.post(`${API_BASE_URL}/users/login`, payload);
 
@@ -68,7 +50,6 @@ function Login({ visible, onHide }) {
         console.log(response);
         const Data = response.data;
         console.log(Data);
->>>>>>> master
         Cookies.set("refreshToken", Data.refreshToken);
         Cookies.set("accessToken", Data.accessToken);
 
@@ -79,19 +60,11 @@ function Login({ visible, onHide }) {
           life: 3000,
         });
       }
-<<<<<<< HEAD
-      setTimeout(()=>{
-        onHide();
-      },[1000])
-    } catch (error) {
-      console.error(error)
-=======
       setTimeout(() => {
         onHide();
       }, [1000]);
     } catch (error) {
       console.error(error);
->>>>>>> master
       toast.current.show({
         severity: "error",
         summary: "Login Failed",
@@ -157,17 +130,6 @@ function Login({ visible, onHide }) {
               <div
                 className="d-flex justify-content-center"
                 style={{
-<<<<<<< HEAD
-                  cursor: "pointer",
-                  border: "1px solid black",
-                  borderRadius: "10px",
-                  padding: "10px",
-                }}
-              >
-                <span>
-                  <FcGoogle className="fs-3" />
-                </span>
-=======
                   // cursor: loading ? "not-allowed" : "pointer",
                   cursor: "not-allowed",
                   // border: "1px solid black",
@@ -180,7 +142,6 @@ function Login({ visible, onHide }) {
                 disabled={loading}
               >
                 <FcGoogle className="fs-3" />
->>>>>>> master
                 <span className="ms-2">Continue via Google</span>
               </div>
             </form>

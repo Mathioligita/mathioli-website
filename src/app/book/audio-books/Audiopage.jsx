@@ -1,6 +1,4 @@
 
-<<<<<<< HEAD
-=======
 // "use client";
 
 // import React, { useState, useEffect, useContext, useRef } from "react";
@@ -560,7 +558,6 @@
 // ===============================================================================================================================================
 
 
->>>>>>> master
 "use client";
 
 import React, { useState, useEffect, useContext, useRef } from "react";
@@ -572,10 +569,7 @@ import { MultiSelect } from "primereact/multiselect";
 import { InputText } from "primereact/inputtext";
 import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
-<<<<<<< HEAD
-=======
 import { Paginator } from "primereact/paginator";
->>>>>>> master
 import "../topselling/[name]/styles.css";
 import "./aduiostyle.css";
 import { Button } from "primereact/button";
@@ -584,12 +578,8 @@ import userContext from "../../UseContext/UseContext";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import Swal from "sweetalert2";
-<<<<<<< HEAD
-import '../../../app/book/topselling/BookCard.css'
-=======
 import SkeletonPreloader from "components/SkeletonPreloader";
 import "../../../app/book/topselling/BookCard.css";
->>>>>>> master
 
 const retryFetch = async (fn, retries = 3, delay = 1000) => {
   try {
@@ -623,14 +613,9 @@ export default function Smartpage({ pathname }) {
   const [selectedBook, setSelectedBook] = useState(null);
   const audioRef = useRef(null);
   const [isDisabled, setIsDisabled] = useState(false);
-<<<<<<< HEAD
-  const [isEBookAvailable, setIsEBookAvailable] = useState(false);
-  const [isAudiobookAvailable, setIsAudiobookAvailable] = useState(false);
-=======
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const [loading, setLoading] = useState(true);
->>>>>>> master
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -651,20 +636,14 @@ export default function Smartpage({ pathname }) {
 
   const fetchData = async () => {
     try {
-<<<<<<< HEAD
-=======
       setLoading(true);
->>>>>>> master
       const response = await retryFetch(BookAPI);
       const data = response?.data?.books;
       setBooksData(data);
     } catch (error) {
       console.error("Error fetching data:", error);
-<<<<<<< HEAD
-=======
     } finally {
       setLoading(false);
->>>>>>> master
     }
   };
 
@@ -680,63 +659,6 @@ export default function Smartpage({ pathname }) {
 
   useEffect(() => {
     if (audiocount === 0 && audioRef.current) {
-<<<<<<< HEAD
-      audioRef.current;
-      audioRef.current.currentTime = 0;
-
-      // Close the popup
-      setShowPopup(false);
-
-      // Trigger SweetAlert when the countdown reaches 0
-      // Swal.fire({
-      //   title: "Continue Listening",
-      //   text: "Your 30-second preview has ended. Do you want to pay to continue listening?",
-      //   icon: "info",
-
-      //   showCancelButton: true,
-      //   confirmButtonText: "Pay",
-      //   cancelButtonText: "Cancel",
-      //   allowOutsideClick: false, // Prevent closing by clicking outside
-      //   allowEscapeKey: false, // Prevent closing with Escape key
-      // }).then((result) => {
-      //   if (result.isConfirmed) {
-      //     // Handle the payment logic here
-      //     handlepayoverflow(selectedBook, "audioBook");
-      //   }
-      // });
-      Swal.fire({
-        title: "Continue Listening",
-        text: "Your 30-second preview has ended. Unlock the full audiobook and continue listening without interruption.",
-        imageUrl: `${selectedBook?.bookimage[0]}`, // Add your image URL here
-        imageAlt: 'Custom image',
-        showCancelButton: true,
-        confirmButtonText: "Buy",
-        cancelButtonText: "Cancel",
-        allowOutsideClick: false, // Prevent closing by clicking outside
-        allowEscapeKey: false, // Prevent closing with Escape key
-        customClass: {
-          popup: 'custom-popup',
-          confirmButton: 'custom-confirm-button',
-          cancelButton: 'custom-cancel-button'
-        },
-        didOpen: () => {
-          // Apply inline styles directly
-          const popup = document.querySelector('.custom-popup');
-          const confirmButton = document.querySelector('.custom-confirm-button');
-          const cancelButton = document.querySelector('.custom-cancel-button');
-          const image = popup.querySelector('.swal2-image');
-
-          if (image) {
-            image.style.backgroundColor = '#1D5755';
-            image.style.height="183px"
-          }
-          confirmButton.style.backgroundColor = '#1D5755';
-          cancelButton.style.backgroundColor = '#1D5755';
-        }
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // Handle the payment logic here
-=======
       audioRef.current.currentTime = 0;
       setShowPopup(false);
       Swal.fire({
@@ -769,7 +691,6 @@ export default function Smartpage({ pathname }) {
         },
       }).then((result) => {
         if (result.isConfirmed) {
->>>>>>> master
           handlepayoverflow(selectedBook, "audioBook");
         }
       });
@@ -797,11 +718,7 @@ export default function Smartpage({ pathname }) {
         !selectedCategory ||
         (book.category &&
           book.category.toLowerCase() ===
-<<<<<<< HEAD
-          selectedCategory?.name?.toLowerCase());
-=======
             selectedCategory?.name?.toLowerCase());
->>>>>>> master
 
       const genreMatch =
         !selectedGenres.length ||
@@ -855,8 +772,6 @@ export default function Smartpage({ pathname }) {
       );
     });
 
-<<<<<<< HEAD
-=======
   const paginatedBooks = filteredBooks?.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
@@ -864,7 +779,6 @@ export default function Smartpage({ pathname }) {
 
   const totalPages = Math.ceil(filteredBooks?.length / itemsPerPage);
 
->>>>>>> master
   const genres = [...new Set(booksData?.map((book) => book?.genre))];
   const languages = [...new Set(booksData?.map((book) => book?.language))];
   const authors = [...new Set(booksData?.map((book) => book?.author))];
@@ -873,29 +787,19 @@ export default function Smartpage({ pathname }) {
   const onGlobalFilterChange = (e) => {
     const value = e.target.value;
     setGlobalFilterValue(value);
-<<<<<<< HEAD
-=======
     setCurrentPage(1); // Reset to the first page when filter changes
   };
 
   const onPageChange = (event) => {
     setCurrentPage(event.page + 1);
->>>>>>> master
   };
 
   const renderHeader = () => {
     return (
-<<<<<<< HEAD
-      <div className="table-header ">
-        <div className="">
-          <IconField iconPosition="left">
-            <InputIcon className="pi pi-search "> </InputIcon>
-=======
       <div className="table-header">
         <div className="">
           <IconField iconPosition="left">
             <InputIcon className="pi pi-search"> </InputIcon>
->>>>>>> master
             <InputText
               type="search"
               value={globalFilterValue ?? ""}
@@ -933,10 +837,6 @@ export default function Smartpage({ pathname }) {
   const handleTimeUpdate = () => {
     const audio = audioRef.current?.audio?.current;
     if (audio && audio.currentTime >= 30) {
-<<<<<<< HEAD
-      audio; // Pause the audio
-=======
->>>>>>> master
       audio.currentTime = 30; // Lock at 30 sec
       setIsDisabled(true);
 
@@ -945,234 +845,6 @@ export default function Smartpage({ pathname }) {
 
       // Show SweetAlert with a "Pay" button
       Swal.fire({
-<<<<<<< HEAD
-              title: "Continue Listening",
-              text: "Your 30-second preview has ended. Unlock the full audiobook and continue listening without interruption.",
-              imageUrl: `${selectedBook?.bookimage[0]}`, // Add your image URL here
-              imageAlt: 'Custom image',
-              showCancelButton: true,
-              confirmButtonText: "Buy",
-              cancelButtonText: "Cancel",
-              allowOutsideClick: false, // Prevent closing by clicking outside
-              allowEscapeKey: false, // Prevent closing with Escape key
-              customClass: {
-                popup: 'custom-popup',
-                confirmButton: 'custom-confirm-button',
-                cancelButton: 'custom-cancel-button'
-              },
-              didOpen: () => {
-                // Apply inline styles directly
-                const popup = document.querySelector('.custom-popup');
-                const confirmButton = document.querySelector('.custom-confirm-button');
-                const cancelButton = document.querySelector('.custom-cancel-button');
-                const image = popup.querySelector('.swal2-image');
-      
-                if (image) {
-                  image.style.backgroundColor = '#1D5755';
-                  image.style.height="183px"
-                }
-                confirmButton.style.backgroundColor = '#1D5755';
-                cancelButton.style.backgroundColor = '#1D5755';
-              }
-            }).then((result) => {
-              if (result.isConfirmed) {
-                // Handle the payment logic here
-                handlepayoverflow(selectedBook, "audioBook");
-              }
-            });
-    }
-  };
-
-  // const shouldRenderButtons = pathname;
-  // console.log(shouldRenderButtons);
-
-  return (
-    <div className="container mt-4">
-      <div className="row mt-5">
-        {/* <div className="col-lg-3 col-md-5 col-sm-12">
-          <div className="sidebar-book">
-            <div className="filter-section mt-3">
-              <MultiSelect
-                value={selectedGenres}
-                options={genres}
-                onChange={(e) => setSelectedGenres(e.value)}
-                placeholder="Select Genres"
-                className="filter-select"
-              />
-            </div>
-            <div className="filter-section">
-              <MultiSelect
-                value={selectedLanguages}
-                options={languages}
-                onChange={(e) => setSelectedLanguages(e.value)}
-                placeholder="Select Languages"
-                className="filter-select"
-              />
-            </div>
-            <div className="filter-section">
-              <MultiSelect
-                value={selectedAuthors}
-                options={authors}
-                onChange={(e) => setSelectedAuthors(e.value)}
-                placeholder="Select Authors"
-                className="filter-select"
-              />
-            </div>
-          </div>
-        </div> */}
-        <div className="col-md-3 col-lg-9 mb-4">
-          <div className="main-content mb-4">
-            {header}
-            <div className="book-sdbjd">
-              {Object.keys(groupedBooks)?.map((category, index) => (
-                <div key={index}>
-                  <div className="d-flex mt-5">
-                    <h3>{category}</h3>
-                  </div>
-                  <Row className="gap-1">
-                    {groupedBooks[category]?.map((book) => (
-                      <>
-                        {book.isAudiobookAvailable && (
-                          <Col md={4} lg={2} sm={6} key={book._id} className="p-1 p-md-0 book-mobile-card image-card-book">
-                            <div
-                              className="book-card book-adio"
-                              onClick={() => handleBookClick(book)}
-                              style={{
-                                cursor: "pointer",
-                                justifyContent: "space-between",
-                                padding: "0px 15px",
-                                borderRadius: "10px",
-                                flexDirection: "column",
-                              }}
-                            >
-                              <div
-                                className="book-images card text-center"
-                                style={{
-                                  flex: "1 0 auto",
-                                  background: "#ffff",
-                                  boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
-                                  borderRadius: "6px",
-                                  padding: "15px",
-                                  justifyContent: "center",
-                                  display: "flex",
-                                }}
-                              >
-                                <img
-                                  src={
-                                    book.bookimage && book.bookimage.length > 0
-                                      ? book.bookimage[0]
-                                      : "https://via.placeholder.com/150"
-                                  }
-                                  alt={book.title}
-                                  width={"100%"}
-                                />
-
-                                {book.isAudiobookAvailable && (
-                                  <button
-                                    className="play-button"
-                                    onClick={(e) => {
-                                      e.stopPropagation();
-                                      handlePlayButtonClick(book);
-                                    }}
-                                  >
-                                    ▶
-                                  </button>
-                                )}
-                              </div>
-                              <div className="book-info mt-3 mb-">
-                                <div className="d-flex">
-                                  <h5
-                                    className="mb-0"
-                                    style={{
-                                      fontFamily: "Inter",
-                                      fontSize: "15px",
-                                      fontWeight: "700",
-                                      color: "#4D4D4D",
-                                    }}
-                                  >
-                                    {book.title}
-                                  </h5>{" "}
-                                  <span
-                                    className="ms-auto"
-                                    style={{
-                                      fontSize: "12px",
-                                      justifyContent: "end",
-                                      textAlign: "end",
-                                    }}
-                                  >
-                                    {book.userReadingStatus.length > 0
-                                      ? (
-                                        book.userReadingStatus.reduce(
-                                          (sum, item) => sum + item.ratings,
-                                          0
-                                        ) / book?.userReadingStatus?.length
-                                      ).toFixed(1)
-                                      : 0}
-                                    /5
-                                  </span>
-                                </div>
-                                <div
-                                  className="ratings mt-1 mb-2 d-flex"
-                                  style={{
-                                    marginTop: "5px",
-                                    fontSize: "12px",
-                                  }}
-                                >
-                                  <span>{book?.author}</span>
-                                  <span
-                                    className="ms-auto rate-values"
-                                    style={{ fontSize: "4px" }}
-                                  >
-                                    {Array.from({ length: 5 }, (_, index) => {
-                                      const rating =
-                                        book.userReadingStatus?.length > 0
-                                          ? book.userReadingStatus[0].ratings
-                                          : 0;
-                                      return (
-                                        <i
-                                          key={index}
-                                          className={`pi ${index < rating
-                                              ? "pi-star-fill"
-                                              : "pi-star"
-                                            }`}
-                                          style={{
-                                            color:
-                                              index < rating
-                                                ? "#FFCB45"
-                                                : "inherit",
-                                            fontSize: "12px",
-                                            margin: "1px",
-                                          }}
-                                        ></i>
-                                      );
-                                    })}
-                                  </span>
-                                </div>
-                              </div>
-                            <div className=" profile-contents-button">
-                              <Button
-                                className="profile-buttonssssss w-100"
-                                onClick={() =>
-                                  handlepayoverflow(
-                                    book,
-                                    book.isAudiobookAvailable
-                                      ? "audioBook"
-                                      : "audioBook"
-                                  )
-                                }
-                              >
-                                Buy Now
-                              </Button>
-                            </div>
-                            </div>
-                          </Col>
-                        )}
-                      </>
-                    ))}
-                  </Row>
-                </div>
-              ))}
-=======
         title: "Continue Listening",
         text: "Your 30-second preview has ended. Unlock the full audiobook and continue listening without interruption.",
         imageUrl: `${selectedBook?.bookimage[0]}`,
@@ -1409,7 +1081,6 @@ export default function Smartpage({ pathname }) {
                   </p>
                 </div>
               )}
->>>>>>> master
             </div>
           </div>
         </div>
@@ -1462,11 +1133,7 @@ export default function Smartpage({ pathname }) {
                   className="w-100"
                 />
               </div>
-<<<<<<< HEAD
-              <div onClick={() => setShowPopup(false)} className="my-auto ">
-=======
               <div onClick={() => setShowPopup(false)} className="my-auto">
->>>>>>> master
                 <i className="pi pi-times ms-4 fw-1"></i>
               </div>
             </div>
@@ -1475,8 +1142,4 @@ export default function Smartpage({ pathname }) {
       )}
     </div>
   );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> master

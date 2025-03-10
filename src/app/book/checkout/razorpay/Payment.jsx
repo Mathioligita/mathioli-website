@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 "use client";
->>>>>>> master
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { Col, Row } from "react-bootstrap";
@@ -13,16 +10,12 @@ const Payment = ({ Paymentplace }) => {
   const [isProcessing, setIsProcessing] = useState(false);
 
   // Get Razorpay order details from session storage
-<<<<<<< HEAD
-  const raso = JSON.parse(sessionStorage.getItem("razorpayOrder")) || {};
-=======
   let raso = {};
   try {
     raso = JSON.parse(sessionStorage.getItem("razorpayOrder")) || {};
   } catch (error) {
     console.error("Failed to parse razorpayOrder from session storage:", error);
   }
->>>>>>> master
 
   useEffect(() => {
     const loadRazorpayScript = () => {

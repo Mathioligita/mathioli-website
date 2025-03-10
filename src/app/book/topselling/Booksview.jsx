@@ -75,10 +75,7 @@ import React from "react";
 import BookCard from "./BookCard"; // Import the BookCard component
 import { Row } from "react-bootstrap";
 import "./bookview.css";
-<<<<<<< HEAD
-=======
 import SkeletonPreloader from "components/SkeletonPreloader";
->>>>>>> master
 
 // Main Books View component
 export default function Booksview({ book }) {
@@ -94,17 +91,6 @@ export default function Booksview({ book }) {
   return (
     <div className="books-view ">
       <Row className="books-view-ed mb-2">
-<<<<<<< HEAD
-        {/* {bookdata.length > 0 ? ( */}
-        <>
-          {bookdata.slice(0, 6).map((bookItem) => (
-            <BookCard key={bookItem._id} book={bookItem} />
-          ))}
-        </>
-        {/* ) : (
-          <p>no data</p>
-        )} */}
-=======
         {bookdata.length > 0 ? (
           <>
             {bookdata.slice(0, 6).map((bookItem) => (
@@ -117,7 +103,6 @@ export default function Booksview({ book }) {
             <SkeletonPreloader />
           </section>
         )}
->>>>>>> master
       </Row>
     </div>
   );

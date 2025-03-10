@@ -121,14 +121,9 @@ const BookCard = ({ book }) => {
   }
   return (
     <Col
-<<<<<<< HEAD
-      sm={12}
-      md={4}
-=======
       xs={12}
       sm={4}
       md={3}
->>>>>>> master
       lg={2}
       className="p-1 p-md-0 book-mobile-card image-card-book"
     >

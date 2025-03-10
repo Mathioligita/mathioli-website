@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 // "use client";
 
 // import React, { useState, useEffect, useContext, useRef } from "react";
@@ -444,7 +442,6 @@
 // =================================================================================================
 // =================================================================================================
 // =================================================================================================
->>>>>>> master
 
 "use client";
 
@@ -457,28 +454,17 @@ import { MultiSelect } from "primereact/multiselect";
 import { InputText } from "primereact/inputtext";
 import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
-<<<<<<< HEAD
-import "../topselling/[name]/styles.css";
-import "./aduiostyle.css";
-import { Button } from "primereact/button";
-// import Overlayaudio from "./overlayaudio";
-=======
 import { Paginator } from "primereact/paginator";
 import "../topselling/[name]/styles.css";
 import "./aduiostyle.css";
 import { Button } from "primereact/button";
->>>>>>> master
 import userContext from "../../UseContext/UseContext";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import Swal from "sweetalert2";
-<<<<<<< HEAD
-import '../../book/topselling/BookCard.css'
-=======
 import SkeletonPreloader from "components/SkeletonPreloader";
 import "../../../app/book/topselling/BookCard.css";
 
->>>>>>> master
 const retryFetch = async (fn, retries = 3, delay = 1000) => {
   try {
     return await fn();
@@ -492,11 +478,6 @@ const retryFetch = async (fn, retries = 3, delay = 1000) => {
   }
 };
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> master
 export default function Smartpage({ pathname }) {
   const [categoriesData, setCategoriesData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -515,17 +496,10 @@ export default function Smartpage({ pathname }) {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
   const audioRef = useRef(null);
-<<<<<<< HEAD
-  // const audioRef = useRef(null);
-  const [isDisabled, setIsDisabled] = useState(false);
-  const [isEBookAvailable, setIsEBookAvailable] = useState(false);
-  const [isAudiobookAvailable, setIsAudiobookAvailable] = useState(false);
-=======
   const [isDisabled, setIsDisabled] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const [loading, setLoading] = useState(true);
->>>>>>> master
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -535,44 +509,25 @@ export default function Smartpage({ pathname }) {
 
         console.log("Fetched categories data:", data);
         setCategoriesdata(data || null);
-<<<<<<< HEAD
-
-        // if (Array.isArray(data) && data.length > 0) {
         setCategoriesData(data || null);
-        // }
-=======
-        setCategoriesData(data || null);
->>>>>>> master
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
     };
 
-<<<<<<< HEAD
-    // if (Array.isArray(categoriesdata) && categoriesdata.length === 0) {
     fetchCategories();
-    // }
-=======
-    fetchCategories();
->>>>>>> master
   }, []);
 
   const fetchData = async () => {
     try {
-<<<<<<< HEAD
-=======
       setLoading(true);
->>>>>>> master
       const response = await retryFetch(BookAPI);
       const data = response?.data?.books;
       setBooksData(data);
     } catch (error) {
       console.error("Error fetching data:", error);
-<<<<<<< HEAD
-=======
     } finally {
       setLoading(false);
->>>>>>> master
     }
   };
 
@@ -588,10 +543,6 @@ export default function Smartpage({ pathname }) {
 
   useEffect(() => {
     if (audiocount === 0 && audioRef.current) {
-<<<<<<< HEAD
-      // audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-=======
       audioRef.current.currentTime = 0;
       setShowPopup(false);
       Swal.fire({
@@ -629,7 +580,6 @@ export default function Smartpage({ pathname }) {
           handlepayoverflow(selectedBook, "audioBook");
         }
       });
->>>>>>> master
     }
   }, [audiocount]);
 
@@ -659,10 +609,6 @@ export default function Smartpage({ pathname }) {
       const genreMatch =
         !selectedGenres.length ||
         (book.genre && selectedGenres.includes(book.genre));
-<<<<<<< HEAD
-
-=======
->>>>>>> master
       const languageMatch =
         !selectedLanguages.length ||
         (book.language && selectedLanguages.includes(book.language));
@@ -698,13 +644,6 @@ export default function Smartpage({ pathname }) {
         return false;
       }
 
-<<<<<<< HEAD
-      // Filter based on the current route
-      // if (pathname === 'e-books' && !book.isEBookAvailable) {
-      //   return false;
-      // }
-=======
->>>>>>> master
       if (pathname === "audio-books" && !book.isAudiobookAvailable) {
         return false;
       }
@@ -719,8 +658,6 @@ export default function Smartpage({ pathname }) {
       );
     });
 
-<<<<<<< HEAD
-=======
   const paginatedBooks = filteredBooks?.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
@@ -728,7 +665,6 @@ export default function Smartpage({ pathname }) {
 
   const totalPages = Math.ceil(filteredBooks?.length / itemsPerPage);
 
->>>>>>> master
   const genres = [...new Set(booksData?.map((book) => book?.genre))];
   const languages = [...new Set(booksData?.map((book) => book?.language))];
   const authors = [...new Set(booksData?.map((book) => book?.author))];
@@ -737,23 +673,16 @@ export default function Smartpage({ pathname }) {
   const onGlobalFilterChange = (e) => {
     const value = e.target.value;
     setGlobalFilterValue(value);
-<<<<<<< HEAD
-=======
     setCurrentPage(1); // Reset to the first page when filter changes
   };
 
   const onPageChange = (event) => {
     setCurrentPage(event.page + 1);
->>>>>>> master
   };
 
   const renderHeader = () => {
     return (
-<<<<<<< HEAD
-      <div className="table-header ">
-=======
       <div className="table-header">
->>>>>>> master
         <div className="">
           <IconField iconPosition="left">
             <InputIcon className="pi pi-search"> </InputIcon>
@@ -784,10 +713,6 @@ export default function Smartpage({ pathname }) {
     setSelectedBook(book);
     setShowPopup(true);
     setAudiocount(30); // Reset the audio count when a new book is selected
-<<<<<<< HEAD
-    // router.push(`/book/audio-books/${book.slug}`);
-=======
->>>>>>> master
   };
 
   const handlepayoverflow = (book, bookType) => {
@@ -798,146 +723,6 @@ export default function Smartpage({ pathname }) {
   const handleTimeUpdate = () => {
     const audio = audioRef.current?.audio?.current;
     if (audio && audio.currentTime >= 30) {
-<<<<<<< HEAD
-      audio;
-      audio.currentTime = 30; // Lock at 30 sec
-      setIsDisabled(true);
-    }
-  };
-  const shouldRenderButtons = pathname;
-  console.log(shouldRenderButtons);
-
-  return (
-    <div className="container mt-4">
-      <div className="row mt-5  ">
-    
-        <div className="col-md-7 col-lg-9 mb-4">
-          <div className="main-content ">
-            {header}
-            <div className="book-sdbjd">
-              {categoriesData.map((category) => (
-                <div key={category.name}>
-                  <h3 className="mt-2">{category.name}</h3>
-                  <Row>
-                    {groupedBooks[category.name]?.map((book) => (
-                      <Col md={4} lg={2} sm={6} key={book._id} className=" p-1 p-md-0 book-mobile-card image-card-book" > 
-                        <div
-                          className="book-card"
-                          onClick={() => handleBookClick(book)}
-                          // style={{
-                          //   cursor: "pointer",
-                          //   justifyContent: "space-between",
-                          //   padding: "15px",
-                          //   // marginBottom: "20px",
-                          //   borderRadius: "10px",
-                          //   flexDirection: "column",
-                          // }}
-                        >
-                          <div
-                            className="book-images"
-                            // style={{
-                            //   flex: "1 0 auto",
-                            //   background: "#ffff",
-                            //   boxShadow:
-                            //     "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
-                            //   borderRadius: "6px",
-                            //   padding: "15px",
-                            //   justifyContent: "center",
-                            //   display: "flex",
-                            // }}
-                          >
-                            <img
-                              src={
-                                book.bookimage && book.bookimage.length > 0
-                                  ? book.bookimage[0]
-                                  : "https://via.placeholder.com/150"
-                              }
-                              alt={book.title}
-                              width={"100%"}
-                            />
-                          </div>
-                          <div
-                            className="book-info mt-2"
-                            
-                          >
-                            <div className="d-flex mt-4">
-                              <h5
-                                className="mb-0"
-                                style={{
-                                  fontFamily: "Inter",
-                                  fontSize: "15px",
-                                  fontWeight: "700",
-                                  color: "#4D4D4D",
-                                }}
-                              >
-                                {book.title}
-                              </h5>
-                              <span
-                                className="ms-auto"
-                                style={{
-                                  fontSize: "12px",
-                                  justifyContent: "end",
-                                  textAlign: "end",
-                                }}
-                              >
-                                {book.userReadingStatus.length > 0
-                                  ? (
-                                      book.userReadingStatus.reduce(
-                                        (sum, item) => sum + item.ratings,
-                                        0
-                                      ) / book?.userReadingStatus?.length
-                                    ).toFixed(1)
-                                  : 0}
-                                /5
-                              </span>
-                            </div>
-                            <div
-                              className="ratings d-flex mt-1"
-                              style={{  fontSize: "13px !important" }}
-                            >
-                              <span>
-
-                              {book?.author}
-                              </span>
-                              <span
-                                className="ms-auto"
-                                // style={{ fontSize: "4px" }}
-                              >
-                                {Array.from({ length: 5 }, (_, index) => {
-                                  const rating =
-                                    book.userReadingStatus?.length > 0
-                                      ? book.userReadingStatus[0].ratings
-                                      : 0;
-                                  return (
-                                    <i
-                                      key={index}
-                                      className={`pi ${
-                                        index < rating
-                                          ? "pi-star-fill"
-                                          : "pi-star"
-                                      }`}
-                                      style={{
-                                        color:
-                                          index < rating
-                                            ? "#FFCB45"
-                                            : "inherit",
-                                      
-                                      }}
-                                    ></i>
-                                  );
-                                })}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      
-                      </Col>
-                    ))}
-                  </Row>
-                </div>
-              ))}
-             
-=======
       audio.currentTime = 30; // Lock at 30 sec
       setIsDisabled(true);
 
@@ -1179,22 +964,17 @@ export default function Smartpage({ pathname }) {
                   </p>
                 </div>
               )}
->>>>>>> master
             </div>
           </div>
         </div>
       </div>
 
-<<<<<<< HEAD
-     
-=======
       {showaudioBooking && (
         <Overlayaudio
           audioBookingdetails={audioBookingdetails}
           setShowaudioBooking={setShowaudioBooking}
         />
       )}
->>>>>>> master
 
       {showPopup && (
         <div className="popup">
@@ -1215,10 +995,6 @@ export default function Smartpage({ pathname }) {
                     />
                   </div>
                   <div className="my-auto">
-<<<<<<< HEAD
-                    {console.log(selectedBook)}
-=======
->>>>>>> master
                     <h4 className="m-2">{selectedBook.title}</h4>
                   </div>
                 </div>
@@ -1240,22 +1016,10 @@ export default function Smartpage({ pathname }) {
                   className="w-100"
                 />
               </div>
-<<<<<<< HEAD
-              <div onClick={() => setShowPopup(false)} className="my-auto ">
-                <i className="pi pi-times ms-4 fw-1"></i>
-              </div>
-            </div>
-
-            {/* <p>Preview will end in {audiocount} seconds...</p>
-            {audiocount === 0 && (
-              <p>You want to pay to continue listening.</p>
-            )} */}
-=======
               <div onClick={() => setShowPopup(false)} className="my-auto">
                 <i className="pi pi-times ms-4 fw-1"></i>
               </div>
             </div>
->>>>>>> master
           </div>
         </div>
       )}

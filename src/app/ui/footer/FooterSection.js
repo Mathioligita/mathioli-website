@@ -18,10 +18,7 @@
 // };
 
 // export default FooterSection;
-<<<<<<< HEAD
-=======
 
->>>>>>> master
 "use client";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -39,14 +36,9 @@ const FooterSection = ({ title, items }) => {
             key={index}
             onClick={() => router.push(item.to)}
             style={{ cursor: "pointer" }}
-<<<<<<< HEAD
-          >
-            {item.name}
-=======
             className="footer-item"
           >
             <span className="footer-content">{item.name}</span>
->>>>>>> master
           </li>
         ))}
       </ul>

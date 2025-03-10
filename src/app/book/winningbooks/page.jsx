@@ -125,10 +125,6 @@ export default function Winingbooks() {
 
   return (
     <div>
-<<<<<<< HEAD
-     
-=======
->>>>>>> master
       <div className="books-view ms-0 ms-md-5">
         <p className="Top-selling">Award Winning Books</p>
         <Row className="mb-3">
@@ -137,13 +133,8 @@ export default function Winingbooks() {
               {awardWinningBooks.map((bookId, index) => (
                 <Col
                   xs={12}
-<<<<<<< HEAD
-                  sm={6}
-                  md={4}
-=======
                   sm={4}
                   md={3}
->>>>>>> master
                   lg={2}
                   key={index}
                   className="p-1 p-md-0 book-mobile-card image-card-book"

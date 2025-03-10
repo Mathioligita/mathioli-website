@@ -123,20 +123,6 @@ export default function UserActions() {
           <span>
             <span
               label="Login"
-<<<<<<< HEAD
-              className="p-button-text"
-              onClick={() => loginpoup()}
-              style={{ all: "unset", cursor: "pointer" }}
-            >
-              Login
-            </span>
-            /
-            <span
-              label="Signup"
-              className="p-button-text"
-              onClick={handleShowRegister}
-              style={{ all: "unset", cursor: "pointer" }}
-=======
               className="p-button-text login-btn"
               onClick={() => loginpoup()}
               style={{ all: "unset", cursor: "pointer", fontWeight: "500" }}
@@ -149,7 +135,6 @@ export default function UserActions() {
               className="p-button-text signup-btn"
               onClick={handleShowRegister}
               style={{ all: "unset", cursor: "pointer", fontWeight: "500" }}
->>>>>>> master
             >
               Signup
             </span>

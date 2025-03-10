@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 // import React, { useState } from "react";
 // import Booksview from "./Booksview";
 // import "./topselling.css";
@@ -164,27 +162,19 @@
 //   );
 // }
 
->>>>>>> master
 import React, { useState } from "react";
 import Booksview from "./Booksview";
 import "./topselling.css";
 import { useRouter } from "next/navigation";
 import { Button } from "primereact/button";
 import { Skeleton } from "primereact/skeleton";
-<<<<<<< HEAD
-=======
 
->>>>>>> master
 export default function TabView({ data, book }) {
   const [activeTab, setActiveTab] = useState("All");
   const router = useRouter();
   const locations =
     typeof window !== "undefined" ? window.location.pathname.split("/") : null;
-<<<<<<< HEAD
-  // console.log(locations[2],"da")
-=======
 
->>>>>>> master
   // Function to handle tab clicks
   const handleTabClick = (tab) => {
     setActiveTab(tab.name); // Set the clicked tab as active
@@ -198,88 +188,24 @@ export default function TabView({ data, book }) {
     return book.filter((book) => book.category === category);
   };
 
-<<<<<<< HEAD
-  let tabContent;
-  switch (activeTab) {
-    case "All":
-      tabContent = <Booksview book={{ books: getBooksByCategory("All") }} />;
-      break;
-    case "Biography":
-      tabContent = (
-        <Booksview book={{ books: getBooksByCategory("Biography") }} />
-      );
-      break;
-    case "Children":
-      tabContent = (
-        <Booksview book={{ books: getBooksByCategory("Children") }} />
-      );
-      break;
-    case "General":
-      tabContent = (
-        <Booksview book={{ books: getBooksByCategory("General") }} />
-      );
-      break;
-    case "Philosophy":
-      tabContent = (
-        <Booksview book={{ books: getBooksByCategory("Philosophy") }} />
-      );
-      break;
-    case "Lang":
-      tabContent = (
-        <Booksview book={{ books: getBooksByCategory("Language") }} />
-      );
-      break;
-    case "Poetry":
-      tabContent = <Booksview book={{ books: getBooksByCategory("Poetry") }} />;
-      break;
-    default:
-      tabContent = <p>Please select a tab.</p>;
-  }
-=======
   // Dynamically filter books based on the active tab
   const tabContent = (
     <Booksview book={{ books: getBooksByCategory(activeTab) }} />
   );
 
->>>>>>> master
   const handleviwall = () => {
     let category = activeTab === "All" ? "all" : activeTab.toLowerCase();
     router.push(`/book/topselling`);
   };
-<<<<<<< HEAD
-  // const handleviwall =()=> router.push(`/book/topselling/${tabContent}`)
-  return (
-    <div className="ms-0 ms-md-5 p-2 p-md-0 mt-4 ">
-      <div className="d-flex align-items-center mb-2">
-        <span className="  Top-selling">Top Selling</span>{" "}
-=======
 
   return (
     <div className="ms-0 ms-md-5 p-2 p-md-0 mt-4">
       <div className="d-flex align-items-center mb-2">
         <span className="Top-selling">Top Selling</span>
->>>>>>> master
         <Button
           className="top-selling-showall"
           onClick={handleviwall}
           style={{
-<<<<<<< HEAD
-            // display:
-            //   // locations.find((i)=>i === "topselling")
-            //   //   ? "none"
-            //   //   : "block",
-            border: "1px solid gray",
-          }}
-        >
-          {" "}
-          Show All
-        </Button>
-      </div>
-      <div
-        // style={{ display: "flex", marginBottom: "10px" }}
-        className="top-selling-tabs mb-3"
-      >
-=======
             border: "1px solid gray",
           }}
         >
@@ -287,7 +213,6 @@ export default function TabView({ data, book }) {
         </Button>
       </div>
       <div className="top-selling-tabs mb-3">
->>>>>>> master
         <div
           key="All"
           onClick={() => handleTabClick({ name: "All" })}
@@ -299,10 +224,6 @@ export default function TabView({ data, book }) {
             color: activeTab === "All" ? "white" : "#969696",
             borderRadius: "40px",
             marginRight: "10px",
-<<<<<<< HEAD
-
-=======
->>>>>>> master
             fontWeight: "bold",
           }}
         >
@@ -327,10 +248,6 @@ export default function TabView({ data, book }) {
                   marginRight: "10px",
                   fontWeight: "bold",
                   textTransform: "capitalize",
-<<<<<<< HEAD
-                  // backgroundColor: " #f1efef",
-=======
->>>>>>> master
                 }}
               >
                 {tab.name}
@@ -352,22 +269,10 @@ export default function TabView({ data, book }) {
                   height="3rem"
                   borderRadius="40px"
                 ></Skeleton>
-<<<<<<< HEAD
-                {/* <div>
-                  <Skeleton width="10rem" className="mb-2"></Skeleton>
-                  <Skeleton width="5rem" className="mb-2"></Skeleton>
-                  <Skeleton height=".5rem"></Skeleton>
-                </div> */}
-=======
->>>>>>> master
               </div>
             </div>
           </div>
         )}
-<<<<<<< HEAD
-        {/* Include the "All" tab */}
-=======
->>>>>>> master
       </div>
       {/* Render content based on active tab */}
       <div>{tabContent}</div>

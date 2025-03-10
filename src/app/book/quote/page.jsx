@@ -37,16 +37,6 @@ export default function Quote() {
 
   if (item.length === 0) {
     return (
-<<<<<<< HEAD
-      <div className="text-center">
-        <div className="d-flex" style={{ justifyContent: "center" }}>
-          <img
-            src="../Assert/Animation - 1740485995740.gif"
-            alt=""
-            // width={"500px"}
-            style={{ objectFit: "cover" }}
-          />
-=======
       <div className="quote-container">
         <div className="quote-card active">
           <div className="slider-header">Today’s Quote</div>
@@ -60,7 +50,6 @@ export default function Quote() {
           >
             - Mathioli Gita
           </div>
->>>>>>> master
         </div>
       </div>
     );

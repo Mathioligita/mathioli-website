@@ -1,26 +1,3 @@
-<<<<<<< HEAD
-.icon-footer{
-    gap: 10px;
-    align-items: center;
-}
-
-
-.icon-footer a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: #000;
-    font-size: 20px;
-    border-radius: 50%;
-    background: #fff;
-    padding: 10px;
-    transition: transform 0.4s ease, background 0.3s ease;
-}
-
-.icon-footer .btn-item-icon:hover a {
-    background: #FFA539;
-    transform: rotateY(360deg) scale(1.2);
-=======
 .icon-footer {
   gap: 10px;
   align-items: center;
@@ -66,5 +43,4 @@
 
 .footer-item:hover .footer-content::after {
   transform: scaleX(1);
->>>>>>> master
 }

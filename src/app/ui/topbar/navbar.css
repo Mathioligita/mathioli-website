@@ -10,11 +10,7 @@
   /* height: 100px; */
 }
 .nav-link.active {
-<<<<<<< HEAD
-  color: #1D5755 !important;
-=======
   color: #1d5755 !important;
->>>>>>> master
 }
 .navbar-container {
   width: 100%;
@@ -181,13 +177,6 @@ font-size: 12px;
     width: 120px;
   }
 
-<<<<<<< HEAD
-  .book-store-header {
-    /* padding: 10px; */
-  }
-
-=======
->>>>>>> master
   .language-selector {
     padding: 8px 10px;
   }
@@ -253,31 +242,15 @@ font-size: 12px;
   background-color: #1d5755;
 }
 
-<<<<<<< HEAD
-.nav-item a{
-  font-weight: 600 !important;
-}
-
-.nav-item a:hover{
-=======
 .nav-item a {
   font-weight: 600 !important;
 }
 
 .nav-item a:hover {
->>>>>>> master
   color: #1d5755 !important;
   font-weight: 600 !important;
 }
 
-<<<<<<< HEAD
-.navigation-menu .nav-item a:hover, 
-a:active, 
-a:focus{
-  color: #1d5755 !important;
-  font-weight: 600 !important;
-}
-=======
 .navigation-menu .nav-item a:hover,
 a:active,
 a:focus {
@@ -303,4 +276,3 @@ a:focus {
     width: 100%;
   }
 }
->>>>>>> master

@@ -1,164 +1,3 @@
-<<<<<<< HEAD
-// "use client"
-// import React, { useState } from "react";
-// import axios from "axios";
-// import { Button } from "primereact/button";
-// import { InputText } from "primereact/inputtext";
-// import { Dropdown } from "primereact/dropdown";
-// // import "./login.css";
-// import { FcGoogle } from "react-icons/fc";
-
-// function Register({ visible, onHide }) {
-//   const [formData, setFormData] = useState({
-//     firstName:"",
-//     lastName:"",
-//     email: "",
-//     password: "",
-//     mobile:""
-
-//   });
-
-//   const [selectedCountry, setSelectedCountry] = useState("+91");
-
-//   const [loading, setLoading] = useState(false);
-
-//   // Handle input changes
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData({
-//       ...formData,
-//       [name]: value,
-//     });
-//   };
-
-//   // Handle phone number input change
-//   const onPhoneChange = (e) => {
-//     const { value } = e.target;
-//     setFormData({
-//       ...formData,
-//       phoneNumber: value,
-//     });
-//   };
-
-//   // Handle country code dropdown change
-//   const onCountryChange = (e) => {
-//     setSelectedCountry(e.value);
-//   };
-
-//   // Handle form submission
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setLoading(true);
-
-//     const payload = {
-//       email: formData.email,
-//       password: formData.password,
-//       phoneNumber: selectedCountry + formData.phoneNumber, // Add country code with phone number
-//     };
-
-//     try {
-//       const response = await axios.post(
-//         "http://localhost:8001/api/v1/users/login",
-//         payload
-//       );
-
-//       if (response.status === 200) {
-//         // Handle successful login (e.g., store token, redirect to dashboard, etc.)
-//         localStorage.setItem("authToken", response.data.token);
-//       }
-//     } catch (error) {
-//       console.error("Login failed:", error);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   const countries = [
-//     { code: "+91" },
-//     { code: "+1" },
-//     { code: "+44" },
-//     { code: "+61" },
-//     { code: "+1" },
-//     // Add more country codes as needed
-//   ];
-
-//   return (
-//     visible && (
-//       <>
-//         <div className="modal-overlay" onClick={onHide}></div>
-//         <div className="login-modal">
-//           <div className="content p-4">
-//             <div className=" d-flex justify-content-center">
-//               <img src="./image/Final-Logo 2.png" alt="Logo" />
-//             </div>
-//             <p className="text-center fs-5" style={{ color: "#4D4D4D" }}>
-//               Welcome back !
-//             </p>
-//             <span
-//               className="d-flex justify-content-center"
-//               style={{ fontSize: "12px", color: "#4D4D4D", fontWeight: "200" }}
-//             >
-//               Login in to continue to MATHIOLI
-//             </span>
-//             <form onSubmit={handleSubmit} className="m-auto mt-4">
-//               {/* Country Code Dropdown */}
-//               <span style={{ color: "#396664" }} className="fw-bold">
-//                 <i className=" pi pi-lock "></i> Your information is safe with
-//                 us
-//               </span>
-//               {/* Phone Number Input */}
-//               <div className="p-d-flex">
-//                 {/* <span className="p-inputgroup"> */}
-//                 {/* Country code */}
-//                 <Dropdown
-//                   value={selectedCountry}
-//                   options={countries}
-//                   onChange={onCountryChange}
-//                   optionLabel="code" // Show only the country code
-//                   placeholder="+91"
-//                   className="w-0 "
-//                   style={{ width: "0px", minWidth: "85px" }}
-//                 />
-
-//                 {/* Phone number input */}
-//                 <InputText
-//                   name="phoneNumber"
-//                   value={formData.phoneNumber}
-//                   onChange={onPhoneChange}
-//                   placeholder="Enter phone number"
-//                   className="p-inputtext m-2 "
-//                 />
-//                 {/* </span> */}
-//               </div>
-
-//               {/* Submit Button */}
-//               <Button
-//                 label="Continue"
-//                 className="w-100"
-//                 type="submit"
-//                 loading={loading}
-//                 style={{ background: "#396664" }}
-//               />
-//               <span className="d-flex justify-content-center">OR</span>
-
-//               <div className="d-flex justify-content-center" style={{cursor:"pointer",border:"1px solid black",borderRadius:"10px",padding:"10px"}}>
-//                 <span>
-
-//               <FcGoogle className="fs-3" />
-//                 </span>
-//               <span className="ms-2">Continue via Google</span>{" "}
-//               </div>
-//             </form>
-//           </div>
-//         </div>
-//       </>
-//     )
-//   );
-// }
-
-// export default Register;
-=======
->>>>>>> master
 "use client";
 import React, { useRef, useState } from "react";
 // import axios from "axios";
@@ -172,11 +11,7 @@ import { Toast } from "primereact/toast";
 import { UsersRegisterAPi } from "api/page";
 import { useRouter } from "next/navigation";
 
-<<<<<<< HEAD
-function Register({ visible, onHide, }) {
-=======
 function Register({ visible, onHide }) {
->>>>>>> master
   const toast = useRef(null);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -186,16 +21,9 @@ function Register({ visible, onHide }) {
     mobile: "",
   });
 
-<<<<<<< HEAD
-
-  // const [selectedCountry, setSelectedCountry] = useState("+91");
-  const [loading, setLoading] = useState(false);
-  const router = useRouter()
-=======
   // const [selectedCountry, setSelectedCountry] = useState("+91");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
->>>>>>> master
   // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -224,13 +52,7 @@ function Register({ visible, onHide }) {
     };
 
     try {
-<<<<<<< HEAD
-      const response = await UsersRegisterAPi(payload)
-
-
-=======
       const response = await UsersRegisterAPi(payload);
->>>>>>> master
 
       if (response.success == true) {
         // alert("coming");
@@ -255,14 +77,8 @@ function Register({ visible, onHide }) {
           life: 3000,
         });
       }
-<<<<<<< HEAD
-
-    } catch (error) {
-      console.log(error)
-=======
     } catch (error) {
       console.log(error);
->>>>>>> master
       toast.current.show({
         severity: "error",
         summary: "Login Failed",
@@ -271,10 +87,6 @@ function Register({ visible, onHide }) {
       });
     } finally {
       setLoading(false);
-<<<<<<< HEAD
-
-=======
->>>>>>> master
     }
   };
 
@@ -393,13 +205,6 @@ function Register({ visible, onHide }) {
               <div
                 className="d-flex justify-content-center"
                 style={{
-<<<<<<< HEAD
-                  cursor: "pointer",
-                  border: "1px solid black",
-                  borderRadius: "10px",
-                  padding: "10px",
-                }}
-=======
                   // cursor: loading ? "not-allowed" : "pointer",
                   cursor: "not-allowed",
                   // border: "1px solid black",
@@ -410,7 +215,6 @@ function Register({ visible, onHide }) {
                   backgroundColor: "#e7e7e7",
                 }}
                 disabled={loading}
->>>>>>> master
               >
                 <FcGoogle className="fs-3" />
                 <span className="ms-2">Continue via Google</span>
