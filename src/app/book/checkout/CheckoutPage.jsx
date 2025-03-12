@@ -325,20 +325,20 @@ const CheckoutPage = () => {
                 Subtotal ({cartItems?.length || buysingleproducts?.quantity}{" "}
                 items):
               </span>{" "}
-              <span>
+              <span className="text-start">
                 ₹{subtotal || buysingleproducts?.bookPrice?.toFixed(2)}
               </span>
             </div>
             <div className="summary-details-line m-2">
               <span className="fw-bold">Shipping:</span>{" "}
-              <span>₹{shipping?.toFixed(2)}</span>
+              <span className="text-start">₹{shipping?.toFixed(2)}</span>
             </div>
             {/* <div className="summary-details-line m-2">
               <span className="fw-bold">Estimated Taxes:</span> <span>₹{estimatedTaxes?.toFixed(2)}</span>
             </div> */}
             <div className="summary-details-line m-2">
               <span className="fw-bold">Total:</span>{" "}
-              <span className="fw-bold">₹{total?.toFixed(2)}</span>
+              <span className="fw-bold text-start">₹{total?.toFixed(2)}</span>
             </div>
           </div>
         </div>

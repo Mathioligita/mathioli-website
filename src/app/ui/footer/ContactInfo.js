@@ -2,7 +2,7 @@ import React from "react";
 
 const ContactInfo = ({ address, email, phone }) => (
   <div className="contact-info row d-flex" style={{ fontSize: "16px",justifyContent:"space-between" }}>
-    <div className="copyright col-md-2 col-sm-12 col-md-6 col-lg-3 mb-3 mb-md-0" >
+    <div className="copyright col-md-2 col-sm-12 col-md-6 col-lg-2 mb-3 mb-md-0" >
       © 2024 by{" "}
       <a
         href="https://www.webdads2u.com/"
@@ -14,7 +14,7 @@ const ContactInfo = ({ address, email, phone }) => (
       </a>{" "}
       PVT LTD.
     </div>
-    <div className="contact-item d-flex  mb-3 col-sm-12 col-md-6 col-lg-3 mb-3 mb-md-0">
+    <div className="contact-item d-flex  mb-3 col-sm-12 col-md-6 col-lg-5 mb-3 mb-md-0">
       <div>
         <img
           src="https://cdn.builder.io/api/v1/image/assets/c4cdc30ee07044d0a85012e5629b6712/8a9ae8fe4a4c15f7effb4a3be181352c7a5917852c482060956795a563c074c0?apiKey=c4cdc30ee07044d0a85012e5629b6712&"

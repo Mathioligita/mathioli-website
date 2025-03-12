@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 // import axios from "axios";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
@@ -10,15 +10,17 @@ import { Password } from "primereact/password";
 import { Toast } from "primereact/toast";
 import { UsersRegisterAPi } from "api/page";
 import { useRouter } from "next/navigation";
+import userContext from "../UseContext/UseContext";
 
 function Register({ visible, onHide }) {
   const toast = useRef(null);
+  const {regsiterPopup,loginpoup}=useContext(userContext)
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
-    mobile: "",
+    mobile: "+91",
   });
 
   // const [selectedCountry, setSelectedCountry] = useState("+91");
@@ -48,7 +50,7 @@ function Register({ visible, onHide }) {
       lastName: formData.lastName,
       email: formData.email,
       password: formData.password,
-      mobile: formData.mobile,
+      mobile: formData.mobile.replace("+91", "").trim(), // Remove +91 prefix
     };
 
     try {
@@ -104,9 +106,9 @@ function Register({ visible, onHide }) {
         <Toast ref={toast} />
         <div className="modal-overlay" onClick={onHide}></div>
         <div className="login-modal">
-          <div className="content p-4">
+          <div className="content p-1">
             <div className="d-flex justify-content-center">
-              <img src="../image/Logo black.svg" alt="Logo" />
+              <img src="../image/Logo black.svg" alt="Logo" width={"200px"} />
             </div>
             <p className="text-center fs-5" style={{ color: "#4D4D4D" }}>
               Welcome back!
@@ -119,7 +121,7 @@ function Register({ visible, onHide }) {
                 fontWeight: "200",
               }}
             >
-              Login in to continue to MATHIOLI
+              Register in to continue to MATHIOLI
             </span>
             <form onSubmit={handleSubmit} className="m-auto mt-2">
               {/* Country Code Dropdown */}
@@ -199,10 +201,10 @@ function Register({ visible, onHide }) {
                 style={{ background: "#396664" }}
               />
 
-              <span className="d-flex justify-content-center">OR</span>
+              {/* <span className="d-flex justify-content-center">OR</span>
 
               {/* Google Login Button */}
-              <div
+              {/* <div
                 className="d-flex justify-content-center"
                 style={{
                   // cursor: loading ? "not-allowed" : "pointer",
@@ -218,8 +220,12 @@ function Register({ visible, onHide }) {
               >
                 <FcGoogle className="fs-3" />
                 <span className="ms-2">Continue via Google</span>
-              </div>
+              </div> */} 
             </form>
+            <div className="mt-2">
+
+            <p>Already have an account? <span onClick={() => { loginpoup(); regsiterPopup(); }} style={{cursor:"pointer",textDecoration:"underline",color:"blue"}}>Login </span>here</p>
+</div>
           </div>
         </div>
       </>

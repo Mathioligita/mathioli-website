@@ -116,12 +116,19 @@ export const cartUpdateAPIquanity = async (updatevalue) => {
       });
       return response;
     } else {
+      const guestId = Cookies.get("guestId");
+      const data = {
+        bookId: updatevalue.bookId,
+        quantity: updatevalue.quantity,
+        guestId
+      };
       const response = await fetchHandler({
         method: "PATCH",
         endpoint: `/user/cart/update-quantity-guest`,
         updatevalue,
         retries: 5, // Override default retries
         backoff: 500,
+        data
       });
       return response;
     }

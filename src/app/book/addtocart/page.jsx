@@ -216,18 +216,16 @@ export default function Addtocart() {
           <Column
           
             header="Product"
-            className="text-start"
+            
             body={(product) => (
-              <div className="d-flex align-items-start">
-                <div className="book-images ">
-                  <img
-                    src={product.bookId.bookimage}
-                    alt="Product"
-                    style={{ width: "50px" }}
-                    // className="m-3"
-                  />
-                </div>
-                <div className="ms-3  text-start">
+              <div className="d-flex align-items-center">
+                 <img
+        src={product.bookId.bookimage}
+        alt="Product"
+        style={{ width: "100px" }}
+        className="m-3"
+      />
+                {/* <div className="ms-3  text-start">
                   {" "}
                   <h6>{product.bookId.title}</h6>
                   <span style={{ fontSize: "12px" }}>
@@ -237,7 +235,17 @@ export default function Addtocart() {
                     <br />
                     {product?.bookId?.author}
                   </span>
-                </div>
+                </div> */}
+                <div className="ms-1 text-start">
+        <h6>{product.bookId.title}</h6>
+        <span style={{ fontSize: "12px" }}>
+          {product?.bookId?.genre}
+          <br />
+          {product?.bookId?.language}
+          <br />
+          {product?.bookId?.author}
+        </span>
+      </div>
               </div>
             )}
           />

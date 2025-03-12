@@ -35,7 +35,7 @@ const Footer = () => {
         <div className="row justify-content-between">
           <div className="col-sm-12 col-md-6 col-lg-4">
             <img
-              src="/image/Final-Logo 2.svg"
+              src="/image/Logo.svg"
               alt="Mathioli Gita Logo"
               className="footer-logo "
               width={"100%"}

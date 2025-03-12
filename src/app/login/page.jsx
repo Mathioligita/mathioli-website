@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 // import axios from "axios";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
@@ -12,11 +12,14 @@ import "primereact/resources/themes/lara-light-cyan/theme.css";
 import "./login.css";
 import Cookies from "js-cookie";
 import { LoginAPi } from "api/page";
+import userContext from "../UseContext/UseContext";
 
 // console.log(API_BASE_URL, "API_BASE_URL");
 
 function Login({ visible, onHide }) {
   const toast = useRef(null);
+  const {registerpoup,regsiterPopup,closeLoginPopup}=useContext(userContext)
+  const guest = Cookies.get("guestId")
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -40,12 +43,13 @@ function Login({ visible, onHide }) {
     const payload = {
       email: formData.email,
       password: formData.password,
+      guestId:guest
     };
 
     try {
       const response = await LoginAPi(payload);
       // const response = await axios.post(`${API_BASE_URL}/users/login`, payload);
-
+console.log(response,"response")
       if (response.success) {
         console.log(response);
         const Data = response.data;
@@ -57,6 +61,14 @@ function Login({ visible, onHide }) {
           severity: "success",
           summary: "Login Successful",
           detail: "Login successfully",
+          life: 3000,
+        });
+      }
+      else{
+        toast.current.show({
+          severity: "error",
+          // summary: "",
+          detail: response.data,
           life: 3000,
         });
       }
@@ -83,9 +95,9 @@ function Login({ visible, onHide }) {
         <Toast ref={toast} />
         <div className="modal-overlay" onClick={onHide}></div>
         <div className="login-modal">
-          <div className="content p-4">
+          <div className="content p-1">
             <div className="d-flex justify-content-center">
-              <img src="../image/Logo black.svg" alt="Logo" />
+              <img src="../image/Logo black.svg" alt="Logo" width={"200px"} />
             </div>
             <p className="text-center fs-5" style={{ color: "#4D4D4D" }}>
               Welcome back!
@@ -118,14 +130,7 @@ function Login({ visible, onHide }) {
                 />
               </div>
 
-              <Button
-                label="Continue"
-                className="w-100"
-                type="submit"
-                loading={loading}
-                style={{ background: "#396664" }}
-              />
-              <span className="d-flex justify-content-center">OR</span>
+              {/* <span className="d-flex justify-content-center">OR</span>
 
               <div
                 className="d-flex justify-content-center"
@@ -143,8 +148,19 @@ function Login({ visible, onHide }) {
               >
                 <FcGoogle className="fs-3" />
                 <span className="ms-2">Continue via Google</span>
-              </div>
+              </div> */}
+              <Button
+                label="Continue"
+                className="w-100"
+                type="submit"
+                loading={loading}
+                style={{ background: "#396664" }}
+              />
             </form>
+<div className="mt-2">
+
+            <p>Don’t have an account yet?  <span onClick={() => { closeLoginPopup(); registerpoup(); }} style={{cursor:"pointer",textDecoration:"underline",color:"blue"}}>sign up</span>here</p>
+</div>
           </div>
         </div>
       </>

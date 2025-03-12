@@ -6,7 +6,6 @@ import { TbLogout2 } from "react-icons/tb";
 import Cookies from "js-cookie";
 import "./sidebar.css";
 import Link from "next/link";
-import { ProfileUser } from "api/page";
 import userContext from "../../UseContext/UseContext";
 
 export default function Sidebar({ setIsOpen }) {
@@ -14,15 +13,15 @@ export default function Sidebar({ setIsOpen }) {
   const [aboutVisible, setAboutVisible] = useState(false);
   const [legal, setLegal] = useState(false);
   const router = useRouter();
-  const { usersdata } = useContext(userContext);
-
+  const { usersdata ,loginpoup,registerpoup} = useContext(userContext);
+  const accessToken = Cookies.get("accessToken")
   const items = [
     { label: "Profile", to: "/book/profile" },
     { label: "Cart", to: "/book/addtocart" },
     { label: "Favourite", to: "/book/wishlist" },
-    { label: "Payments", to: "/book/payments" },
-    { label: "My Audio Books", to: "/book/audio-books" },
-    { label: "My Orders", to: "/book/orders" },
+    // { label: "Payments", to: "/book/payments" },
+    { label: "My Audio Books", to: "/book/profile" },
+    // { label: "My Orders", to: "/book/orders" },
   ];
 
   const aboutItems = [
@@ -207,9 +206,22 @@ export default function Sidebar({ setIsOpen }) {
           Categories
         </li>
         {/* </ul> */}
-        <li className="fw-bold p-2" onClick={handleLogout}>
-          <i className=" pi pi-sign-out" /> <span className="ms-2">Logout</span>
-        </li>
+        {accessToken ? (
+          <>
+            <li className="fw-bold p-2" onClick={handleLogout}>
+              <i className=" pi pi-sign-out" /> <span className="ms-2">Logout</span>
+            </li>
+          </>
+        ) : (
+          <>
+            <li className="fw-bold p-2" onClick={() => loginpoup(true)}>
+              <i className=" pi pi-sign-in" /> <span className="ms-2">Login</span>
+            </li>
+            {/* <li className="fw-bold p-2" onClick={() =>  registerpoup(true)}>
+              <i className=" pi pi-user-plus" /> <span className="ms-2">Sign Up</span>
+            </li> */}
+          </>
+        )}
       </ul>
     </div>
   );

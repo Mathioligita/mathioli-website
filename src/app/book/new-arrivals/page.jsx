@@ -33,7 +33,7 @@ const TabComponent = () => {
   }, []);
 
   const handleBookClick = (item) => {
-    router.push(`/book/${item.id}`);
+    router.push(`/book/${item.slug}`);
   };
 
   const slideLeft = () => {
@@ -59,7 +59,8 @@ const TabComponent = () => {
           onClick={() => setActiveTab("newRelease")}
           disabled={activeTab === "newRelease"}
           style={{
-            borderTopRightRadius: "0px",
+            borderTopRightRadius: "8px",
+            borderTopLeftRadius: "8px",
             borderBottomRightRadius: "0px",
             borderTop: "0px",
             borderLeft: "0px",
@@ -78,7 +79,9 @@ const TabComponent = () => {
           disabled={activeTab === "recentEpisodes"}
           style={{
             border: "none",
-            borderTopRightRadius: "0px",
+            borderTopRightRadius: "8px",
+            borderTopLeftRadius: "8px",
+            // borderTopRightRadius: "0px",
             borderTop: "0px",
             borderRight: "0px",
             borderLeft: "0px",
@@ -129,15 +132,21 @@ const TabComponent = () => {
           </div>
         )} */}
         {activeTab === "recentEpisodes" && (
-          <div className="slider-container" ref={sliderRef}>
-            <div>
-              <h4>Stay Tuned for Recent Episodes</h4>
-              <p>Currently, there are no recent episodes available.</p>
-              <p>
-                Check back soon, as new episodes will be added here as they
-                become available.
-              </p>
-            </div>
+          <div className="slider-container gap-3" ref={sliderRef}>
+            {  data.map((item, index) => (
+                  <Col key={index} lg={2} md={3} sm={3} className="text-center">
+                    <div className="book-mobile-card">
+                      <div className="new-arrivals-item new-books">
+                        <img
+                          src={item.bookimage}
+                          alt={`New Arrival ${item.title}`}
+                          className="new-arrivals-img"
+                          onClick={() => handleBookClick(item)}
+                        />
+                      </div>
+                    </div>
+                  </Col>
+                ))}
           </div>
         )}
 

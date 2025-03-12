@@ -127,6 +127,7 @@ export default function RootLayout({ children }) {
   const [categoriesdata, setCategoriesdata] = useState([]);
   const [loginPopupVisible, setLoginPopupVisible] = useState(false);
   const [usersdata, setusersdata] = useState([]);
+  const [registerpop,setRegisterpop]=useState(false)
 
   const loginpoup = () => {
     setLoginPopupVisible(true);
@@ -134,6 +135,13 @@ export default function RootLayout({ children }) {
 
   const closeLoginPopup = () => {
     setLoginPopupVisible(false);
+  };
+  const registerpoup = () => {
+    setRegisterpop(true);
+  };
+
+  const regsiterPopup = () => {
+    setRegisterpop(false);
   };
 
   useEffect(() => {
@@ -166,6 +174,10 @@ export default function RootLayout({ children }) {
     loginPopupVisible,
     usersdata,
     setusersdata,
+    regsiterPopup,
+    registerpoup,
+    registerpop,setRegisterpop
+
     // loading,
     // setLoading,
   };
