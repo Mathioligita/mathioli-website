@@ -14,6 +14,7 @@
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
     "canvas": "^3.1.0",
+    "dotenv": "^16.4.7",
     "formik": "^2.4.6",
     "js-cookie": "^3.0.5",
     "mothoil-ui": "file:",
