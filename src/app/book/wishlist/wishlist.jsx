@@ -358,13 +358,13 @@ export default function Wishlist() {
   const imageBodyTemplate = (product) => (
     <div className="d-flex align-items-center">
       <img
-        src={product.bookId.bookimage}
+        src={product?.bookId?.bookimage}
         alt="Product"
         style={{ width: "100px" }}
         className="m-3"
       />
       <div className="ms-1 text-start">
-        <h6>{product.bookId.title}</h6>
+        <h6>{product?.bookId?.title}</h6>
         <span style={{ fontSize: "12px" }}>
           {product?.bookId?.genre}
           <br />
@@ -428,7 +428,7 @@ export default function Wishlist() {
           header="Wishlist"
           body={(product) => {
             const isFavorite = wishlistvalues.some(
-              (item) => item.bookId._id === product.bookId._id
+              (item) => item?.bookId?._id === product?.bookId?._id
             );
 
             return (

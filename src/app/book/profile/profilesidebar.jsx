@@ -35,14 +35,14 @@ const ProfileSidebar = ({ onNavigate, user, }) => {
         </div>
       </div>
 
-      <div>
+      {/* <div>
         <div className="m-auto profile-contents-button  ">
 
           <Button className="w-100 profile-buttonssssss-buttons" onClick={() => onNavigate("Bookmark")}>
             Bookmark
           </Button>
         </div>
-      </div>
+      </div> */}
       <div>
         <div className="m-auto profile-contents-button  ">
 

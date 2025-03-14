@@ -265,7 +265,7 @@ export default function BookDetailPage() {
 									className=""
 									icon="pi pi-comments"
 									label="Review"
-									onClick={() => setShow(true)}
+									onClick={() => setShow(accessToken ? true : loginpoup())}
 									severity="success"
 									outlined
 								>

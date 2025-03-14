@@ -5,7 +5,7 @@ import { Col, Row } from "react-bootstrap";
 import { bookingVerifypayment } from "api/page"; // Import your API function
 import { Button } from "primereact/button";
 
-const Payment = ({ Paymentplace }) => {
+const Payment = ({ Paymentplace ,total,razopayshow}) => {
   const [sdkLoaded, setSdkLoaded] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
 
@@ -36,66 +36,70 @@ const Payment = ({ Paymentplace }) => {
 
   const handlePayment = async () => {
     Paymentplace();
-    if (!sdkLoaded || !window.Razorpay) {
-      Swal.fire(
-        "Error",
-        "Razorpay SDK not loaded. Please refresh and try again.",
-        "error"
-      );
-      return;
-    }
+    if(razopayshow){
 
-    const options = {
-      key: "rzp_live_wJBFoukfvdWNdP", // Replace with your Razorpay Key ID
-      amount: (raso?.order?.orderTotal || 0) * 100, // Convert amount to paise
-      currency: "INR",
-      name: "Mathioli ",
-      order_id: raso?.razorpayOrder?.id, // Order ID from backend
-      handler: async (response) => {
-        const paymentData = {
-          orderId: response.razorpay_order_id,
-          paymentId: response.razorpay_payment_id,
-          signature: response.razorpay_signature,
-        };
-
-        try {
-          const apiResponse = await bookingVerifypayment(paymentData);
-          if (apiResponse?.data?.success) {
-            Swal.fire("Success", "Payment successful!", "success");
-          } else {
+      if (!sdkLoaded || !window.Razorpay) {
+        Swal.fire(
+          "Error",
+          "Razorpay SDK not loaded. Please refresh and try again.",
+          "error"
+        );
+        return;
+      }
+  
+      const options = {
+        key: "rzp_live_wJBFoukfvdWNdP", // Replace with your Razorpay Key ID
+        amount: (raso?.order?.orderTotal || 0) * 100, // Convert amount to paise
+        currency: "INR",
+        name: "Mathioli ",
+        order_id: raso?.razorpayOrder?.id, // Order ID from backend
+        
+        handler: async (response) => {
+          const paymentData = {
+            orderId: response.razorpay_order_id,
+            paymentId: response.razorpay_payment_id,
+            signature: response.razorpay_signature,
+          };
+  
+          try {
+            const apiResponse = await bookingVerifypayment(paymentData);
+            if (apiResponse?.data?.success) {
+              Swal.fire("Success", "Payment successful!", "success");
+            } else {
+              Swal.fire(
+                "Error",
+                apiResponse?.data?.message || "Payment failed",
+                "error"
+              );
+            }
+          } catch (error) {
+            console.error("API error:", error);
             Swal.fire(
               "Error",
-              apiResponse?.data?.message || "Payment failed",
+              "Unable to verify payment. Please try again.",
               "error"
             );
           }
-        } catch (error) {
-          console.error("API error:", error);
-          Swal.fire(
-            "Error",
-            "Unable to verify payment. Please try again.",
-            "error"
-          );
-        }
-      },
-      prefill: {
-        name: raso?.order?.shippingInfo?.firstname,
-        email: raso?.order?.shippingInfo?.email,
-        contact: raso?.order?.shippingInfo?.phone,
-      },
-      theme: { color: "#F37254" },
-    };
+        },
+        prefill: {
+          name: raso?.order?.shippingInfo?.firstname,
+          email: raso?.order?.shippingInfo?.email,
+          contact: raso?.order?.shippingInfo?.phone,
+        },
+        theme: { color: "#396664" }, // Updated theme color
+      };
+      const rzp = new window.Razorpay(options);
+      rzp.on("payment.failed", (response) => {
+        Swal.fire(
+          "Error",
+          response.error.description || "Payment failed.",
+          "error"
+        );
+      });
+  
+      rzp.open();
+    }
 
-    const rzp = new window.Razorpay(options);
-    rzp.on("payment.failed", (response) => {
-      Swal.fire(
-        "Error",
-        response.error.description || "Payment failed.",
-        "error"
-      );
-    });
-
-    rzp.open();
   };
 
   return (

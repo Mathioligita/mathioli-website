@@ -124,6 +124,9 @@ const CheckoutPage = () => {
 					};
 					const response = await DistrictAPI(data);
 					setDistricts(response?.data || []);
+					console.log(response.data, 'data');
+
+					localStorage.setItem('totalAmount', response.data);
 				} catch (error) {
 					console.error('Error fetching districts:', error);
 				}
@@ -202,10 +205,11 @@ const CheckoutPage = () => {
 		// console.log(payload, "playload")
 		try {
 			const response = await PlaceOrderAPi(payload);
-			console.log('Order placed successfully', response);
+			// console.log('Order placed successfully', response);
 			if (response.success) {
 				// console.log(response.data)
 				sessionStorage.setItem('razorpayOrder', JSON.stringify(response.data));
+
 				// sessionStorage.setItem("order", response.data.order)
 
 				setRazopayshow(true);
@@ -240,7 +244,7 @@ const CheckoutPage = () => {
 
 										{buysingleproducts?.book?.title}
 									</div>
-									<div className="item-detail align-self-center">
+									<div className="item-detail align-self-center ms-auto">
 										<p>₹{buysingleproducts?.bookPrice?.toFixed(2)}</p>
 									</div>
 								</div>
@@ -498,7 +502,7 @@ const CheckoutPage = () => {
 						<Col md={12}>
 							{/* {
                 razopayshow ? ( */}
-							<Payment razsopay={razsopay} Paymentplace={handlePayment} />
+							<Payment razsopay={razsopay} razopayshow={razopayshow} total={total} Paymentplace={handlePayment} />
 							{/* ) : null
                 // <Button label="Place Order " className="place-order" onClick={handlePayment} />
               } */}

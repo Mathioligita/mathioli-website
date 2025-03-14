@@ -222,7 +222,7 @@ function Register({ visible, onHide }) {
                 <span className="ms-2">Continue via Google</span>
               </div> */} 
             </form>
-            <div className="mt-2">
+            <div className="mt-4">
 
             <p>Already have an account? <span onClick={() => { loginpoup(); regsiterPopup(); }} style={{cursor:"pointer",textDecoration:"underline",color:"blue"}}>Login </span>here</p>
 </div>

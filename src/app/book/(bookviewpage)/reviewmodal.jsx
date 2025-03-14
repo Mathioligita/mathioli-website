@@ -190,6 +190,8 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import { REviewBook } from "api/page";
 import { Button } from "react-bootstrap";
+import "./audio.css"
+
 
 export default function ReviewModal({ slug, closeModal }) {
   const [rating, setRating] = useState(0);
