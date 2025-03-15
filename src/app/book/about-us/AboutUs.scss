@@ -1,0 +1,28 @@
+@media (max-width: 768px) {
+  .about-us-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .about-us-container img {
+    width: 100%;
+    max-width: 350px; /* Adjust image size for smaller screens */
+  }
+
+  .about-us-text {
+    padding: 20px;
+  }
+
+  .about-us-text p {
+    font-size: 16px; /* Adjust text size for better readability */
+  }
+}
+.imag-aboursds {
+  width: 500px;
+}
+@media (max-width: 425px) {
+  .imag-aboursds {
+    width: 300px !important;
+  }
+}

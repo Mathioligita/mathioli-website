@@ -1,233 +1,235 @@
-@import url('https://fonts.googleapis.com/css2?family=Anek+Tamil:wght@100..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Anek+Tamil:wght@100..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 /* Container for quotes and dots */
 .quote-container {
-	position: relative;
-	width: 650px;
-	/* height: 233px; */
-	/* overflow: hidden; */
-	/* text-align: center; */
-	color: white;
-	padding: 20px;
-	margin: 10px;
+  position: relative;
+  width: 650px;
+  /* height: 233px; */
+  /* overflow: hidden; */
+  /* text-align: center; */
+  color: white;
+  padding: 20px;
+  margin: 10px;
 }
 
 /* Quote card style */
 .quote-card {
-	/* position: absolute; */
-	width: 100%;
-	/* Ensure it takes full width */
-	max-width: 90%;
-	/* Optional: limit max width */
-	padding: 2rem;
-	opacity: 0;
-	height: 200px;
-	transform: translateX(100%);
-	border-radius: 10px;
-	transition:
-		transform 2s ease-in-out,
-		opacity 1s ease-in-out;
-	background: rgb(188, 66, 69);
-	background: linear-gradient(99deg, rgba(188, 66, 69, 1) 0%, rgba(119, 41, 142, 1) 100%);
-	box-sizing: border-box;
-	white-space: normal;
-	/* Allow text to wrap */
-	word-wrap: break-word;
-	/* Prevent long words from overflowing */
+  /* position: absolute; */
+  width: 100%;
+  /* Ensure it takes full width */
+  max-width: 90%;
+  /* Optional: limit max width */
+  padding: 2rem;
+  opacity: 0;
+  height: 200px;
+  transform: translateX(100%);
+  border-radius: 10px;
+  transition: transform 2s ease-in-out, opacity 1s ease-in-out;
+  background: rgb(188, 66, 69);
+  background: linear-gradient(
+    99deg,
+    rgba(188, 66, 69, 1) 0%,
+    rgba(119, 41, 142, 1) 100%
+  );
+  box-sizing: border-box;
+  white-space: normal;
+  /* Allow text to wrap */
+  word-wrap: break-word;
+  /* Prevent long words from overflowing */
 }
 
 /* Active state for the quote */
 .quote-card.active {
-	opacity: 1;
-	transform: translateX(0);
-	/* Move to the center */
+  opacity: 1;
+  transform: translateX(0);
+  /* Move to the center */
 }
 
 /* Dots container */
 .dots-container {
-	display: flex;
-	gap: 5px;
-	position: absolute;
-	/* bottom: 10px; */
-	/* left: 50%; */
-	transform: translateX(-50%);
-	z-index: 1;
-	top: 220px;
-	left: 64px;
+  display: flex;
+  gap: 5px;
+  position: absolute;
+  /* bottom: 10px; */
+  /* left: 50%; */
+  transform: translateX(-50%);
+  z-index: 1;
+  top: 220px;
+  left: 64px;
 }
 
 .quote-container .slider-header {
-	font-size: 25px;
-	font-weight: 600;
+  font-size: 25px;
+  font-weight: 600;
 }
 
 .quote-container .quote {
-	font-size: 20px;
-	font-weight: 400;
+  font-size: 20px;
+  font-weight: 400;
 }
 
 /* Individual dot */
 .dot {
-	width: 8px;
-	height: 8px;
-	border-radius: 50%;
-	background-color: transparent;
-	border: 1px solid white;
-	transition: background-color 0.3s ease;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 1px solid white;
+  transition: background-color 0.3s ease;
 }
 
 /* Active dot */
 .dot.active {
-	background-color: #eeebe9;
+  background-color: #eeebe9;
 }
 
 @media (max-width: 425px) {
-	.quote-container {
-		position: relative;
-		width: 350px;
-		/* height: 223px; */
-		/* overflow: hidden; */
-		/* text-align: center; */
-		color: white;
-		padding: 0px;
-		margin: 6px;
-	}
-	.quote {
-		font-size: 12px !important;
-	}
-	.quote-card {
-		height: 200px !important;
-	}
-	.dots-container {
-		top: 169px;
-	}
+  .quote-container {
+    position: relative;
+    width: 350px;
+    /* height: 223px; */
+    /* overflow: hidden; */
+    /* text-align: center; */
+    color: white;
+    padding: 0px;
+    margin: 6px;
+  }
+  .quote {
+    font-size: 12px !important;
+  }
+  .quote-card {
+    height: 200px !important;
+  }
+  .dots-container {
+    top: 169px;
+  }
 }
 @media (max-width: 540px) {
-	.quote-container {
-		position: relative;
-		width: 350px;
-		/* height: 223px; */
-		/* overflow: hidden; */
-		/* text-align: center; */
-		color: white;
-		padding: 0px;
-		margin: 6px;
-	}
-	.quote {
-		font-size: 12px !important;
-		font-family: 'Anek Tamil';
-	}
-	.quote-card {
-		height: 200px !important;
-	}
-	.dots-container {
-		top: 169px;
-	}
+  .quote-container {
+    position: relative;
+    width: 350px;
+    /* height: 223px; */
+    /* overflow: hidden; */
+    /* text-align: center; */
+    color: white;
+    padding: 0px;
+    margin: 6px;
+  }
+  .quote {
+    font-size: 12px !important;
+    font-family: "Anek Tamil";
+  }
+  .quote-card {
+    height: 200px !important;
+  }
+  .dots-container {
+    top: 169px;
+  }
 }
 
 @media (max-width: 768px) {
-	.quote-container {
-		position: relative;
-		width: 350px;
-		/* height: 223px; */
-		/* overflow: hidden; */
-		/* text-align: center; */
-		color: white;
-		padding: 0px;
-		margin: 6px;
-	}
-	.quote {
-		font-size: 12px !important;
-	}
-	.quote-card {
-		height: 206px !important;
-	}
-	.dots-container {
-		top: 169px;
-	}
+  .quote-container {
+    position: relative;
+    width: 350px;
+    /* height: 223px; */
+    /* overflow: hidden; */
+    /* text-align: center; */
+    color: white;
+    padding: 0px;
+    margin: 6px;
+  }
+  .quote {
+    font-size: 12px !important;
+  }
+  .quote-card {
+    height: 206px !important;
+  }
+  .dots-container {
+    top: 169px;
+  }
 }
 /* Optional: Animations */
 @keyframes slideIn {
-	0% {
-		transform: translateX(100%);
-		opacity: 0;
-	}
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
 
-	100% {
-		transform: translateX(0);
-		opacity: 1;
-	}
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 @media (max-width: 1025px) {
-	.quote-container {
-		width: 100% !important;
-	}
+  .quote-container {
+    width: 100% !important;
+  }
 
-	.navva,
-	.download-icon-button,
-	.subscribe-2,
-	.user-actions {
-		font-size: 12px;
-		cursor: pointer;
-	}
+  .navva,
+  .download-icon-button,
+  .subscribe-2,
+  .user-actions {
+    font-size: 12px;
+    cursor: pointer;
+  }
 }
 
-@media (max-width: 770px) {
-	.navbar {
-		justify-content: unset;
-	}
+@media (max-width: 768px) {
+  .navbar {
+    justify-content: left !important;
+  }
 
-	.link-image {
-		display: block !important;
-		margin-left: auto !important;
-		margin-right: auto !important;
-		justify-items: center;
-		text-align: center !important;
-	}
+  .link-image {
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    justify-items: center;
+    text-align: center !important;
+  }
 
-	.quote-card {
-		padding: 1rem;
-	}
+  .quote-card {
+    padding: 1rem;
+  }
 }
 
 @media (max-width: 321px) {
-	.dots-container {
-		top: 174px;
-	}
+  .dots-container {
+    top: 174px;
+  }
 }
 
 @media (max-width: 426px) {
-	.banner-text {
-		right: 27%;
-		top: 27%;
-	}
+  .banner-text {
+    right: 27%;
+    top: 27%;
+  }
 
-	.line1,
-	.line2 {
-		font-size: 20px !important;
-	}
+  .line1,
+  .line2 {
+    font-size: 20px !important;
+  }
 }
 
 .in-box {
-	padding: 10px;
-	/* margin-right: 5px; */
+  padding: 10px;
+  /* margin-right: 5px; */
 }
 
 .sub-btn {
-	margin-left: 5px !important;
+  margin-left: 5px !important;
 }
 
 @media screen and (max-width: 768px) {
-	.form-control {
-		font-size: 12px;
-	}
+  .form-control {
+    font-size: 12px;
+  }
 
-	.sub-btn {
-		font-size: 10px;
-	}
+  .sub-btn {
+    font-size: 10px;
+  }
 }
 
 /*  */
 .quote-card active {
-	align-content: center !important;
+  align-content: center !important;
 }

@@ -25,7 +25,7 @@ export default function Sidebar({ setIsOpen }) {
 	];
 
 	const aboutItems = [
-		{ label: 'Rate us on Playstore', to: '/playstore' },
+		// { label: 'Rate us on Playstore', to: '/playstore' },
 		{ label: 'About Us', to: '/book/about-us' },
 	];
 
@@ -145,9 +145,9 @@ export default function Sidebar({ setIsOpen }) {
 								className="text-decoration-none text-black"
 								onClick={() => setIsOpen(false)}
 							>
-								<li>
+								<li className='p-3 ' style={{borderBottom:"1px solid gray"}}>
 									<span className="fw-light">{item.label}</span>
-									<hr />
+									{/* <hr /> */}
 								</li>
 							</Link>
 						))}
@@ -166,18 +166,18 @@ export default function Sidebar({ setIsOpen }) {
 								className="text-decoration-none text-black"
 								onClick={() => setIsOpen(false)}
 							>
-								<li>
+								<li className='p-3 ' style={{borderBottom:"1px solid gray"}}>
 									{item.label}
-									<hr />
+									{/* <hr /> */}
 								</li>
 							</Link>
 						))}
 					</ul>
 				)}
 
-				<li className="fw-bold p-2">
+				{/* <li className="fw-bold p-2">
 					<i className="pi pi-pencil me-2"></i> Blogs
-				</li>
+				</li> */}
 
 				{/* <ul className="fw-bold sidebar-values-adjustment"> */}
 				<li

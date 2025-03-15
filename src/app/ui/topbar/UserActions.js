@@ -13,6 +13,7 @@ import {
 import userContext from "@/app/UseContext/UseContext";
 import Cookies from "js-cookie";
 import { Button } from "primereact/button";
+import Link from "next/link";
 
 const retryFetch = async (fn, retries = 3, delay = 1000) => {
   try {
@@ -43,7 +44,7 @@ export default function UserActions() {
     registerpoup,
     regsiterPopup,
     setRegisterpop,
-    registerpop
+    registerpop,
   } = useContext(userContext);
 
   // console.log(usersdata, "userdata")
@@ -69,12 +70,12 @@ export default function UserActions() {
   }, []);
   const handleShowRegister = () => {
     setRegister(true);
-    setRegisterpop(true)
+    setRegisterpop(true);
   };
 
   const handleHideRegister = () => {
     setRegister(false);
-    setRegisterpop(false)
+    setRegisterpop(false);
   };
 
   const handleWishlist = () => {
@@ -126,14 +127,18 @@ export default function UserActions() {
   return (
     <div className="user-actions d-flex align-items-center gap-1 ms-3">
       <div className="ms-1 d-flex">
-        {accessToken ? null : (
+        {accessToken ? (
+          <Link href="/book/profile" className="text-black">
+            <i className=" pi pi-user"></i>
+          </Link>
+        ) : (
           <span>
             {/* <Button label="Login" className="rounded-2"  outlined onClick={() => loginpoup()} /> */}
             <span
               label="Login"
               className="p-button-text login-btn"
               onClick={() => loginpoup()}
-              style={{  cursor: "pointer", fontWeight: "500" }}
+              style={{ cursor: "pointer", fontWeight: "500" }}
             >
               Login
             </span>
@@ -170,16 +175,13 @@ export default function UserActions() {
           <Login visible={loginPopupVisible} onHide={closeLoginPopup} />
         </div>
       )}
-{
-  registerpop && (
-
-    <Register
-      visible={registerpop}
-      setRegister={setRegister}
-      onHide={handleHideRegister}
-    />
-  )
-}
+      {registerpop && (
+        <Register
+          visible={registerpop}
+          setRegister={setRegister}
+          onHide={handleHideRegister}
+        />
+      )}
     </div>
   );
 }

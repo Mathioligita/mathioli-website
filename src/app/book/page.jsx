@@ -200,7 +200,7 @@ export default function Page() {
                 {header}
                 <div className="book-sdbjd">
                   <Row>
-                    {filteredBooks.length > 0 ? (
+                    {filteredBooks?.length > 0 ? (
                       paginatedBooks?.map((book) => (
                         <Col
                           md={4}

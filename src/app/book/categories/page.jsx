@@ -352,7 +352,7 @@ export default function Smartpage({ pathname }) {
                     </Col>
                   ))}
                 </Row>
-              ) : filteredBooks.length > 0 ? (
+              ) : filteredBooks?.length > 0 ? (
                 <>
                   {Object.keys(groupedBooks)?.map((category, index) => (
                     <div key={index}>

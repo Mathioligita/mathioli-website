@@ -6,22 +6,20 @@ import FooterSection from "./FooterSection";
 import NewsletterForm from "./NewsletterForm";
 import { CategoryAPI } from "api/page";
 import userContext from "@/app/UseContext/UseContext";
-import './container-footer.css'
+import "./container-footer.css";
 
 const Footer = () => {
-
-
   const { categoriesdata } = useContext(userContext);
-
-  
 
   const companyLinks = [
     { name: "About Us", to: "/book/about-us" },
-    { name: "Blog", to: "/book/blog" },
+    // { name: "Blog", to: "/book/blog" },
+    { name: "Payment Policy", to: "/book/payment-policy" },
+    { name: "Privacy Policy", to: "/book/privacy-policy" },
     { name: "Contact Us", to: "/book/contact-us" },
     { name: "Terms and Condition", to: "/book/terms-and-conditions" },
   ];
-  
+
   const categories = categoriesdata?.map((item) => ({
     name: item?.name,
     to: `/book/categories/${item?.slug}`,
@@ -63,7 +61,6 @@ const Footer = () => {
         <hr className="my-4" />
 
         <ContactInfo
-
           address="Shanthi Vihar Complex, No 11 Luz Ginza complex - old, 140, Royapettah High Rd, Luz, Mylapore, Chennai, Tamil Nadu 600004"
           email="Ourstudio@hello.com"
           phone="123 456 6578"
