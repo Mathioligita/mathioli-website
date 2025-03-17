@@ -201,3 +201,17 @@ i.pi.pi-star {
   background-color: #1d5755;
   box-shadow: 0px 3px 6px 0px #0000007a;
 }
+
+@media (max-width: 768px) {
+  .top-selling {
+    flex-wrap: wrap;
+    gap: 12px;
+    /* margin-left: 12px; */
+  }
+  .Top-selling {
+    margin-left: 17px;
+  }
+  .top-selling-showall {
+    margin-right: 0px;
+  }
+}

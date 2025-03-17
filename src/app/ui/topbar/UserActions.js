@@ -171,7 +171,7 @@ export default function UserActions() {
       </span>
 
       {loginPopupVisible && (
-        <div className="position-absolute">
+        <div className="position-absolute" >
           <Login visible={loginPopupVisible} onHide={closeLoginPopup} />
         </div>
       )}

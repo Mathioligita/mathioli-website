@@ -149,7 +149,7 @@ export default function Winingbooks() {
                         src={
                           bookId?.bookimage && bookId?.bookimage?.length > 0
                             ? bookId?.bookimage[0]
-                            : "https://via.placeholder.com/150"
+                            : "/image/image 9.png"
                         }
                         // src={
                         //   bookId?.bookId?.bookimage?.length > 0

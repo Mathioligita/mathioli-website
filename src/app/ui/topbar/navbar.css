@@ -1,3 +1,15 @@
+.logo-damksmladas {
+  display: none;
+}
+@media (max-width: 768px) {
+  .logo-damksmladas {
+    display: block;
+  }
+  .dkjndkjfdnkjfndfkjd {
+    display: none !important;
+  }
+}
+
 /* BookStoreHeader Styles */
 .logo-text {
   width: 240px;
@@ -63,7 +75,9 @@
   object-position: center;
   width: 12px;
 }
-
+.fav-wishlist {
+  display: none;
+}
 .search-bar {
   border: 2px solid #000;
   display: flex;
@@ -152,7 +166,7 @@
 /* Universal Box Sizing */
 
 /* Adjustments for 1024px Viewport */
-@media (min-width: 1326px) {
+@media (min-width: 1px) {
   .logo-text {
     justify-self: center !important;
 
@@ -188,9 +202,12 @@ font-size: 12px;
   .navbar {
     justify-content: left !important;
   }
+  .collapse:not(.show) {
+    display: block !important;
+  }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   .logo-text {
     width: 200px;
     justify-content: start;
@@ -198,7 +215,7 @@ font-size: 12px;
   }
 
   .navbar {
-    justify-content: center !important;
+    justify-content: space-between !important;
     height: 100px;
   }
 
@@ -277,5 +294,12 @@ a:focus {
 
   .navbar .d-flex {
     width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .fav-wishlist {
+    display: block !important;
+    margin-top: 17px;
+    color: black;
   }
 }

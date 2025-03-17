@@ -1,4 +1,3 @@
-
 // =================================================================================================
 // =================================================================================================
 // =================================================================================================
@@ -394,11 +393,12 @@ export default function Smartpage({ pathname }) {
                               >
                                 <img
                                   src={
-                                    book.bookimage && book.bookimage.length > 0
-                                      ? book.bookimage[0]
-                                      : "https://via.placeholder.com/150"
+                                    book?.bookimage &&
+                                    book?.bookimage?.length > 0
+                                      ? book?.bookimage[0]
+                                      : "/image/image 9.png"
                                   }
-                                  alt={book.title}
+                                  alt={book?.title}
                                   width={"100%"}
                                 />
 
@@ -499,7 +499,7 @@ export default function Smartpage({ pathname }) {
                                 >
                                   Buy Now
                                 </Button>
-                              </div> */}  
+                              </div> */}
                             </div>
                           </Col>
                         ))}

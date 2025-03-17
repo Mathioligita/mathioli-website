@@ -76,7 +76,7 @@ export default function AboutUs() {
 
         <div className="container text-start d-flex mt-5">
           <Row>
-            <Col>
+            <Col sm={12} md={12} lg={6}>
               <div>
                 <img
                   src="/Assert/Frame 427325670.png"
@@ -85,8 +85,8 @@ export default function AboutUs() {
                 />
               </div>
             </Col>
-            <Col>
-              <div className="ms-3">
+            <Col sm={12} md={12} lg={6}>
+              <div className="ms-5">
                 <p
                   className="mt-3"
                   style={{
@@ -118,6 +118,7 @@ export default function AboutUs() {
                   effortlessly.
                 </p>
                 <Button
+                  className="rounded-2"
                   label="Explore Our Books"
                   style={{ background: "#1D5755" }}
                   onClick={togglebacks}

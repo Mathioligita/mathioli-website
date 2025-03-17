@@ -8,7 +8,6 @@
 //   const [isSubmitting, setIsSubmitting] = useState(false);
 //   const [errorMessage, setErrorMessage] = useState("");
 
-
 //   const handleSubmit = async () => {
 //     if (!rating || !comment) {
 //       setErrorMessage("Please provide both a rating and a comment.");
@@ -44,8 +43,8 @@
 
 //         <div className="form-group">
 //           <label>Rating:</label>
-//           <select 
-//             value={rating} 
+//           <select
+//             value={rating}
 //             onChange={(e) => setRating(Number(e.target.value))}
 //             className="rating-select"
 //           >
@@ -69,15 +68,15 @@
 //         </div>
 
 //         <div className="form-actions">
-//           <button 
-//             onClick={handleSubmit} 
+//           <button
+//             onClick={handleSubmit}
 //             disabled={isSubmitting}
 //             className="submit-btn"
 //           >
 //             {isSubmitting ? "Submitting..." : "Submit Review"}
 //           </button>
-//           <button 
-//             onClick={closeModal} 
+//           <button
+//             onClick={closeModal}
 //             className="cancel-btn"
 //           >
 //             Cancel
@@ -178,7 +177,6 @@
 //   );
 // }
 
-
 //==================================================================================================================
 //==================================================================================================================
 //==================================================================================================================
@@ -190,8 +188,7 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import { REviewBook } from "api/page";
 import { Button } from "react-bootstrap";
-import "./audio.css"
-
+import "./audio.css";
 
 export default function ReviewModal({ slug, closeModal }) {
   const [rating, setRating] = useState(0);
@@ -250,7 +247,7 @@ export default function ReviewModal({ slug, closeModal }) {
         <h2>Write a Review</h2>
 
         <div className="form-group">
-          <label>Rating:</label>
+          <label className="text-start">Rating:</label>
           <div className="rating">
             <input
               value="5"
@@ -296,7 +293,7 @@ export default function ReviewModal({ slug, closeModal }) {
         </div>
 
         <div className="form-group">
-          <label>Comment:</label>
+          <label className="text-start">Comment:</label>
           <textarea
             value={comment}
             onChange={(e) => setComment(e.target.value)}
@@ -310,7 +307,7 @@ export default function ReviewModal({ slug, closeModal }) {
             onClick={handleSubmit}
             disabled={isSubmitting}
             className="submit-btn"
-            style={{background:"rgb(29, 87, 85)"}}
+            style={{ background: "rgb(29, 87, 85)" }}
           >
             {isSubmitting ? "Submitting..." : "Submit Review"}
           </Button>

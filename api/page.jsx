@@ -98,7 +98,7 @@ export const CartRemoveAPI = async (data) => {
 };
 
 export const cartUpdateAPIquanity = async (updatevalue) => {
-  console.log(updatevalue,"updatedvalues");
+  console.log(updatevalue, "updatedvalues");
 
   try {
     const accessToken = Cookies.get("accessToken");
@@ -120,7 +120,7 @@ export const cartUpdateAPIquanity = async (updatevalue) => {
       const data = {
         bookId: updatevalue.bookId,
         quantity: updatevalue.quantity,
-        guestId
+        guestId,
       };
       const response = await fetchHandler({
         method: "PATCH",
@@ -128,7 +128,7 @@ export const cartUpdateAPIquanity = async (updatevalue) => {
         updatevalue,
         retries: 5, // Override default retries
         backoff: 500,
-        data
+        data,
       });
       return response;
     }
@@ -485,7 +485,7 @@ export const APIshippingdata = async (data) => {
   try {
     const response = await fetchHandler({
       method: "POST",
-      endpoint: `/shippingregion/calculate-shipping`,
+      endpoint: `/user/order/shipping/calculation`,
       data,
       retries: 5, // Override default retries
       backoff: 500,
@@ -580,6 +580,36 @@ export const SingleBuyProduct = async (data) => {
       method: "GET",
       endpoint: `/user/book/buynow/${data}`,
 
+      retries: 5, // Override default retries
+      backoff: 500,
+    });
+
+    return response;
+  } catch (error) {
+    console.error("Error in bookingAudioBooking:", error);
+  }
+};
+export const MyOrders = async () => {
+  try {
+    const response = await fetchHandler({
+      method: "GET",
+      endpoint: `/user/order/my-order`,
+
+      retries: 5, // Override default retries
+      backoff: 500,
+    });
+
+    return response;
+  } catch (error) {
+    console.error("Error in bookingAudioBooking:", error);
+  }
+};
+export const NewsletterFormS = async (data) => {
+  try {
+    const response = await fetchHandler({
+      method: "POST",
+      endpoint: `/user/subscribe`,
+      data,
       retries: 5, // Override default retries
       backoff: 500,
     });

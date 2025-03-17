@@ -1,11 +1,9 @@
-
 // ===============================================================================================================================================
 // ===============================================================================================================================================
 // ===============================================================================================================================================
 // ===============================================================================================================================================
 // ===============================================================================================================================================
 // ===============================================================================================================================================
-
 
 "use client";
 
@@ -127,7 +125,9 @@ export default function Smartpage({ pathname }) {
         },
         didOpen: () => {
           const popup = document.querySelector(".custom-popup");
-          const confirmButton = document.querySelector(".custom-confirm-button");
+          const confirmButton = document.querySelector(
+            ".custom-confirm-button"
+          );
           const cancelButton = document.querySelector(".custom-cancel-button");
           const image = popup.querySelector(".swal2-image");
 
@@ -310,7 +310,9 @@ export default function Smartpage({ pathname }) {
         },
         didOpen: () => {
           const popup = document.querySelector(".custom-popup");
-          const confirmButton = document.querySelector(".custom-confirm-button");
+          const confirmButton = document.querySelector(
+            ".custom-confirm-button"
+          );
           const cancelButton = document.querySelector(".custom-cancel-button");
           const image = popup.querySelector(".swal2-image");
 
@@ -397,7 +399,7 @@ export default function Smartpage({ pathname }) {
                                         book.bookimage &&
                                         book.bookimage.length > 0
                                           ? book.bookimage[0]
-                                          : "https://via.placeholder.com/150"
+                                          : "/image/image 9.png"
                                       }
                                       alt={book.title}
                                       width={"100%"}
@@ -439,9 +441,11 @@ export default function Smartpage({ pathname }) {
                                         {book.userReadingStatus.length > 0
                                           ? (
                                               book.userReadingStatus.reduce(
-                                                (sum, item) => sum + item.ratings,
+                                                (sum, item) =>
+                                                  sum + item.ratings,
                                                 0
-                                              ) / book?.userReadingStatus?.length
+                                              ) /
+                                              book?.userReadingStatus?.length
                                             ).toFixed(1)
                                           : 0}
                                         /5
@@ -459,30 +463,34 @@ export default function Smartpage({ pathname }) {
                                         className="ms-auto rate-values"
                                         style={{ fontSize: "4px" }}
                                       >
-                                        {Array.from({ length: 5 }, (_, index) => {
-                                          const rating =
-                                            book.userReadingStatus?.length > 0
-                                              ? book.userReadingStatus[0].ratings
-                                              : 0;
-                                          return (
-                                            <i
-                                              key={index}
-                                              className={`pi ${
-                                                index < rating
-                                                  ? "pi-star-fill"
-                                                  : "pi-star"
-                                              }`}
-                                              style={{
-                                                color:
+                                        {Array.from(
+                                          { length: 5 },
+                                          (_, index) => {
+                                            const rating =
+                                              book.userReadingStatus?.length > 0
+                                                ? book.userReadingStatus[0]
+                                                    .ratings
+                                                : 0;
+                                            return (
+                                              <i
+                                                key={index}
+                                                className={`pi ${
                                                   index < rating
-                                                    ? "#FFCB45"
-                                                    : "inherit",
-                                                fontSize: "12px",
-                                                margin: "1px",
-                                              }}
-                                            ></i>
-                                          );
-                                        })}
+                                                    ? "pi-star-fill"
+                                                    : "pi-star"
+                                                }`}
+                                                style={{
+                                                  color:
+                                                    index < rating
+                                                      ? "#FFCB45"
+                                                      : "inherit",
+                                                  fontSize: "12px",
+                                                  margin: "1px",
+                                                }}
+                                              ></i>
+                                            );
+                                          }
+                                        )}
                                       </span>
                                     </div>
                                   </div>

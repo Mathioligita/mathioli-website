@@ -5,7 +5,7 @@ import { Col, Row } from "react-bootstrap";
 import { bookingVerifypayment } from "api/page"; // Import your API function
 import { Button } from "primereact/button";
 
-const Payment = ({ Paymentplace ,total,razopayshow}) => {
+const Payment = ({ Paymentplace, total, razopayshow }) => {
   const [sdkLoaded, setSdkLoaded] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
 
@@ -36,31 +36,31 @@ const Payment = ({ Paymentplace ,total,razopayshow}) => {
 
   const handlePayment = async () => {
     Paymentplace();
-    if(razopayshow){
-
-      if (!sdkLoaded || !window.Razorpay) {
-        Swal.fire(
-          "Error",
-          "Razorpay SDK not loaded. Please refresh and try again.",
-          "error"
-        );
-        return;
-      }
-  
+    if (!sdkLoaded || !window.Razorpay) {
+      Swal.fire(
+        "Error",
+        "Razorpay SDK not loaded. Please refresh and try again.",
+        "error"
+      );
+      return;
+    }
+    // alert("before");
+    if (razopayshow) {
+      // alert("helo");
       const options = {
         key: "rzp_live_wJBFoukfvdWNdP", // Replace with your Razorpay Key ID
         amount: (raso?.order?.orderTotal || 0) * 100, // Convert amount to paise
         currency: "INR",
         name: "Mathioli ",
         order_id: raso?.razorpayOrder?.id, // Order ID from backend
-        
+
         handler: async (response) => {
           const paymentData = {
             orderId: response.razorpay_order_id,
             paymentId: response.razorpay_payment_id,
             signature: response.razorpay_signature,
           };
-  
+
           try {
             const apiResponse = await bookingVerifypayment(paymentData);
             if (apiResponse?.data?.success) {
@@ -96,10 +96,9 @@ const Payment = ({ Paymentplace ,total,razopayshow}) => {
           "error"
         );
       });
-  
+
       rzp.open();
     }
-
   };
 
   return (

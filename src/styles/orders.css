@@ -1,0 +1,31 @@
+/* styles/orders.css */
+
+.order-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+.order-card.disabled {
+  opacity: 0.5;
+  pointer-events: none; /* Disable interactions */
+}
+
+.product-image {
+  max-width: 80px;
+  height: auto;
+}
+
+.review-button {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.review-button.disabled {
+  color: gray;
+  pointer-events: none;
+}

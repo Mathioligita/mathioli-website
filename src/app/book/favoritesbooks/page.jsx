@@ -65,7 +65,7 @@ const FavoritesBooks = () => {
                       src={
                         bookId?.bookId?.bookimage?.length > 0
                           ? bookId.bookId.bookimage[0]
-                          : "https://via.placeholder.com/150"
+                          : "/image/image 9.png"
                       }
                       alt={bookId?.bookId?.title}
                       width={"100%"}

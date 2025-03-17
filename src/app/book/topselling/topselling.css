@@ -1,7 +1,11 @@
-@media (max-width: 320px) {
+@media (max-width: 768px) {
   .top-selling {
     flex-wrap: wrap;
     gap: 12px;
+    /* margin-left: 12px; */
+  }
+  .Top-selling {
+    margin-left: 12px;
   }
 }
 
@@ -17,7 +21,7 @@
 }
 .top-selling-showall:hover {
   background-color: #1d5755 !important;
-  color:#fff !important;
+  color: #fff !important;
 }
 
 .Top-selling {
@@ -34,8 +38,8 @@
   /* margin-left: 3rem; */
 }
 
-@media screen and (max-width:600px) {
-  .books-view{
+@media screen and (max-width: 600px) {
+  .books-view {
     margin-right: 0px !important;
   }
 }
@@ -43,17 +47,17 @@
 .books-view {
   margin-right: 27px;
 }
-.books-view :active{
-    border-bottom: #1d5755;
+.books-view :active {
+  border-bottom: #1d5755;
 }
 
 @media (max-width: 426px) {
   .top-selling-tabs {
     display: grid;
-    /* padding: 10px; */
-    /* margin-bottom: 36px; */
+    padding: 10px;
+    margin-bottom: 36px;
     margin-left: 0;
-    /* margin: 4px 45px; */
+    margin: 4px 45px;
     text-align: center;
     gap: 13px;
   }
@@ -62,3 +66,105 @@
 /* .filter-section .select-cat {
     width: 100% !important;
 } */
+
+.top-selling-tabs-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.top-selling-tabs {
+  display: contents;
+  overflow-x: auto;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  width: 100%;
+  padding: 10px 0;
+}
+
+.top-selling-tabs::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+.tab-item {
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: rgb(241, 239, 239);
+  color: #969696;
+  border-radius: 40px;
+  margin-right: 10px;
+  font-weight: bold;
+  text-transform: capitalize;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.tab-item.active {
+  background-color: #1d5755;
+  color: white;
+}
+
+.scroll-icon {
+  font-size: 20px;
+  cursor: pointer;
+  color: #666;
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  padding: 5px;
+  z-index: 1;
+  transition: opacity 0.3s;
+}
+
+.scroll-icon.left {
+  left: 0;
+}
+
+.scroll-icon.right {
+  right: 0;
+}
+
+/* Hide scroll icons on larger screens */
+@media (min-width: 768px) {
+  .scroll-icon {
+    display: none;
+  }
+  .top-selling-tabs-container {
+    overflow-x: auto;
+  }
+}
+
+.top-selling-tabs-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.top-selling-tabs {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none; /* Hide scrollbar for modern browsers */
+  -ms-overflow-style: none; /* Hide scrollbar for IE */
+}
+
+.top-selling-tabs::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome/Safari */
+}
+
+.scroll-icon {
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #333;
+  position: absolute;
+  z-index: 10;
+}
+
+.scroll-icon.left {
+  left: 0;
+}
+
+.scroll-icon.right {
+  right: 0;
+}

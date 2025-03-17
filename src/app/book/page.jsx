@@ -218,7 +218,7 @@ export default function Page() {
                                 src={
                                   book.bookimage && book.bookimage.length > 0
                                     ? book.bookimage[0]
-                                    : "https://via.placeholder.com/150"
+                                    : "/image/image 9.png"
                                 }
                                 alt={book.title}
                               />

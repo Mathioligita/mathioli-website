@@ -14,7 +14,7 @@ import userContext from "../UseContext/UseContext";
 
 function Register({ visible, onHide }) {
   const toast = useRef(null);
-  const {regsiterPopup,loginpoup}=useContext(userContext)
+  const { regsiterPopup, loginpoup } = useContext(userContext);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -108,7 +108,7 @@ function Register({ visible, onHide }) {
         <div className="login-modal">
           <div className="content p-1">
             <div className="d-flex justify-content-center">
-              <img src="../image/Logo black.svg" alt="Logo" width={"200px"} />
+              <img src="/image/Logo black.svg" alt="Logo" width={"200px"} />
             </div>
             <p className="text-center fs-5" style={{ color: "#4D4D4D" }}>
               Welcome back!
@@ -220,12 +220,27 @@ function Register({ visible, onHide }) {
               >
                 <FcGoogle className="fs-3" />
                 <span className="ms-2">Continue via Google</span>
-              </div> */} 
+              </div> */}
             </form>
             <div className="mt-4">
-
-            <p>Already have an account? <span onClick={() => { loginpoup(); regsiterPopup(); }} style={{cursor:"pointer",textDecoration:"underline",color:"blue"}}>Login </span>here</p>
-</div>
+              <p>
+                Already have an account?{" "}
+                <span
+                  onClick={() => {
+                    loginpoup();
+                    regsiterPopup();
+                  }}
+                  style={{
+                    cursor: "pointer",
+                    textDecoration: "underline",
+                    color: "blue",
+                  }}
+                >
+                  Login{" "}
+                </span>
+                here
+              </p>
+            </div>
           </div>
         </div>
       </>
