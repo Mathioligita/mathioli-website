@@ -15,6 +15,33 @@
   border-radius: 10px;
 }
 
+.book-value-gamda {
+  position: relative;
+}
+
+.hoverbooks-title {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  position: absolute;
+  top: -20px;
+  left: 0;
+}
+
+.book-value-gamda:hover .hoverbooks-title {
+  opacity: 1;
+  visibility: visible;
+}
+
+.book-value-gamda:hover .hoverbooks-title-2 {
+  /* display: none; */
+}
+
 /* On hover, show shadow */
 .book-images {
   /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; */
@@ -31,7 +58,7 @@
   display: flex;
   border: 1px solid #80808061;
   justify-content: center;
-  width:fit-content;
+  width: fit-content;
 }
 
 /* Book image styles */
@@ -96,4 +123,3 @@
     /* background-color: red; */
   }
 }
-

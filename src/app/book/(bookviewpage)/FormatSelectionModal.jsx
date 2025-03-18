@@ -46,8 +46,8 @@ const FormatSelectionModal = ({
   return (
     <>
       <Modal show={show} onHide={handleClose} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Select Book Format</Modal.Title>
+        <Modal.Header closeButton className="border-0">
+          <Modal.Title className="fs-6">Select Book Format</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="d-flex" style={{ justifyContent: "space-evenly" }}>
@@ -65,20 +65,28 @@ const FormatSelectionModal = ({
                 onChange={() => handleFormatChange("ebook")}
               />
             </div> */}
-            <div className="format-toggle d-flex">
-              <label className="toggle-label me-2 ">Audiobook</label>
-              <InputSwitch
-                checked={selectedFormat === "audiobook"}
-                onChange={() => handleFormatChange("audiobook")}
-              />
-            </div>
+            {selectedFormat && (
+              <div className="format-toggle d-flex">
+                <label className="toggle-label me-2 ">Audiobook</label>
+                <InputSwitch
+                  checked={selectedFormat === "audiobook"}
+                  onChange={() => handleFormatChange("audiobook")}
+                />
+              </div>
+            )}
           </div>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className="border-0">
           <Button variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleSubmit}>
+          <Button
+            style={{
+              background: "rgb(29, 87, 85)",
+              border: "1px solid rgb(29, 87, 85)",
+            }}
+            onClick={handleSubmit}
+          >
             Submit
           </Button>
         </Modal.Footer>

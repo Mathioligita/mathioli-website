@@ -297,7 +297,7 @@ export default function TabView({ data, book }) {
           onClick={() => scrollTabs("left")}
         />
 
-        <div className="top-selling-tabs" ref={scrollContainerRef}>
+        <div className="top-selling-tabs ms-5" ref={scrollContainerRef}>
           <div
             key="All"
             onClick={() => handleTabClick({ name: "All" })}

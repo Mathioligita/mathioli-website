@@ -358,7 +358,7 @@ export default function Smartpage({ pathname }) {
                       <div className="d-flex mt-5">
                         <h3>{category}</h3>
                       </div>
-                      <Row className="gap-1">
+                      <Row className="gap-1 mt-2">
                         {groupedBooks[category]?.map((book) => (
                           <Col
                             md={4}
@@ -415,7 +415,7 @@ export default function Smartpage({ pathname }) {
                                 )} */}
                               </div>
                               <div className="book-info mt-3 mb-">
-                                <div className="d-flex">
+                                {/* <div className="d-flex">
                                   <h5
                                     className="mb-0"
                                     style={{
@@ -425,7 +425,8 @@ export default function Smartpage({ pathname }) {
                                       color: "#4D4D4D",
                                     }}
                                   >
-                                    {book.title}
+                                    
+                                    {book.title.split(" ")[0] + "..."}
                                   </h5>{" "}
                                   <span
                                     className="ms-auto"
@@ -441,6 +442,50 @@ export default function Smartpage({ pathname }) {
                                             (sum, item) => sum + item.ratings,
                                             0
                                           ) / book?.userReadingStatus?.length
+                                        ).toFixed(1)
+                                      : 0}
+                                    /5
+                                  </span>
+                                </div> */}
+                                <div className="d-flex justify-content-between align-items-center mt-4 book-value-gamda  ">
+                                  {/* <h5 className="mb-0">{book.title.split(" ")[0] + "..."}</h5>
+                                   */}
+                                  <div className="d-flex ">
+                                    <h5
+                                      className="mb-2 hoverbooks-title-2"
+                                      style={{
+                                        fontFamily: "Inter",
+                                        fontSize: "15px",
+                                        fontWeight: "700",
+                                        color: "#4D4D4D",
+                                      }}
+                                    >
+                                      {book.title.split(" ")[0] + "..."}
+                                    </h5>
+                                    <h5
+                                      className="mb-2 hoverbooks-title"
+                                      style={{
+                                        fontFamily: "Inter",
+                                        fontSize: "15px",
+                                        fontWeight: "700",
+                                        color: "white",
+                                        position: "absolute",
+                                        top: "0",
+                                      }}
+                                    >
+                                      {book.title}
+                                    </h5>
+                                  </div>
+                                  <span
+                                    className="ms-auto"
+                                    style={{ fontSize: "10px" }}
+                                  >
+                                    {book.userReadingStatus.length > 0
+                                      ? (
+                                          book.userReadingStatus.reduce(
+                                            (sum, item) => sum + item.ratings,
+                                            0
+                                          ) / book.userReadingStatus.length
                                         ).toFixed(1)
                                       : 0}
                                     /5

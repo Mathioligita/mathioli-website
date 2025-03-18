@@ -364,7 +364,9 @@ export default function Wishlist() {
         className="m-3"
       />
       <div className="ms-1 text-start">
-        <h6>{product?.bookId?.title}</h6>
+        <h6>
+          {product?.bookId?.title.split(" ").slice(0, 2).join(" ") + "..."}
+        </h6>
         <span style={{ fontSize: "12px" }}>
           {product?.bookId?.genre}
           <br />
@@ -387,6 +389,7 @@ export default function Wishlist() {
 
   const statusBodyTemplate = (product) => (
     <Tag
+      style={{ fontSize: "12px" }}
       value={availabilityBodyTemplate(product)}
       severity={getSeverity(product)}
     />

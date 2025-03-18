@@ -44,11 +44,12 @@ const Payment = ({ Paymentplace, total, razopayshow }) => {
       );
       return;
     }
-    // alert("before");
+    alert("before");
     if (razopayshow) {
-      // alert("helo");
+      alert("helo");
+      console.log();
       const options = {
-        key: "rzp_live_wJBFoukfvdWNdP", // Replace with your Razorpay Key ID
+        key: env.process.RAZORPAY_KEY_ID, // Replace with your Razorpay Key ID
         amount: (raso?.order?.orderTotal || 0) * 100, // Convert amount to paise
         currency: "INR",
         name: "Mathioli ",

@@ -126,7 +126,7 @@
 }
 
 /* Hide scroll icons on larger screens */
-@media (min-width: 768px) {
+@media (min-width: 1440px) {
   .scroll-icon {
     display: none;
   }
@@ -139,6 +139,8 @@
   display: flex;
   align-items: center;
   position: relative;
+  max-width: 1005px;
+  /* margin-left: 12px; */
 }
 
 .top-selling-tabs {

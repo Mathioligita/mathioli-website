@@ -1,17 +1,16 @@
-
 "use client";
 import React, { useState, useEffect, useContext } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useParams, useRouter } from "next/navigation";
 import { BookAPI, CategoryAPI } from "../../../../../api/page";
-import { Dropdown } from "primereact/dropdown";
-import { MultiSelect } from "primereact/multiselect";
+// import { Dropdown } from "primereact/dropdown";
+// import { MultiSelect } from "primereact/multiselect";
 import { InputText } from "primereact/inputtext";
 // import "./styles.css"; // Import your CSS file
 import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
 import userContext from "../../../UseContext/UseContext";
-import "../BookCard.css"
+import "../BookCard.css";
 export default function Page() {
   const [categoriesData, setCategoriesData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -33,7 +32,7 @@ export default function Page() {
         const data = response?.data?.categories;
         console.log("Fetched categories data:", data);
         setCategoriesdata(data || null);
-        setCategoriesData(data || null );
+        setCategoriesData(data || null);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
@@ -63,7 +62,7 @@ export default function Page() {
         setBooksData(data); // Set the fetched data to the state
 
         // Filter top selling books
-        const topSelling = data.filter(book => book.isTopSelling);
+        const topSelling = data.filter((book) => book.isTopSelling);
         console.log("Top Selling Books:", topSelling);
         setTopSellingBooks(topSelling);
       } catch (error) {
@@ -110,7 +109,9 @@ export default function Page() {
   });
 
   const genres = [...new Set(topSellingBooks?.map((book) => book?.genre))];
-  const languages = [...new Set(topSellingBooks?.map((book) => book?.language))];
+  const languages = [
+    ...new Set(topSellingBooks?.map((book) => book?.language)),
+  ];
   const authors = [...new Set(topSellingBooks?.map((book) => book?.author))];
   const formats = ["EBook", "Audiobook", "Hard Copy"];
 
@@ -142,168 +143,158 @@ export default function Page() {
   return (
     <div className="container mt-4">
       <div className="row mt-5">
-        {/* <div className="col-md-3 col-sm-12">
-          <div className="sidebar-book">
-            <div className="filter-section">
-              <Dropdown
-                value={selectedCategory}
-                options={categoriesData}
-                onChange={(e) => setSelectedCategory(e.value)}
-                placeholder="Select a Category"
-                className="category-select w-100"
-                optionLabel="name"
-              />
-            </div>
-            <div className="filter-section">
-              <MultiSelect
-                value={selectedGenres}
-                options={genres}
-                onChange={(e) => setSelectedGenres(e.value)}
-                placeholder="Select Genres"
-                className="filter-select"
-              />
-            </div>
-            <div className="filter-section">
-              <MultiSelect
-                value={selectedLanguages}
-                options={languages}
-                onChange={(e) => setSelectedLanguages(e.value)}
-                placeholder="Select Languages"
-                className="filter-select"
-              />
-            </div>
-            <div className="filter-section">
-              <MultiSelect
-                value={selectedAuthors}
-                options={authors}
-                onChange={(e) => setSelectedAuthors(e.value)}
-                placeholder="Select Authors"
-                className="filter-select"
-              />
-            </div>
-            <div className="filter-section">
-              <MultiSelect
-                value={selectedFormats}
-                options={formats}
-                onChange={(e) => setSelectedFormats(e.value)}
-                placeholder="Select Formats"
-                className="filter-select"
-              />
-            </div>
-          </div>
-        </div> */}
         {/* <div className="col-md-9"> */}
-          <div className="main-content">
-            {header}
-            <div className="book-sdbjd">
-              <Row>
-                {filteredBooks?.map((book) => (
-                  <Col md={4} lg={2} sm={6} key={book._id} className=" p-1 p-md-0 book-mobile-card image-card-book">
+        <div className="main-content">
+          {header}
+          <div className="book-sdbjd">
+            <Row>
+              {filteredBooks?.map((book) => (
+                <Col
+                  md={4}
+                  lg={2}
+                  sm={6}
+                  key={book._id}
+                  className=" p-1 p-md-0 book-mobile-card image-card-book"
+                >
+                  <div
+                    className="book-card"
+                    onClick={() => handleBookClick(book)}
+                    // style={{
+                    //   cursor: "pointer",
+                    //   justifyContent: "space-between",
+                    //   marginBottom: "20px",
+                    //   borderRadius: "10px",
+                    //   flexDirection: "column",
+                    // }}
+                  >
                     <div
-                      className="book-card"
-                      onClick={() => handleBookClick(book)}
+                      className="book-images card text-center"
                       // style={{
-                      //   cursor: "pointer",
-                      //   justifyContent: "space-between",
-                      //   marginBottom: "20px",
-                      //   borderRadius: "10px",
-                      //   flexDirection: "column",
+                      //   flex: "1 0 auto",
+                      //   background: "#ffff",
+                      //   padding: "15px",
+                      //   boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+                      //   borderRadius: "6px",
+                      //   height: "220px",
+                      //   display: "flex",
+                      //   justifyContent: "center",
                       // }}
                     >
-                      <div
-                        className="book-images card text-center"
-                        // style={{
-                        //   flex: "1 0 auto",
-                        //   background: "#ffff",
-                        //   padding: "15px",
-                        //   boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
-                        //   borderRadius: "6px",
-                        //   height: "220px",
-                        //   display: "flex",
-                        //   justifyContent: "center",
-                        // }}
-                      >
-                        <img
-                          src={
-                            book.bookimage && book.bookimage.length > 0
-                              ? book.bookimage[0]
-                              : "https://via.placeholder.com/150"
-                          }
-                          
-                          // style={{margin: '-2px'}}
-                          alt={book.title}
-                          // width={"100%"}
-                        />
-                      </div>
-                      <div className="book-info" >
-                        <div className="d-flex">
-                          <h5
-                            className="mb-2"
-                            style={{
-                              fontFamily: "Inter",
-                              fontSize: "15px",
-                              fontWeight: "700",
-                              color: "#4D4D4D",
-                            }}
-                          >
-                            {book.title}
-                          </h5>
-                          <span
-                            className="ms-auto"
-                            style={{
-                              fontSize: "12px",
-                              justifyContent: "end",
-                              textAlign: "end",
-                            }}
-                          >
-                            {book.userReadingStatus.length > 0
-                              ? (
-                                  book.userReadingStatus.reduce(
-                                    (sum, item) => sum + item.ratings,
-                                    0
-                                  ) / book?.userReadingStatus?.length
-                                ).toFixed(1)
-                              : 0}
-                            /5
-                          </span>
-                        </div>
-                        <div
-                          className="ratings d-flex"
-                          style={{ marginTop: "10px", fontSize: "12px" }}
+                      <img
+                        src={
+                          book.bookimage && book.bookimage.length > 0
+                            ? book.bookimage[0]
+                            : "https://via.placeholder.com/150"
+                        }
+                        // style={{margin: '-2px'}}
+                        alt={book.title}
+                        // width={"100%"}
+                      />
+                    </div>
+                    <div className="book-info">
+                      {/* <div className="d-flex" style={{ position: "relative" }}>
+                        <h5
+                          className="mb-2 hoverbooks-title-2"
+                          style={{
+                            fontFamily: "Inter",
+                            fontSize: "15px",
+                            fontWeight: "700",
+                            color: "#4D4D4D",
+                          }}
                         >
-                          <span>
-
-                          {book?.author}
-                          </span>
-                          <span className="ms-auto rate-values" style={{ fontSize: "9px" }}>
-                            {Array.from({ length: 5 }, (_, index) => {
-                              const rating =
-                                book.userReadingStatus?.length > 0
-                                  ? book.userReadingStatus[0].ratings
-                                  : 0;
-                              return (
-                                <i
-                                  key={index}
-                                  className={`pi ${
-                                    index < rating ? "pi-star-fill" : "pi-star"
-                                  }`}
-                                  style={{
-                                    color:
-                                      index < rating ? "#FFCB45" : "inherit",
-                                    fontSize: "12px",margin:"1px"
-                                  }}
-                                ></i>
-                              );
-                            })}
-                          </span>
-                        </div>
+                          {book.title.split(" ")[0] + "..."}
+                        </h5>
+                        <h5
+                          className="mb-2    hoverbooks-title"
+                          style={{
+                            fontFamily: "Inter",
+                            fontSize: "15px",
+                            fontWeight: "700",
+                            color: "#4D4D4D",
+                          }}
+                        >
+                          {book.title}
+                        </h5>
+                        <span
+                          className="ms-auto"
+                          style={{
+                            fontSize: "12px",
+                            justifyContent: "end",
+                            textAlign: "end",
+                          }}
+                        >
+                          {book.userReadingStatus.length > 0
+                            ? (
+                                book.userReadingStatus.reduce(
+                                  (sum, item) => sum + item.ratings,
+                                  0
+                                ) / book?.userReadingStatus?.length
+                              ).toFixed(1)
+                            : 0}
+                          /5
+                        </span>
+                      </div> */}
+                      <div className="d-flex book-value-gamda" style={{ position: "relative" }}>
+                        <h5
+                          className="mb-2 hoverbooks-title-2"
+                          style={{
+                            fontFamily: "Inter",
+                            fontSize: "15px",
+                            fontWeight: "700",
+                            color: "#4D4D4D",
+                          }}
+                        >
+                          {book.title.split(" ")[0] + "..."}
+                        </h5>
+                        <h5
+                          className="mb-2 hoverbooks-title"
+                          style={{
+                            fontFamily: "Inter",
+                            fontSize: "15px",
+                            fontWeight: "700",
+                            color: "#4D4D4D",
+                          }}
+                        >
+                          {book.title}
+                        </h5>
+                      </div>
+                      <div
+                        className="ratings d-flex"
+                        style={{ marginTop: "10px", fontSize: "12px" }}
+                      >
+                        <span>{book?.author}</span>
+                        <span
+                          className="ms-auto rate-values"
+                          style={{ fontSize: "9px" }}
+                        >
+                          {Array.from({ length: 5 }, (_, index) => {
+                            const rating =
+                              book.userReadingStatus?.length > 0
+                                ? book.userReadingStatus[0].ratings
+                                : 0;
+                            return (
+                              <i
+                                key={index}
+                                className={`pi ${
+                                  index < rating ? "pi-star-fill" : "pi-star"
+                                }`}
+                                style={{
+                                  color: index < rating ? "#FFCB45" : "inherit",
+                                  fontSize: "12px",
+                                  margin: "1px",
+                                }}
+                              ></i>
+                            );
+                          })}
+                        </span>
                       </div>
                     </div>
-                  </Col>
-                ))}
-              </Row>
-            </div>
+                  </div>
+                </Col>
+              ))}
+            </Row>
           </div>
+        </div>
         {/* </div> */}
       </div>
     </div>

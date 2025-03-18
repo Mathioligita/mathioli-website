@@ -9,7 +9,10 @@ export default function Overview({ books2 }) {
       <Row className="tab-overview ">
         <Col className="tab-publish ">
           Publish Date <br />
+          <span style={{ color: "#F27851" }}>
+
           {new Date(books2?.book?.publishDate).getFullYear()}
+          </span>
         </Col>
         <Col className="tab-publish">
           Publisher <br />
@@ -23,7 +26,7 @@ export default function Overview({ books2 }) {
         </Col>
         <Col className="tab-publish">
           Pages <br />
-          <span>{books2?.book?.pages}</span>
+          <span style={{ color: "#F27851" }}>{books2?.book?.pages}</span>
         </Col>
         <p></p>
       </Row>
@@ -49,11 +52,11 @@ export default function Overview({ books2 }) {
               <br />
               <span>{books2?.book?.publisher}</span>{" "}
             </p>
-            <p>
+            {/* <p>
               printed By
               <br />
               <span>{books2?.book?.printedBy || "no data"}</span>{" "}
-            </p>
+            </p> */}
           </div>
         </Col>
       </Row>

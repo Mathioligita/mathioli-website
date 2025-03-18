@@ -224,7 +224,7 @@ export default function Page() {
                               />
                             </div>
                             <div className="book-info mt-2">
-                              <div className="d-flex mt-4">
+                              {/* <div className="d-flex mt-4">
                                 <h5
                                   className="mb-0"
                                   style={{
@@ -234,7 +234,8 @@ export default function Page() {
                                     color: "#4D4D4D",
                                   }}
                                 >
-                                  {book.title}
+                               
+                                  {book.title.split(" ")[0] + "..."}
                                 </h5>
                                 <span
                                   className="ms-auto"
@@ -250,6 +251,51 @@ export default function Page() {
                                           (sum, item) => sum + item.ratings,
                                           0
                                         ) / book?.userReadingStatus?.length
+                                      ).toFixed(1)
+                                    : 0}
+                                  /5
+                                </span>
+                              </div> */}
+
+                              <div className="d-flex justify-content-between align-items-center mt-4 book-value-gamda  ">
+                                {/* <h5 className="mb-0">{book.title.split(" ")[0] + "..."}</h5>
+                                 */}
+                                <div className="d-flex ">
+                                  <h5
+                                    className="mb-2 hoverbooks-title-2"
+                                    style={{
+                                      fontFamily: "Inter",
+                                      fontSize: "15px",
+                                      fontWeight: "700",
+                                      color: "#4D4D4D",
+                                    }}
+                                  >
+                                    {book.title.split(" ")[0] + "..."}
+                                  </h5>
+                                  <h5
+                                    className="mb-2 hoverbooks-title"
+                                    style={{
+                                      fontFamily: "Inter",
+                                      fontSize: "15px",
+                                      fontWeight: "700",
+                                      color: "white",
+                                      position: "absolute",
+                                      top: "0",
+                                    }}
+                                  >
+                                    {book.title}
+                                  </h5>
+                                </div>
+                                <span
+                                  className="ms-auto"
+                                  style={{ fontSize: "10px" }}
+                                >
+                                  {book.userReadingStatus.length > 0
+                                    ? (
+                                        book.userReadingStatus.reduce(
+                                          (sum, item) => sum + item.ratings,
+                                          0
+                                        ) / book.userReadingStatus.length
                                       ).toFixed(1)
                                     : 0}
                                   /5

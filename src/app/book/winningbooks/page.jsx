@@ -173,7 +173,8 @@ export default function Winingbooks() {
                             color: "#4D4D4D",
                           }}
                         >
-                          {bookId?.title}
+                          {/* {bookId?.title} */}
+                          {bookId.title.split(" ")[0] + "..."}
                         </h5>
 
                         <span

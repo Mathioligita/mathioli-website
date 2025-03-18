@@ -283,7 +283,7 @@
 import { Button } from "primereact/button";
 import React, { useRef, useState } from "react";
 import "./profilescss.scss";
-import { ProfileUserPatch } from "api/page";
+import Cookies from "js-cookie";
 
 const ProfileSidebar = ({ onNavigate, user, triggerFileInput }) => {
   return (
@@ -366,6 +366,17 @@ const ProfileSidebar = ({ onNavigate, user, triggerFileInput }) => {
             onClick={() => onNavigate("My orders")}
           >
             My Orders
+          </Button>
+        </div>
+        <div className="m-auto profile-contents-button">
+          <Button
+            className="w-100 profile-buttonssssss-buttons"
+            onClick={() => {
+              Cookies.remove("accessToken");
+              window.location.href("/");
+            }}
+          >
+            Log out
           </Button>
         </div>
       </div>

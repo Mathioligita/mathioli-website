@@ -68,7 +68,7 @@ export default function Sidebar({ setIsOpen }) {
             width="100%"
           />
         </span>
-        <span className="mt-4 ms-4">
+        <span className="mt-2 ms-4">
           <i className="pi pi-times fs-4" onClick={() => setIsOpen(false)} />
         </span>
       </div>
@@ -82,6 +82,7 @@ export default function Sidebar({ setIsOpen }) {
           border: "1px solid black",
           padding: "5px",
           borderRadius: "50px",
+          marginLeft: "12px",
           width: "fit-content",
           cursor: "pointer",
         }}

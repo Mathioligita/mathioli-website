@@ -39,9 +39,36 @@ const BookCard = ({ book }) => {
             width={"100%"}
           />
         </div>
-        <div className="book-info mt-2">
-          <div className="d-flex justify-content-between align-items-center mt-4">
-            <h5 className="mb-0">{book.title}</h5>
+        <div className="book-info mt-2 " style={{ position: "relative" }}>
+          <div className="d-flex justify-content-between align-items-center mt-4 book-value-gamda  ">
+            {/* <h5 className="mb-0">{book.title.split(" ")[0] + "..."}</h5>
+             */}
+            <div className="d-flex ">
+              <h5
+                className="mb-2 hoverbooks-title-2"
+                style={{
+                  fontFamily: "Inter",
+                  fontSize: "15px",
+                  fontWeight: "700",
+                  color: "#4D4D4D",
+                }}
+              >
+                {book.title.split(" ")[0] + "..."}
+              </h5>
+              <h5
+                className="mb-2 hoverbooks-title"
+                style={{
+                  fontFamily: "Inter",
+                  fontSize: "15px",
+                  fontWeight: "700",
+                  color: "white",
+                  position: "absolute",
+                  top: "0",
+                }}
+              >
+                {book.title}
+              </h5>
+            </div>
             <span className="ms-auto" style={{ fontSize: "10px" }}>
               {book.userReadingStatus.length > 0
                 ? (

@@ -214,17 +214,15 @@ export default function Addtocart() {
         </div>
         <DataTable value={carts} className="text-center">
           <Column
-          
             header="Product"
-            
             body={(product) => (
               <div className="d-flex align-items-center">
-                 <img
-        src={product.bookId.bookimage}
-        alt="Product"
-        style={{ width: "100px" }}
-        className="m-3"
-      />
+                <img
+                  src={product.bookId.bookimage}
+                  alt="Product"
+                  style={{ width: "100px" }}
+                  className="m-3"
+                />
                 {/* <div className="ms-3  text-start">
                   {" "}
                   <h6>{product.bookId.title}</h6>
@@ -237,15 +235,18 @@ export default function Addtocart() {
                   </span>
                 </div> */}
                 <div className="ms-1 text-start">
-        <h6>{product.bookId.title}</h6>
-        <span style={{ fontSize: "12px" }}>
-          {product?.bookId?.genre}
-          <br />
-          {product?.bookId?.language}
-          <br />
-          {product?.bookId?.author}
-        </span>
-      </div>
+                  <h6>
+                    {product.bookId.title.split(" ").slice(0, 2).join(" ") +
+                      "..."}{" "}
+                  </h6>
+                  <span style={{ fontSize: "12px" }}>
+                    {product?.bookId?.genre}
+                    <br />
+                    {product?.bookId?.language}
+                    <br />
+                    {product?.bookId?.author}
+                  </span>
+                </div>
               </div>
             )}
           />

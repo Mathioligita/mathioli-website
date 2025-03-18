@@ -31,7 +31,7 @@ const Footer = () => {
     >
       <div className="container-footer">
         <div className="row justify-content-between">
-          <div className="col-sm-12 col-md-6 col-lg-4">
+          <div className="col-sm-12 col-md-6 col-lg-3">
             <img
               src="/image/Logo.svg"
               alt="Mathioli Gita Logo"
@@ -45,7 +45,7 @@ const Footer = () => {
               more meaningful.
             </p>
           </div>
-          <div className="col-sm-12 col-md-6 col-lg-1">
+          <div className="col-sm-12 col-md-6 col-lg-3">
             <FooterSection title="Categories" items={categories} />
           </div>
           <div
