@@ -3,9 +3,9 @@
 import React, { useEffect, useState, memo, useContext } from "react";
 import Booksview from "./Booksview";
 import TabView from "./TabView";
-import userContext from "@/app/UseContext/UseContext";
+import userContext from "../../UseContext/UseContext";
 import { BookAPI, CategoryAPI } from "../../../../api/page";
-import SkeletonPreloader from "components/SkeletonPreloader";
+// import SkeletonPreloader from "../../components/SkeletonPreloader";
 import { Col, Row } from "react-bootstrap";
 
 const MemoizedTabView = memo(({ data, book }) => {

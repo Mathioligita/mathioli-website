@@ -309,6 +309,38 @@ export const ProfileUserPatch = async (data) => {
     console.error("Unexpected error:", error);
   }
 };
+export const AddressCreate = async (data) => {
+  try {
+    const response = await fetchHandler({
+      method: "PUT",
+
+      endpoint: "/users/shipping-address",
+      data,
+      retries: 5, // Override default retries
+      backoff: 500,
+      // isFormData: true,
+    });
+    return response;
+  } catch (error) {
+    console.error("Unexpected error:", error);
+  }
+};
+export const AddressStatusUpdate = async (data) => {
+  try {
+    const response = await fetchHandler({
+      method: "PUT",
+
+      endpoint: "/users/shipping-address",
+      data,
+      retries: 5, // Override default retries
+      backoff: 500,
+      // isFormData: true,
+    });
+    return response;
+  } catch (error) {
+    console.error("Unexpected error:", error);
+  }
+};
 export const searchbarGet = async (data) => {
   try {
     const response = await fetchHandler({
@@ -486,6 +518,19 @@ export const APIshippingdata = async (data) => {
     const response = await fetchHandler({
       method: "POST",
       endpoint: `/user/order/shipping/calculation`,
+      data,
+      retries: 5, // Override default retries
+      backoff: 500,
+    });
+    return response;
+  } catch (error) {}
+};
+export const APIshippiAddressUpdate = async (data) => {
+  console.log(data, "disctric");
+  try {
+    const response = await fetchHandler({
+      method: "PUT",
+      endpoint: `/users/shipping-address`,
       data,
       retries: 5, // Override default retries
       backoff: 500,

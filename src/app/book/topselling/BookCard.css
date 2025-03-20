@@ -15,6 +15,9 @@
   border-radius: 10px;
 }
 
+.hoverbooks-title-2{
+  font-size: 12px !important;
+}
 .book-value-gamda {
   position: relative;
 }
@@ -23,9 +26,10 @@
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgb(0, 0, 0);
   color: white;
   padding: 4px 8px;
+  /* width: 120px; */
   border-radius: 4px;
   white-space: nowrap;
   position: absolute;
@@ -114,8 +118,8 @@
 }
 
 .books-view .row {
-  max-width: 1194px;
-  overflow: hidden;
+  max-width: 1440px;
+  overflow: auto;
 }
 @media screen and (max-width: 600px) {
   .book-mobile-card {

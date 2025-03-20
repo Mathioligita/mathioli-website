@@ -74,33 +74,34 @@ export default function Sidebar({ setIsOpen }) {
       </div>
 
       {/* /* User Profile Section */}
-
-      <div
-        className="d-flex align-items-center user-dropdown"
-        style={{
-          gap: "13px",
-          border: "1px solid black",
-          padding: "5px",
-          borderRadius: "50px",
-          marginLeft: "12px",
-          width: "fit-content",
-          cursor: "pointer",
-        }}
-        onClick={() => setVisible(!visible)}
-      >
-        <img
-          src={usersdata?.profileImage || "../image/Ellipse 10.png"}
-          style={{ borderRadius: "50%" }}
-          alt="User"
-          width="40px"
-        />
-        <span>
-          {usersdata?.firstName
-            ? `${usersdata.firstName} ${usersdata.lastName}`
-            : "No users"}
-        </span>
-        <i className="pi pi-angle-down" style={{ padding: "5px" }}></i>
-      </div>
+      {accessToken ? (
+        <div
+          className="d-flex align-items-center user-dropdown"
+          style={{
+            gap: "13px",
+            border: "1px solid black",
+            padding: "5px",
+            borderRadius: "50px",
+            marginLeft: "12px",
+            width: "fit-content",
+            cursor: "pointer",
+          }}
+          onClick={() => setVisible(!visible)}
+        >
+          <img
+            src={usersdata?.profileImage || "../image/Ellipse 10.png"}
+            style={{ borderRadius: "50%" }}
+            alt="User"
+            width="40px"
+          />
+          <span>
+            {usersdata?.firstName
+              ? `${usersdata.firstName} ${usersdata.lastName}`
+              : "No users"}
+          </span>
+          <i className="pi pi-angle-down" style={{ padding: "5px" }}></i>
+        </div>
+      ) : null}
 
       {visible && (
         <ul

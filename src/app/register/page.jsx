@@ -261,7 +261,7 @@ import { useRouter } from "next/navigation";
 import userContext from "../UseContext/UseContext";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { UsersRegisterAPi } from "api/page";
+import { UsersRegisterAPi } from "../../../api/page";
 
 function Register({ visible, onHide }) {
   const toast = useRef(null);

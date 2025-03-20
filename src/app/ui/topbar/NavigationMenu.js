@@ -3,9 +3,7 @@
 
 // // import "./navbar.css";
 
-
 // // export default function NavigationMenu() {
-  
 
 // //   const menuItems = [
 // //     { name: "Books", to: "/book" },
@@ -28,7 +26,6 @@
 // //     </nav>
 // //   );
 // // }
-
 
 // "use client";
 // import Link from "next/link";
@@ -64,20 +61,6 @@
 //   );
 // }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -90,6 +73,7 @@ export default function NavigationMenu() {
     { name: "Books", to: "/book" },
     { name: "Audio Books", to: "/book/audio-books" },
     { name: "Categories", to: "/book/categories" },
+    { name: "Videos", to: "/book/videos" },
   ];
 
   return (
@@ -97,7 +81,12 @@ export default function NavigationMenu() {
       <ul className="navva d-flex align-self-center">
         {menuItems.map((item, index) => (
           <li key={index} className="nav-item align-self-center">
-            <Link href={item.to} className={`nav-link text-black ${pathname === item.to ? 'active' : ''}`}>
+            <Link
+              href={item.to}
+              className={`nav-link text-black ${
+                pathname === item.to ? "active" : ""
+              }`}
+            >
               {item.name}
             </Link>
           </li>
@@ -105,7 +94,7 @@ export default function NavigationMenu() {
       </ul>
       <style jsx>{`
         .nav-link.active {
-          color: #1D5755;
+          color: #1d5755;
         }
       `}</style>
     </nav>

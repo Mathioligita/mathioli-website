@@ -32,19 +32,19 @@ export default function Layout({ children }) {
         <div className={`layout-sidebar ${isSidebarVisible ? "" : "hidden"}`}>
           {/* <Sidebar  /> */}
         </div>
-        <div
+        {/* <div
           className={`layout-main-container ${
             isSidebarVisible ? "" : "sidebar-hidden"
           }`}
-          style={{ background: "#fff" }}
-        >
-          <div className="layout-main">
+          // style={{ background: "#fff" }}
+        > */}
+          <div className="layout-main" >
             {children}
              {/* {loading && <Loading />}{" "} */}
           </div>
         </div>
         <FooterPage />
-      </div>
+      {/* </div> */}
     </LoadingContext.Provider>
   );
 }

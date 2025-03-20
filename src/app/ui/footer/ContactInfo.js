@@ -1,14 +1,21 @@
 import React from "react";
 
 const ContactInfo = ({ address, email, phone }) => (
-  <div className="contact-info row d-flex" style={{ fontSize: "16px",justifyContent:"space-between" }}>
-    <div className="copyright col-md-2 col-sm-12 col-md-6 col-lg-2 mb-3 mb-md-0" >
-      © 2024 by{" "}
+  <div
+    className="contact-info row d-flex"
+    style={{ fontSize: "16px", justifyContent: "space-between" }}
+  >
+    <div
+      className="copyright col-md-2 col-sm-12 col-md-6 col-lg-2 mb-3 mb-md-0"
+      style={{ cursor: "pointer" }}
+    >
+      © 2025 by{" "}
       <a
         href="https://www.webdads2u.com/"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-white"
+        className="text-white text-decoration-none"
+
       >
         WEBDADS2U
       </a>{" "}

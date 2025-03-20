@@ -1,9 +1,9 @@
-// =================================================================================================
-// =================================================================================================
-// =================================================================================================
-// =================================================================================================
-// =================================================================================================
-// =================================================================================================
+// ===============================================================================================================================================
+// ===============================================================================================================================================
+// ===============================================================================================================================================
+// ===============================================================================================================================================
+// ===============================================================================================================================================
+// ===============================================================================================================================================
 
 "use client";
 
@@ -17,15 +17,18 @@ import { InputText } from "primereact/inputtext";
 import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
 import { Paginator } from "primereact/paginator";
-import "../topselling/[name]/styles.css";
-import "./aduiostyle.css";
+// import "../topselling/[name]/styles.css";
+import "./top-selling.scss";
 import { Button } from "primereact/button";
+// import Overlayaudio from "./overlayaudio";
 import userContext from "../../UseContext/UseContext";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import Swal from "sweetalert2";
-import SkeletonPreloader from "../../../../components/SkeletonPreloader";
+
 import "../../../app/book/topselling/BookCard.css";
+import Overlayaudio from "../audio-books/overlayaudio";
+import SkeletonPreloader from "../../../../components/SkeletonPreloader";
 
 const retryFetch = async (fn, retries = 3, delay = 1000) => {
   try {
@@ -40,7 +43,7 @@ const retryFetch = async (fn, retries = 3, delay = 1000) => {
   }
 };
 
-export default function Smartpage({ pathname }) {
+export default function TopsellingAudioBooks() {
   const [categoriesData, setCategoriesData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const { categoriesdata, setCategoriesdata } = useContext(userContext);
@@ -206,7 +209,7 @@ export default function Smartpage({ pathname }) {
         return false;
       }
 
-      if (pathname === "audio-books" && !book.isAudiobookAvailable) {
+      if ("/audio-books" === "audio-books" && !book.isAudiobookAvailable) {
         return false;
       }
 
@@ -331,19 +334,21 @@ export default function Smartpage({ pathname }) {
   };
 
   return (
-    <div className="container mt-4">
+    <div className="ms-0 ms-md-5 p-2 p-md-0 mt-4">
       <div className="mt-5">
         <div className="mb-4">
-          <div className="main-content">
-            {header}
-            <div className="book-sdbjd">
+          <div className=" mb-4">
+            {/* {header} */}
+            <span className="Top-selling ">Top Selling AudioBooks</span>
+            <div className="book-sdbjd mt-4">
               {loading ? (
                 <Row>
                   {[...Array(itemsPerPage)].map((_, index) => (
                     <Col
-                      md={4}
+                      xs={12}
+                      sm={4}
+                      md={3}
                       lg={2}
-                      sm={6}
                       key={index}
                       className="p-1 p-md-0 book-mobile-card image-card-book"
                     >
@@ -355,198 +360,209 @@ export default function Smartpage({ pathname }) {
                 <>
                   {Object.keys(groupedBooks)?.map((category, index) => (
                     <div key={index}>
-                      <div className="d-flex mt-5">
+                      {/* <div className="d-flex mt-5">
                         <h3>{category}</h3>
-                      </div>
-                      <Row className="gap-1 mt-2">
+                      </div> */}
+                      <Row className="gap-1">
                         {groupedBooks[category]?.map((book) => (
-                          <Col
-                            md={4}
-                            lg={2}
-                            sm={6}
-                            key={book._id}
-                            className="p-1 p-md-0 book-mobile-card image-card-book"
-                          >
-                            <div
-                              className="book-card book-adio"
-                              onClick={() => handleBookClick(book)}
-                              style={{
-                                cursor: "pointer",
-                                justifyContent: "space-between",
-                                padding: "0px 15px",
-                                borderRadius: "10px",
-                                flexDirection: "column",
-                              }}
-                            >
-                              <div
-                                className="book-images card text-center"
-                                style={{
-                                  flex: "1 0 auto",
-                                  background: "#ffff",
-                                  boxShadow:
-                                    "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
-                                  borderRadius: "6px",
-                                  padding: "15px",
-                                  justifyContent: "center",
-                                  display: "flex",
-                                }}
+                          <>
+                            {book.isAudiobookAvailable && (
+                              <Col
+                                md={4}
+                                lg={2}
+                                sm={6}
+                                key={book._id}
+                                className="p-1 p-md-0 book-mobile-card image-card-book"
                               >
-                                <img
-                                  src={
-                                    book?.bookimage &&
-                                    book?.bookimage?.length > 0
-                                      ? book?.bookimage[0]
-                                      : "/image/image 9.png"
-                                  }
-                                  alt={book?.title}
-                                  width={"100%"}
-                                />
-
-                                {/* {book.isAudiobookAvailable && (
-                                  <button
-                                    className="play-button"
-                                    onClick={(e) => {
-                                      e.stopPropagation();
-                                      handlePlayButtonClick(book);
-                                    }}
-                                  >
-                                    ▶
-                                  </button>
-                                )} */}
-                              </div>
-                              <div className="book-info mt-3 mb-">
-                                {/* <div className="d-flex">
-                                  <h5
-                                    className="mb-0"
-                                    style={{
-                                      fontFamily: "Inter",
-                                      fontSize: "15px",
-                                      fontWeight: "700",
-                                      color: "#4D4D4D",
-                                    }}
-                                  >
-                                    
-                                    {book.title.split(" ")[0] + "..."}
-                                  </h5>{" "}
-                                  <span
-                                    className="ms-auto"
-                                    style={{
-                                      fontSize: "12px",
-                                      justifyContent: "end",
-                                      textAlign: "end",
-                                    }}
-                                  >
-                                    {book.userReadingStatus.length > 0
-                                      ? (
-                                          book.userReadingStatus.reduce(
-                                            (sum, item) => sum + item.ratings,
-                                            0
-                                          ) / book?.userReadingStatus?.length
-                                        ).toFixed(1)
-                                      : 0}
-                                    /5
-                                  </span>
-                                </div> */}
-                                <div className="d-flex justify-content-between align-items-center mt-4 book-value-gamda  ">
-                                  {/* <h5 className="mb-0">{book.title.split(" ")[0] + "..."}</h5>
-                                   */}
-                                  <div className="d-flex ">
-                                    <h5
-                                      className="mb-2 hoverbooks-title-2"
-                                      style={{
-                                        fontFamily: "Inter",
-                                        fontSize: "15px",
-                                        fontWeight: "700",
-                                        color: "#4D4D4D",
-                                      }}
-                                    >
-                                      {book.title.split(" ")[0] + "..."}
-                                    </h5>
-                                    <h5
-                                      className="mb-2 hoverbooks-title"
-                                      style={{
-                                        fontFamily: "Inter",
-                                        fontSize: "15px",
-                                        fontWeight: "700",
-                                        color: "white",
-                                        position: "absolute",
-                                        top: "0",
-                                      }}
-                                    >
-                                      {book.title}
-                                    </h5>
-                                  </div>
-                                  <span
-                                    className="ms-auto"
-                                    style={{ fontSize: "10px" }}
-                                  >
-                                    {book.userReadingStatus.length > 0
-                                      ? (
-                                          book.userReadingStatus.reduce(
-                                            (sum, item) => sum + item.ratings,
-                                            0
-                                          ) / book.userReadingStatus.length
-                                        ).toFixed(1)
-                                      : 0}
-                                    /5
-                                  </span>
-                                </div>
                                 <div
-                                  className="ratings mt-1 mb-2 d-flex"
+                                  className="book-card book-adio"
+                                  onClick={() => handleBookClick(book)}
                                   style={{
-                                    marginTop: "5px",
-                                    fontSize: "12px",
+                                    cursor: "pointer",
+                                    justifyContent: "space-between",
+                                    padding: "0px 15px",
+                                    borderRadius: "6px",
+                                    flexDirection: "column",
                                   }}
                                 >
-                                  <span>{book?.author}</span>
-                                  <span
-                                    className="ms-auto rate-values"
-                                    style={{ fontSize: "4px" }}
+                                  <div
+                                    className="book-images card text-center"
+                                    style={{
+                                      flex: "1 0 auto",
+                                      background: "#ffff",
+                                      boxShadow:
+                                        "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+                                      borderRadius: "6px",
+                                      padding: "15px",
+                                      justifyContent: "center",
+                                      display: "flex",
+                                    }}
                                   >
-                                    {Array.from({ length: 5 }, (_, index) => {
-                                      const rating =
-                                        book.userReadingStatus?.length > 0
-                                          ? book.userReadingStatus[0].ratings
-                                          : 0;
-                                      return (
-                                        <i
-                                          key={index}
-                                          className={`pi ${
-                                            index < rating
-                                              ? "pi-star-fill"
-                                              : "pi-star"
-                                          }`}
+                                    <img
+                                      src={
+                                        book.bookimage &&
+                                        book.bookimage.length > 0
+                                          ? book.bookimage[0]
+                                          : "/image/image 9.png"
+                                      }
+                                      alt={book.title}
+                                      width={"100%"}
+                                    />
+
+                                    {book.isAudiobookAvailable && (
+                                      <button
+                                        className="play-button"
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          handlePlayButtonClick(book);
+                                        }}
+                                      >
+                                        ▶
+                                      </button>
+                                    )}
+                                  </div>
+                                  <div className="book-info mt-3 mb-">
+                                    {/* <div className="d-flex">
+                                      <h5
+                                        className="mb-0"
+                                        style={{
+                                          fontFamily: "Inter",
+                                          fontSize: "15px",
+                                          fontWeight: "700",
+                                          color: "#4D4D4D",
+                                        }}
+                                      >
+                                      
+                                        {book.title.split(" ")[0] + "..."}
+                                      </h5>{" "}
+                                      <span
+                                        className="ms-auto"
+                                        style={{
+                                          fontSize: "12px",
+                                          justifyContent: "end",
+                                          textAlign: "end",
+                                        }}
+                                      >
+                                        {book.userReadingStatus.length > 0
+                                          ? (
+                                              book.userReadingStatus.reduce(
+                                                (sum, item) =>
+                                                  sum + item.ratings,
+                                                0
+                                              ) /
+                                              book?.userReadingStatus?.length
+                                            ).toFixed(1)
+                                          : 0}
+                                        /5
+                                      </span>
+                                    </div> */}
+                                    <div className="d-flex justify-content-between align-items-center mt-4 book-value-gamda  ">
+                                      {/* <h5 className="mb-0">{book.title.split(" ")[0] + "..."}</h5>
+                                       */}
+                                      <div className="d-flex ">
+                                        <h5
+                                          className="mb-2 hoverbooks-title-2"
                                           style={{
-                                            color:
-                                              index < rating
-                                                ? "#FFCB45"
-                                                : "inherit",
-                                            fontSize: "12px",
-                                            margin: "1px",
+                                            fontFamily: "Inter",
+                                            fontSize: "15px",
+                                            fontWeight: "700",
+                                            color: "#4D4D4D",
                                           }}
-                                        ></i>
-                                      );
-                                    })}
-                                  </span>
+                                        >
+                                          {book.title.split(" ")[0] + "..."}
+                                        </h5>
+                                        <h5
+                                          className="mb-2 hoverbooks-title"
+                                          style={{
+                                            fontFamily: "Inter",
+                                            fontSize: "15px",
+                                            fontWeight: "700",
+                                            color: "white",
+                                            position: "absolute",
+                                            top: "0",
+                                          }}
+                                        >
+                                          {book.title}
+                                        </h5>
+                                      </div>
+                                      <span
+                                        className="ms-auto"
+                                        style={{ fontSize: "10px" }}
+                                      >
+                                        {book.userReadingStatus.length > 0
+                                          ? (
+                                              book.userReadingStatus.reduce(
+                                                (sum, item) =>
+                                                  sum + item.ratings,
+                                                0
+                                              ) / book.userReadingStatus.length
+                                            ).toFixed(1)
+                                          : 0}
+                                        /5
+                                      </span>
+                                    </div>
+                                    <div
+                                      className="ratings mt-1 mb-2 d-flex"
+                                      style={{
+                                        marginTop: "5px",
+                                        fontSize: "12px",
+                                      }}
+                                    >
+                                      <span>{book?.author}</span>
+                                      <span
+                                        className="ms-auto rate-values"
+                                        style={{ fontSize: "4px" }}
+                                      >
+                                        {Array.from(
+                                          { length: 5 },
+                                          (_, index) => {
+                                            const rating =
+                                              book.userReadingStatus?.length > 0
+                                                ? book.userReadingStatus[0]
+                                                    .ratings
+                                                : 0;
+                                            return (
+                                              <i
+                                                key={index}
+                                                className={`pi ${
+                                                  index < rating
+                                                    ? "pi-star-fill"
+                                                    : "pi-star"
+                                                }`}
+                                                style={{
+                                                  color:
+                                                    index < rating
+                                                      ? "#FFCB45"
+                                                      : "inherit",
+                                                  fontSize: "12px",
+                                                  margin: "1px",
+                                                }}
+                                              ></i>
+                                            );
+                                          }
+                                        )}
+                                      </span>
+                                    </div>
+                                  </div>
+                                  {/* <div className="profile-contents-button">
+                                    <Button
+                                      className="profile-buttonssssss w-100"
+                                      onClick={() =>
+                                        handlepayoverflow(
+                                          book,
+                                          book.isAudiobookAvailable
+                                            ? "audioBook"
+                                            : "audioBook"
+                                        )
+                                      }
+                                    >
+                                      Buy Now
+                                    </Button>
+                                  </div> */}
                                 </div>
-                              </div>
-                              {/* <div className="profile-contents-button">
-                                <Button
-                                  className="profile-buttonssssss w-100"
-                                  onClick={() =>
-                                    handlepayoverflow(
-                                      book,
-                                      book.isAudiobookAvailable
-                                        ? "audioBook"
-                                        : "audioBook"
-                                    )
-                                  }
-                                >
-                                  Buy Now
-                                </Button>
-                              </div> */}
-                            </div>
-                          </Col>
+                              </Col>
+                            )}
+                          </>
                         ))}
                       </Row>
                     </div>

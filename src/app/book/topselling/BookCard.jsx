@@ -25,9 +25,13 @@ const BookCard = ({ book }) => {
       sm={4}
       md={3}
       lg={2}
-      className="p-1 p-md-0 book-mobile-card image-card-book"
+      className="p-1 p-md-0 book-mobile-card image-card-book "
     >
-      <div className="book-card" onClick={handleBookClick}>
+      <div
+        className="book-card"
+        onClick={handleBookClick}
+        // style={{ width: "200px" }}
+      >
         <div className="book-images card text-center ">
           <img
             src={
@@ -64,9 +68,15 @@ const BookCard = ({ book }) => {
                   color: "white",
                   position: "absolute",
                   top: "0",
+                  maxWidth: "900px",
                 }}
               >
-                {book.title}
+                {/* {book.title} */}
+                {book.title.split(" ").map((word, index) => (
+                  <span key={index}>
+                    {word} <br />
+                  </span>
+                ))}
               </h5>
             </div>
             <span className="ms-auto" style={{ fontSize: "10px" }}>

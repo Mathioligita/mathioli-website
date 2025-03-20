@@ -59,7 +59,7 @@
 
 // export default fetchHandler;
 
-import { API_BASE_URL } from '@/app/utils';
+import { API_BASE_URL } from '../src/app/utils';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 

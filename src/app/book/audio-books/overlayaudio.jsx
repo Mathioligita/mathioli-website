@@ -105,13 +105,11 @@
 //                 /-
 //               </p>
 
-             
 //             </div>
 //           </div>
 
-         
 //           <Payment handlePaymentplace={handleSubmit} />
-         
+
 //         </div>
 //       </div>
 //     </div>
@@ -121,7 +119,7 @@
 
 import React, { useContext, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { bookingAudioBooking } from "api/page";
+import { bookingAudioBooking } from "../../../../api/page";
 import Swal from "sweetalert2";
 import Payment from "./razorpay/Payment";
 import userContext from "../../UseContext/UseContext";
@@ -213,7 +211,7 @@ export default function Overlayaudio({
 
               {/* Price */}
               <p className="fw-bold text-success">
-                Rs.{" "}
+                ₹{" "}
                 {audioBookingdetails?.book?.audiobookPrice ||
                   audioBookingdetails.audiobookPrice}
                 /-

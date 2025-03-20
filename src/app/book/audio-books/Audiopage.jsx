@@ -25,7 +25,7 @@ import userContext from "../../UseContext/UseContext";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import Swal from "sweetalert2";
-import SkeletonPreloader from "components/SkeletonPreloader";
+import SkeletonPreloader from "../../../../components/SkeletonPreloader";
 import "../../../app/book/topselling/BookCard.css";
 
 const retryFetch = async (fn, retries = 3, delay = 1000) => {
@@ -332,8 +332,8 @@ export default function Smartpage({ pathname }) {
   };
 
   return (
-    <div className="container mt-4">
-      <div className="mt-5">
+    <div className="container">
+      <div className="pt-5">
         <div className="mb-4">
           <div className="main-content mb-4">
             {header}
@@ -372,7 +372,6 @@ export default function Smartpage({ pathname }) {
                               >
                                 <div
                                   className="book-card book-adio"
-                                  onClick={() => handleBookClick(book)}
                                   style={{
                                     cursor: "pointer",
                                     justifyContent: "space-between",
@@ -382,6 +381,7 @@ export default function Smartpage({ pathname }) {
                                   }}
                                 >
                                   <div
+                                    onClick={() => handleBookClick(book)}
                                     className="book-images card text-center"
                                     style={{
                                       flex: "1 0 auto",

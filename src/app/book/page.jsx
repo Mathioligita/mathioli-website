@@ -8,7 +8,7 @@ import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
 import { Paginator } from "primereact/paginator";
 import userContext from "../UseContext/UseContext";
-import SkeletonPreloader from "components/SkeletonPreloader";
+import SkeletonPreloader from "../../../components/SkeletonPreloader";
 import "../book/topselling/BookCard.css";
 
 export default function Page() {
@@ -155,7 +155,7 @@ export default function Page() {
     <div>
       {loading ? (
         <section>
-          <div className="container mt-4">
+          <div className="container ">
             <div className="mt-5">
               <div className="mb-4">
                 <div className="main-content mb-4">
@@ -193,7 +193,7 @@ export default function Page() {
           </div>
         </section>
       ) : (
-        <div className="container mt-4">
+        <div className="container ">
           <div className="mt-5">
             <div className="mb-4">
               <div className="main-content mb-4">

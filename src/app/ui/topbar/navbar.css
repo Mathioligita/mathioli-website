@@ -1,9 +1,15 @@
 .logo-damksmladas {
-  display: none;
+  display: none !important;
+}
+.fav-wishlist {
+  display: none !important;
 }
 @media (max-width: 768px) {
   .logo-damksmladas {
-    display: block;
+    display: block !important;
+  }
+  .fav-wishlist {
+    display: block !important;
   }
   .dkjndkjfdnkjfndfkjd {
     display: none !important;
@@ -299,7 +305,7 @@ a:focus {
 @media (max-width: 768px) {
   .fav-wishlist {
     display: block !important;
-    margin-top: 17px;
+    /* margin-top: 17px; */
     color: black;
   }
 }

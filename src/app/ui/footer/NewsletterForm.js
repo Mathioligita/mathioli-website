@@ -131,7 +131,7 @@ const NewsletterForm = () => {
               style={{
                 background: "#FFA539",
                 color: "black",
-                borderRadius: "10px",
+                borderRadius: "6px",
                 border: "none",
                 // padding:"11px"
               }}

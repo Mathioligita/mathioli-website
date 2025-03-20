@@ -5,11 +5,11 @@ import Editions from "./Editions";
 import { Col, Row } from "react-bootstrap";
 import Ratings from "./Ratings";
 import RelatedBooks from "./relatedBooks";
-export default function TabViews({ books }) {
+export default function TabViews({ books, setShow, show }) {
   console.log(books, "books");
   return (
     <div>
-      <TabView className="" >
+      <TabView className="">
         <TabPanel header="Overview">
           <Overview books2={books} />
         </TabPanel>
@@ -22,50 +22,37 @@ export default function TabViews({ books }) {
               <div className="">
                 <h5> Details</h5>
                 <p>
-                  <strong>
-
-                  Publish Date :
-                  </strong>
+                  <strong>Publish Date :</strong>
                   <span className="ms-2">
                     {new Date(books?.book?.publishDate).getFullYear()}
                   </span>
                 </p>
                 <p>
-                  <strong>
-
-                  Author :
-                  </strong>
+                  <strong>Author :</strong>
                   <span className="ms-2">{books?.book?.author}</span>
                 </p>
                 <p>
-                  <strong>
-
-                  Published in
-                  </strong>
+                  <strong>Published in</strong>
                   <span className="ms-2">{books?.book?.publisher}</span>{" "}
                 </p>
                 <p>
-                  <strong>
-
-                  printed By :
-                  </strong>
+                  <strong>printed By :</strong>
                   <span className="ms-2">
                     {books?.book?.printedBy || "no data"}
                   </span>{" "}
                 </p>
                 <p>
-                  <strong>
-
-                  Description :
-                  </strong>
+                  <strong>Description :</strong>
                   <span className="ms-2">{books?.book?.description}</span>
                 </p>
               </div>
             </Col>
           </Row>
         </TabPanel>
-        <TabPanel header={` (${books?.book?.userReadingStatus?.length}) Reviews`}>
-          <Ratings books={books} />
+        <TabPanel
+          header={` (${books?.book?.userReadingStatus?.length}) Reviews`}
+        >
+          <Ratings books={books} show={show} setShow={setShow} />
         </TabPanel>
         {/* <TabPanel header="Lists">
           <p className="m-0">

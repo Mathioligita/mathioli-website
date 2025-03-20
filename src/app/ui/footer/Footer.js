@@ -4,8 +4,8 @@ import React, { useContext } from "react";
 import ContactInfo from "./ContactInfo";
 import FooterSection from "./FooterSection";
 import NewsletterForm from "./NewsletterForm";
-import { CategoryAPI } from "api/page";
-import userContext from "@/app/UseContext/UseContext";
+// import { CategoryAPI } from "api/page";
+import userContext from "../../UseContext/UseContext";
 import "./container-footer.css";
 
 const Footer = () => {
@@ -26,7 +26,7 @@ const Footer = () => {
   }));
   return (
     <footer
-      className="footer text-white py-5 mt-5"
+      className="footer text-white pt-5 pt-5"
       style={{ backgroundColor: "#1D5755" }}
     >
       <div className="container-footer">
@@ -62,8 +62,8 @@ const Footer = () => {
 
         <ContactInfo
           address="Shanthi Vihar Complex, No 11 Luz Ginza complex - old, 140, Royapettah High Rd, Luz, Mylapore, Chennai, Tamil Nadu 600004"
-          email="Ourstudio@hello.com"
-          phone="123 456 6578"
+          email="uthiradambooks@gmail.com"
+          phone="9884810585"
         />
       </div>
     </footer>

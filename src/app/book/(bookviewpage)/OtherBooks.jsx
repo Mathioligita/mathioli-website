@@ -10,7 +10,10 @@ export default function OtherBooks({ books }) {
   };
   return (
     <>
-      <div className="d-flex" style={{ justifyContent: "space-evenly" }}>
+      <div
+        className="d-flex"
+        style={{ justifyContent: "space-evenly", cursor: "pointer" }}
+      >
         {Array.isArray(books.relatedBooks) &&
           books.relatedBooks.slice(0, 3).map((i, index) => (
             <div

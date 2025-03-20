@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './Quote.css';
 import './newquote.css';
 
-import { QuoteAPi } from 'api/page';
+import { QuoteAPi } from '../../../../api/page';
 
 export default function Quote() {
 	const [currentIndex, setCurrentIndex] = useState(0);

@@ -186,11 +186,16 @@ import { Toast } from "primereact/toast";
 import "primereact/resources/themes/saga-blue/theme.css"; // Choose a theme
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import { REviewBook } from "api/page";
+import { REviewBook } from "../../../../api/page";
 import { Button } from "react-bootstrap";
 import "./audio.css";
 
-export default function ReviewModal({ slug, closeModal }) {
+export default function ReviewModal({
+  slug,
+  closeModal,
+  reviewdata,
+  setReviewdata,
+}) {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -215,6 +220,10 @@ export default function ReviewModal({ slug, closeModal }) {
       };
       const response = await REviewBook(slug, data);
 
+      console.log(response.data, "response");
+      if (response.data) {
+        setReviewdata(true);
+      }
       // if (response.newReview) {
       toast.current.show({
         severity: "success",

@@ -106,7 +106,7 @@
   justify-content: center;
   background-color: #1D5755;
   border: 1px solid #F5F5F5;
-  border-radius: 12px;
+  border-radius: 6px;
   /* margin-top: 1rem; */
   color: rgb(255, 255, 255);
   /* transition: all 1s ease; */
@@ -121,7 +121,7 @@
   color: #1D5755;
   background-color: white;
   border: 1px solid #1D5755;
-  border-radius: 12px;
+  border-radius: 6px;
   /* outline: none; */
   /* Removes default focus outline */
   /* margin-left: 10px;

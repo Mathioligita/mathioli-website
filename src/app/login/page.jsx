@@ -11,7 +11,7 @@ import { FcGoogle } from 'react-icons/fc';
 import 'primereact/resources/themes/lara-light-cyan/theme.css';
 import './login.css';
 import Cookies from 'js-cookie';
-import { LoginAPi } from 'api/page';
+import { LoginAPi } from '../../../api/page';
 import userContext from '../UseContext/UseContext';
 
 // console.log(API_BASE_URL, "API_BASE_URL");

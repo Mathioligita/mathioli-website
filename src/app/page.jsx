@@ -11,10 +11,11 @@ import TabView from "./book/topselling/page";
 import Favoritesbooks from "./book/favoritesbooks/page";
 import Winingbooks from "./book/winningbooks/page";
 import "./globals.css";
+import TopsellingAudioBooks from "./book/topselling-audiobookspage/topselling-audiobooks";
 export default function Home() {
   return (
     <>
-      <div className="">
+      <div className="" style={{ overflowX: "hidden" }}>
         {/* <button className="btn btn-primary">sdsd</button> */}
         <Topbars />
         <Bannersection />
@@ -29,6 +30,8 @@ export default function Home() {
           </Row>
         </div>
         <TabView />
+
+        <TopsellingAudioBooks />
 
         <Favoritesbooks />
         <Winingbooks />

@@ -75,3 +75,23 @@
   display: flex;
   justify-content: space-between;
 }
+@media (max-width: 425px) {
+  .shippingaddress-item {
+    font-size: 11px;
+  }
+  .shippingaddress-item-4 {
+    font-size: 9px;
+  }
+  .shippingaddress-item-heading {
+    font-size: 17px;
+  }
+}
+.aviablity-strch-remmove {
+  padding: 0px !important;
+}
+.aviablity-strch-remmove .remove-values {
+  margin-top: 2rem !important;
+}
+.avatarimage-valeues img {
+  object-fit: contain;
+}

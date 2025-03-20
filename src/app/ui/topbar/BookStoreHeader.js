@@ -10,7 +10,7 @@ import SearchBar from "./SearchBar"; // Default export
 import Sidebar from "../sidebar/page";
 import "./navbar.css";
 import Link from "next/link";
-import userContext from "@/app/UseContext/UseContext";
+import userContext from "../../../app/UseContext/UseContext";
 import { Badge } from "primereact/badge";
 import { useRouter } from "next/navigation";
 
@@ -42,44 +42,49 @@ export default function BookStoreHeader() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);    
+  }, []);
 
   return (
     <div>
       <header className="book-store-header ">
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <div>
-            <button
-              style={{ all: "unset" }}
-              type="button"
-              className="m-4 m-lg-1"
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
-          </div>
+          <div className="d-flex" style={{ justifyContent: "space-between" }}>
+            <div>
+              <button
+                style={{ all: "unset" }}
+                type="button"
+                className="m-4 m-lg-1"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                <span className="navbar-toggler-icon"></span>
+              </button>
+            </div>
 
-          <div className="logo-damksmladas">
-            <Link className="m-3 m-lg-1 link-image" href="/">
-              <Logo />
-            </Link>
-          </div>
-          <div>
-            <div className="fav-wishlist me-4">
-              <span onClick={handleWishlist} className="ms-3 m">
-                <i className="pi pi-heart p-overlay-badge fs-5">
-                  <Badge value={wishlistcount}></Badge>
-                </i>
-              </span>
+            <div className="logo-damksmladas">
+              <Link className="m-3 m-lg-1 link-image" href="/">
+                <Logo />
+              </Link>
+            </div>
+            <div className="fav-wishlist" >
+              <div
+                className="fav-wishlist me-4  d-flex"
+                style={{ marginTop: "32px", display: "none" }}
+              >
+                <span onClick={handleWishlist} className="ms-3 m">
+                  <i className="pi pi-heart p-overlay-badge fs-5">
+                    <Badge value={wishlistcount}></Badge>
+                  </i>
+                </span>
 
-              <span onClick={handleAddToCart} className="ms-3 ">
-                <i
-                  className="pi pi-shopping-cart p-overlay-badge fs-5"
-                  style={{ fontSize: "1rem" }}
-                >
-                  <Badge value={cart1}></Badge>
-                </i>
-              </span>
+                <span onClick={handleAddToCart} className="ms-3 ">
+                  <i
+                    className="pi pi-shopping-cart p-overlay-badge fs-5"
+                    style={{ fontSize: "1rem" }}
+                  >
+                    <Badge value={cart1}></Badge>
+                  </i>
+                </span>
+              </div>
             </div>
           </div>
 

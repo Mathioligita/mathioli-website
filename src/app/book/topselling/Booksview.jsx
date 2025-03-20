@@ -75,7 +75,7 @@ import React from "react";
 import BookCard from "./BookCard"; // Import the BookCard component
 import { Row } from "react-bootstrap";
 import "./bookview.css";
-import SkeletonPreloader from "components/SkeletonPreloader";
+import SkeletonPreloader from "../../../../components/SkeletonPreloader";
 
 // Main Books View component
 export default function Booksview({ book }) {

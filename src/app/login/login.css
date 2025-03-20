@@ -1,90 +1,89 @@
 /* Login Modal Container */
 .login-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    z-index: 999;
-    width: 400px; /* Adjust the width as needed */
-    max-width: 100%;
-    animation: fadeIn 0.3s ease-in-out;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  width: 400px; /* Adjust the width as needed */
+  max-width: 100%;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Overlay background */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Animation for fading in */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
   }
-  
-  /* Overlay background */
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 998;
-    animation: fadeIn 0.3s ease-in-out;
+  100% {
+    opacity: 1;
   }
-  
-  /* Animation for fading in */
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-  
-  /* Center content and add margin */
-  /* .login-modal .content {
+}
+
+/* Center content and add margin */
+/* .login-modal .content {
     text-align: center;
   }
    */
-  .login-modal img {
-    /* width: 100% !important; */
-    /* margin-bottom: 20px; */
-  }
-  
-  /* .login-modal p {
+.login-modal img {
+  /* width: 100% !important; */
+  /* margin-bottom: 20px; */
+}
+
+/* .login-modal p {
     font-size: 1.2rem;
     margin-bottom: 5px;
   } */
-  
-  /* .login-modal span {
+
+/* .login-modal span {
     font-size: 1rem;
     margin-bottom: 20px;
     display: block;
   } */
-  
-  /* Style the form inputs and button */
-  
-  
-  /* .mb-3 .form-label {
+
+/* Style the form inputs and button */
+
+/* .mb-3 .form-label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
   } */
-  
-  /* .mb-3 .p-inputtext, .mb-3 .p-password {
+
+/* .mb-3 .p-inputtext, .mb-3 .p-password {
     width: 100%;
   } */
-  
-  /* button.p-button {
+
+/* button.p-button {
     width: 100%;
     background-color: #007bff;
     color: #fff;
     border-radius: 4px;
     padding: 10px;
   } */
-  
-  /* Optional: Style for icons */
-  /* .pi {
+
+/* Optional: Style for icons */
+/* .pi {
     font-size: 20px;
     margin-right: 10px;
   }
    */
-   .login-password .p-component .p-icon-field {
+.login-password .p-component .p-icon-field {
   width: 100% !important;
   display: grid;
 }
@@ -95,3 +94,18 @@
     margin-left:10px;
   }
 } */
+
+@media (max-width: 425px) {
+  .login-modal {
+    width: 314px;
+  }
+  .popup-content {
+    width: 100% !important;
+  }
+  .popup {
+    padding: 12px 12px !important;
+  }
+  .popup-content h4 {
+    font-size: 12px;
+  }
+}

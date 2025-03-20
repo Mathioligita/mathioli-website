@@ -126,7 +126,7 @@ export default function RootLayout({ children }) {
   const [booksdata, setBooksData] = useState([]);
   const [categoriesdata, setCategoriesdata] = useState([]);
   const [loginPopupVisible, setLoginPopupVisible] = useState(false);
-  const [usersdata, setusersdata] = useState([]);
+  const [usersdata, setusersdata] = useState(null);
   const [registerpop, setRegisterpop] = useState(false);
 
   const loginpoup = () => {

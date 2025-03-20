@@ -326,13 +326,13 @@ import { InputTextarea } from "primereact/inputtextarea";
 import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
 import { Col, Row } from "react-bootstrap";
-import { ProfileUser, ProfileUserPatch } from "api/page";
-import userContext from "@/app/UseContext/UseContext";
+import { ProfileUser, ProfileUserPatch } from "../../../../api/page";
+import userContext from "../../../app/UseContext/UseContext";
 import Swal from "sweetalert2";
 
 const ProfileInformation = ({ isEditing, user, setIsEditing }) => {
   const { usersdata, setusersdata } = useContext(userContext);
-  console.log(isEditing, "da");
+  console.log(usersdata, "da");
   const [data, setData] = useState(null);
 
   useEffect(() => {

@@ -10,7 +10,7 @@ import {
   FavoriteAPI,
   ProfileUser,
 } from "../../../../api/page";
-import userContext from "@/app/UseContext/UseContext";
+import userContext from "../../../app/UseContext/UseContext";
 import Cookies from "js-cookie";
 import { Button } from "primereact/button";
 import Link from "next/link";
@@ -41,13 +41,14 @@ export default function UserActions() {
     wishlistvalues,
     setusersdata,
     setCategoriesdata,
-    registerpoup,
-    regsiterPopup,
+    // registerpoup,
+    usersdata,
+    // regsiterPopup,
     setRegisterpop,
     registerpop,
   } = useContext(userContext);
-
-  // console.log(usersdata, "userdata")
+  // const { usersdata, setusersdata } = useContext(userContext)
+  console.log(usersdata, "userdata???????????????");
   const accessToken = Cookies.get("accessToken");
   const wishlistcount = wishlistvalues?.length || 0;
   const cart1 = cart?.length || 0;
@@ -171,7 +172,7 @@ export default function UserActions() {
       </span>
 
       {loginPopupVisible && (
-        <div className="position-absolute" >
+        <div className="position-absolute">
           <Login visible={loginPopupVisible} onHide={closeLoginPopup} />
         </div>
       )}
