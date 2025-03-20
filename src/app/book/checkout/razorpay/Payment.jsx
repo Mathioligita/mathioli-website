@@ -18,7 +18,10 @@ const Payment = ({
 
   // Get Razorpay order details from session storage
   let raso = {};
-  raso = JSON.parse(sessionStorage.getItem("razorpayOrder")) || {};
+  raso =
+    typeof window !== "undefined"
+      ? JSON.parse(sessionStorage.getItem("razorpayOrder"))
+      : null || {};
   // try {
   // } catch (error) {
   //   console.error("Failed to parse razorpayOrder from session storage:", error);

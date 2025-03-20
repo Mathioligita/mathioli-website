@@ -335,7 +335,6 @@ import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import "./atc.css";
-
 import {
   addToCartAPI,
   CartRemoveAPI,
@@ -524,7 +523,7 @@ export default function Addtocart() {
   };
 
   const Checkoutnavigate = () => {
-    localStorage.removeItem("selectedBook");
+    Cookies.remove("selectedBook");
     accessToken ? router.push("/book/checkout") : loginpoup();
   };
 

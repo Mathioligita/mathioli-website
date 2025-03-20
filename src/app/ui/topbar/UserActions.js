@@ -42,13 +42,12 @@ export default function UserActions() {
     setusersdata,
     setCategoriesdata,
     // registerpoup,
-    usersdata,
     // regsiterPopup,
     setRegisterpop,
     registerpop,
   } = useContext(userContext);
   // const { usersdata, setusersdata } = useContext(userContext)
-  console.log(usersdata, "userdata???????????????");
+  // console.log(usersdata, "userdata???????????????");
   const accessToken = Cookies.get("accessToken");
   const wishlistcount = wishlistvalues?.length || 0;
   const cart1 = cart?.length || 0;

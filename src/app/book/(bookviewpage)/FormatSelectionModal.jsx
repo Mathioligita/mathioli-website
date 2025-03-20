@@ -335,6 +335,7 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 
 import Overlayaudio from "../audio-books/overlayaudio";
+import Cookies from "js-cookie";
 
 const FormatSelectionModal = ({
   show,
@@ -370,7 +371,7 @@ const FormatSelectionModal = ({
 
       // Store in local storage if both hardcopy and audiobook are selected
       if (selectedFormats.hardcopy && selectedFormats.audiobook) {
-        localStorage.setItem("selectedBook", JSON.stringify(book));
+        Cookies.set("selectedBook", JSON.stringify(book));
       }
 
       handleClose();
