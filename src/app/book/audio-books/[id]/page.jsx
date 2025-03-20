@@ -4,7 +4,7 @@
 import { useParams } from "next/navigation";
 import React, { useEffect, useState, useRef } from "react";
 import "../audio.css";
-import { booksId } from "api/page";
+import { booksId } from "../../../../../api/page";
 import { Col, Row, Nav } from "react-bootstrap";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";

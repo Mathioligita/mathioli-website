@@ -79,7 +79,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import { contactusAPi } from "api/page";
+import { contactusAPi } from "../../../../api/page";
 import Swal from "sweetalert2";
 
 export default function Contact() {
