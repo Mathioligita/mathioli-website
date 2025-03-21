@@ -36,7 +36,7 @@ export default function TabView({ data, book }) {
     router.push(`/book/topselling`);
   };
   const locations = typeof window !== "undefined" ? location.pathname : null;
-  // console.log(locations, "locations");
+  console.log(locations, "locations");
   return (
     <div className="ms-0 ms-md-5 p-2 p-md-0 mt-4">
       <div className="d-flex align-items-center mb-2">

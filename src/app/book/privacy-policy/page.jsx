@@ -91,7 +91,7 @@ export default function PrivacyPolicy() {
         </ul>
         <p>
           To exercise your rights, contact us at{" "}
-          <strong>Email: [Your Email Here]</strong>
+          <strong>Email: uthiradambooks@gmail.com</strong>
         </p>
 
         <h6>8. Changes to This Privacy Policy</h6>
@@ -106,8 +106,8 @@ export default function PrivacyPolicy() {
           If you have any questions or concerns about this Privacy Policy, feel
           free to reach out to us:
         </p>
-        <p>📧 Email: [Your Email Here]</p>
-        <p>📞 Phone: +91 [Your Phone Number Here]</p>
+        <p>📧 Email: uthiradambooks@gmail.com</p>
+        <p>📞 Phone: +91 9884810585</p>
       </div>
     </div>
   );

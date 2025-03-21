@@ -8,7 +8,14 @@
   background-color: #396664;
   border-radius: 1px solid #396664;
 }
+.p-inputswitch:not(.p-disabled):has(.p-inputswitch-input:hover).p-highlight
+  .p-inputswitch-slider {
+  background: #396664 !important;
+}
 
+.p-inputswitch.p-highlight .p-inputswitch-slider {
+  background: #396664;
+}
 /* .checkout-all {
   display: flex;
   justify-content: space-between;

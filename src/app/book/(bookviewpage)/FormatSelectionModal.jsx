@@ -368,11 +368,13 @@ const FormatSelectionModal = ({
       } else {
         setShowaudioBooking(true); // Show Overlayaudio for ebook and audiobook
       }
+      if (selectedFormats.hardcopy && selectedFormats.audiobook) {
+        sessionStorage.setItem("selectedBook", JSON.stringify(book));
+        sessionStorage.setItem("selectedHardcopy", true);
+        sessionStorage.setItem("selectedaudiocopy", true);
+      }
 
       // Store in local storage if both hardcopy and audiobook are selected
-      if (selectedFormats.hardcopy && selectedFormats.audiobook) {
-        Cookies.set("selectedBook", JSON.stringify(book));
-      }
 
       handleClose();
     }

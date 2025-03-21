@@ -149,8 +149,8 @@ export default function TermsAndConditions() {
           If you have any questions about these Terms and Conditions, please
           contact us:
         </p>
-        <p>📧 Email: [Your Email Here]</p>
-        <p>📞 Phone: +91 [Your Phone Number Here]</p>
+        <p>📧 Email: uthiradambooks@gmail.com</p>
+        <p>📞 Phone: +91 9884810585</p>
       </div>
     </div>
   );

@@ -42,6 +42,7 @@ export default function UserActions() {
     setusersdata,
     setCategoriesdata,
     // registerpoup,
+    usersdata,
     // regsiterPopup,
     setRegisterpop,
     registerpop,

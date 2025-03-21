@@ -14,7 +14,7 @@ const ShippingForm = ({
 }) => {
   // const isMobile = useMediaQuery({ query: "(max-width: 600px)" });
   // {
-  //   console.log(formData, "Formdata");
+    console.log(formData, "Formdata");
   // }
   return (
     <Dialog

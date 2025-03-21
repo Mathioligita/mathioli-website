@@ -40,7 +40,7 @@ const retryFetch = async (fn, retries = 3, delay = 1000) => {
   }
 };
 
-export default function Smartpage() {
+export default function Smartpage({ pathname }) {
   const [categoriesData, setCategoriesData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const { categoriesdata, setCategoriesdata } = useContext(userContext);
@@ -206,7 +206,7 @@ export default function Smartpage() {
         return false;
       }
 
-      if ("audio-books" === "audio-books" && !book.isAudiobookAvailable) {
+      if (pathname === "audio-books" && !book.isAudiobookAvailable) {
         return false;
       }
 

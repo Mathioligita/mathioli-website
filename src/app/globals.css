@@ -121,7 +121,9 @@ p.footer-description {
   font-size: 16px;
   font-weight: 400;
 }
-
+.p-rating .p-rating-item.p-rating-item-active .p-rating-icon {
+  color: "red" !important;
+}
 .book-images {
   /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; */
   flex: 1 0 auto;

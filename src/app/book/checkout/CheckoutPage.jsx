@@ -26,7 +26,7 @@
 // import { Toast } from "primereact/toast";
 // import { RadioButton } from "primereact/radiobutton";
 
-// const CheckoutPage = () => {
+// const CheckoutPage = ({ buysingleproducts }) => {
 //   const [checkout, setCheckout] = useState([]);
 //   const [shippingdata, setShippingdata] = useState([]);
 //   const [user, setUser] = useState(null);
@@ -42,24 +42,13 @@
 //   const [singleselectbooks, setSingleselectBooks] = useState([]);
 //   const guestId = Cookies.get("guestId");
 //   const toast = useRef(null);
-//   // console.log(singleselectbooks, "singleselectbooks");
+//   console.log(usersdata, "usersdata>>>>>>>>>>>>>>????????????");
+
 //   const selecteditemhardcopy =
-//     typeof window !== "undefined"
-//       ? JSON.parse(Cookies.get("selectedBook"))
-//       : null;
-//   useEffect(() => {
-//     const selecteditemhardcopy =
-//       typeof window !== "undefined"
-//         ? JSON.parse(Cookies.get("selectedBook"))
-//         : null;
-//     if (selecteditemhardcopy) {
-//       setSingleselectBooks(
-//         Array.isArray(selecteditemhardcopy)
-//           ? selecteditemhardcopy
-//           : [selecteditemhardcopy]
-//       );
-//     }
-//   }, []);
+//     JSON.parse(localStorage.getItem("selectedBook")) || null;
+//   if (!selecteditemhardcopy) {
+//     setSingleselectBooks(selecteditemhardcopy);
+//   }
 //   const [formData, setFormData] = useState({
 //     firstName: "",
 //     lastName: "",
@@ -90,11 +79,6 @@
 //     privacy_policy: "",
 //   });
 
-//   // if (!checkout || !selecteditemhardcopy) {
-//   //   // If checkout is true, navigate to the checkout page
-//   //   return window.location.assign("/");
-//   // }
-
 //   const accessToken = Cookies.get("accessToken");
 //   if (!accessToken) {
 //     window.location.assign("/");
@@ -107,6 +91,7 @@
 //         setCheckout(response?.data?.Checkout);
 //         setCheckoutdata(response.data);
 //         setUser(response?.data?.user || usersdata);
+//         // Set the initial selected address
 //         if (response?.data?.user?.shippingAddress?.length > 0) {
 //           setSelectedAddress(
 //             response?.data?.user?.shippingAddress[0]._id ||
@@ -118,7 +103,6 @@
 //       console.error("Failed to fetch checkout data:", error);
 //     }
 //   };
-
 //   useEffect(() => {
 //     fetchData();
 //   }, []);
@@ -129,11 +113,6 @@
 //       behavior: "smooth",
 //     });
 //   }, []);
-
-//   const audiobookselected = selecteditemhardcopy?.audiobookPrice;
-//   const hardcopybookselected = selecteditemhardcopy?.price;
-
-//   const subtotalamountsingle = audiobookselected + hardcopybookselected;
 
 //   const handleClickOpen = () => {
 //     setErrors({
@@ -203,48 +182,37 @@
 //   };
 
 //   const handleAddAddress = () => {
-//     // Logic to add a new address
+//     // console.log("Add new address");
 //   };
 
 //   const removeFromCart = async (product) => {
-//     if (!selecteditemhardcopy) {
-//       setCart((prevCart) => prevCart.filter((item) => item._id !== product));
+//     setCart((prevCart) => prevCart.filter((item) => item._id !== product));
 
-//       const data = {
-//         bookId: product?.bookId?._id || selecteditemhardcopy?._id,
-//         guestId: guestId,
-//       };
+//     const data = {
+//       bookId: product.bookId._id,
+//       guestId: guestId,
+//     };
 
-//       try {
-//         const response = await CartRemoveAPI(data);
-//         if (response.success) {
-//           toast.current.show({
-//             severity: "warn",
-//             summary: "Removed from Cart",
-//             detail: `Product has been removed from your cart.`,
-//             life: 3000,
-//           });
-//           const data = await retryFetch(addToCartAPI);
-//           setCart(data?.data?.cart);
-//         }
-//       } catch (error) {
-//         console.error("Error removing from cart:", error);
+//     try {
+//       const response = await CartRemoveAPI(data);
+//       if (response.success) {
 //         toast.current.show({
-//           severity: "error",
-//           summary: "Error",
-//           detail: `Failed to remove product from cart.`,
+//           severity: "warn",
+//           summary: "Removed from Cart",
+//           detail: `Product has been removed from your cart.`,
 //           life: 3000,
 //         });
+//         const data = await retryFetch(addToCartAPI);
+//         setCart(data?.data?.cart);
 //       }
-//     } else {
-//       Cookies.remove("selectedBook");
+//     } catch (error) {
+//       console.error("Error removing from cart:", error);
 //       toast.current.show({
-//         severity: "warn",
-//         summary: "Removed from Cart",
-//         detail: `Product has been removed from your cart.`,
+//         severity: "error",
+//         summary: "Error",
+//         detail: `Failed to remove product from cart.`,
 //         life: 3000,
 //       });
-//       window.location.href = "/";
 //     }
 //   };
 
@@ -320,58 +288,45 @@
 //     }
 //   };
 
-//   console.log(usersdata, "usersdata?.shippingAddress?");
 //   const handlePayment = async () => {
 //     try {
-//       // const selectedItemIds = checkout.map((item) => item.bookId._id);
+//       const selectedItemIds = checkout.map((item) => item.bookId._id);
 
-//       const activeAddress = selecteditemhardcopy
-//         ? usersdata?.shippingAddress.find((addr) => addr.active) ||
-//           usersdata.shippingAddress[0]
-//         : user.shippingAddress.find((addr) => addr.active) ||
-//           user.shippingAddress[0];
-
-//       console.log(activeAddress, "activeAddress");
+//       const activeAddress =
+//         user.shippingAddress.find((addr) => addr.active) ||
+//         user.shippingAddress[0];
 
 //       const shippingAddress = {
-//         name: !selecteditemhardcopy
-//           ? `${activeAddress?.fullName} `
-//           : `${activeAddress?.fullName}`,
-//         address: activeAddress?.address,
-//         city: activeAddress?.city,
-//         postalCode: activeAddress?.zipCode,
-//         state: activeAddress?.state,
-//         country: activeAddress?.country,
-//         email: activeAddress?.email || activeAddress?.email,
-//         phone: activeAddress?.phone || activeAddress?.phone,
+//         name: `${user.firstName} ${user.lastName}`,
+//         address: activeAddress.address,
+//         city: activeAddress.city,
+//         postalCode: activeAddress.zipCode,
+//         state: activeAddress.state,
+//         country: activeAddress.country,
+//         email: user.email,
+//         phone: user.mobile,
 //       };
-//       console.log(shippingAddress, "shippingAddress>>>>>>>>");
 //       const payload = {
-//         orderItems: selecteditemhardcopy
-//           ? [
-//               {
-//                 book: selecteditemhardcopy._id,
-//                 quantity: 1,
-//                 bookSubTotal: subtotalamountsingle,
-//               },
-//             ]
+//         orderItems: buysingleproducts
+//           ? {
+//               book: buysingleproducts?.book?._id,
+//               quantity: buysingleproducts?.quantity,
+//               bookSubTotal:
+//                 buysingleproducts?.bookPrice * buysingleproducts?.quantity,
+//             }
 //           : checkout.map((item) => ({
 //               book: item?.bookId?._id,
 //               quantity: item?.quantity,
 //               bookSubTotal: item?.price * item?.quantity,
 //             })),
 //         shippingAddress: shippingAddress,
-//         // totalAmount: shippingdata.totalAmount || buysingleproducts?.totalPrice,
-//         totalAmount: 1,
+//         totalAmount: shippingdata.totalAmount || buysingleproducts?.totalPrice,
 //         terms_condition: formData.terms_condition || true,
 //         privacy_policy: formData.privacy_policy || true,
-//         // subTotal: shippingdata?.subtotal || subtotalamountsingle,
-//         subTotal: 1,
-//         // shippingAmount: shippingdata?.freight_charge,
-//         shippingAmount: 0,
-//         bookType: selecteditemhardcopy ? "hardcopy,audiobook" : null,
+//         subTotal: shippingdata?.subtotal || buysingleproducts?.subtotal,
+//         shippingAmount: shippingdata?.freight_charge,
 //       };
-//       console.log(payload, "payload>>>>>>>>>>>");
+
 //       const response = await PlaceOrderAPi(payload);
 
 //       if (response?.success) {
@@ -395,8 +350,8 @@
 //   };
 
 //   const activeAddress =
-//     user?.shippingAddress?.shippingAddress?.find((addr) => addr?.active) ||
-//     usersdata?.shippingAddress?.find((addr) => addr?.active) ||
+//     user?.shippingAddress ||
+//     usersdata?.shippingAddress.find((addr) => addr?.active) ||
 //     user?.shippingAddress?.[0] ||
 //     null;
 
@@ -404,12 +359,12 @@
 //     handleClickOpen();
 //     handleCloseChangeAddress();
 //   };
-//   console.log(singleselectbooks, "usersdata::::::::::::::::::::::::::::::::");
+
 //   const handlesubmit = async () => {
 //     const data = {
 //       postalCode: activeAddress?.zipCode,
-//       weight: checkoutdata?.totalWeight || selecteditemhardcopy.weight,
-//       subtotal: checkoutdata?.total || subtotalamountsingle,
+//       weight: checkoutdata?.totalWeight || buysingleproducts?.weight,
+//       subtotal: checkoutdata?.total || buysingleproducts?.totalPrice,
 //     };
 
 //     try {
@@ -428,52 +383,12 @@
 //       addressId: editshippingfromdata,
 //       shippingAddress: formData.shippingAddress,
 //     };
+//     console.log(paylod);
 //     const response = await APIshippiAddressUpdate(paylod);
 //     if (response.success) {
-//       // Handle success
 //     }
 //   };
-//   const renderAvailability = (isAvailable, label, data) => (
-//     <>
-//       <div className="d-flex">
-//         <li className="shippingaddress-item-4" style={{ fontSize: "12px" }}>
-//           <span className="me-2">
-//             {isAvailable ? (
-//               <img src="/Assert/Vector.png" alt="cff" className="" />
-//             ) : (
-//               <img src="/Assert/Vector (1).png" alt="sss" className="" />
-//             )}
-//           </span>
-//           <span style={{ fontSize: "12px" }}>{label} </span>
-//         </li>
-//         <span className="ms-3" style={{ fontSize: "12px", fontWeight: "800" }}>
-//           {" "}
-//           ₹{data}
-//         </span>
-//       </div>
-//       <br />
-//     </>
-//   );
-
-//   const availabilityBodyTemplate = (product) => (
-//     <ul className="my-auto">
-//       {console.log(product, "product>>>>>>>>>>>>>>>>")}
-//       {renderAvailability(
-//         selecteditemhardcopy
-//           ? selecteditemhardcopy?.isHardCopyAvailable
-//           : product?.bookId?.isHardCopyAvailable,
-//         "Hard Copy",
-//         hardcopybookselected
-//       )}
-//       {renderAvailability(
-//         selecteditemhardcopy
-//           ? selecteditemhardcopy?.isAudiobookAvailable
-//           : product?.bookId?.isAudiobookAvailable,
-//         "Audio Book",
-//         audiobookselected
-//       )}
-//     </ul>
-//   );
+//   console.log(selecteditemhardcopy, "selecteditemhardcopy");
 
 //   return (
 //     <>
@@ -497,7 +412,6 @@
 //           <div
 //             onClick={() => window.history.back()}
 //             style={{ cursor: "pointer" }}
-//             className="shippingaddress-item-heading"
 //           >
 //             <i className="pi pi-arrow-left" /> Checkout
 //           </div>
@@ -513,13 +427,12 @@
 //           Shipping Information
 //         </h3>
 //         <Row>
-//           <Col sm={12} md={8}>
+//           <Col md={8}>
 //             <div
 //               style={{
 //                 marginBottom: "20px",
 //                 border: "1px solid rgb(221, 221, 221)",
 //                 padding: "7px",
-//                 background: "white",
 //                 borderRadius: "8px",
 //                 fontFamily: "Montserrat",
 //                 height: "70px",
@@ -527,7 +440,7 @@
 //             >
 //               <div className="">
 //                 <div
-//                   className="d-flex shippingaddress-item"
+//                   className="d-flex "
 //                   style={{ justifyContent: "space-between" }}
 //                 >
 //                   <div>
@@ -539,7 +452,11 @@
 //                       <input
 //                         type="radio"
 //                         className="radio-button"
+//                         // style={{ background: "#1d5755" }}
+//                         // inputId={user._id}
 //                         name="address"
+//                         // value={user._id}
+//                         // onChange={() => handleAddressChange(user._id)}
 //                         checked={activeAddress?._id}
 //                       />{" "}
 //                       {activeAddress?.address},{activeAddress?.city},
@@ -547,6 +464,7 @@
 //                       {activeAddress?.zipCode}
 //                     </span>
 //                   </div>
+
 //                   <div className="d-flex">
 //                     <div
 //                       style={{
@@ -574,242 +492,91 @@
 //                 </div>
 //               </div>
 //             </div>
-//             <Col sm={12} md={12}>
-//               <div className="card mb-4 ">
-//                 {!checkout ? (
-//                   <DataTable
-//                     className="shippingaddress-item-4 "
+//             <Col md={12}>
+//               <div className="card ">
+//                 <DataTable
+//                   style={{
+//                     border: " 1px solid white",
+//                     borderRadius: "8px",
+//                     background: "white",
+//                   }}
+//                   value={checkout || singleselectbooks}
+//                   // style={{ justifyContent: "space-between" }}
+//                 >
+//                   <Column
+//                     headerStyle={{ display: "none" }}
+//                     showHeaders={false}
 //                     style={{
-//                       border: " 1px solid white",
-//                       borderRadius: "8px",
-//                       background: "white",
+//                       alignItems: "start",
+//                       display: "flex",
+//                       justifyContent: "start",
 //                     }}
-//                     value={singleselectbooks}
-//                   >
-//                     <Column
-//                       headerStyle={{ display: "none" }}
-//                       showHeaders={false}
-//                       style={{
-//                         // alignItems: "start",
-//                         display: "flex",
-//                         justifyContent: "start",
-//                       }}
-//                       field="productId.name"
-//                       body={(rowData) => (
+//                     field="productId.name"
+//                     body={(rowData) => (
+//                       <div
+//                         style={{ display: "flex", alignItems: "center" }}
+//                         className="text-start"
+//                       >
+//                         {console.log(
+//                           rowData,
+//                           "rowData>>>>>>>>>>>>>>>>>>>>>>>>>"
+//                         )}
+//                         <Avatar
+//                           image={
+//                             rowData?.bookId?.bookimage[0] ||
+//                             rowData?.bookimage[0]
+//                           }
+//                           size="large"
+//                           // shape="circle"
+//                           style={{ marginRight: "16px" }}
+//                         />
 //                         <div
-//                           // style={{ display: "flex", alignItems: "center" }}
-//                           className="text-start"
+//                           className="d-flex"
+//                           style={{ justifyContent: "space-between" }}
 //                         >
-//                           <Avatar
-//                             image={
-//                               rowData?.bookId?.bookimage[0] ||
-//                               rowData?.bookimage[0]
-//                             }
-//                             size="larger"
-//                             className="avatarimage-valeues"
-//                             style={{
-//                               marginRight: "16px",
-//                               height: "90px",
-//                               width: "100%",
-//                               objectFit: "contain ",
-//                             }}
-//                           />
-//                           <div
-//                             className="d-flex"
-//                             style={{
-//                               justifyContent: "space-between",
-//                               textAlign: "center",
-//                             }}
-//                           >
-//                             <span>
-//                               {rowData?.bookId?.title || rowData?.title}
-//                             </span>
-//                           </div>
+//                           <span>
+//                             {rowData?.bookId?.title || rowData?.title}
+//                           </span>
 //                         </div>
-//                       )}
-//                     ></Column>
-//                     <Column
-//                       headerStyle={{ display: "none" }}
-//                       body={(rowData) => (
-//                         <span>
-//                           Qty: {singleselectbooks ? 1 : rowData?.quantity || 1}
-//                         </span>
-//                       )}
-//                     ></Column>
-//                     <Column
-//                       headerStyle={{ display: "none", padding: "0px" }}
-//                       field="subtotal"
-//                       className="aviablity-strch-remmove"
-//                       body={(rowData) => (
-//                         <div
-//                           className={`my-auto ${
-//                             selecteditemhardcopy ? "remove-values" : ""
-//                           }`}
-//                         >
-//                           <div
-//                             style={{ marginLeft: "10px", fontWeight: "800" }}
-//                           >
-//                             {selecteditemhardcopy ? (
-//                               availabilityBodyTemplate(rowData)
-//                             ) : (
-//                               <span
-//                                 className="fw-bold fs-6"
-//                                 style={{ fontWeight: "800" }}
-//                               >
-//                                 {` ₹ ${
-//                                   rowData?.subtotal?.toFixed(2) ||
-//                                   rowData?.price
-//                                 }
-//                                 `}
-//                               </span>
-//                             )}
-//                             {/* {availabilityBodyTemplate(rowData)} */}
-//                           </div>
-//                         </div>
-//                       )}
-//                     ></Column>
-//                     <Column
-//                       field="subtotal"
-//                       headerStyle={{ display: "none" }}
-//                       body={(rowData) => (
-//                         <div
-//                           onClick={() => removeFromCart(rowData)}
-//                           style={{
-//                             fontWeight: "800",
-//                             color: "black",
-//                             fontSize: "25px",
-//                           }}
-//                         >
-//                           <CiCircleRemove />
-//                         </div>
-//                       )}
-//                     />
-//                   </DataTable>
-//                 ) : (
-//                   <DataTable
-//                     className="shippingaddress-item-4 "
-//                     style={{
-//                       border: "1px solid white",
-//                       borderRadius: "8px",
-//                       background: "white",
-//                     }}
-//                     value={checkout}
-//                   >
-//                     {/* <div
-//                       className="d-flex"
-//                       style={{ justifyContent: "space-between" }}
-//                     > */}
-//                     <Column
-//                       headerStyle={{ display: "none" }}
-//                       showHeaders={false}
-//                       style={
-//                         {
-//                           // alignItems: "start",
-//                           // justifyContent: "space-between",
-//                         }
-//                       }
-//                       field="productId.name"
-//                       body={(rowData) => (
-//                         <>
-//                           <div
-//                             className="d-flex ms-auto"
-//                             style={{
-//                               // justifyContent: "space-between",
-//                               textAlign: "start",
-//                             }}
-//                           >
-//                             <div
-//                               style={
-//                                 {
-//                                   // display: "flex",
-//                                   // alignItems: "center",
-//                                   // justifyContent: "space-between",
-//                                 }
-//                               }
-//                               className="text-start d-flex"
-//                             >
-//                               <Avatar
-//                                 image={
-//                                   rowData?.bookId?.bookimage[0] ||
-//                                   rowData?.bookimage[0]
-//                                 }
-//                                 size="larger"
-//                                 className="avatarimage-valeues"
-//                                 style={{
-//                                   marginRight: "16px",
-//                                   height: "90px",
-//                                   width: "100%",
-//                                   objectFit: "contain ",
-//                                 }}
-//                               />
-//                             </div>
-//                             <div className="my-auto">
-//                               {/* <span> */}
-//                               {rowData?.bookId?.title || rowData?.title}
-//                               {/* </span> */}
-//                             </div>
-//                           </div>
-//                         </>
-//                       )}
-//                     ></Column>
-//                     <Column
-//                       headerStyle={{ display: "none" }}
-//                       body={(rowData) => (
-//                         <span className="ms-auto">
-//                           Qty: {singleselectbooks ? 1 : rowData?.quantity || 1}
-//                         </span>
-//                       )}
-//                     ></Column>
-//                     <Column
-//                       headerStyle={{ display: "none", padding: "0px" }}
-//                       field="subtotal"
-//                       className="aviablity-strch-remmove"
-//                       body={(rowData) => (
-//                         <div
-//                           className={`my-auto ${
-//                             selecteditemhardcopy ? "remove-values" : ""
-//                           }`}
-//                         >
-//                           <div style={{ marginLeft: "10px" }}>
-//                             {selecteditemhardcopy ? (
-//                               availabilityBodyTemplate(rowData)
-//                             ) : (
-//                               <span style={{ fontWeight: "800" }}>
-//                                 {` ₹ ${
-//                                   rowData?.subtotal?.toFixed(2) ||
-//                                   rowData?.price
-//                                 }`}
-//                               </span>
-//                             )}
-//                             {/* {availabilityBodyTemplate(rowData)} */}
-//                           </div>
-//                         </div>
-//                       )}
-//                     ></Column>
-//                     <Column
-//                       field="subtotal"
-//                       headerStyle={{ display: "none" }}
-//                       body={(rowData) => (
-//                         <div
-//                           onClick={() => removeFromCart(rowData)}
-//                           style={{
-//                             fontWeight: "800",
-//                             color: "black",
-//                             fontSize: "25px",
-//                           }}
-//                         >
-//                           <CiCircleRemove />
-//                         </div>
-//                       )}
-//                     />
-//                     {/* </div> */}
-//                   </DataTable>
-//                 )}
+//                       </div>
+//                     )}
+//                   ></Column>
+//                   <Column
+//                     headerStyle={{ display: "none" }}
+//                     body={(rowData) => (
+//                       <span>
+//                         {" "}
+//                         Qty: {rowData?.quantity || rowData?.quantity}
+//                       </span>
+//                     )}
+//                   ></Column>
+//                   <Column
+//                     headerStyle={{ display: "none" }}
+//                     field="subtotal"
+//                     body={(rowData) => ` ₹ ${rowData?.subtotal.toFixed(2)}`}
+//                   ></Column>
+//                   <Column
+//                     field="subtotal"
+//                     headerStyle={{ display: "none" }}
+//                     body={(rowData) => (
+//                       <div
+//                         onClick={() => removeFromCart(rowData)}
+//                         style={{
+//                           fontWeight: "800",
+//                           color: "black",
+//                           fontSize: "25px",
+//                         }}
+//                       >
+//                         <CiCircleRemove />
+//                       </div>
+//                     )}
+//                   ></Column>
+//                 </DataTable>
 //               </div>
 //             </Col>
 //           </Col>
 
-//           <Col className="ms-auto " sm={12} md={4}>
+//           <Col className="ms-auto" md={4}>
 //             <div
 //               style={{
 //                 top: "20px",
@@ -857,7 +624,6 @@
 //                 <p style={{ fontWeight: "bold" }}>
 //                   ₹
 //                   {shippingdata?.subtotal ||
-//                     subtotalamountsingle ||
 //                     checkout
 //                       .reduce((acc, item) => acc + item?.subtotal, 0)
 //                       .toFixed(2)}
@@ -890,6 +656,7 @@
 //                 </p>
 //               </div>
 //               <div>
+//                 {" "}
 //                 <span className="fw-light text-success">
 //                   {shippingdata?.estimated_delivery_days ? (
 //                     <>
@@ -906,13 +673,13 @@
 //                 <p style={{ fontWeight: "bold" }}>Total</p>
 //                 <p style={{ fontWeight: "bold" }}>
 //                   ₹
-//                   {shippingdata?.totalAmount?.toFixed(2) ||
+//                   {shippingdata?.totalAmount ||
 //                     checkout
 //                       .reduce((acc, item) => acc + item.subtotal, 0)
 //                       .toFixed(2)}
 //                 </p>
 //               </div>
-//               <Row className="mb-3">
+//               {/* <Row className="mb-3">
 //                 <Col md={12}>
 //                   <div className="d-flex align-items-center">
 //                     <Checkbox
@@ -947,7 +714,7 @@
 //                     <div className="error">{errors.privacy_policy}</div>
 //                   )}
 //                 </Col>
-//               </Row>
+//               </Row> */}
 //               <Payment
 //                 formData={formData}
 //                 paynowbuttonsuccess={paynowbuttonsuccess}
@@ -957,7 +724,270 @@
 //               />
 //             </div>
 //           </Col>
+//           {/* <Col md={8}>
+//             <div className="p-datatable-products ">
+//               <DataTable
+//                 value={checkout}
+//                 style={{ justifyContent: "space-between" }}
+//               >
+//                 <Column
+//                   headerStyle={{ display: "none" }}
+//                   showHeaders={false}
+//                   style={{
+//                     alignItems: "start",
+//                     display: "flex",
+//                     justifyContent: "start",
+//                   }}
+//                   field="productId.name"
+//                   body={(rowData) => (
+//                     <div
+//                       style={{ display: "flex", alignItems: "center" }}
+//                       className="text-start"
+//                     >
+//                       <Avatar
+//                         image={rowData?.bookId?.bookimage[0] || null}
+//                         size="large"
+//                         shape="circle"
+//                         style={{ marginRight: "16px" }}
+//                       />
+//                       <div
+//                         className="d-flex"
+//                         style={{ justifyContent: "space-between" }}
+//                       >
+//                         <p>{rowData?.bookId?.title}</p>
+//                       </div>
+//                     </div>
+//                   )}
+//                 ></Column>
+//                 <Column
+//                   headerStyle={{ display: "none" }}
+//                   body={(rowData) => <p> Qty: {rowData?.quantity}</p>}
+//                 ></Column>
+//                 <Column
+//                   headerStyle={{ display: "none" }}
+//                   field="subtotal"
+//                   body={(rowData) => ` ₹ ${rowData?.subtotal.toFixed(2)}`}
+//                 ></Column>
+//                 <Column
+//                   field="subtotal"
+//                   headerStyle={{ display: "none" }}
+//                   body={(rowData) => (
+//                     <div onClick={() => removeFromCart(rowData)}>
+//                       <CiCircleRemove />
+//                     </div>
+//                   )}
+//                 ></Column>
+//               </DataTable>
+//             </div>
+//           </Col> */}
 //         </Row>
+
+//         {/* <Row>
+//           <Col md={8}>
+//             <div className="p-datatable-products ">
+//               <DataTable
+//                 value={checkout}
+//                 style={{ justifyContent: "space-between" }}
+//               >
+//                 <Column
+//                   headerStyle={{ display: "none" }}
+//                   showHeaders={false}
+//                   style={{
+//                     alignItems: "start",
+//                     display: "flex",
+//                     justifyContent: "start",
+//                   }}
+//                   field="productId.name"
+//                   body={(rowData) => (
+//                     <div
+//                       style={{ display: "flex", alignItems: "center" }}
+//                       className="text-start"
+//                     >
+//                       <Avatar
+//                         image={rowData?.bookId?.bookimage[0] || null}
+//                         size="large"
+//                         shape="circle"
+//                         style={{ marginRight: "16px" }}
+//                       />
+//                       <div
+//                         className="d-flex"
+//                         style={{ justifyContent: "space-between" }}
+//                       >
+//                         <p>{rowData?.bookId?.title}</p>
+//                       </div>
+//                     </div>
+//                   )}
+//                 ></Column>
+//                 <Column
+//                   headerStyle={{ display: "none" }}
+//                   body={(rowData) => <p> Qty: {rowData?.quantity}</p>}
+//                 ></Column>
+//                 <Column
+//                   headerStyle={{ display: "none" }}
+//                   field="subtotal"
+//                   body={(rowData) => ` ₹ ${rowData?.subtotal.toFixed(2)}`}
+//                 ></Column>
+//                 <Column
+//                   field="subtotal"
+//                   headerStyle={{ display: "none" }}
+//                   body={(rowData) => (
+//                     <div onClick={() => removeFromCart(rowData)}>
+//                       <CiCircleRemove />
+//                     </div>
+//                   )}
+//                 ></Column>
+//               </DataTable>
+//             </div>
+//           </Col>
+//           <Col className="ms-auto">
+//             <div
+//               style={{
+//                 top: "20px",
+//                 right: "20px",
+//                 background: "#fff",
+//                 padding: "16px",
+//                 border: "1px solid #ddd",
+//                 borderRadius: "8px",
+//               }}
+//             >
+//               <div className="d-flex">
+//                 <div className="my-auto">
+//                   <h6
+//                     style={{
+//                       fontWeight: "500",
+//                       marginBottom: "10px",
+//                       fontFamily: "Poppins",
+//                       textAlign: "center",
+//                     }}
+//                   >
+//                     Order Summary
+//                   </h6>
+//                 </div>
+//                 <div className="ms-auto">
+//                   <div>
+//                     <Button
+//                       onClick={handlesubmit}
+//                       className="h-50 "
+//                       style={{
+//                         background: "#396664",
+//                         fontSize: "12px",
+//                         border: "1px solid #396664 ",
+//                         borderRadius: "6px",
+//                       }}
+//                     >
+//                       Delivery to this Address
+//                     </Button>
+//                   </div>
+//                 </div>
+//               </div>
+
+//               <Divider />
+//               <div style={{ display: "flex", justifyContent: "space-between" }}>
+//                 <p style={{ fontWeight: "bold" }}>Subtotal</p>
+//                 <p style={{ fontWeight: "bold" }}>
+//                   ₹
+//                   {shippingdata?.subtotal ||
+//                     checkout
+//                       .reduce((acc, item) => acc + item?.subtotal, 0)
+//                       .toFixed(2)}
+//                 </p>
+//               </div>
+//               <div
+//                 style={{
+//                   display: "flex",
+//                   justifyContent: "space-between",
+//                   marginTop: "8px",
+//                 }}
+//               >
+//                 <p
+//                   style={{
+//                     fontFamily: "Poppins",
+//                     fontWeight: "400",
+//                     fontSize: "14px",
+//                   }}
+//                 >
+//                   Shipping
+//                 </p>
+//                 <p
+//                   style={{
+//                     fontFamily: "Poppins",
+//                     fontWeight: "400",
+//                     fontSize: "14px",
+//                   }}
+//                 >
+//                   {shippingdata?.freight_charge || "--"}
+//                 </p>
+//               </div>
+//               <div>
+//                 {" "}
+//                 <span className="fw-light text-success">
+//                   {shippingdata?.estimated_delivery_days ? (
+//                     <>
+//                       ( Delivery Within {shippingdata?.estimated_delivery_days}{" "}
+//                       days )
+//                     </>
+//                   ) : (
+//                     "Select the delivery address"
+//                   )}
+//                 </span>
+//               </div>
+//               <Divider />
+//               <div style={{ display: "flex", justifyContent: "space-between" }}>
+//                 <p style={{ fontWeight: "bold" }}>Total</p>
+//                 <p style={{ fontWeight: "bold" }}>
+//                   ₹
+//                   {shippingdata?.totalAmount ||
+//                     checkout
+//                       .reduce((acc, item) => acc + item.subtotal, 0)
+//                       .toFixed(2)}
+//                 </p>
+//               </div>
+// <Row className="mb-3">
+//   <Col md={12}>
+//     <div className="d-flex align-items-center">
+//       <Checkbox
+//         inputId="privacy"
+//         name="privacy_policy"
+//         checked={formData.privacy_policy}
+//         onChange={handleChange}
+//         style={{ fontSize: "12px" }}
+//       />
+//       <label
+//         htmlFor="privacy"
+//         className="ms-2"
+//         style={{ fontSize: "12px" }}
+//       >
+//         I agree to the{" "}
+//         <a
+//           href="/book/terms-and-conditions"
+//           className="text-decoration-none"
+//         >
+//           Terms & Conditions
+//         </a>{" "}
+//         & {""}
+//         <a
+//           href="/book/privacy-policy"
+//           className="text-decoration-none"
+//         >
+//           Privacy Policy
+//         </a>
+//       </label>
+//     </div>
+//     {errors.privacy_policy && (
+//       <div className="error">{errors.privacy_policy}</div>
+//     )}
+//   </Col>
+// </Row>
+//               <Payment
+//                 formData={formData}
+//                 paynowbuttonsuccess={paynowbuttonsuccess}
+//                 PlaceOrders={handlePayment}
+//                 selectedProduct={checkout}
+//                 paynowbutton={paynowbutton}
+//               />
+//             </div>
+//           </Col>
+//         </Row> */}
 
 //         <ShippingForm
 //           open={shippingFormOpen}
@@ -968,7 +998,18 @@
 //           handleSubmit={handlesubmitShppingForm}
 //         />
 //         <ChangeAddress
-//           usersdata={usersdata}
+//           usersdata={
+//             usersdata?.shippingAddress?.map((address) => ({
+//               _id: address._id,
+//               active: address.active,
+//               fullName: `${usersdata?.firstName} ${usersdata?.lastName}`,
+//               address: address.address,
+//               city: address.city,
+//               state: address.state,
+//               zipCode: address.zipCode,
+//               country: address.country,
+//             })) || []
+//           }
 //           setEditshippingfromdata={setEditshippingfromdata}
 //           fetchData={fetchData}
 //           activeAddress={activeAddress}
@@ -978,7 +1019,8 @@
 //           handleOpenForm={handleOpenForm}
 //           handleAddAddress={handleAddAddress}
 //           userData={
-//             user?.shippingAddress?.map((address) => ({
+//             user?.shippingAddress ||
+//             usersdata?.shippingAddress?.map((address) => ({
 //               _id: address._id,
 //               active: address.active,
 //               fullName: `${user?.firstName || usersdata?.firstName} ${
@@ -989,7 +1031,8 @@
 //               state: address.state,
 //               zipCode: address.zipCode,
 //               country: address.country,
-//             })) || []
+//             })) ||
+//             []
 //           }
 //         />
 //       </div>
@@ -998,11 +1041,10 @@
 // };
 
 // export default CheckoutPage;
-
 "use client";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Col, Row } from "react-bootstrap";
-// import { Dialog } from "primereact/dialog";
+import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { Checkbox } from "primereact/checkbox";
 import { DataTable } from "primereact/datatable";
@@ -1025,8 +1067,8 @@ import "./checkout.scss";
 import { CiCircleRemove } from "react-icons/ci";
 import userContext from "../../UseContext/UseContext";
 import { Toast } from "primereact/toast";
-import { useRouter } from "next/navigation";
 // import { RadioButton } from "primereact/radiobutton";
+import { useRouter } from "next/navigation";
 
 const CheckoutPage = () => {
   const [checkout, setCheckout] = useState([]);
@@ -1043,27 +1085,33 @@ const CheckoutPage = () => {
   const [paynowbuttonsuccess, setPaybuttonsuccess] = useState(null);
   const [singleselectbooks, setSingleselectBooks] = useState([]);
   const guestId = Cookies.get("guestId");
-  const toast = useRef(null);
   const router = useRouter();
-
+  const toast = useRef(null);
+  // console.log(singleselectbooks, "singleselectbooks");
   const selecteditemhardcopy =
     typeof window !== "undefined"
-      ? JSON.parse(Cookies.get("selectedBook"))
+      ? JSON.parse(sessionStorage.getItem("selectedBook"))
+      : null;
+  const selectedhardcopy =
+    typeof window !== "undefined"
+      ? sessionStorage.getItem("selectedaudiocopy")
       : null;
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const selecteditemhardcopy = JSON.parse(Cookies.get("selectedBook"));
-      if (selecteditemhardcopy) {
-        setSingleselectBooks(
-          Array.isArray(selecteditemhardcopy)
-            ? selecteditemhardcopy
-            : [selecteditemhardcopy]
-        );
-      }
-    }
-  }, []);
+  console.log(singleselectbooks, "selecteditemhardcopy");
 
+  useEffect(() => {
+    const selecteditemhardcopy =
+      typeof window !== "undefined"
+        ? JSON.parse(sessionStorage.getItem("selectedBook"))
+        : null;
+    if (selecteditemhardcopy) {
+      setSingleselectBooks(
+        Array.isArray(selecteditemhardcopy)
+          ? selecteditemhardcopy
+          : [selecteditemhardcopy]
+      );
+    }
+  }, [selectedhardcopy]);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -1094,10 +1142,15 @@ const CheckoutPage = () => {
     privacy_policy: "",
   });
 
+  // if (!checkout || !selecteditemhardcopy) {
+  //   // If checkout is true, navigate to the checkout page
+  //   return window.location.assign("/");
+  // }
+
   const accessToken = Cookies.get("accessToken");
-  if (!accessToken & (typeof window !== "undefined")) {
-    router.push("/")
+  if (!accessToken) {
     // window.location.assign("/");
+    router.push("/");
   }
 
   const fetchData = async () => {
@@ -1152,7 +1205,7 @@ const CheckoutPage = () => {
     });
     if (user && user.shippingAddress && user.shippingAddress.length > 0) {
       const activeAddress =
-        user?.shippingAddress ||
+        user?.shippingAddress.find((addr) => addr.active) ||
         usersdata?.shippingAddress.find((addr) => addr.active) ||
         user.shippingAddress[0];
       setFormData({
@@ -1207,45 +1260,59 @@ const CheckoutPage = () => {
   };
 
   const removeFromCart = async (product) => {
-    if (!selecteditemhardcopy) {
-      setCart((prevCart) => prevCart.filter((item) => item._id !== product));
-
-      const data = {
-        bookId: product?.bookId?._id || selecteditemhardcopy?._id,
-        guestId: guestId,
-      };
-
-      try {
-        const response = await CartRemoveAPI(data);
-        if (response.success) {
-          toast.current.show({
-            severity: "warn",
-            summary: "Removed from Cart",
-            detail: `Product has been removed from your cart.`,
-            life: 3000,
-          });
-          const data = await retryFetch(addToCartAPI);
-          setCart(data?.data?.cart);
-        }
-      } catch (error) {
-        console.error("Error removing from cart:", error);
-        toast.current.show({
-          severity: "error",
-          summary: "Error",
-          detail: `Failed to remove product from cart.`,
-          life: 3000,
-        });
-      }
-    } else {
-      Cookies.remove("selectedBook");
+    if (singleselectbooks) {
+      sessionStorage.removeItem("selectedBook");
+      sessionStorage.removeItem("selectedaudiocopy");
+      sessionStorage.removeItem("selectedHardcopy");
       toast.current.show({
         severity: "warn",
         summary: "Removed from Cart",
         detail: `Product has been removed from your cart.`,
         life: 3000,
-      });
+      })
+      // window.location.assign("/");
       router.push("/")
-      // window.location.href = "/";
+    } else {
+      if (!selecteditemhardcopy) {
+        setCart((prevCart) => prevCart.filter((item) => item._id !== product));
+
+        const data = {
+          bookId: product?.bookId?._id || selecteditemhardcopy?._id,
+          guestId: guestId,
+        };
+
+        try {
+          const response = await CartRemoveAPI(data);
+          if (response.success) {
+            toast.current.show({
+              severity: "warn",
+              summary: "Removed from Cart",
+              detail: `Product has been removed from your cart.`,
+              life: 3000,
+            });
+            const data = await retryFetch(addToCartAPI);
+            setCart(data?.data?.cart);
+          }
+        } catch (error) {
+          console.error("Error removing from cart:", error);
+          toast.current.show({
+            severity: "error",
+            summary: "Error",
+            detail: `Failed to remove product from cart.`,
+            life: 3000,
+          });
+        }
+      } else {
+        localStorage.removeItem("selectedBook");
+        toast.current.show({
+          severity: "warn",
+          summary: "Removed from Cart",
+          detail: `Product has been removed from your cart.`,
+          life: 3000,
+        });
+        // window.location.href = "/";
+        router.push("/");
+      }
     }
   };
 
@@ -1321,7 +1388,7 @@ const CheckoutPage = () => {
   //   }
   // };
 
-  // console.log(usersdata, "usersdata?.shippingAddress?");
+  console.log(usersdata, "usersdata?.shippingAddress?");
   const handlePayment = async () => {
     try {
       // const selectedItemIds = checkout.map((item) => item.bookId._id);
@@ -1377,12 +1444,12 @@ const CheckoutPage = () => {
 
       if (response?.success) {
         setPaybuttonsuccess(response.data);
-        if (typeof window !== "undefined") {
-          sessionStorage.setItem(
-            "razorpayOrder",
-            JSON.stringify(response.data)
-          );
-        }
+        typeof window !== "undefined"
+          ? sessionStorage.setItem(
+              "razorpayOrder",
+              JSON.stringify(response.data)
+            )
+          : null;
         return response?.data;
       } else {
         return {
@@ -1401,7 +1468,7 @@ const CheckoutPage = () => {
   };
 
   const activeAddress =
-    user?.shippingAddress?.find((addr) => addr?.active) ||
+    user?.shippingAddress?.shippingAddress?.find((addr) => addr?.active) ||
     usersdata?.shippingAddress?.find((addr) => addr?.active) ||
     user?.shippingAddress?.[0] ||
     null;
@@ -1410,7 +1477,7 @@ const CheckoutPage = () => {
     handleClickOpen();
     handleCloseChangeAddress();
   };
-  // console.log(singleselectbooks, "usersdata::::::::::::::::::::::::::::::::");
+  console.log(singleselectbooks, "usersdata::::::::::::::::::::::::::::::::");
   const handlesubmit = async () => {
     const data = {
       postalCode: activeAddress?.zipCode,
@@ -1463,7 +1530,6 @@ const CheckoutPage = () => {
 
   const availabilityBodyTemplate = (product) => (
     <ul className="my-auto">
-      {console.log(product, "product>>>>>>>>>>>>>>>>")}
       {renderAvailability(
         selecteditemhardcopy
           ? selecteditemhardcopy?.isHardCopyAvailable
@@ -1582,7 +1648,7 @@ const CheckoutPage = () => {
             </div>
             <Col sm={12} md={12}>
               <div className="card mb-4 ">
-                {!checkout ? (
+                {singleselectbooks.length && selectedhardcopy ? (
                   <DataTable
                     className="shippingaddress-item-4 "
                     style={{
@@ -1602,31 +1668,31 @@ const CheckoutPage = () => {
                       }}
                       field="productId.name"
                       body={(rowData) => (
-                        <div
-                          // style={{ display: "flex", alignItems: "center" }}
-                          className="text-start"
-                        >
-                          <Avatar
-                            image={
-                              rowData?.bookId?.bookimage[0] ||
-                              rowData?.bookimage[0]
-                            }
-                            size="larger"
-                            className="avatarimage-valeues"
-                            style={{
-                              marginRight: "16px",
-                              height: "90px",
-                              width: "100%",
-                              objectFit: "contain ",
-                            }}
-                          />
+                        <div className="d-flex ">
                           <div
-                            className="d-flex"
-                            style={{
-                              justifyContent: "space-between",
-                              textAlign: "center",
-                            }}
+                            // style={{ display: "flex", alignItems: "center" }}
+                            className="text-start"
                           >
+                            <Avatar
+                              image={rowData?.bookimage[0]}
+                              size="larger"
+                              className="avatarimage-valeues"
+                              style={{
+                                marginRight: "16px",
+                                height: "90px",
+                                width: "100%",
+                                objectFit: "contain ",
+                              }}
+                            />
+                            <div
+                              className="d-flex"
+                              style={{
+                                justifyContent: "space-between",
+                                textAlign: "center",
+                              }}
+                            ></div>
+                          </div>
+                          <div className="my-auto">
                             <span>
                               {rowData?.bookId?.title || rowData?.title}
                             </span>
@@ -1638,7 +1704,8 @@ const CheckoutPage = () => {
                       headerStyle={{ display: "none" }}
                       body={(rowData) => (
                         <span>
-                          Qty: {singleselectbooks ? 1 : rowData?.quantity || 1}
+                          Qty:{" "}
+                          {singleselectbooks ? 1 : rowData?.bookId.quantity}
                         </span>
                       )}
                     ></Column>
@@ -1736,8 +1803,8 @@ const CheckoutPage = () => {
                             >
                               <Avatar
                                 image={
-                                  rowData?.bookId?.bookimage[0] ||
-                                  rowData?.bookimage[0]
+                                  rowData?.bookId?.bookimage[0]
+                                  // rowData?.bookimage[0]
                                 }
                                 size="larger"
                                 className="avatarimage-valeues"
@@ -1762,7 +1829,7 @@ const CheckoutPage = () => {
                       headerStyle={{ display: "none" }}
                       body={(rowData) => (
                         <span className="ms-auto">
-                          Qty: {singleselectbooks ? 1 : rowData?.quantity || 1}
+                          Qty: {rowData?.quantity}
                         </span>
                       )}
                     ></Column>
@@ -2004,3 +2071,4 @@ const CheckoutPage = () => {
 };
 
 export default CheckoutPage;
+

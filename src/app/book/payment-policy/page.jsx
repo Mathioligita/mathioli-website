@@ -93,9 +93,10 @@ const PaymentPolicy = () => {
         <p>
           For any payment-related queries, you can contact our support team:
           <br />
-          📧 Email: support@mathioligita.com
+          📧 Email: uthiradambooks@gmail.com
           <br />
-          📞 Phone: +91 XXXXX XXXXX
+          📞 Phone: +91 
+          9884810585
         </p>
       </div>
       {/* </Col>
