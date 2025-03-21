@@ -81,6 +81,7 @@ export const CartRemoveAPI = async (data) => {
         return response;
       } else {
         const guestId = Cookies.get("guestId");
+        // const updatedData={...data,guestId}
         const response = await fetchHandler({
           method: "PATCH",
           endpoint: `/user/cart/remove-guest`,

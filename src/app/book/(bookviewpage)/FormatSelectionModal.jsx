@@ -343,6 +343,7 @@ const FormatSelectionModal = ({
   handleSelection,
   audioBookingdetails,
   book,
+  handleAddToCart,
 }) => {
   const [selectedFormats, setSelectedFormats] = useState({
     hardcopy: false,
@@ -362,9 +363,11 @@ const FormatSelectionModal = ({
     const selected = Object.keys(selectedFormats).filter(
       (format) => selectedFormats[format]
     );
+    sessionStorage.setItem('paymentPageCheckout',false)
     if (selected.length > 0) {
       if (selected.includes("hardcopy")) {
         handleSelection(selected);
+        // handleAddToCart(book);
       } else {
         setShowaudioBooking(true); // Show Overlayaudio for ebook and audiobook
       }

@@ -527,7 +527,9 @@ export default function Addtocart() {
     sessionStorage.removeItem("selectedBook");
     sessionStorage.removeItem("selectedHardcopy");
     sessionStorage.removeItem("selectedaudiocopy");
-
+    sessionStorage.removeItem("buysinglebook");
+    sessionStorage.removeItem('singleBookBuying')
+    sessionStorage.setItem('paymentPageCheckout',true)
     accessToken ? router.push("/book/checkout") : loginpoup();
   };
 

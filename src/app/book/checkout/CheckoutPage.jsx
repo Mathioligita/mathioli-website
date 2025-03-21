@@ -1055,6 +1055,7 @@ import Payment from "./razorpay/Payment";
 import ChangeAddress from "./ChangeAddress";
 import ShippingForm from "./ShippingForm";
 import {
+  addToCartAPI,
   APIshippiAddressUpdate,
   APIshippingdata,
   CartRemoveAPI,
@@ -1069,6 +1070,7 @@ import userContext from "../../UseContext/UseContext";
 import { Toast } from "primereact/toast";
 // import { RadioButton } from "primereact/radiobutton";
 import { useRouter } from "next/navigation";
+import CheckoutTable from "./CheckoutTable";
 
 const CheckoutPage = () => {
   const [checkout, setCheckout] = useState([]);
@@ -1084,10 +1086,11 @@ const CheckoutPage = () => {
   const [editshippingfromdata, setEditshippingfromdata] = useState(null);
   const [paynowbuttonsuccess, setPaybuttonsuccess] = useState(null);
   const [singleselectbooks, setSingleselectBooks] = useState([]);
+  const [SingleBuyProductdata, setSingleBuyProduct] = useState([]);
   const guestId = Cookies.get("guestId");
   const router = useRouter();
   const toast = useRef(null);
-  // console.log(singleselectbooks, "singleselectbooks");
+  console.log(SingleBuyProductdata, "SingleBuyProductdata");
   const selecteditemhardcopy =
     typeof window !== "undefined"
       ? JSON.parse(sessionStorage.getItem("selectedBook"))
@@ -1096,7 +1099,11 @@ const CheckoutPage = () => {
     typeof window !== "undefined"
       ? sessionStorage.getItem("selectedaudiocopy")
       : null;
-
+  const selectedhardcopy1 =
+    typeof window !== "undefined"
+      ? JSON.parse(sessionStorage.getItem("buysinglebook"))
+      : null;
+  console.log(selectedhardcopy1, "selected>>>>>>>>>>>>>>>.");
   console.log(singleselectbooks, "selecteditemhardcopy");
 
   useEffect(() => {
@@ -1104,6 +1111,19 @@ const CheckoutPage = () => {
       typeof window !== "undefined"
         ? JSON.parse(sessionStorage.getItem("selectedBook"))
         : null;
+    const SingleBuyProduct = JSON.parse(
+      sessionStorage.getItem("buysinglebook")
+      // sessionStorage.getItem('singleBookBuying')
+    );
+    sessionStorage.getItem("singleBookBuying");
+
+    if (SingleBuyProduct && sessionStorage.getItem("singleBookBuying")) {
+      console.log(SingleBuyProduct, "SingleBuyProductdata");
+      setCheckoutdata(SingleBuyProduct);
+      setSingleBuyProduct(
+        Array.isArray(SingleBuyProduct) ? SingleBuyProduct : [SingleBuyProduct]
+      );
+    }
     if (selecteditemhardcopy) {
       setSingleselectBooks(
         Array.isArray(selecteditemhardcopy)
@@ -1111,7 +1131,7 @@ const CheckoutPage = () => {
           : [selecteditemhardcopy]
       );
     }
-  }, [selectedhardcopy]);
+  }, []);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -1155,16 +1175,19 @@ const CheckoutPage = () => {
 
   const fetchData = async () => {
     try {
-      const response = await Checkout();
-      if (!response?.isError) {
-        setCheckout(response?.data?.Checkout);
-        setCheckoutdata(response.data);
-        setUser(response?.data?.user || usersdata);
-        if (response?.data?.user?.shippingAddress?.length > 0) {
-          setSelectedAddress(
-            response?.data?.user?.shippingAddress[0]._id ||
-              usersdata.shippingAddress[0]._id
-          );
+      const ProceedToCheckout = sessionStorage.getItem("paymentPageCheckout");
+      if (ProceedToCheckout == "true") {
+        const response = await Checkout();
+        if (!response?.isError) {
+          setCheckout(response?.data?.Checkout);
+          setCheckoutdata(response.data);
+          setUser(response?.data?.user || usersdata);
+          if (response?.data?.user?.shippingAddress?.length > 0) {
+            setSelectedAddress(
+              response?.data?.user?.shippingAddress[0]._id ||
+                usersdata.shippingAddress[0]._id
+            );
+          }
         }
       }
     } catch (error) {
@@ -1173,7 +1196,10 @@ const CheckoutPage = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    const ProceedToCheckout = sessionStorage.getItem("paymentPageCheckout");
+    if (ProceedToCheckout) {
+      fetchData();
+    }
   }, []);
 
   useEffect(() => {
@@ -1260,59 +1286,66 @@ const CheckoutPage = () => {
   };
 
   const removeFromCart = async (product) => {
-    if (singleselectbooks) {
+    console.log(product, "---------value for removeFromCart");
+    if (
+      sessionStorage.getItem("buysinglebook") &&
+      sessionStorage.getItem("singleBookBuying")
+    ) {
       sessionStorage.removeItem("selectedBook");
       sessionStorage.removeItem("selectedaudiocopy");
       sessionStorage.removeItem("selectedHardcopy");
+      sessionStorage.removeItem("buysinglebook");
+      sessionStorage.removeItem("singleBookBuying");
       toast.current.show({
         severity: "warn",
         summary: "Removed from Cart",
         detail: `Product has been removed from your cart.`,
         life: 3000,
-      })
+      });
       // window.location.assign("/");
-      router.push("/")
+      router.push("/");
     } else {
-      if (!selecteditemhardcopy) {
-        setCart((prevCart) => prevCart.filter((item) => item._id !== product));
+      // if (!selecteditemhardcopy) {
+      setCart((prevCart) => prevCart.filter((item) => item._id !== product));
 
-        const data = {
-          bookId: product?.bookId?._id || selecteditemhardcopy?._id,
-          guestId: guestId,
-        };
+      const data = {
+        bookId: product?.bookId?._id || selecteditemhardcopy?._id,
+        // guestId: guestId,
+      };
 
-        try {
-          const response = await CartRemoveAPI(data);
-          if (response.success) {
-            toast.current.show({
-              severity: "warn",
-              summary: "Removed from Cart",
-              detail: `Product has been removed from your cart.`,
-              life: 3000,
-            });
-            const data = await retryFetch(addToCartAPI);
-            setCart(data?.data?.cart);
-          }
-        } catch (error) {
-          console.error("Error removing from cart:", error);
+      try {
+        const response = await CartRemoveAPI(data);
+        if (response.success) {
           toast.current.show({
-            severity: "error",
-            summary: "Error",
-            detail: `Failed to remove product from cart.`,
+            severity: "warn",
+            summary: "Removed from Cart",
+            detail: `Product has been removed from your cart.`,
             life: 3000,
           });
+          fetchData();
+          const data = await addToCartAPI();
+          setCart(data?.data?.cart);
         }
-      } else {
-        localStorage.removeItem("selectedBook");
+      } catch (error) {
+        console.error("Error removing from cart:", error);
         toast.current.show({
-          severity: "warn",
-          summary: "Removed from Cart",
-          detail: `Product has been removed from your cart.`,
+          severity: "error",
+          summary: "Error",
+          detail: `Failed to remove product from cart.`,
           life: 3000,
         });
-        // window.location.href = "/";
-        router.push("/");
       }
+      // } else {
+      //   localStorage.removeItem("selectedBook");
+      //   toast.current.show({
+      //     severity: "warn",
+      //     summary: "Removed from Cart",
+      //     detail: `Product has been removed from your cart.`,
+      //     life: 3000,
+      //   });
+      //   // window.location.href = "/";
+      //   router.push("/");
+      // }
     }
   };
 
@@ -1393,11 +1426,11 @@ const CheckoutPage = () => {
     try {
       // const selectedItemIds = checkout.map((item) => item.bookId._id);
 
-      const activeAddress = selecteditemhardcopy
-        ? usersdata?.shippingAddress.find((addr) => addr.active) ||
-          usersdata.shippingAddress[0]
-        : user.shippingAddress.find((addr) => addr.active) ||
-          user.shippingAddress[0];
+      const activeAddress =
+        usersdata?.shippingAddress.find((addr) => addr.active) ||
+        usersdata.shippingAddress[0];
+      // : user.shippingAddress.find((addr) => addr.active) ||
+      //   user.shippingAddress[0];
 
       console.log(activeAddress, "activeAddress");
 
@@ -1413,32 +1446,82 @@ const CheckoutPage = () => {
         email: activeAddress?.email || activeAddress?.email,
         phone: activeAddress?.phone || activeAddress?.phone,
       };
+
       console.log(shippingAddress, "shippingAddress>>>>>>>>");
+      let orderItem = null;
+
+      if (selecteditemhardcopy) {
+        orderItem = {
+          book: selecteditemhardcopy?._id,
+          quantity: 1,
+          bookSubTotal: subtotalamountsingle,
+        };
+      } else if (selectedhardcopy1) {
+        orderItem = {
+          book: selectedhardcopy1?.book?._id,
+          quantity: 1,
+          bookSubTotal: selectedhardcopy1?.subtotal,
+        };
+      } else if (checkout.length > 0) {
+        // Assuming you want to send the first item in checkout if no other conditions are met
+        const firstCheckoutItem = checkout[0];
+        orderItem = {
+          book: firstCheckoutItem?.bookId?._id,
+          quantity: firstCheckoutItem?.quantity,
+          bookSubTotal: firstCheckoutItem?.price * firstCheckoutItem?.quantity,
+        };
+      }
+
       const payload = {
-        orderItems: selecteditemhardcopy
-          ? [
-              {
-                book: selecteditemhardcopy._id,
-                quantity: 1,
-                bookSubTotal: subtotalamountsingle,
-              },
-            ]
-          : checkout.map((item) => ({
-              book: item?.bookId?._id,
-              quantity: item?.quantity,
-              bookSubTotal: item?.price * item?.quantity,
-            })),
+        orderItems: orderItem ? [orderItem] : [],
         shippingAddress: shippingAddress,
-        totalAmount: shippingdata.totalAmount || buysingleproducts?.totalPrice,
-        // totalAmount: 1,
+        totalAmount:
+          shippingdata.totalAmount ||
+          buysingleproducts?.totalPrice ||
+          selectedhardcopy1?.totalPrice,
         terms_condition: formData.terms_condition || true,
         privacy_policy: formData.privacy_policy || true,
-        subTotal: shippingdata?.subtotal || subtotalamountsingle,
-        // subTotal: 1,
+        subTotal:
+          shippingdata?.subtotal ||
+          subtotalamountsingle ||
+          selectedhardcopy1?.subTotal,
         shippingAmount: shippingdata?.freight_charge,
-        // shippingAmount: 0,
         bookType: selecteditemhardcopy ? "hardcopy,audiobook" : null,
       };
+
+      // const payload = {
+
+      //   orderItems: selecteditemhardcopy
+      //     ? [
+      //         {
+      //           book: selecteditemhardcopy?._id || selectedhardcopy1?.book?._id,
+      //           quantity: 1,
+      //           bookSubTotal:
+      //             subtotalamountsingle || selectedhardcopy1?.subtotal,
+      //         },
+      //       ]
+      //     : checkout.map((item) => ({
+      //         book: item?.bookId?._id,
+      //         quantity: item?.quantity,
+      //         bookSubTotal: item?.price * item?.quantity,
+      //       })  ),
+      //   shippingAddress: shippingAddress,
+      //   totalAmount:
+      //     shippingdata.totalAmount ||
+      //     buysingleproducts?.totalPrice ||
+      //     selectedhardcopy1?.totalPrice,
+      //   // totalAmount: 1,
+      //   terms_condition: formData.terms_condition || true,
+      //   privacy_policy: formData.privacy_policy || true,
+      //   subTotal:
+      //     shippingdata?.subtotal ||
+      //     subtotalamountsingle ||
+      //     selectedhardcopy1.subTotal,
+      //   // subTotal: 1,
+      //   shippingAmount: shippingdata?.freight_charge,
+      //   // shippingAmount: 0,
+      //   bookType: selecteditemhardcopy ? "hardcopy,audiobook" : null,
+      // };
       console.log(payload, "payload>>>>>>>>>>>");
       const response = await PlaceOrderAPi(payload);
 
@@ -1478,11 +1561,18 @@ const CheckoutPage = () => {
     handleCloseChangeAddress();
   };
   console.log(singleselectbooks, "usersdata::::::::::::::::::::::::::::::::");
+
   const handlesubmit = async () => {
     const data = {
       postalCode: activeAddress?.zipCode,
-      weight: checkoutdata?.totalWeight || selecteditemhardcopy.weight,
-      subtotal: checkoutdata?.total || subtotalamountsingle,
+      weight:
+        checkoutdata?.totalWeight ||
+        selecteditemhardcopy?.weight ||
+        selectedhardcopy1?.weight,
+      subtotal:
+        checkoutdata?.total ||
+        subtotalamountsingle ||
+        selectedhardcopy1?.totalPrice,
     };
 
     try {
@@ -1547,6 +1637,7 @@ const CheckoutPage = () => {
     </ul>
   );
 
+  console.log(SingleBuyProductdata, "SingleBuyProductdata");
   return (
     <>
       <Toast ref={toast} />
@@ -1648,236 +1739,15 @@ const CheckoutPage = () => {
             </div>
             <Col sm={12} md={12}>
               <div className="card mb-4 ">
-                {singleselectbooks.length && selectedhardcopy ? (
-                  <DataTable
-                    className="shippingaddress-item-4 "
-                    style={{
-                      border: " 1px solid white",
-                      borderRadius: "8px",
-                      background: "white",
-                    }}
-                    value={singleselectbooks}
-                  >
-                    <Column
-                      headerStyle={{ display: "none" }}
-                      showHeaders={false}
-                      style={{
-                        // alignItems: "start",
-                        display: "flex",
-                        justifyContent: "start",
-                      }}
-                      field="productId.name"
-                      body={(rowData) => (
-                        <div className="d-flex ">
-                          <div
-                            // style={{ display: "flex", alignItems: "center" }}
-                            className="text-start"
-                          >
-                            <Avatar
-                              image={rowData?.bookimage[0]}
-                              size="larger"
-                              className="avatarimage-valeues"
-                              style={{
-                                marginRight: "16px",
-                                height: "90px",
-                                width: "100%",
-                                objectFit: "contain ",
-                              }}
-                            />
-                            <div
-                              className="d-flex"
-                              style={{
-                                justifyContent: "space-between",
-                                textAlign: "center",
-                              }}
-                            ></div>
-                          </div>
-                          <div className="my-auto">
-                            <span>
-                              {rowData?.bookId?.title || rowData?.title}
-                            </span>
-                          </div>
-                        </div>
-                      )}
-                    ></Column>
-                    <Column
-                      headerStyle={{ display: "none" }}
-                      body={(rowData) => (
-                        <span>
-                          Qty:{" "}
-                          {singleselectbooks ? 1 : rowData?.bookId.quantity}
-                        </span>
-                      )}
-                    ></Column>
-                    <Column
-                      headerStyle={{ display: "none", padding: "0px" }}
-                      field="subtotal"
-                      className="aviablity-strch-remmove"
-                      body={(rowData) => (
-                        <div
-                          className={`my-auto ${
-                            selecteditemhardcopy ? "remove-values" : ""
-                          }`}
-                        >
-                          <div
-                            style={{ marginLeft: "10px", fontWeight: "800" }}
-                          >
-                            {selecteditemhardcopy ? (
-                              availabilityBodyTemplate(rowData)
-                            ) : (
-                              <span
-                                className="fw-bold fs-6"
-                                style={{ fontWeight: "800" }}
-                              >
-                                {` ₹ ${
-                                  rowData?.subtotal?.toFixed(2) ||
-                                  rowData?.price
-                                }
-                                `}
-                              </span>
-                            )}
-                            {/* {availabilityBodyTemplate(rowData)} */}
-                          </div>
-                        </div>
-                      )}
-                    ></Column>
-                    <Column
-                      field="subtotal"
-                      headerStyle={{ display: "none" }}
-                      body={(rowData) => (
-                        <div
-                          onClick={() => removeFromCart(rowData)}
-                          style={{
-                            fontWeight: "800",
-                            color: "black",
-                            fontSize: "25px",
-                          }}
-                        >
-                          <CiCircleRemove />
-                        </div>
-                      )}
-                    />
-                  </DataTable>
-                ) : (
-                  <DataTable
-                    className="shippingaddress-item-4 "
-                    style={{
-                      border: "1px solid white",
-                      borderRadius: "8px",
-                      background: "white",
-                    }}
-                    value={checkout}
-                  >
-                    {/* <div
-                      className="d-flex"
-                      style={{ justifyContent: "space-between" }}
-                    > */}
-                    <Column
-                      headerStyle={{ display: "none" }}
-                      showHeaders={false}
-                      style={
-                        {
-                          // alignItems: "start",
-                          // justifyContent: "space-between",
-                        }
-                      }
-                      field="productId.name"
-                      body={(rowData) => (
-                        <>
-                          <div
-                            className="d-flex ms-auto"
-                            style={{
-                              // justifyContent: "space-between",
-                              textAlign: "start",
-                            }}
-                          >
-                            <div
-                              style={
-                                {
-                                  // display: "flex",
-                                  // alignItems: "center",
-                                  // justifyContent: "space-between",
-                                }
-                              }
-                              className="text-start d-flex"
-                            >
-                              <Avatar
-                                image={
-                                  rowData?.bookId?.bookimage[0]
-                                  // rowData?.bookimage[0]
-                                }
-                                size="larger"
-                                className="avatarimage-valeues"
-                                style={{
-                                  marginRight: "16px",
-                                  height: "90px",
-                                  width: "100%",
-                                  objectFit: "contain ",
-                                }}
-                              />
-                            </div>
-                            <div className="my-auto">
-                              {/* <span> */}
-                              {rowData?.bookId?.title || rowData?.title}
-                              {/* </span> */}
-                            </div>
-                          </div>
-                        </>
-                      )}
-                    ></Column>
-                    <Column
-                      headerStyle={{ display: "none" }}
-                      body={(rowData) => (
-                        <span className="ms-auto">
-                          Qty: {rowData?.quantity}
-                        </span>
-                      )}
-                    ></Column>
-                    <Column
-                      headerStyle={{ display: "none", padding: "0px" }}
-                      field="subtotal"
-                      className="aviablity-strch-remmove"
-                      body={(rowData) => (
-                        <div
-                          className={`my-auto ${
-                            selecteditemhardcopy ? "remove-values" : ""
-                          }`}
-                        >
-                          <div style={{ marginLeft: "10px" }}>
-                            {selecteditemhardcopy ? (
-                              availabilityBodyTemplate(rowData)
-                            ) : (
-                              <span style={{ fontWeight: "800" }}>
-                                {` ₹ ${
-                                  rowData?.subtotal?.toFixed(2) ||
-                                  rowData?.price
-                                }`}
-                              </span>
-                            )}
-                            {/* {availabilityBodyTemplate(rowData)} */}
-                          </div>
-                        </div>
-                      )}
-                    ></Column>
-                    <Column
-                      field="subtotal"
-                      headerStyle={{ display: "none" }}
-                      body={(rowData) => (
-                        <div
-                          onClick={() => removeFromCart(rowData)}
-                          style={{
-                            fontWeight: "800",
-                            color: "black",
-                            fontSize: "25px",
-                          }}
-                        >
-                          <CiCircleRemove />
-                        </div>
-                      )}
-                    />
-                    {/* </div> */}
-                  </DataTable>
-                )}
+                <CheckoutTable
+                  checkout={checkout}
+                  selectedhardcopy={selectedhardcopy}
+                  singleselectbooks={singleselectbooks}
+                  removeFromCart={removeFromCart}
+                  availabilityBodyTemplate={availabilityBodyTemplate}
+                  selecteditemhardcopy={selecteditemhardcopy}
+                  SingleBuyProductdata={SingleBuyProductdata}
+                />
               </div>
             </Col>
           </Col>
@@ -1930,10 +1800,11 @@ const CheckoutPage = () => {
                 <p style={{ fontWeight: "bold" }}>
                   ₹
                   {shippingdata?.subtotal ||
+                    selectedhardcopy1?.subtotal ||
                     subtotalamountsingle ||
                     checkout
-                      .reduce((acc, item) => acc + item?.subtotal, 0)
-                      .toFixed(2)}
+                      ?.reduce((acc, item) => acc + item?.subtotal, 0)
+                      ?.toFixed(2)}
                 </p>
               </div>
               <div
@@ -1981,7 +1852,7 @@ const CheckoutPage = () => {
                   ₹
                   {shippingdata?.totalAmount?.toFixed(2) ||
                     checkout
-                      .reduce((acc, item) => acc + item.subtotal, 0)
+                      ?.reduce((acc, item) => acc + item.subtotal, 0)
                       .toFixed(2)}
                 </p>
               </div>
@@ -2071,4 +1942,3 @@ const CheckoutPage = () => {
 };
 
 export default CheckoutPage;
-

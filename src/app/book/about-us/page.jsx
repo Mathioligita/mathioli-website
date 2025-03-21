@@ -74,7 +74,7 @@ export default function AboutUs() {
           />
         </Head>
 
-        <div className="container text-start d-flex mt-5">
+        <div className="container text-start d-flex mt-5 mb-5">
           <Row>
             <Col sm={12} md={12} lg={6}>
               <div>
@@ -118,7 +118,7 @@ export default function AboutUs() {
                   effortlessly.
                 </p>
                 <Button
-                  className="rounded-2"
+                  className="rounded-2 "
                   label="Explore Our Books"
                   style={{ background: "#1D5755" }}
                   onClick={togglebacks}

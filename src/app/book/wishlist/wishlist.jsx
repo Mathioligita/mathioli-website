@@ -581,7 +581,7 @@ export default function Wishlist() {
             <Column
               header="Add to Cart"
               body={(product) => {
-                const isInWishlist = cart.some(
+                const isInWishlist = cart?.some(
                   (item) => item?.bookId?._id === product?.bookId?._id
                 );
 

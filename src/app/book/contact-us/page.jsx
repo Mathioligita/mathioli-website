@@ -132,8 +132,8 @@ export default function Contact() {
           >
             <div className="pt-5">
               <h5>Our Contact Details:</h5>
-              <p>📞 Phone: +91 98848 10585</p>
-              <p>📧 Email: ""</p>
+              <p>📞 Phone: +91 9884810585</p>
+              <p>📧 Email: uthiradambooks@gmail.com</p>
               <p>
                 📍 Address: Shanthi Vihar Complex, No 11 Luz Ginza complex -
                 old, 140, Royapettah High Rd, Luz, Mylapore, Chennai, Tamil Nadu

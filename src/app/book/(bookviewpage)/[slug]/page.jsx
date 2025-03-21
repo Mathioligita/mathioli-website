@@ -111,9 +111,13 @@ export default function BookDetailPage() {
   }, [wishlistvalues, bookDetails]);
 
   const handleAddToCart = async (bookDetails) => {
+    console.log(bookDetails, "bookdetails");
     try {
       if (accessToken) {
-        const data = { bookId: bookDetails.book._id, quantity: 1 };
+        const data = {
+          bookId: bookDetails?.book?._id || bookDetails._id,
+          quantity: 1,
+        };
         const response = await CartADDAPI(data);
         setCart(response?.data?.cart);
         toast.current.show({
@@ -124,7 +128,7 @@ export default function BookDetailPage() {
         });
       } else {
         const data = {
-          bookId: bookDetails.book._id,
+          bookId: bookDetails?.book?._id || bookDetails?._id,
           quantity: 1,
           guestId: guestId,
         };
@@ -212,10 +216,13 @@ export default function BookDetailPage() {
     setSelectedFormat(format);
     setShowFormatModal(false);
     const data = bookDetails.book.slug;
+    // console.log(data, "faaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+    // alert("JJJJ");
     const response = await SingleBuyProduct(data);
-    if (response) {
-      sessionStorage.setItem("buysinglebook", JSON.stringify(response));
-    }
+    // if (response) {
+    sessionStorage.setItem("buysinglebook", JSON.stringify(response.data));
+    sessionStorage.setItem('singleBookBuying',true)
+    // }
     router.push("/book/checkout");
   };
 
@@ -583,6 +590,7 @@ export default function BookDetailPage() {
         <PdfViewer setShowebook={setShowebook} ebookSrc={bookDetails.book} />
       )}
       <FormatSelectionModal
+        handleAddToCart={handleAddToCart}
         show={showFormatModal}
         book={book}
         handleClose={() => setShowFormatModal(false)}
