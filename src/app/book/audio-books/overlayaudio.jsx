@@ -134,6 +134,7 @@ export default function Overlayaudio({
   if (!audioBookingdetails) return null;
   const [razpay, setRazpay] = useState(null);
   const { loginpoup } = useContext(userContext);
+  const [audiopay, setAudiopay] = useState(null);
 
   const handleSubmit = async () => {
     const data = {
@@ -146,7 +147,8 @@ export default function Overlayaudio({
 
     sessionStorage.setItem("AudioPay", JSON.stringify(response.data));
     if (response.success) {
-      console.log(response.message);
+      // console.log(response.message);
+      setAudiopay(response.data);
       setRazpay(response.data.razorpayOrder);
     } else if (response.status === 401) {
       setShowaudioBooking(false);
@@ -219,7 +221,7 @@ export default function Overlayaudio({
             </div>
           </div>
 
-          <Payment handlePaymentplace={handleSubmit} />
+          <Payment PlaceOrders={handleSubmit} paynowbuttonsuccess={audiopay} />
         </div>
       </div>
     </div>

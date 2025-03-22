@@ -221,7 +221,7 @@ export default function BookDetailPage() {
     const response = await SingleBuyProduct(data);
     // if (response) {
     sessionStorage.setItem("buysinglebook", JSON.stringify(response.data));
-    sessionStorage.setItem('singleBookBuying',true)
+    sessionStorage.setItem("singleBookBuying", true);
     // }
     router.push("/book/checkout");
   };
@@ -336,7 +336,7 @@ export default function BookDetailPage() {
                 , {new Date(book?.publishDate).getFullYear() || "N/A"}
               </div>
               <div className="book-publish-date">
-                <span>{book?.genre}</span>,{" "}
+                {/* <span>{book?.genre}</span>,{" "} */}
                 {new Date(book?.publishDate).toDateString()}
               </div>
               <div className="d-flex align-items-center">
@@ -413,7 +413,10 @@ export default function BookDetailPage() {
                   </div>
                 ) : null}
               </div>
-              <div className="book-pages mb-2 d-flex">
+              <div
+                className="book-pages mb-2 d-flex "
+                style={{ justifyContent: "" }}
+              >
                 <Button
                   onClick={handleSubmitbuy}
                   className="rounded-2"
@@ -479,7 +482,7 @@ export default function BookDetailPage() {
                     <i className="pi pi-headphones fw-bold"></i>
                   </Button>
                 ) : (
-                  <div className="d-flex ms-4">
+                  <div className="d-flex ms-2">
                     <span
                       // className="love-icons"
                       onClick={() => handleFavoriteToggle(bookDetails)}
@@ -530,8 +533,12 @@ export default function BookDetailPage() {
               <span style={{ fontSize: "13px" }}>
                 {book?.authorBiography || "No biography available."}
               </span>
-              <p className="fw-bold mt-3">Related Books</p>
-              <OtherBooks books={bookDetails} />
+              {bookDetails && (
+                <>
+                  <p className="fw-bold mt-3">Related Books</p>
+                  <OtherBooks books={bookDetails} />
+                </>
+              )}
             </div>
           </Col>
         </Row>

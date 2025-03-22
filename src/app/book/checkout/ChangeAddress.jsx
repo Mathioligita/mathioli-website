@@ -352,6 +352,7 @@ const ChangeAddress = ({
 
       {showNewAddressForm && (
         <NewAddressForm
+        fetchData={fetchData}
           open={showNewAddressForm}
           handleClose={handleCloseNewAddressForm}
           handleSubmitAddress={handleSubmitAddress}

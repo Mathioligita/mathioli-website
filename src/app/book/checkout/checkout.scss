@@ -14,3 +14,18 @@ input[type="radio"]:after {
 .change-buttons-hovera :hover {
   text-decoration: dashed !important;
 }
+.checkout-out-delivery {
+  background: #396664;
+  font-size: 12px;
+  border: 1px solid #396664;
+  border-radius: 6px;
+}
+
+@media (max-width: 425px) {
+  .checkout-out-delivery {
+    font-size: 8px;
+  }
+  .shippingaddress-item-4 {
+    font-size: 12px;
+  }
+}

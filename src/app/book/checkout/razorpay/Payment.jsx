@@ -173,7 +173,7 @@ const Payment = ({
       });
       rzp.open();
     }
-  }, [paynowbuttonsuccess]);
+  }, [paynowbuttonsuccess])
 
   return (
     <div className="" style={{ fontFamily: "Poppins" }}>

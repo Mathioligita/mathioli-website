@@ -142,7 +142,7 @@ const NewsletterForm = () => {
       </form>
       <div className="d-flex mt-3 icon-footer">
         <div className="btn-item-icon">
-          <Link href={"/"}>
+          <Link href={"http://facebook.com/mathioligita"}>
             <FaFacebookF />
           </Link>
         </div>
@@ -152,7 +152,7 @@ const NewsletterForm = () => {
           </Link>
         </div>
         <div className="btn-item-icon">
-          <Link href={"/"}>
+          <Link href={"https://www.instagram.com/mathioligita/"}>
             <FaLinkedinIn />
           </Link>
         </div>

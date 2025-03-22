@@ -71,7 +71,7 @@ const BookCard = ({ book }) => {
                   maxWidth: "900px",
                 }}
               >
-                {/* {book.title} */}
+               
                 {book.title.split(" ").map((word, index) => (
                   <span key={index}>
                     {word} <br />

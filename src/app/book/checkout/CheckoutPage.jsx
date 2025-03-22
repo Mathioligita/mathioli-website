@@ -1229,10 +1229,11 @@ const CheckoutPage = () => {
       },
       privacy_policy: "",
     });
+    console.log(user, "activeAddress");
     if (user && user.shippingAddress && user.shippingAddress.length > 0) {
       const activeAddress =
-        user?.shippingAddress.find((addr) => addr.active) ||
-        usersdata?.shippingAddress.find((addr) => addr.active) ||
+        user?.shippingAddress.find((addr) => addr?.active) ||
+        usersdata?.shippingAddress.find((addr) => addr?.active) ||
         user.shippingAddress[0];
       setFormData({
         firstName: user?.firstName || "",
@@ -1551,7 +1552,7 @@ const CheckoutPage = () => {
   };
 
   const activeAddress =
-    user?.shippingAddress?.shippingAddress?.find((addr) => addr?.active) ||
+    user?.shippingAddress?.find((addr) => addr?.active) ||
     usersdata?.shippingAddress?.find((addr) => addr?.active) ||
     user?.shippingAddress?.[0] ||
     null;
@@ -1598,28 +1599,25 @@ const CheckoutPage = () => {
   };
   const renderAvailability = (isAvailable, label, data) => (
     <>
-      <div className="d-flex">
-        <li className="shippingaddress-item-4" style={{ fontSize: "12px" }}>
-          <span className="me-2">
+      <div className="d-flex " style={{ textAlign: "center" }}>
+        <li className=" hard-copy-checkout shippingaddress-item-4">
+          {/* <span className="me-2">
             {isAvailable ? (
               <img src="/Assert/Vector.png" alt="cff" className="" />
             ) : (
               <img src="/Assert/Vector (1).png" alt="sss" className="" />
             )}
-          </span>
-          <span style={{ fontSize: "12px" }}>{label} </span>
+          </span> */}
+          <span className="">{label} </span>
+          <span className="ms-3"> ₹ {data}</span>
         </li>
-        <span className="ms-3" style={{ fontSize: "12px", fontWeight: "800" }}>
-          {" "}
-          ₹{data}
-        </span>
       </div>
       <br />
     </>
   );
 
   const availabilityBodyTemplate = (product) => (
-    <ul className="my-auto">
+    <ul className="">
       {renderAvailability(
         selecteditemhardcopy
           ? selecteditemhardcopy?.isHardCopyAvailable
@@ -1780,13 +1778,7 @@ const CheckoutPage = () => {
                   <div>
                     <Button
                       onClick={handlesubmit}
-                      className="h-50 "
-                      style={{
-                        background: "#396664",
-                        fontSize: "12px",
-                        border: "1px solid #396664 ",
-                        borderRadius: "6px",
-                      }}
+                      className="checkout-out-delivery"
                     >
                       Delivery to this Address
                     </Button>
@@ -1909,6 +1901,7 @@ const CheckoutPage = () => {
           formData={formData}
           setFormData={setFormData}
           errors={errors}
+          fetchData={fetchData}
           handleSubmit={handlesubmitShppingForm}
         />
         <ChangeAddress

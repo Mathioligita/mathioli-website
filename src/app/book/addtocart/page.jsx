@@ -528,8 +528,8 @@ export default function Addtocart() {
     sessionStorage.removeItem("selectedHardcopy");
     sessionStorage.removeItem("selectedaudiocopy");
     sessionStorage.removeItem("buysinglebook");
-    sessionStorage.removeItem('singleBookBuying')
-    sessionStorage.setItem('paymentPageCheckout',true)
+    sessionStorage.removeItem("singleBookBuying");
+    sessionStorage.setItem("paymentPageCheckout", true);
     accessToken ? router.push("/book/checkout") : loginpoup();
   };
 
@@ -611,19 +611,20 @@ export default function Addtocart() {
                     className="p-button-rounded p-button-text p-button-success"
                   />
                 </div>
+                <div className="d-flex ">
+                  <span className="my-auto">
+                    {formatCurrency(product.bookId.price * product.quantity)}
+                  </span>
+                  <Button
+                    icon="pi pi-trash"
+                    className="p-button-text p-button-danger"
+                    onClick={() => removeFromCart(product)}
+                    style={{ fontSize: "20px" }}
+                  />
+                </div>
               </div>
-              <div className="d-flex justify-content-between mt-2">
-                <span>
-                  {formatCurrency(product.bookId.price * product.quantity)}
-                </span>
-                <Button
-                  icon="pi pi-trash"
-                  className="p-button-text p-button-danger"
-                  onClick={() => removeFromCart(product)}
-                  style={{ fontSize: "20px" }}
-                />
-              </div>
-              <div className="mt-2">{statusBodyTemplate(product)}</div>
+
+              {/* <div className="mt-2">{statusBodyTemplate(product)}</div> */}
             </div>
           ))
         ) : (
@@ -661,8 +662,8 @@ export default function Addtocart() {
                         "..."}{" "}
                     </h6>
                     <span style={{ fontSize: "12px" }}>
-                      {product?.bookId?.genre}
-                      <br />
+                      {/* {product?.bookId?.genre} */}
+                      {/* <br /> */}
                       {product?.bookId?.language}
                       <br />
                       {product?.bookId?.author}

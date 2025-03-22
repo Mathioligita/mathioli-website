@@ -130,9 +130,16 @@ const FavoritesBooks = () => {
                             color: "white",
                             position: "absolute",
                             top: "0",
+                            maxWidth: "900px",
                           }}
                         >
-                          {bookId?.bookId?.title}
+                          {bookId?.bookId?.title
+                            .split(" ")
+                            .map((word, index) => (
+                              <span key={index}>
+                                {word} <br />
+                              </span>
+                            ))}
                         </h5>
                       </div>
                       <span className="ms-auto" style={{ fontSize: "10px" }}>

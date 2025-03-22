@@ -1,85 +1,87 @@
-@media  (min-widht:500px) and (max-width:780px) {
-    .btn-cart{
-        font-size: 12px !important;
-    }
-    .book-pages button{
-        font-size: 12px !important;
-    }
+.p-inputswitch.p-highlight .p-inputswitch-slider {
+  background: #1d5755 !important;
 }
 
-.book-btp{
-    margin-left: 23px;
+@media (min-widht: 500px) and (max-width: 780px) {
+  .btn-cart {
+    font-size: 12px !important;
+  }
+  .book-pages button {
+    font-size: 12px !important;
+  }
 }
 
-.button-rev:hover .book-description img{
-    filter: invert(58%) sepia(9%) saturate(2948%) hue-rotate(75deg) brightness(101%) contrast(86%);
+.book-btp {
+  margin-left: 23px;
 }
 
-
-.button-rev:hover .book-description .p{
-    color: rgb(65, 182, 77);
-
+.button-rev:hover .book-description img {
+  filter: invert(58%) sepia(9%) saturate(2948%) hue-rotate(75deg)
+    brightness(101%) contrast(86%);
 }
 
-.button-rev{
-    color: #000 !important;
-    background: transparent;
-    border: 1px solid #000;
-    padding: 10px;
-    cursor: pointer !important;
+.button-rev:hover .book-description .p {
+  color: rgb(65, 182, 77);
 }
 
-.button-rev:hover{
-    color: #000 !important;
-    background: transparent;
-    border: 1px solid #000;
-    padding: 10px;
-    cursor: pointer !important;
+.button-rev {
+  color: #000 !important;
+  background: transparent;
+  border: 1px solid #000;
+  padding: 10px;
+  cursor: pointer !important;
 }
 
-.btn-rev{
-    text-align: center;
+.button-rev:hover {
+  color: #000 !important;
+  background: transparent;
+  border: 1px solid #000;
+  padding: 10px;
+  cursor: pointer !important;
 }
 
+.btn-rev {
+  text-align: center;
+}
 
 .fav-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .fav-icon {
-    color: gray;
-    font-size: 24px;
-    transition: color 0.3s ease; /* Smooth transition for color change */
-  }
-  
-  .fav-icon:hover {
-    color: red !important; /* Change color to red on hover */
-  }
-  
-  .fav-icon-fill {
-    color: red;
-    font-size: 24px;
-  }
+  background: none;
+  border: none;
+  cursor: pointer;
+}
 
-  span.fw-bold.fs-5{
-  min-Width: 224px;
-  }
+.fav-icon {
+  color: gray;
+  font-size: 24px;
+  transition: color 0.3s ease; /* Smooth transition for color change */
+}
 
-  @media screen and (max-width:600px) {
-    span.fw-bold.fs-5{
-        min-width: 238px;
-    }
-    .book-pages.d-flex{
-        flex-wrap: wrap;
-        /* flex-direction: column; */
-    }
-    button.rounded-2.p-button.p-component{
-        margin-bottom: 10px;
-    }
-    button.rounded-2.btn-cart.mb-2.p-button.p-component{
-        margin-left: 0px !important;
-        margin-bottom: 10px;
-    }
+.fav-icon:hover {
+  color: red !important; /* Change color to red on hover */
+}
+
+.fav-icon-fill {
+  color: red;
+  font-size: 24px;
+}
+
+span.fw-bold.fs-5 {
+  min-width: 224px;
+}
+
+@media screen and (max-width: 600px) {
+  span.fw-bold.fs-5 {
+    min-width: 238px;
   }
+  .book-pages.d-flex {
+    /* flex-wrap: wrap; */
+    /* flex-direction: column; */
+  }
+  button.rounded-2.p-button.p-component {
+    margin-bottom: 10px;
+  }
+  button.rounded-2.btn-cart.mb-2.p-button.p-component {
+    margin-left: 0px !important;
+    margin-bottom: 10px;
+  }
+}

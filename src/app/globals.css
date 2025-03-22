@@ -317,4 +317,10 @@ i.pi.pi-star {
   .p-toast-icon {
     font-size: 16px; /* Adjust icon size */
   }
+  .popup-content .d-flex {
+    display: grid !important;
+  }
+  .popup-content .ms-auto {
+    margin-left: 0px !important;
+  }
 }

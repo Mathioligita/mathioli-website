@@ -4,7 +4,12 @@ import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { AddressCreate } from "../../../../api/page";
 
-const NewAddressForm = ({ open, handleClose, handleSubmitAddress }) => {
+const NewAddressForm = ({
+  open,
+  handleClose,
+  handleSubmitAddress,
+  fetchData,
+}) => {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -46,6 +51,7 @@ const NewAddressForm = ({ open, handleClose, handleSubmitAddress }) => {
       const response = await AddressCreate(data);
       if (response) {
         handleClose();
+        fetchData();
       }
     } else {
       setErrors(formErrors);
@@ -196,18 +202,29 @@ const NewAddressForm = ({ open, handleClose, handleSubmitAddress }) => {
             )}
           </div>
 
-          <div className="p-dialog-footer">
+          <div className="p-dialog-footer mt-3">
             <Button
               label="Cancel"
               icon="pi pi-times"
               onClick={handleClose}
+              style={{
+                border: "1px solid gray",
+                color: "gray",
+                borderRadius: "6px",
+              }}
               className="p-button-text"
+              // outlined
             />
             <Button
               label="Add Address"
               icon="pi pi-check"
               type="submit"
-              className="p-button-primary"
+              className="p-button-primary ms-2"
+              style={{
+                border: "1px solid #1D5755",
+                background: "#1D5755",
+                borderRadius: "6px",
+              }}
             />
           </div>
         </div>

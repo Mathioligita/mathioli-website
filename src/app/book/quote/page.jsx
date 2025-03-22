@@ -35,7 +35,7 @@ export default function Quote() {
 		}
 	}, [item]); // Runs whenever `item` changes
 
-	if (item.length === 0) {
+	if (item.length == 0) {
 		return (
 			<div className="quote-container">
 				<div className="quote-card active">

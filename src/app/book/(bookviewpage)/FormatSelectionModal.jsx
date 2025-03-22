@@ -348,7 +348,7 @@ const FormatSelectionModal = ({
   const [selectedFormats, setSelectedFormats] = useState({
     hardcopy: false,
     audiobook: false,
-    ebook: false,
+    // ebook: false,
   });
   const [showaudioBooking, setShowaudioBooking] = useState(false);
 
@@ -363,7 +363,7 @@ const FormatSelectionModal = ({
     const selected = Object.keys(selectedFormats).filter(
       (format) => selectedFormats[format]
     );
-    sessionStorage.setItem('paymentPageCheckout',false)
+    sessionStorage.setItem("paymentPageCheckout", false);
     if (selected.length > 0) {
       if (selected.includes("hardcopy")) {
         handleSelection(selected);
@@ -494,6 +494,11 @@ const FormatSelectionModal = ({
               border: "1px solid rgb(29, 87, 85)",
             }}
             onClick={handleSubmit}
+            disabled={
+              selectedFormats.audiobook || selectedFormats.hardcopy
+                ? false
+                : true
+            }
           >
             Proceed to Checkout
           </Button>

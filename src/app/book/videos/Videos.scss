@@ -1,0 +1,39 @@
+.videos-container {
+  padding: 20px;
+
+  h5 {
+    margin-bottom: 20px;
+  }
+
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+
+    iframe {
+      width: 100%;
+      height: 200px;
+      border: none;
+    }
+  }
+
+  .pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
+    button {
+      padding: 10px 20px;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      cursor: pointer;
+
+      &.active {
+        background-color: rgb(29, 87, 85);
+        color: #fff;
+        border-color: rgb(29, 87, 85);
+      }
+    }
+  }
+}

@@ -284,8 +284,14 @@ import { Button } from "primereact/button";
 import React, { useRef, useState } from "react";
 import "./profilescss.scss";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 const ProfileSidebar = ({ onNavigate, user, triggerFileInput }) => {
+  const router = useRouter();
+  const handleLogout = () => {
+    Cookies.remove("accessToken");
+    router.push("/");
+  };
   return (
     <div className="sidebar-Profile">
       <div className="text-center">
@@ -371,10 +377,7 @@ const ProfileSidebar = ({ onNavigate, user, triggerFileInput }) => {
         <div className="m-auto profile-contents-button">
           <Button
             className="w-100 profile-buttonssssss-buttons"
-            onClick={() => {
-              Cookies.remove("accessToken");
-              window.location.href("/");
-            }}
+            onClick={handleLogout}
           >
             Log out
           </Button>

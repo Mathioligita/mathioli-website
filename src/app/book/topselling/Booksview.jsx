@@ -80,6 +80,8 @@ import SkeletonPreloader from "../../../../components/SkeletonPreloader";
 // Main Books View component
 export default function Booksview({ book }) {
   const bookdata = book?.books || [];
+  const location = window.location.pathname;
+  console.log(location, "/book/topselling");
 
   // Check if bookdata is an array
   if (!Array.isArray(bookdata)) {
@@ -93,9 +95,15 @@ export default function Booksview({ book }) {
       <Row className="books-view-ed mb-2">
         {bookdata.length > 0 ? (
           <>
-            {bookdata.slice(0, 6).map((bookItem) => (
-              <BookCard key={bookItem._id} book={bookItem} />
-            ))}
+            {location === "/book/topselling"
+              ? bookdata.map((bookItem) => (
+                  <BookCard key={bookItem._id} book={bookItem} />
+                ))
+              : bookdata
+                  .slice(0, 6)
+                  .map((bookItem) => (
+                    <BookCard key={bookItem._id} book={bookItem} />
+                  ))}
           </>
         ) : (
           <section className="container d-flex">

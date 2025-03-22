@@ -238,13 +238,13 @@ const ShippingForm = ({
           </div>
 
           <div className="p-dialog-footer mt-4">
-            <Button
+            {/* <Button
               label="Cancel"
               icon="pi pi-times"
               onClick={handleClose}
               className="p-button-text text-dark"
               outlined
-            />
+            /> */}
             <Button
               label="Update"
               icon="pi pi-check"

@@ -471,9 +471,16 @@ export default function Smartpage({ pathname }) {
                                         color: "white",
                                         position: "absolute",
                                         top: "0",
+                                        maxWidth: "900px",
                                       }}
                                     >
-                                      {book.title}
+                                      {book.title
+                                        .split(" ")
+                                        .map((word, index) => (
+                                          <span key={index}>
+                                            {word} <br />
+                                          </span>
+                                        ))}
                                     </h5>
                                   </div>
                                   <span

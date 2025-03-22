@@ -116,6 +116,9 @@
   z-index: 1;
   transition: opacity 0.3s;
 }
+.scroll-icon :active {
+  background-color: #1d5755;
+}
 
 .scroll-icon.left {
   left: 0;
@@ -128,7 +131,7 @@
 /* Hide scroll icons on larger screens */
 @media (min-width: 1440px) {
   .scroll-icon {
-    display: none;
+    /* display: none; */
   }
   .top-selling-tabs-container {
     overflow-x: auto;

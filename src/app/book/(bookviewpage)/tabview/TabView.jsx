@@ -20,7 +20,7 @@ export default function TabViews({ books, setShow, show }) {
           <Row>
             <Col md={12}>
               <div className="">
-                <h5> Details</h5>
+                {/* <h5> Details</h5> */}
                 <p>
                   <strong>Publish Date :</strong>
                   <span className="ms-2">
@@ -36,10 +36,10 @@ export default function TabViews({ books, setShow, show }) {
                   <span className="ms-2">{books?.book?.publisher}</span>{" "}
                 </p>
                 <p>
-                  <strong>printed By :</strong>
-                  <span className="ms-2">
+                  {/* <strong>printed By :</strong> */}
+                  {/* <span className="ms-2">
                     {books?.book?.printedBy || "no data"}
-                  </span>{" "}
+                  </span>{" "} */}
                 </p>
                 <p>
                   <strong>Description :</strong>

@@ -96,7 +96,7 @@ export default function Page() {
     const globalMatch =
       book?.title?.toLowerCase().includes(globalFilterValue?.toLowerCase()) ||
       book?.author?.toLowerCase().includes(globalFilterValue?.toLowerCase()) ||
-      book?.genre?.toLowerCase().includes(globalFilterValue?.toLowerCase()) ||
+      // book?.genre?.toLowerCase().includes(globalFilterValue?.toLowerCase()) ||
       book?.language?.toLowerCase().includes(globalFilterValue?.toLowerCase());
 
     return (
@@ -281,9 +281,16 @@ export default function Page() {
                                       color: "white",
                                       position: "absolute",
                                       top: "0",
+                                      maxWidth: "900px",
                                     }}
                                   >
-                                    {book.title}
+                                    {book.title
+                                      .split(" ")
+                                      .map((word, index) => (
+                                        <span key={index}>
+                                          {word} <br />
+                                        </span>
+                                      ))}
                                   </h5>
                                 </div>
                                 <span
