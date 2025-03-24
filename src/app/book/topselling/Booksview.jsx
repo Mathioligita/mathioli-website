@@ -80,7 +80,8 @@ import SkeletonPreloader from "../../../../components/SkeletonPreloader";
 // Main Books View component
 export default function Booksview({ book }) {
   const bookdata = book?.books || [];
-  const location = window.location.pathname;
+  const location =
+    typeof window !== "undefined" ? window.location.pathname : null;
   console.log(location, "/book/topselling");
 
   // Check if bookdata is an array
