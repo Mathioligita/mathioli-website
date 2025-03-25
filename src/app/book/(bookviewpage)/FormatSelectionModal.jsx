@@ -521,7 +521,7 @@
 // };
 
 // export default FormatSelectionModal;
-"use client"
+"use client";
 import { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { InputSwitch } from "primereact/inputswitch";
@@ -588,6 +588,11 @@ const FormatSelectionModal = ({
     format: Object.keys(selectedFormats).filter(
       (format) => selectedFormats[format]
     ),
+  };
+
+  const books = {
+    book: book,
+    booktype: "audioBook",
   };
 
   console.log(book, "books");
@@ -706,7 +711,7 @@ const FormatSelectionModal = ({
       {showaudioBooking && !selectedFormats.hardcopy && (
         <Overlayaudio
           book={updatedAudioBookingDetails}
-          audioBookingdetails={book} // Pass the updated details
+          audioBookingdetails={books} // Pass the updated details
           setShowaudioBooking={setShowaudioBooking}
         />
       )}

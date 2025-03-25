@@ -1799,6 +1799,7 @@ const CheckoutPage = () => {
                     <Button
                       onClick={handlesubmit}
                       className="checkout-out-delivery"
+                      disabled={!activeAddress}
                     >
                       Delivery to this Address
                     </Button>
@@ -1905,6 +1906,7 @@ const CheckoutPage = () => {
                 </Col>
               </Row>
               <Payment
+                shippingdata={shippingdata}
                 formData={formData}
                 paynowbuttonsuccess={paynowbuttonsuccess}
                 PlaceOrders={handlePayment}

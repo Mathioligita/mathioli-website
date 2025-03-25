@@ -12,6 +12,7 @@ const Payment = ({
   razopayshow,
   paynowbutton,
   paynowbuttonsuccess,
+  shippingdata,
 }) => {
   const [sdkLoaded, setSdkLoaded] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -173,7 +174,7 @@ const Payment = ({
       });
       rzp.open();
     }
-  }, [paynowbuttonsuccess])
+  }, [paynowbuttonsuccess]);
 
   return (
     <div className="" style={{ fontFamily: "Poppins" }}>
@@ -200,6 +201,7 @@ const Payment = ({
               className="rounded-2 m-2 w-100"
               disabled={
                 !formData.privacy_policy ||
+                !shippingdata ||
                 // !paynowbutton ||
                 !sdkLoaded ||
                 isProcessing

@@ -162,13 +162,13 @@ const Payment = ({
   let raso = {};
   raso =
     typeof window !== "undefined"
-      ? JSON.parse(sessionStorage.getItem("razorpayOrder"))
+      ? JSON.parse(sessionStorage.getItem("AudioPay"))
       : null || {};
   // try {
   // } catch (error) {
   //   console.error("Failed to parse razorpayOrder from session storage:", error);
   // }
-  // console.log(raso, "raso>>>>>>>>>>>>>>>");
+  console.log(raso, "raso>>>>>>>>>>>>>>>");
 
   useEffect(() => {
     const loadRazorpayScript = () => {
@@ -262,10 +262,10 @@ const Payment = ({
       const options = {
         key: "rzp_live_wJBFoukfvdWNdP",
         // amount:  (raso?.orders[0]?.orderTotal || 0) * 100,
-        amount: (raso?.orders[0]?.orderTotal || 0) * 100,
+        amount: (raso?.order?.totalAmount || 0) * 100,
         currency: "INR",
         name: "Mathioli ",
-        order_id: raso?.orders?.razorpayOrderId,
+        order_id: raso?.order?.razorpayOrderId,
         // key_secret: "UVRURpVTJBiXiHQcET8ZBEUt",
         handler: async (response) => {
           console.log(response, "responsepayementVerfity");

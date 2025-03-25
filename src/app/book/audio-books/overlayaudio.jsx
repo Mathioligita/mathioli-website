@@ -138,10 +138,10 @@ export default function Overlayaudio({
 
   const handleSubmit = async () => {
     const data = {
-      audioBookId: audioBookingdetails?.book?._id,
-      booktype: audioBookingdetails?.bookType,
+      audioBookId: audioBookingdetails?.book?._id || audioBookingdetails?._id,
+      booktype: audioBookingdetails?.bookType || "audioBook",
     };
-    console.log(data);
+    console.log(data, "Sssssssssss");
     const response = await bookingAudioBooking(data);
     console.log(response, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
