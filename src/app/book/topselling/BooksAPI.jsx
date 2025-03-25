@@ -21,7 +21,7 @@ MemoizedTabView.displayName = "MemoizedTabView"; // Adding display name
 const MemoizedBooksView = memo(({ book }) => {
   return (
     <div>
-      <Booksview book={book} />
+        <Booksview book={book} />
     </div>
   );
 });

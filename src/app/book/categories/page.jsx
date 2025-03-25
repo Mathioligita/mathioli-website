@@ -558,14 +558,14 @@ export default function Smartpage({ pathname }) {
                       </Row>
                     </div>
                   ))}
-                  {/* {totalPages > 1 && (
+                  {totalPages > 1 && (
                     <Paginator
                       first={currentPage}
                       rows={itemsPerPage}
                       totalRecords={filteredBooks.length}
                       onPageChange={onPageChange}
                     ></Paginator>
-                  )} */}
+                  )}
                 </>
               ) : (
                 <div className="no-books-message">

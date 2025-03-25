@@ -346,7 +346,6 @@ import { useRouter } from "next/navigation.js";
 import Cookies from "js-cookie";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { Row } from "react-bootstrap";
 
 const retryFetch = async (fn, retries = 3, delay = 1000) => {
   try {
@@ -570,67 +569,64 @@ export default function Addtocart() {
         </div>
 
         {isMobileView ? (
-          <Row>
-            {carts.map((product) => (
-              <div
-                key={product._id}
-                className="cart-item mb-3 p-3 border rounded"
-              >
-                <div className="d-flex align-items-center">
-                  <Col md={3}>
-                    <img
-                      src={product.bookId.bookimage}
-                      alt="Product"
-                      style={{ width: "50px" }}
-                      className="mr-3"
-                    />
-                    <div className="flex-grow-1">
-                      <h6>
-                        {product.bookId.title.split(" ").slice(0, 2).join(" ") +
-                          "..."}
-                      </h6>
-                    </div>
-                  </Col>
-                  <Col md={3}>
-                    <div className="d-flex align-items-center">
-                      <Button
-                        icon="pi pi-minus"
-                        style={{ color: "Red" }}
-                        onClick={() => updateQuantity(product, -1)}
-                        disabled={product.quantity <= 1 || loading}
-                        className="p-button-rounded p-button-text p-button-danger"
-                      />
-                      <span className="mx-2">{product?.quantity}</span>
-                      <Button
-                        icon="pi pi-plus"
-                        style={{ color: "Green", fontSize: "15px" }}
-                        onClick={() => updateQuantity(product, 1)}
-                        disabled={loading}
-                        className="p-button-rounded p-button-text p-button-success"
-                      />
-                    </div>
-                  </Col>
-                  <Col md={3}>
-                    <div className="d-flex ">
-                      <span className="my-auto">
-                        {formatCurrency(
-                          product.bookId.price * product.quantity
-                        )}
-                      </span>
-                      <Button
-                        icon="pi pi-trash"
-                        className="p-button-text p-button-danger"
-                        onClick={() => removeFromCart(product)}
-                        style={{ fontSize: "20px" }}
-                      />
-                    </div>
-                  </Col>
+          carts.map((product) => (
+            <div
+              key={product._id}
+              className="cart-item mb-3 p-3 border rounded"
+            >
+              <div className="d-flex align-items-center">
+                <img
+                  src={product.bookId.bookimage}
+                  alt="Product"
+                  style={{ width: "50px" }}
+                  className="mr-3"
+                />
+                <div className="flex-grow-1">
+                  <h6>
+                    {product.bookId.title.split(" ").slice(0, 2).join(" ") +
+                      "..."}
+                  </h6>
+                  {/* <span style={{ fontSize: "12px" }}>
+                  {product?.bookId?.genre}
+                  <br />
+                  {product?.bookId?.language}
+                  <br />
+                  {product?.bookId?.author}
+                </span> */}
                 </div>
-
-                {/* <div className="mt-2">{statusBodyTemplate(product)}</div> */}
+                <div className="d-flex align-items-center">
+                  <Button
+                    icon="pi pi-minus"
+                    style={{ color: "Red" }}
+                    onClick={() => updateQuantity(product, -1)}
+                    disabled={product.quantity <= 1 || loading}
+                    className="p-button-rounded p-button-text p-button-danger"
+                  />
+                  <span className="mx-2">{product?.quantity}</span>
+                  <Button
+                    icon="pi pi-plus"
+                    style={{ color: "Green", fontSize: "15px" }}
+                    onClick={() => updateQuantity(product, 1)}
+                    disabled={loading}
+                    className="p-button-rounded p-button-text p-button-success"
+                  />
+                </div>
+                <div className="d-flex ">
+                  <span className="my-auto">
+                    {formatCurrency(product.bookId.price * product.quantity)}
+                  </span>
+                  <Button
+                    icon="pi pi-trash"
+                    className="p-button-text p-button-danger"
+                    onClick={() => removeFromCart(product)}
+                    style={{ fontSize: "20px" }}
+                  />
+                </div>
               </div>
-            ))}
-          </Row>
+
+              {/* <div className="mt-2">{statusBodyTemplate(product)}</div> */}
+            </div>
+          ))
         ) : (
           <DataTable value={carts} className="text-center">
             <Column
@@ -662,7 +658,7 @@ export default function Addtocart() {
 
                   <div className="ms-1 text-start">
                     <h6>
-                      {product.bookId.title.split(" ").slice(0, 1).join(" ") +
+                      {product.bookId.title.split(" ").slice(0, 2).join(" ") +
                         "..."}{" "}
                     </h6>
                     <span style={{ fontSize: "12px" }}>
