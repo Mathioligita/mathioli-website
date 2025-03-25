@@ -444,7 +444,7 @@ export default function Page() {
         );
         setBooksData(sortedBooks);
       } catch (error) {
-        console.error("Error fetching data:", error)
+        console.error("Error fetching data:", error);
       } finally {
         setLoading(false);
       }
@@ -584,6 +584,7 @@ export default function Page() {
                           md={4}
                           lg={2}
                           sm={6}
+                          xs={6}
                           key={book._id}
                           className="p-1 p-md-0 book-mobile-card image-card-book"
                         >

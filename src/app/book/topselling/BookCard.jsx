@@ -21,7 +21,7 @@ const BookCard = ({ book }) => {
   }
   return (
     <Col
-      xs={12}
+      xs={6}
       sm={4}
       md={3}
       lg={2}
@@ -71,7 +71,6 @@ const BookCard = ({ book }) => {
                   maxWidth: "900px",
                 }}
               >
-               
                 {book.title.split(" ").map((word, index) => (
                   <span key={index}>
                     {word} <br />

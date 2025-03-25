@@ -337,6 +337,9 @@ i.pi.pi-star {
   .rhap_main .rhap_stacked {
     width: "167px";
   }
+  .book-images {
+    padding: 0px !important;
+  }
 }
 
 .custom-popups {

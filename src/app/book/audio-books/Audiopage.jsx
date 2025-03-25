@@ -1006,6 +1006,7 @@ export default function Smartpage() {
                             md={4}
                             lg={2}
                             sm={6}
+                            xs={6}
                             key={book._id} // Add a unique key prop here
                             className="p-1 p-md-0 book-mobile-card image-card-book"
                           >

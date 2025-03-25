@@ -200,7 +200,7 @@ export default function Sidebar({ setIsOpen }) {
         </li>
         <li
           className="fw-bold p-2 sidebar-values-adjustment"
-          onClick={() => router.push("//book/categories")}
+          onClick={() => router.push("/book/categories")}
         >
           {" "}
           <i className="pi pi-list me-2"></i>
