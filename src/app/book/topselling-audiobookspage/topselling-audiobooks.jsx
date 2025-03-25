@@ -1275,7 +1275,7 @@ export default function TopsellingAudioBooks() {
                 </div>
               </div>
               <i
-                className="pi pi-times fs-4 cursor-pointers"
+                className="pi pi-times fs-4 cursor-pointers-eee"
                 onClick={() => setShowPopup(false)}
               ></i>
             </div>

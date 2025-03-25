@@ -747,7 +747,7 @@ export default function BookDetailPage() {
               </div>
               <i
                 className="pi pi-times fs-4 cursor-pointers-eee"
-                onClick={() => setShowPopup(false)}
+                onClick={() => setIsPopupOpen(false)}
               ></i>
             </div>
           </div>

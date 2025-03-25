@@ -359,7 +359,7 @@ i.pi.pi-star {
   color: #b3b0b0;
 }
 .cursor-pointers-kkk {
-  display: none;
+  display: none !important;
   color: #b3b0b0;
 }
 @media only screen and (max-width: 600px) {
@@ -413,11 +413,11 @@ i.pi.pi-star {
     gap: 2rem !important;
   }
   .cursor-pointers-kkk {
-    display: block;
+    display: block !important;
     color: #b3b0b0;
   }
   .cursor-pointers-eee {
-    display: none;
+    display: none !important;
     color: #b3b0b0;
   }
 }
@@ -436,11 +436,12 @@ i.pi.pi-star {
     width: 60%;
   }
   .banner-text h1 .line1 {
-    font-size: 26px;
+    font-size: 43px;
   }
   .paragrap-banner {
-    font-size: 10px;
+    font-size: 17px;
   }
+  
 }
 
 @media only screen and (min-width: 992px) {
