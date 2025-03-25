@@ -174,12 +174,15 @@ export default function TabView({ data, book }) {
 
   return (
     <div className="ms-0 ms-md-5 p-2 p-md-0 mt-4">
-      <div className="d-flex align-items-center mb-2">
+      <div
+        className="d-flex align-items-center mb-2"
+        style={{ justifyContent: "space-between" }}
+      >
         <span className="Top-selling">Top Selling</span>
 
         {locations === "/book/topselling" ? null : (
           <Button
-            className="top-selling-showall"
+            className="top-selling-showall ms-auto"
             onClick={handleviwall}
             style={{ border: "1px solid gray" }}
           >
