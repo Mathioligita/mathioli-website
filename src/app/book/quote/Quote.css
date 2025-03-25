@@ -200,8 +200,8 @@
 
 @media (max-width: 426px) {
   .banner-text {
-    right: 27%;
-    top: 27%;
+    right: 0%;
+    top: 50%;
   }
 
   .line1,

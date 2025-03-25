@@ -21,7 +21,7 @@ export default function Bannersection() {
             Read and Dream it
             <p className=" paragrap-banner">
               Immerse in words, unlock adventures, and <br />{" "}
-              <span>dream beyond limits.</span>
+              <span className="paragaada">dream beyond limits.</span>
             </p>
           </span>
         </h1>

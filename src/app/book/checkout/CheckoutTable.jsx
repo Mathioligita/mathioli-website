@@ -58,7 +58,7 @@ export default function CheckoutTable({
   );
 
   const renderTitle = (rowData) => (
-    <span style={{ textAlign: "start" }} className="me-auto">
+    <span style={{ textAlign: "start" }} className="me-auto checkout-title-gdf">
       {rowData?.bookId?.title || rowData?.title || rowData?.book?.title}
     </span>
   );
@@ -74,7 +74,10 @@ export default function CheckoutTable({
   );
 
   const renderPrice = (rowData) => (
-    <div style={{ marginLeft: "10px", fontWeight: "800" }} className="my-auto">
+    <div
+      style={{ marginLeft: "10px", fontWeight: "800" }}
+      className="my-auto text-end"
+    >
       {selecteditemhardcopy ? (
         <div className="mt-5">{availabilityBodyTemplate(rowData)}</div>
       ) : (
@@ -86,7 +89,12 @@ export default function CheckoutTable({
   const renderRemoveButton = (rowData) => (
     <div
       onClick={() => removeFromCart(checkout ? rowData : null)}
-      style={{ fontWeight: "800", color: "black", fontSize: "25px" }}
+      style={{
+        fontWeight: "800",
+        color: "black",
+        fontSize: "25px",
+        marginLeft: "12px",
+      }}
     >
       <CiCircleRemove />
     </div>

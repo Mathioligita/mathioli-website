@@ -29,6 +29,7 @@ import { Button } from "primereact/button";
 import Loading from "../../../../../components/Loading";
 // import Overlayaudio from '../../audio-books/overlayaudio';
 import "../../audio-books/aduiostyle.css";
+import Overlayaudio from "../../audio-books/overlayaudio";
 
 const renderAvailability = (isAvailable, label, book) => (
   <li style={{ textAlign: "start" }}>
@@ -79,6 +80,8 @@ export default function BookDetailPage() {
   const { loading, setLoading } = useContext(LoadingContext);
   const [selectedBook, setSelectedBook] = useState(null);
   const audioRef = useRef(null);
+  const [showaudioBooking, setShowaudioBooking] = useState(false);
+  const [audioBookingdetails, setAudioBokkingDetails] = useState(null);
   const [isDisabled, setIsDisabled] = useState(false);
   const [reviewdata, setReviewdata] = useState(null);
 
@@ -87,13 +90,94 @@ export default function BookDetailPage() {
     setIsPopupOpen(true);
   };
 
+  // const handleTimeUpdate = () => {
+  //   if (audioRef.current.audio.current.currentTime >= 30) {
+  //     audioRef.current.audio.current.pause();
+  //     setIsDisabled(true);
+  //   }
+  //   Swal.fire({
+  //     title: "Continue Listening",
+  //     text: "Your 30-second preview has ended. Unlock the full audiobook and continue listening without interruption.",
+  //     imageUrl: `${selectedBook?.bookimage[0]}`,
+  //     imageAlt: "Custom image",
+  //     showCancelButton: true,
+  //     confirmButtonText: "Buy",
+  //     cancelButtonText: "Cancel",
+  //     allowOutsideClick: false,
+  //     allowEscapeKey: false,
+  //     customClass: {
+  //       popup: "custom-popup",
+  //       confirmButton: "custom-confirm-button",
+  //       cancelButton: "custom-cancel-button",
+  //     },
+  //     didOpen: () => {
+  //       const popup = document.querySelector(".custom-popup");
+  //       const confirmButton = document.querySelector(".custom-confirm-button");
+  //       const cancelButton = document.querySelector(".custom-cancel-button");
+  //       const image = popup.querySelector(".swal2-image");
+
+  //       if (image) {
+  //         image.style.backgroundColor = "#1D5755";
+  //         image.style.height = "183px";
+  //       }
+  //       confirmButton.style.backgroundColor = "#1D5755";
+  //       cancelButton.style.backgroundColor = "#1D5755";
+  //     },
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       handlepayoverflow(selectedBook, "audioBook");
+  //     }
+  //   });
+  // };
+  const handlepayoverflow = (book, bookType) => {
+    setShowaudioBooking(true);
+    setAudioBokkingDetails({ book, bookType });
+  };
   const handleTimeUpdate = () => {
-    if (audioRef.current.audio.current.currentTime >= 30) {
-      audioRef.current.audio.current.pause();
+    const audio = audioRef.current?.audio?.current;
+    if (audio && audio.currentTime >= 30) {
+      audio.currentTime = 30; // Lock at 30 sec
       setIsDisabled(true);
+
+      // Close the popup and show SweetAlert
+      setIsPopupOpen(false);
+      Swal.fire({
+        title: "Continue Listening",
+        text: "Your 30-second preview has ended. Unlock the full audiobook and continue listening without interruption.",
+        imageUrl: `${selectedBook?.bookimage[0]}`,
+        imageAlt: "Custom image",
+        showCancelButton: true,
+        confirmButtonText: "Buy",
+        cancelButtonText: "Cancel",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        customClass: {
+          popup: "custom-popup",
+          confirmButton: "custom-confirm-button",
+          cancelButton: "custom-cancel-button",
+        },
+        didOpen: () => {
+          const popup = document.querySelector(".custom-popup");
+          const confirmButton = document.querySelector(
+            ".custom-confirm-button"
+          );
+          const cancelButton = document.querySelector(".custom-cancel-button");
+          const image = popup.querySelector(".swal2-image");
+
+          if (image) {
+            image.style.backgroundColor = "#1D5755";
+            image.style.height = "183px";
+          }
+          confirmButton.style.backgroundColor = "#1D5755";
+          cancelButton.style.backgroundColor = "#1D5755";
+        },
+      }).then((result) => {
+        if (result.isConfirmed) {
+          handlepayoverflow(selectedBook, "audioBook");
+        }
+      });
     }
   };
-
   const fetchBookDetails = async () => {
     setLoading(true);
     try {
@@ -239,11 +323,11 @@ export default function BookDetailPage() {
     // if (response) {
     const sessision = sessionStorage.getItem("selectedBook");
     // if (sessision) {
-      sessionStorage.removeItem("selectedBook");
-      sessionStorage.removeItem("selectedaudiocopy");
-      sessionStorage.removeItem("selectedHardcopy");
-      sessionStorage.setItem("buysinglebook", JSON.stringify(response.data));
-      sessionStorage.setItem("singleBookBuying", true);
+    sessionStorage.removeItem("selectedBook");
+    sessionStorage.removeItem("selectedaudiocopy");
+    sessionStorage.removeItem("selectedHardcopy");
+    sessionStorage.setItem("buysinglebook", JSON.stringify(response.data));
+    sessionStorage.setItem("singleBookBuying", true);
     // }
     // }
     router.push("/book/checkout");
@@ -575,48 +659,96 @@ export default function BookDetailPage() {
         </div>
       </div>
       {isPopupOpen && (
-        <div className="popup">
-          <div className="popup-content">
-            <div className="d-flex">
-              <div className="p-2">
-                <div className="d-flex">
-                  <div>
-                    <img
-                      src={selectedBook.bookimage[0]}
-                      alt=""
-                      style={{
-                        height: "100px",
-                        objectFit: "cover",
-                        borderRadius: "15px",
-                        padding: "2px",
-                      }}
-                    />
-                  </div>
-                  <div className="my-auto">
-                    <h4 className="m-2">{selectedBook.title}</h4>
-                  </div>
-                </div>
-              </div>
-              <div
-                style={{
-                  pointerEvents: isDisabled ? "none" : "auto",
-                  opacity: isDisabled ? 0.5 : 1,
-                }}
-                className="w-50 ms-auto mt-auto"
-              >
-                <AudioPlayer
-                  ref={audioRef}
-                  autoPlay
-                  src={selectedBook.audiobookUpload[0]}
-                  onPlay={(e) => console.log("onPlay")}
-                  onListen={handleTimeUpdate} // Track time and disable after 30 sec
-                  controls
-                  className="w-100"
+        // <div className="popup">
+        //   <div className="popup-content">
+        //     <div className="d-flex">
+        //       <div className="p-2">
+        //         <div className="d-flex">
+        //           <div>
+        //             <img
+        //               src={selectedBook.bookimage[0]}
+        //               alt=""
+        //               style={{
+        //                 height: "100px",
+        //                 objectFit: "cover",
+        //                 borderRadius: "15px",
+        //                 padding: "2px",
+        //               }}
+        //             />
+        //           </div>
+        //           <div className="my-auto">
+        //             <h4 className="m-2">{selectedBook.title}</h4>
+        //           </div>
+        //         </div>
+        //       </div>
+        //       <div
+        //         style={{
+        //           pointerEvents: isDisabled ? "none" : "auto",
+        //           opacity: isDisabled ? 0.5 : 1,
+        //         }}
+        //         className="w-50 ms-auto mt-auto"
+        //       >
+        //         <AudioPlayer
+        //           ref={audioRef}
+        //           autoPlay
+        //           src={selectedBook.audiobookUpload[0]}
+        //           onPlay={(e) => console.log("onPlay")}
+        //           onListen={handleTimeUpdate} // Track time and disable after 30 sec
+        //           controls
+        //           className="w-100"
+        //         />
+        //       </div>
+        //       <div onClick={() => setIsPopupOpen(false)} className="my-auto">
+        //         <i className="pi pi-times ms-4 fw-1"></i>
+        //       </div>
+        //     </div>
+        //   </div>
+        // </div>
+        <div className="custom-popups">
+          <div className="custom-popup-contents p-3">
+            <div className="text-end">
+              <i
+                className="pi pi-times fs-4 cursor-pointers-kkk"
+                onClick={() => setIsPopupOpen(false)}
+              ></i>
+            </div>
+            <div className="d-flex align-items-center justify-content-center flex-wrap">
+              <div className="text-center mx-2">
+                <img
+                  src={selectedBook.bookimage[0]}
+                  alt="Book Cover"
+                  style={{
+                    height: "100px",
+                    objectFit: "cover",
+                    borderRadius: "15px",
+                    padding: "2px",
+                  }}
                 />
               </div>
-              <div onClick={() => setIsPopupOpen(false)} className="my-auto">
-                <i className="pi pi-times ms-4 fw-1"></i>
+              <div className="text-center mx-2">
+                <h4>{selectedBook.title}</h4>
               </div>
+              <div className="text-center mx-2">
+                <div
+                  style={{
+                    pointerEvents: isDisabled ? "none" : "auto",
+                    opacity: isDisabled ? 0.5 : 1,
+                  }}
+                >
+                  <AudioPlayer
+                    ref={audioRef}
+                    autoPlay
+                    src={selectedBook.audiobookUpload[0]}
+                    onPlay={() => console.log("onPlay")}
+                    onListen={handleTimeUpdate}
+                    controls
+                  />
+                </div>
+              </div>
+              <i
+                className="pi pi-times fs-4 cursor-pointers-eee"
+                onClick={() => setShowPopup(false)}
+              ></i>
             </div>
           </div>
         </div>
@@ -631,6 +763,12 @@ export default function BookDetailPage() {
         handleClose={() => setShowFormatModal(false)}
         handleSelection={handleFormatSelection}
       />
+      {showaudioBooking && (
+        <Overlayaudio
+          audioBookingdetails={audioBookingdetails}
+          setShowaudioBooking={setShowaudioBooking}
+        />
+      )}
     </div>
   );
 }

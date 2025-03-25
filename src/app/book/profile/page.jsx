@@ -164,7 +164,7 @@ const ProfilePage = (profileImage) => {
     <div>
       <div
         style={{
-          backgroundImage: `url(../Assert/Frame.png)`,
+          backgroundImage: `url(/Assert/Frame.png)`,
           objectFit: "contain",
           width: "100%",
           height: "320px",
@@ -176,7 +176,13 @@ const ProfilePage = (profileImage) => {
         <div className="container  ">
           <div>
             <Row className="">
-              <Col sm={12} md={3} className="profile-contents-adjust mb-3">
+              <Col
+                xs={12}
+                sm={12}
+                md={4}
+                lg={4}
+                className="profile-contents-adjust mb-3"
+              >
                 <div className="profile-page ">
                   <ProfileSidebar
                     triggerFileInput={triggerFileInput}
@@ -186,7 +192,14 @@ const ProfilePage = (profileImage) => {
                   />
                 </div>
               </Col>
-              <Col sm={12} md={8} className="" style={{ textAlign: "center" }}>
+              <Col
+                xs={12}
+                sm={12}
+                md={8}
+                lg={8}
+                className=""
+                style={{ textAlign: "center" }}
+              >
                 <div className="content ">{renderSection(activeSection)}</div>
               </Col>
             </Row>

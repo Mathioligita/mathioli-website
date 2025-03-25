@@ -15,7 +15,7 @@ export default function RelatedBooks({ books2 }) {
           books2.relatedBooks.map((i, index) => (
             <Col
               md={1}
-              sm={6}
+              xs={4}
               key={i?.id || index}
               className=" d-flex"
               onClick={() => handleBookClick(i)}
@@ -23,7 +23,7 @@ export default function RelatedBooks({ books2 }) {
               {" "}
               {/* Use a unique key */}
               <img
-                src={i?.bookimage || "No image available."}
+                src={i?.bookimage[0] || "No image available."}
                 className="author-image ms-3"
                 alt="Book Image"
                 width={"80px"}

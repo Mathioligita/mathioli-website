@@ -89,7 +89,7 @@ export default function Sidebar({ setIsOpen }) {
           onClick={() => setVisible(!visible)}
         >
           <img
-            src={usersdata?.profileImage || "../image/Ellipse 10.png"}
+            src={usersdata?.profileImage || "/image/Ellipse 10.png"}
             style={{ borderRadius: "50%" }}
             alt="User"
             width="40px"

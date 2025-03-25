@@ -355,7 +355,7 @@ export default function Wishlist() {
       onClick={() => (window.location.href = `/book/${product?.bookId?.slug}`)}
     >
       <img
-        src={product?.bookId?.bookimage}
+        src={product?.bookId?.bookimage[0] || "/image/image 9.png"}
         alt="Product"
         style={{ width: "100px" }}
         className="m-3"
@@ -427,9 +427,14 @@ export default function Wishlist() {
           <div className="row g-0">
             <div className="col-md-4">
               <div className="d-flex m-auto" style={{}}>
-                <div className="mt-3 ms-3 ">
+                <div
+                  className="mt-3 ms-3 "
+                  onClick={() =>
+                    (window.location.href = `/book/${product?.bookId?.slug}`)
+                  }
+                >
                   <img
-                    src={product.bookId.bookimage}
+                    src={product?.bookId?.bookimage[0] || "/image/image 9.png"}
                     // className="img-fluid rounded-start"
                     style={{ width: "100px" }}
                     alt="Product"
@@ -534,13 +539,16 @@ export default function Wishlist() {
                     className="p-button-success rounded-3"
                     onClick={() => addToCart(product)}
                     disabled={
-                      product?.bookId?.quantity == 1 ||
-                      wishlistvalues.some(
-                        (item) => item?.bookId?._id == product?.bookId?._id
+                      product?.bookId?.quantity === 0 ||
+                      cart?.some(
+                        (item) => item?.bookId?._id === product?.bookId?._id
                       )
                     }
                     outlined
                   />
+
+                  {console.log(product, "wishlistvalues")}
+                  {console.log(wishlistvalues, "wishlistvalues????")}
                 </div>
               </div>
             </div>
@@ -621,8 +629,8 @@ export default function Wishlist() {
                     style={{
                       border:
                         product?.bookId?.quantity === 0 || isInWishlist
-                          ? "1px solid red"
-                          : "0px solid red",
+                          ? "0px solid red"
+                          : "1px solid red",
                     }}
                     className="p-button-success rounded-3"
                     onClick={() => addToCart(product)}

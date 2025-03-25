@@ -223,9 +223,9 @@ export default function BookMark() {
               key={`${orderIndex}-${itemIndex}`}
               className={`order-card mb-3 ${isCompleted ? "disabled" : ""}`}
             >
-              <Row className="align-items-center">
+              <Row className="" style={{ textAlign: "center" }}>
                 {/* Product Image */}
-                <Col xs={2} className="text-center">
+                <Col xs={2}>
                   <img
                     src={
                       book.bookimage?.[0] || "https://via.placeholder.com/100"
@@ -236,14 +236,19 @@ export default function BookMark() {
                 </Col>
 
                 {/* Product Details */}
-                <Col xs={2}>
-                  <h6 className="mb-1">{book.title}</h6>
-                  {/* <p className="text-muted mb-1">Color: Black | Size: Free</p> */}
-                  <p className="fw-bold mb-0">₹{book.price || "N/A"}</p>
+                <Col xs={5} className="m-auto my-order-vakjs">
+                  <div
+                    className="d-flex font-size-myordxer"
+                    style={{ justifyContent: "space-between" }}
+                  >
+                    <h6 className="mb-1">{book.title}</h6>
+                    {/* <p className="text-muted mb-1">Color: Black | Size: Free</p> */}
+                    <span className="fw-bold mb-0">₹{book.price || "N/A"}</span>
+                  </div>
                 </Col>
 
                 {/* Order Status & Review */}
-                <Col xs={8} className="text-end">
+                <Col xs={5} className="text-end myorrder-title">
                   <p
                     className={`mb-1 ${
                       isCompleted ? "text-success" : "text-warning"

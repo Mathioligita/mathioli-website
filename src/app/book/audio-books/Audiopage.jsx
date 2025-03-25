@@ -1245,59 +1245,107 @@ export default function Smartpage() {
         //     </div>
         //   </div>
         // </div>
-        <div className="popup">
-          <div className="popup-content p-3">
-            <Row className="align-items-center">
-              {/* Book Image and Title */}
-              <Col md={5} sm={2} className="d-flex align-items-center">
-                <div className="popup-images-data">
-                  <img
-                    src={selectedBook.bookimage[0]}
-                    alt="Book Cover"
-                    style={{
-                      height: "100px",
-                      objectFit: "cover",
-                      borderRadius: "15px",
-                      padding: "2px",
-                    }}
+        // <div className="popup">
+        //   <div className="popup-content p-3">
+        //     <Row className="align-items-center">
+        //       {/* Book Image and Title */}
+        //       <Col md={5} sm={2} className="d-flex align-items-center">
+        //         <div className="popup-images-data">
+        //           <img
+        //             src={selectedBook.bookimage[0]}
+        //             alt="Book Cover"
+        //             style={{
+        //               height: "100px",
+        //               objectFit: "cover",
+        //               borderRadius: "15px",
+        //               padding: "2px",
+        //             }}
+        //           />
+        //         </div>
+        //         <h4 className="m-2">{selectedBook.title}</h4>
+        //       </Col>
+
+        //       {/* Audio Player */}
+        //       <Col
+        //         md={5}
+        //         sm={2}
+        //         className="text-center"
+        //         style={{
+        //           pointerEvents: isDisabled ? "none" : "auto",
+        //           opacity: isDisabled ? 0.5 : 1,
+        //         }}
+        //       >
+        //         <Row className="justify-content-center">
+        //           <Col md={8} lg={6} sm={2}>
+        //             <AudioPlayer
+        //               ref={audioRef}
+        //               autoPlay
+        //               src={selectedBook.audiobookUpload[0]}
+        //               onPlay={() => console.log("onPlay")}
+        //               onListen={handleTimeUpdate}
+        //               controls
+        //               className="w-100"
+        //             />
+        //           </Col>
+        //         </Row>
+        //       </Col>
+
+        //       {/* Close Icon */}
+        //       <Col md={2} sm={2} className="text-end">
+        //         <i
+        //           className="pi pi-times fs-4 cursor-pointer"
+        //           onClick={() => setShowPopup(false)}
+        //         ></i>
+        //       </Col>
+        //     </Row>
+        //   </div>
+        // </div>
+        <div className="custom-popups">
+          <div className="custom-popup-contents p-3">
+            <div className="text-end">
+              <i
+                className="pi pi-times fs-4 cursor-pointers-kkk"
+                onClick={() => setShowPopup(false)}
+              ></i>
+            </div>
+            <div className="d-flex align-items-center justify-content-center flex-wrap">
+              <div className="text-center mx-2">
+                <img
+                  src={selectedBook.bookimage[0]}
+                  alt="Book Cover"
+                  style={{
+                    height: "100px",
+                    objectFit: "cover",
+                    borderRadius: "15px",
+                    padding: "2px",
+                  }}
+                />
+              </div>
+              <div className="text-center mx-2">
+                <h4>{selectedBook.title}</h4>
+              </div>
+              <div className="text-center mx-2">
+                <div
+                  style={{
+                    pointerEvents: isDisabled ? "none" : "auto",
+                    opacity: isDisabled ? 0.5 : 1,
+                  }}
+                >
+                  <AudioPlayer
+                    ref={audioRef}
+                    autoPlay
+                    src={selectedBook.audiobookUpload[0]}
+                    onPlay={() => console.log("onPlay")}
+                    onListen={handleTimeUpdate}
+                    controls
                   />
                 </div>
-                <h4 className="m-2">{selectedBook.title}</h4>
-              </Col>
-
-              {/* Audio Player */}
-              <Col
-                md={5}
-                sm={2}
-                className="text-center"
-                style={{
-                  pointerEvents: isDisabled ? "none" : "auto",
-                  opacity: isDisabled ? 0.5 : 1,
-                }}
-              >
-                <Row className="justify-content-center">
-                  <Col md={8} lg={6} sm={2}>
-                    <AudioPlayer
-                      ref={audioRef}
-                      autoPlay
-                      src={selectedBook.audiobookUpload[0]}
-                      onPlay={() => console.log("onPlay")}
-                      onListen={handleTimeUpdate}
-                      controls
-                      className="w-100"
-                    />
-                  </Col>
-                </Row>
-              </Col>
-
-              {/* Close Icon */}
-              <Col md={2} sm={2} className="text-end">
-                <i
-                  className="pi pi-times fs-4 cursor-pointer"
-                  onClick={() => setShowPopup(false)}
-                ></i>
-              </Col>
-            </Row>
+              </div>
+              <i
+                className="pi pi-times fs-4 cursor-pointers-eee"
+                onClick={() => setShowPopup(false)}
+              ></i>
+            </div>
           </div>
         </div>
       )}

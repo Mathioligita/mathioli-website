@@ -330,3 +330,130 @@ i.pi.pi-star {
     width: "167px";
   }
 }
+
+.custom-popups {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.custom-popup-contents {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: auto;
+  margin-bottom: 12px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 80%;
+  max-width: 700px;
+}
+.cursor-pointers {
+  color: #b3b0b0;
+}
+.cursor-pointers-kkk {
+  display: none;
+  color: #b3b0b0;
+}
+@media only screen and (max-width: 600px) {
+  .custom-popup-contents .d-flex {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .custom-popup-images-data img {
+    height: 62px !important;
+  }
+
+  .rhap_main .rhap_stacked {
+    width: 100%;
+  }
+  .addd-cart-title h6 {
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .checkout-title-gdf {
+    font-size: 12px;
+  }
+  .p-dialog {
+    width: 87% !important;
+  }
+  .p-button .p-component {
+    font-size: 6px !important;
+  }
+  .review-modal {
+    width: 88%;
+  }
+  .myorrder-title {
+    font-size: 12px;
+  }
+  .font-size-myordxer h6 {
+    font-size: 12px;
+  }
+  .paragaada {
+    font-size: 7px;
+  }
+  .my-order-vakjs {
+    margin-right: inherit;
+  }
+  .product-image {
+    max-width: 60px !important;
+  }
+  .pi-sign-out span {
+    font-size: 16px;
+  }
+  .bmc-book .slider-container {
+    gap: 2rem !important;
+  }
+  .cursor-pointers-kkk {
+    display: block;
+    color: #b3b0b0;
+  }
+  .cursor-pointers-eee {
+    display: none;
+    color: #b3b0b0;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .custom-popup-contents {
+    width: 90%;
+  }
+  .addd-cart-title h6 {
+    font-size: 13px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .custom-popup-contents {
+    width: 60%;
+  }
+  .banner-text h1 .line1 {
+    font-size: 26px;
+  }
+  .paragrap-banner {
+    font-size: 10px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .custom-popup-contents {
+    width: 50%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .custom-popup-contents {
+    width: 90%;
+  }
+  .custom-popup-contents .d-flex {
+    justify-content: space-around;
+  }
+}
