@@ -119,7 +119,7 @@
 
 .books-view .row {
   max-width: 1440px;
-  overflow: auto;
+  /* overflow: auto; */
 }
 @media screen and (max-width: 600px) {
   .book-mobile-card {

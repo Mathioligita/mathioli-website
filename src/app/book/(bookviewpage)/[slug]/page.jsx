@@ -30,16 +30,33 @@ import Loading from "../../../../../components/Loading";
 // import Overlayaudio from '../../audio-books/overlayaudio';
 import "../../audio-books/aduiostyle.css";
 
-const renderAvailability = (isAvailable, label) => (
-  <li>
+const renderAvailability = (isAvailable, label, book) => (
+  <li style={{ textAlign: "start" }}>
     <span className="me-2">
       {isAvailable ? (
         <img src="../../Assert/Vector.png" alt="" className="" />
-      ) : (
-        <img src="../../Assert/Vector (1).png" alt="" className="" />
-      )}
+      ) : // <img src="../../Assert/Vector (1).png" alt="" className="" />
+      null}
     </span>
-    {label}
+    {isAvailable && (
+      <>
+        {label}
+        {book.isAudiobookAvailable ? (
+          <>
+            {/* <span className="fw-bold fs-5 ms-5">{book.price} ₹ /-</span> <br /> */}
+            {console.log(label, "label")}
+            {/* {label} */}
+            <span className="fw-bold fs-5 ms-5">{book} ₹ /-</span>
+          </>
+        ) : (
+          <>
+            <span className="fw-bold fs-5 ms-5" style={{ textAlign: "start" }}>
+              {book} ₹ /-
+            </span>
+          </>
+        )}
+      </>
+    )}
   </li>
 );
 
@@ -220,8 +237,14 @@ export default function BookDetailPage() {
     // alert("JJJJ");
     const response = await SingleBuyProduct(data);
     // if (response) {
-    sessionStorage.setItem("buysinglebook", JSON.stringify(response.data));
-    sessionStorage.setItem("singleBookBuying", true);
+    const sessision = sessionStorage.getItem("selectedBook");
+    // if (sessision) {
+      sessionStorage.removeItem("selectedBook");
+      sessionStorage.removeItem("selectedaudiocopy");
+      sessionStorage.removeItem("selectedHardcopy");
+      sessionStorage.setItem("buysinglebook", JSON.stringify(response.data));
+      sessionStorage.setItem("singleBookBuying", true);
+    // }
     // }
     router.push("/book/checkout");
   };
@@ -368,20 +391,25 @@ export default function BookDetailPage() {
               <div className="mt-2 mt-md-3">
                 <span className="fw-bold">Availability</span>
                 <ul className="list-unstyled">
-                  {renderAvailability(book?.isHardCopyAvailable, "Hard Copy")}
+                  {renderAvailability(
+                    book?.isHardCopyAvailable,
+                    "Hard Copy",
+                    book?.price
+                  )}
                   {/* {renderAvailability(book?.isEBookAvailable, "E-Book")} */}
-                  {renderAvailability(book?.isAudiobookAvailable, "Audio Book")}
+                  {renderAvailability(
+                    book?.isAudiobookAvailable,
+                    "Audio Book",
+                    book?.audiobookPrice
+                  )}
                 </ul>
               </div>
               <div
                 className="book-price d-flex flex-md-wrap"
                 style={{ justifyContent: "space-between", maxWidth: "353px" }}
               >
-                <span className="fw-bold fs-5" style={{}}>
-                  ₹ {book?.price || "N/A"}/-
-                </span>
                 {book?.isAudiobookAvailable ? (
-                  <div className="d-flex ">
+                  <div className="d-flex ms-auto">
                     <span
                       // className="love-icons"
                       onClick={() => handleFavoriteToggle(bookDetails)}

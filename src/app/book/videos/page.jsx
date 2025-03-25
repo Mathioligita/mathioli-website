@@ -213,7 +213,7 @@ const videos = [
 
 export default function Page() {
   const [currentPage, setCurrentPage] = useState(1);
-  const videosPerPage = 6;
+  const videosPerPage = 8;
 
   const indexOfLastVideo = currentPage * videosPerPage;
   const indexOfFirstVideo = indexOfLastVideo - videosPerPage;

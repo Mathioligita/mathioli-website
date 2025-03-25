@@ -1,68 +1,87 @@
 .banner-container {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-  }
-  
-  .banner-image {
-    width: 100%;
-    z-index: 1;
-  }
-  
-  .banner-text {
-    position: absolute;
-    top: 20%;
-    right: 19%; /* Adjust the right positioning */
-    transform: translateY(-50%);
-    color: white;
-    font-size: 3vw; /* Adjust the font size to be responsive */
-    text-align: right; /* Align text to the right */
-    z-index: 2;
-    animation: fadeIn 2s ease-in-out;
-  }
-  .banner-text h1{
-    font-size: 67px;
-  }
-  .line1 {
-    display: block;
-    /* margin-bottom: 0.2em; Adjust the spacing between lines */
-    font-weight: bold;
-  }
-  
-  .line2 {
-    display: block;
-    font-weight: bold;
-    margin: 0px -74px;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
 
+.banner-image {
+  width: 100%;
+  z-index: 1;
+}
+
+.banner-text {
+  position: absolute;
+  top: 50%;
+  right: 12%; /* Adjust the right positioning */
+  transform: translateY(-50%);
+  color: white;
+  font-size: 3vw; /* Adjust the font size to be responsive */
+  text-align: right; /* Align text to the right */
+  z-index: 2;
+  animation: fadeIn 2s ease-in-out;
+}
+.banner-text h1 {
+  font-size: 48px;
+  color: #1d5755;
+}
+.line1 {
+  display: block;
+  /* margin-bottom: 0.2em; Adjust the spacing between lines */
+  font-weight: bold;
+}
+
+.line2 {
+  display: block;
+  font-weight: bold;
+  margin: 0px -74px;
+}
+.paragrap-banner {
+  font-size: 20px;
+  color: #707070;
+  text-align: start;
+}
+.btn-banner {
+  font-size: 16px;
+  border-radius: 6px;
+  background: rgb(29, 87, 85);
+  border: 1px solid rgb(29, 87, 85);
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
   }
-  
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
-  @media (max-width: 768px) {
-    .banner-text h1 {
-      font-size: 6vw; /* Increase font size for smaller screens */
-    }
-  
-    .banner-text {
-      font-size: 4vw; /* Increase font size for smaller screens */
-    }
+}
+@media (max-width: 768px) {
+  .banner-text h1 {
+    font-size: 6vw; /* Increase font size for smaller screens */
   }
-  
-  @media (max-width: 480px) {
-    .banner-text h1 {
-      font-size: 8vw; /* Increase font size for very small screens */
-    }
-  
-    .banner-text {
-      font-size: 6vw; /* Increase font size for very small screens */
-    }
+
+  .banner-text {
+    font-size: 4vw; /* Increase font size for smaller screens */
   }
-  
+}
+
+@media (max-width: 480px) {
+  .banner-text h1 {
+    font-size: 8px; /* Increase font size for very small screens */
+  }
+  .paragrap-banner {
+    font-size: 8px;
+  }
+
+  .banner-text {
+    font-size: 6vw; /* Increase font size for very small screens */
+  }
+  .banner-text {
+    right: 3%;
+  }
+  .btn-banner {
+    font-size: 6px;
+  }
+}

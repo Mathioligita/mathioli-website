@@ -1564,11 +1564,31 @@ const CheckoutPage = () => {
   console.log(singleselectbooks, "usersdata::::::::::::::::::::::::::::::::");
 
   const handlesubmit = async () => {
+    const weight = selecteditemhardcopy?.weight;
+    const unit = selecteditemhardcopy?.weightUnit;
+
+    console.log(weight, unit, "values");
+
+    const convertWeight = (weight, unit) => {
+      switch (unit) {
+        case "kg":
+          return weight;
+        case "g":
+          return weight / 1000;
+        case "lb":
+          return weight * 0.453592;
+        default:
+          return weight;
+      }
+    };
+
+    const singleaudiobooksprice = convertWeight(weight, unit);
+
     const data = {
       postalCode: activeAddress?.zipCode,
       weight:
         checkoutdata?.totalWeight ||
-        selecteditemhardcopy?.weight ||
+        singleaudiobooksprice ||
         selectedhardcopy1?.weight,
       subtotal:
         checkoutdata?.total ||

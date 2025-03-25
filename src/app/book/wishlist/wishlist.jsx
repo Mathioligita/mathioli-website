@@ -496,26 +496,50 @@ export default function Wishlist() {
                     "product>>>>>>>>>>>>>>>>>>"
                   )}
 
-                  <Button
+                  {/* <Button
                     severity="danger"
-                    style={{border:"1px solid red" }}
+                    style={{ border: "1px solid red" }}
                     label={
-                      product.bookId.quantity === 0 ||
-                      cart.some(
-                        (item) => item.bookId._id === product.bookId._id
-                      )
+                      product.bookId.quantity == 0 ||
+                      cart.some((item) => item.bookId._id == product.bookId._id)
                         ? "Item in Cart"
                         : "Add to Cart"
                     }
                     className="p-button-success rounded-3"
                     onClick={() => addToCart(product)}
                     disabled={
-                      product?.bookId?.quantity == 0 ||
+                      product?.bookId?.quantity == 1 ||
                       wishlistvalues.some(
                         (item) => item?.bookId?._id == product?.bookId?._id
                       )
                     }
-                    // outlined
+                    outlined
+                  /> */}
+                  <Button
+                    severity="danger"
+                    style={
+                      product?.bookId?.quantity ||
+                      wishlistvalues.some(
+                        (item) => item?.bookId?._id == product?.bookId?._id
+                      )
+                        ? { border: "1px solid red" }
+                        : {}
+                    }
+                    label={
+                      product.bookId.quantity == 0 ||
+                      cart.some((item) => item.bookId._id == product.bookId._id)
+                        ? "Item in Cart"
+                        : "Add to Cart"
+                    }
+                    className="p-button-success rounded-3"
+                    onClick={() => addToCart(product)}
+                    disabled={
+                      product?.bookId?.quantity == 1 ||
+                      wishlistvalues.some(
+                        (item) => item?.bookId?._id == product?.bookId?._id
+                      )
+                    }
+                    outlined
                   />
                 </div>
               </div>
@@ -598,7 +622,7 @@ export default function Wishlist() {
                       border:
                         product?.bookId?.quantity === 0 || isInWishlist
                           ? "1px solid red"
-                          : "0px solid red" ,
+                          : "0px solid red",
                     }}
                     className="p-button-success rounded-3"
                     onClick={() => addToCart(product)}

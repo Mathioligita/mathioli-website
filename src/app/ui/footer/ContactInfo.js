@@ -1,9 +1,10 @@
+import Link from "next/link";
 import React from "react";
 
 const ContactInfo = ({ address, email, phone }) => (
   <div
     className="contact-info row d-flex"
-    style={{ fontSize: "16px", justifyContent: "space-between" }}
+    style={{ fontSize: "12px", justifyContent: "space-between" }}
   >
     <div
       className="copyright col-md-2 col-sm-12 col-md-6 col-lg-2 mb-3 mb-md-0"
@@ -11,11 +12,10 @@ const ContactInfo = ({ address, email, phone }) => (
     >
       © 2025 by{" "}
       <a
-        href="https://www.webdads2u.com/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-white text-decoration-none"
-
+        href="/https://www.webdads2u.com/"
+        // target="_blank"
+        // rel="noopener noreferrer"
+        className=" text-white text-decoration-none"
       >
         WEBDADS2U
       </a>{" "}
@@ -42,7 +42,15 @@ const ContactInfo = ({ address, email, phone }) => (
         />
       </div>
       <div>
-        <span>{email}</span>
+        <span>
+          {" "}
+          <Link
+            href={`mailto:${email}`}
+            className="text-decoration-none text-white"
+          >
+            {email}
+          </Link>
+        </span>
       </div>
     </div>
     <div className="contact-item d-flex  mb-3 col-sm-12 col-md-6 col-lg-2 mb-3 mb-md-0">

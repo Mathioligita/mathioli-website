@@ -3,15 +3,19 @@ import React from "react";
 
 export default function Editions({ books2 }) {
   const router = useRouter();
-    // console.log(books2,"booksbooksbooks")
-    const handleBookClick = (i) => {
-      router.push(`/book/${i.slug}`);
-    };
+  // console.log(books2,"booksbooksbooks")
+  const handleBookClick = (i) => {
+    router.push(`/book/${i.slug}`);
+  };
   return (
     <div className="d-flex ">
       {Array.isArray(books2?.editions) &&
         books2.editions.map((i, index) => (
-          <div key={i?.id || index} className=" d-flex" onClick={() => handleBookClick(i)}>
+          <div
+            key={i?.id || index}
+            className=" d-flex"
+            onClick={() => handleBookClick(i)}
+          >
             {" "}
             {/* Use a unique key */}
             <img
@@ -19,6 +23,7 @@ export default function Editions({ books2 }) {
               className="author-image ms-3"
               alt="Book Image"
               width={"80px"}
+              style={{ cursor: "pointer" }}
             />
           </div>
         ))}
