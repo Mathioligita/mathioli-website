@@ -71,6 +71,51 @@
 //   );
 // }
 
+// import React from "react";
+// import BookCard from "./BookCard"; // Import the BookCard component
+// import { Row } from "react-bootstrap";
+// import "./bookview.css";
+// import SkeletonPreloader from "../../../../components/SkeletonPreloader";
+
+// // Main Books View component
+// export default function Booksview({ book }) {
+//   const bookdata = book?.books || [];
+//   const location =
+//     typeof window !== "undefined" ? window.location.pathname : null;
+//   console.log(location, "/book/topselling");
+
+//   // Check if bookdata is an array
+//   if (!Array.isArray(bookdata)) {
+//     return <p>No books available or invalid data structure.</p>;
+//   }
+//   if (!bookdata) {
+//     return <p>no data</p>;
+//   }
+//   return (
+//     <div className="books-view ">
+//       <Row className="books-view-ed mb-2">
+//         {bookdata.length > 0 ? (
+//           <>
+//             {location === "/book/topselling"
+//               ? bookdata.map((bookItem) => (
+//                   <BookCard key={bookItem._id} book={bookItem} />
+//                 ))
+//               : bookdata
+//                   .slice(0, 6)
+//                   .map((bookItem) => (
+//                     <BookCard key={bookItem._id} book={bookItem} />
+//                   ))}
+//           </>
+//         ) : (
+//           <section className="container d-flex">
+//             <SkeletonPreloader />
+//             <SkeletonPreloader />
+//           </section>
+//         )}
+//       </Row>
+//     </div>
+//   );
+// }
 import React from "react";
 import BookCard from "./BookCard"; // Import the BookCard component
 import { Row } from "react-bootstrap";
@@ -91,16 +136,22 @@ export default function Booksview({ book }) {
   if (!bookdata) {
     return <p>no data</p>;
   }
+
+  // Sort books by createdAt (most recent first)
+  const sortedBooks = bookdata.sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  );
+
   return (
-    <div className="books-view ">
+    <div className="books-view">
       <Row className="books-view-ed mb-2">
-        {bookdata.length > 0 ? (
+        {sortedBooks.length > 0 ? (
           <>
             {location === "/book/topselling"
-              ? bookdata.map((bookItem) => (
+              ? sortedBooks.map((bookItem) => (
                   <BookCard key={bookItem._id} book={bookItem} />
                 ))
-              : bookdata
+              : sortedBooks
                   .slice(0, 6)
                   .map((bookItem) => (
                     <BookCard key={bookItem._id} book={bookItem} />

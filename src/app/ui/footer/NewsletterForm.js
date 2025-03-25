@@ -77,7 +77,7 @@ import React, { useState } from "react";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import Link from "next/link";
-import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
+import { FaFacebookF, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
 import "./footer-sec.css";
 import { NewsletterFormS } from "../../../../api/page";
@@ -142,18 +142,24 @@ const NewsletterForm = () => {
       </form>
       <div className="d-flex mt-3 icon-footer">
         <div className="btn-item-icon">
-          <Link href={"http://facebook.com/mathioligita"}>
+          <Link href={"http://facebook.com/mathioligita"} target="_blank">
             <FaFacebookF />
           </Link>
         </div>
         <div className="btn-item-icon">
-          <Link href={"/"}>
+          <Link
+            href={"https://www.instagram.com/mathioligita/"}
+            target="_blank"
+          >
             <RiInstagramFill />
           </Link>
         </div>
         <div className="btn-item-icon">
-          <Link href={"https://www.instagram.com/mathioligita/"}>
-            <FaLinkedinIn />
+          <Link
+            href={"https://www.youtube.com/@uthiradambooks"}
+            target="_blank"
+          >
+            <FaYoutube />
           </Link>
         </div>
       </div>

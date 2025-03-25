@@ -682,7 +682,7 @@ const retryFetch = async (fn, retries = 3, delay = 1000) => {
   }
 };
 
-export default function Smartpage({ pathname }) {
+export default function Smartpage() {
   const [categoriesData, setCategoriesData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const { categoriesdata, setCategoriesdata } = useContext(userContext);
@@ -848,7 +848,7 @@ export default function Smartpage({ pathname }) {
         return false;
       }
 
-      if (pathname === "audio-books" && !book.isAudiobookAvailable) {
+      if ("audio-books" === "audio-books" && !book.isAudiobookAvailable) {
         return false;
       }
 
@@ -1079,7 +1079,7 @@ export default function Smartpage({ pathname }) {
                                         position: "absolute",
                                         top: "-5",
                                         maxWidth: "900px",
-                                        zIndex:"999"
+                                        zIndex: "999",
                                       }}
                                     >
                                       {book.title
@@ -1200,49 +1200,104 @@ export default function Smartpage({ pathname }) {
       )}
 
       {showPopup && (
+        // <div className="popup">
+        //   <div className="popup-content">
+        //     <div className="d-flex">
+        //       <div className="p-2">
+        //         <div className="d-flex">
+        //           <div>
+        //             <img
+        //               src={selectedBook.bookimage[0]}
+        //               alt=""
+        //               style={{
+        //                 height: "100px",
+        //                 objectFit: "cover",
+        //                 borderRadius: "15px",
+        //                 padding: "2px",
+        //               }}
+        //             />
+        //           </div>
+        //           <div className="my-auto">
+        //             <h4 className="m-2">{selectedBook.title}</h4>
+        //           </div>
+        //         </div>
+        //       </div>
+        //       <div
+        //         style={{
+        //           pointerEvents: isDisabled ? "none" : "auto",
+        //           opacity: isDisabled ? 0.5 : 1,
+        //         }}
+        //         className="w-50 ms-auto mt-auto"
+        //       >
+        //         <AudioPlayer
+        //           ref={audioRef}
+        //           autoPlay
+        //           src={selectedBook.audiobookUpload[0]}
+        //           onPlay={(e) => console.log("onPlay")}
+        //           onListen={handleTimeUpdate} // Track time and disable after 30 sec
+        //           controls
+        //           className="w-100"
+        //         />
+        //       </div>
+        //       <div onClick={() => setShowPopup(false)} className="my-auto">
+        //         <i className="pi pi-times ms-4 fw-1"></i>
+        //       </div>
+        //     </div>
+        //   </div>
+        // </div>
         <div className="popup">
-          <div className="popup-content">
-            <div className="d-flex">
-              <div className="p-2">
-                <div className="d-flex">
-                  <div>
-                    <img
-                      src={selectedBook.bookimage[0]}
-                      alt=""
-                      style={{
-                        height: "100px",
-                        objectFit: "cover",
-                        borderRadius: "15px",
-                        padding: "2px",
-                      }}
-                    />
-                  </div>
-                  <div className="my-auto">
-                    <h4 className="m-2">{selectedBook.title}</h4>
-                  </div>
+          <div className="popup-content p-3">
+            <Row className="align-items-center">
+              {/* Book Image and Title */}
+              <Col md={5} sm={2} className="d-flex align-items-center">
+                <div className="popup-images-data">
+                  <img
+                    src={selectedBook.bookimage[0]}
+                    alt="Book Cover"
+                    style={{
+                      height: "100px",
+                      objectFit: "cover",
+                      borderRadius: "15px",
+                      padding: "2px",
+                    }}
+                  />
                 </div>
-              </div>
-              <div
+                <h4 className="m-2">{selectedBook.title}</h4>
+              </Col>
+
+              {/* Audio Player */}
+              <Col
+                md={5}
+                sm={2}
+                className="text-center"
                 style={{
                   pointerEvents: isDisabled ? "none" : "auto",
                   opacity: isDisabled ? 0.5 : 1,
                 }}
-                className="w-50 ms-auto mt-auto"
               >
-                <AudioPlayer
-                  ref={audioRef}
-                  autoPlay
-                  src={selectedBook.audiobookUpload[0]}
-                  onPlay={(e) => console.log("onPlay")}
-                  onListen={handleTimeUpdate} // Track time and disable after 30 sec
-                  controls
-                  className="w-100"
-                />
-              </div>
-              <div onClick={() => setShowPopup(false)} className="my-auto">
-                <i className="pi pi-times ms-4 fw-1"></i>
-              </div>
-            </div>
+                <Row className="justify-content-center">
+                  <Col md={8} lg={6} sm={2}>
+                    <AudioPlayer
+                      ref={audioRef}
+                      autoPlay
+                      src={selectedBook.audiobookUpload[0]}
+                      onPlay={() => console.log("onPlay")}
+                      onListen={handleTimeUpdate}
+                      controls
+                      className="w-100"
+                    />
+                  </Col>
+                </Row>
+              </Col>
+
+              {/* Close Icon */}
+              <Col md={2} sm={2} className="text-end">
+                <i
+                  className="pi pi-times fs-4 cursor-pointer"
+                  onClick={() => setShowPopup(false)}
+                ></i>
+              </Col>
+            </Row>
           </div>
         </div>
       )}

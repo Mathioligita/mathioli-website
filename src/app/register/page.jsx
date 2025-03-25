@@ -376,7 +376,7 @@ function Register({ visible, onHide }) {
                       <Field
                         name="firstName"
                         as={InputText}
-                        placeholder="Enter firstName"
+                        placeholder="Enter FirstName"
                         className="p-inputtext w-100"
                       />
                       <ErrorMessage
@@ -389,7 +389,7 @@ function Register({ visible, onHide }) {
                       <Field
                         name="lastName"
                         as={InputText}
-                        placeholder="Enter lastName"
+                        placeholder="Enter LastName"
                         className="p-inputtext w-100"
                       />
                       <ErrorMessage
@@ -403,7 +403,7 @@ function Register({ visible, onHide }) {
                     <Field
                       name="email"
                       as={InputText}
-                      placeholder="Enter email"
+                      placeholder="Enter Email"
                       className="w-100"
                     />
                     <ErrorMessage
@@ -416,7 +416,7 @@ function Register({ visible, onHide }) {
                     <Field
                       name="password"
                       as={Password}
-                      placeholder="Enter password"
+                      placeholder="Enter Password"
                       className="w-100"
                       toggleMask
                     />
@@ -430,7 +430,7 @@ function Register({ visible, onHide }) {
                     <Field
                       name="mobile"
                       as={InputText}
-                      placeholder="Enter phone number"
+                      placeholder="Enter Phone number"
                       className="w-100 mt-2"
                     />
                     <ErrorMessage
@@ -463,8 +463,8 @@ function Register({ visible, onHide }) {
                     color: "blue",
                   }}
                 >
-                  Login{" "}
-                </span>
+                  Login
+                </span>{" "}
                 here
               </p>
             </div>

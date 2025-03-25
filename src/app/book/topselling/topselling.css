@@ -1,4 +1,4 @@
-@media (max-width: 768px) {
+  @media (max-width: 768px) {
   .top-selling {
     flex-wrap: wrap;
     gap: 12px;
@@ -53,7 +53,7 @@
 
 @media (max-width: 426px) {
   .top-selling-tabs {
-    display: grid;
+    /* display: grid; */
     padding: 10px;
     margin-bottom: 36px;
     margin-left: 0;
@@ -129,11 +129,9 @@
 }
 
 /* Hide scroll icons on larger screens */
-@media (min-width: 1440px) {
-  .scroll-icon {
-    /* display: none; */
-  }
+@media (min-width: 1020px) and (max-width: 1440px) {
   .top-selling-tabs-container {
+    max-width: 1335px; /* Set max-width for screens between 1020px and 1440px */
     overflow-x: auto;
   }
 }
@@ -143,6 +141,8 @@
   align-items: center;
   position: relative;
   max-width: 1259px;
+
+  /* max-width: 1440px;  */
   /* margin-left: 12px; */
 }
 

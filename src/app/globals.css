@@ -318,9 +318,15 @@ i.pi.pi-star {
     font-size: 16px; /* Adjust icon size */
   }
   .popup-content .d-flex {
-    display: grid !important;
+    /* display: grid !important; */
   }
   .popup-content .ms-auto {
     margin-left: 0px !important;
+  }
+  .popup-images-data img {
+    height: 62px !important;
+  }
+  .rhap_main .rhap_stacked {
+    width: "167px";
   }
 }
