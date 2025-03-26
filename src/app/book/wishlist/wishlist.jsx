@@ -436,25 +436,24 @@ export default function Wishlist() {
                   <img
                     src={product?.bookId?.bookimage[0] || "/image/image 9.png"}
                     // className="img-fluid rounded-start"
-                    style={{ width: "100px" }}
+                    style={{ width: "50px" }}
                     alt="Product"
                   />
                 </div>
 
                 <div className="my-auto ms-2">
-                  <h5 className="card-title">{product.bookId.title}</h5>
+                  <h5 className="card-title " style={{ fontSize: "12px" }}>
+                    <strong>{product.bookId.title}</strong>
+                  </h5>
                   <p className="card-text">
-                    <small className="text-muted">{product.bookId.genre}</small>
-                    <br />
-                    <small className="text-muted">
-                      {product.bookId.language}
-                    </small>
-                    <br />
                     <small className="text-muted">
                       {product.bookId.author}
                     </small>
                   </p>
                 </div>
+                <span className="card-text text-end fw-bold my-auto ms-auto">
+                  {formatCurrency(product.bookId.price)}
+                </span>
                 <span
                   className="ms-auto me-2"
                   onClick={() => toggleWishlist(product)}
@@ -476,12 +475,8 @@ export default function Wishlist() {
             </div>
             <div className="col-md-8">
               <div className="card-body">
-                <p className="card-text text-end fw-bold">
-                  {formatCurrency(product.bookId.price)}
-                </p>
-
                 <div className="d-flex justify-content-between align-items-center">
-                  <ul className="list-unstyled text-start">
+                  <ul className="list-unstyled text-start my-auto">
                     {renderAvailability(
                       product.bookId.isHardCopyAvailable,
                       "Hard Copy"
@@ -527,7 +522,7 @@ export default function Wishlist() {
                       wishlistvalues.some(
                         (item) => item?.bookId?._id == product?.bookId?._id
                       )
-                        ? { border: "1px solid red" }
+                        ? { border: "1px solid red", fontSize: "12px" }
                         : {}
                     }
                     label={

@@ -186,21 +186,27 @@ export default function Sidebar({ setIsOpen }) {
         {/* <ul className="fw-bold sidebar-values-adjustment"> */}
         <li
           className="fw-bold p-2 sidebar-values-adjustment"
-          onClick={() => router.push("/book")}
+          onClick={() => {
+            router.push("/book"), setIsOpen(false);
+          }}
         >
           <i className="pi pi-book me-2"></i>Books
         </li>
         {/* <li onClick={() => router.push("/book/e-books")}>E-Books</li> */}
         <li
           className="fw-bold p-2 sidebar-values-adjustment"
-          onClick={() => router.push("/book/audio-books")}
+          onClick={() => {
+            router.push("/book/audio-books"), setIsOpen(false);
+          }}
         >
           <i className="pi pi-headphones me-2"></i>
           Audio Books
         </li>
         <li
           className="fw-bold p-2 sidebar-values-adjustment"
-          onClick={() => router.push("/book/categories")}
+          onClick={() => {
+            router.push("/book/categories"), setIsOpen(false);
+          }}
         >
           {" "}
           <i className="pi pi-list me-2"></i>

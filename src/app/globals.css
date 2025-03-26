@@ -474,7 +474,8 @@ i.pi.pi-star {
     justify-content: space-around;
   }
   .banner-text h1 .line1 {
-    font-size: 61px;
+    font-size: 50px;
+    right: 8%;
   }
   .p-icon-field > .p-input-icon {
     top: 39%;
