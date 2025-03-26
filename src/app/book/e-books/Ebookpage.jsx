@@ -182,7 +182,7 @@ export default function Ebookpage( ) {
 
   const renderHeader = () => {
     return (
-      <div className="table-header " >
+      <div className="table-header ">
         <div className="">
           <IconField iconPosition="left">
             <InputIcon className="pi pi-search"> </InputIcon>

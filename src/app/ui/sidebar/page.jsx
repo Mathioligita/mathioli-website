@@ -130,19 +130,60 @@ export default function Sidebar({ setIsOpen }) {
       )}
 
       <ul className="list-unstyled p-2 m-auto">
+        <li
+          className="fw-bold p-2 about-dropdown"
+          onClick={() => setAboutVisible(!aboutVisible)}
+        >
+          <i className="pi pi-user me-2"></i> About
+        </li>
+
+        {aboutVisible && (
+          <ul className="list-unstyled about-dropdown">
+            {aboutItems.map((item, index) => (
+              <Link
+                href={item.to}
+                key={index}
+                className="text-decoration-none text-black"
+                onClick={() => setIsOpen(false)}
+              >
+                <li className="p-3 " style={{ borderBottom: "1px solid gray" }}>
+                  <span className="fw-light">{item.label}</span>
+                  {/* <hr /> */}
+                </li>
+              </Link>
+            ))}
+          </ul>
+        )}
+
+        <li
+          className="fw-bold p-2 legal-dropdown"
+          onClick={() => setLegal(!legal)}
+        >
+          <i className="pi pi-file me-2"></i> Legal
+        </li>
+        {legal && (
+          <ul className="list-unstyled legal-dropdown">
+            {legalItems.map((item, index) => (
+              <Link
+                href={item.to}
+                key={index}
+                className="text-decoration-none text-black"
+                onClick={() => setIsOpen(false)}
+              >
+                <li className="p-3 " style={{ borderBottom: "1px solid gray" }}>
+                  {item.label}
+                  {/* <hr /> */}
+                </li>
+              </Link>
+            ))}
+          </ul>
+        )}
+
         {/* <li className="fw-bold p-2">
 					<i className="pi pi-pencil me-2"></i> Blogs
 				</li> */}
 
         {/* <ul className="fw-bold sidebar-values-adjustment"> */}
-        <li
-          className="fw-bold p-2 sidebar-values-adjustment"
-          onClick={() => {
-            router.push("/"), setIsOpen(false);
-          }}
-        >
-          <i className="pi pi-home me-2"></i>Home
-        </li>
         <li
           className="fw-bold p-2 sidebar-values-adjustment"
           onClick={() => {
@@ -194,53 +235,6 @@ export default function Sidebar({ setIsOpen }) {
               <i className=" pi pi-user-plus" /> <span className="ms-2">Sign Up</span>
             </li> */}
           </>
-        )}
-        <li
-          className="fw-bold p-2 about-dropdown"
-          onClick={() => setAboutVisible(!aboutVisible)}
-        >
-          <i className="pi pi-user me-2"></i> About
-        </li>
-
-        {aboutVisible && (
-          <ul className="list-unstyled about-dropdown">
-            {aboutItems.map((item, index) => (
-              <Link
-                href={item.to}
-                key={index}
-                className="text-decoration-none text-black"
-                onClick={() => setIsOpen(false)}
-              >
-                <li className="p-3 " style={{ borderBottom: "1px solid gray" }}>
-                  <span className="fw-light">{item.label}</span>
-                  {/* <hr /> */}
-                </li>
-              </Link>
-            ))}
-          </ul>
-        )}
-        <li
-          className="fw-bold p-2 legal-dropdown"
-          onClick={() => setLegal(!legal)}
-        >
-          <i className="pi pi-file me-2"></i> Legal
-        </li>
-        {legal && (
-          <ul className="list-unstyled legal-dropdown">
-            {legalItems.map((item, index) => (
-              <Link
-                href={item.to}
-                key={index}
-                className="text-decoration-none text-black"
-                onClick={() => setIsOpen(false)}
-              >
-                <li className="p-3 " style={{ borderBottom: "1px solid gray" }}>
-                  {item.label}
-                  {/* <hr /> */}
-                </li>
-              </Link>
-            ))}
-          </ul>
         )}
       </ul>
     </div>

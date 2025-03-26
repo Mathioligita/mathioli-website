@@ -122,7 +122,7 @@ export default function Page() {
 
   const renderHeader = () => {
     return (
-      <div className="table-header" style={{ marginTop: "7rem" }}>
+      <div className="table-header">
         <div className="">
           <IconField iconPosition="left">
             <InputIcon className="pi pi-search"> </InputIcon>

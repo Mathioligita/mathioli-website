@@ -37,15 +37,17 @@ export default function Categories() {
   }
 
   return (
-    <div className="container pt-5" style={{ marginTop: "7rem" }}>
-      <h4>{BooksData[0]?.category || null}</h4>
+    <div className="sm-ss-container">
+      <div className="container pt-5">
+        <h4>{BooksData[0]?.category || null}</h4>
 
-      <div className="books-view ">
-        <Row>
-          {BooksData.map((bookItem) => (
-            <BookCard key={bookItem._id} book={bookItem} />
-          ))}
-        </Row>
+        <div className="books-view ">
+          <Row>
+            {BooksData.map((bookItem) => (
+              <BookCard key={bookItem._id} book={bookItem} />
+            ))}
+          </Row>
+        </div>
       </div>
     </div>
   );

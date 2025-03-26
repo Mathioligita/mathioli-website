@@ -173,96 +173,100 @@ export default function TabView({ data, book }) {
   const uniqueCategories = Array.from(new Set(book?.map((b) => b.category)));
 
   return (
-    <div
-      className="ms-0 ms-md-5 p-2 p-md-0 mt-4"
-      style={{ overflowX: "hidden" }}
-    >
+    <div className="sm-ss-container">
       <div
-        className="d-flex align-items-center mb-2"
-        style={{ justifyContent: "space-between" }}
+        className="ms-0 ms-md-5 p-2 p-md-0 mt-4"
+        style={{ overflow: "hidden" }}
       >
-        <span className="Top-selling">Top Selling</span>
+        <div
+          className="d-flex align-items-center mb-2"
+          style={{ justifyContent: "space-between" }}
+        >
+          <span className="Top-selling">Top Selling</span>
 
-        {locations === "/book/topselling" ? null : (
-          <Button
-            className="top-selling-showall ms-auto"
-            onClick={handleviwall}
-            style={{ border: "1px solid gray" }}
-          >
-            Show All
-          </Button>
-        )}
-      </div>
-
-      <div className="top-selling-tabs-container">
-        {/* Left Scroll Button */}
-        <FaChevronLeft
-          className="scroll-icon left"
-          onClick={() => scrollTabs("left")}
-        />
-
-        <div className="top-selling-tabs " ref={scrollContainerRef}>
-          <div
-            key="All"
-            onClick={() => handleTabClick("All")}
-            className={`tab-item ${activeTab === "All" ? "active" : ""}`}
-            style={{
-              padding: "10px 20px",
-              cursor: "pointer",
-              backgroundColor:
-                activeTab === "All" ? "#1D5755" : "rgb(241, 239, 239)",
-              color: activeTab === "All" ? "white" : "#969696",
-              borderRadius: "40px",
-              marginLeft: "24px",
-              fontWeight: "bold",
-            }}
-          >
-            All
-          </div>
-
-          {uniqueCategories.length > 0 ? (
-            uniqueCategories.map((category) => (
-              <div
-                style={{
-                  padding: "10px 20px",
-                  cursor: "pointer",
-                  backgroundColor:
-                    activeTab === category ? "#1D5755" : "rgb(241, 239, 239)",
-                  color: activeTab === category ? "white" : "#969696",
-                  borderRadius: "40px",
-                  marginRight: "10px",
-                  fontWeight: "bold",
-                }}
-                key={category}
-                onClick={() => handleTabClick(category)}
-                className={`tab-item ${activeTab === category ? "active" : ""}`}
-              >
-                {category}
-              </div>
-            ))
-          ) : (
-            <div className="tab-skeletons d-flex">
-              <Skeleton
-                width="6rem"
-                height="3rem"
-                borderRadius="40px"
-                className="me-2"
-              />
-              <Skeleton width="6rem" height="3rem" borderRadius="40px" />
-            </div>
+          {locations === "/book/topselling" ? null : (
+            <Button
+              className="top-selling-showall ms-auto"
+              onClick={handleviwall}
+              style={{ border: "1px solid gray" }}
+            >
+              Show All
+            </Button>
           )}
         </div>
 
-        {/* Right Scroll Button */}
-        <FaChevronRight
-          className="scroll-icon right"
-          onClick={() => scrollTabs("right")}
-        />
-      </div>
+        <div className="top-selling-tabs-container">
+          {/* Left Scroll Button */}
+          <FaChevronLeft
+            className="scroll-icon left"
+            onClick={() => scrollTabs("left")}
+          />
 
-      {/* Books List */}
-      <div>
-        <Booksview book={{ books: getBooksByCategory(activeTab) }} />
+          <div className="top-selling-tabs " ref={scrollContainerRef}>
+            <div
+              key="All"
+              onClick={() => handleTabClick("All")}
+              className={`tab-item ${activeTab === "All" ? "active" : ""}`}
+              style={{
+                padding: "10px 20px",
+                cursor: "pointer",
+                backgroundColor:
+                  activeTab === "All" ? "#1D5755" : "rgb(241, 239, 239)",
+                color: activeTab === "All" ? "white" : "#969696",
+                borderRadius: "40px",
+                marginLeft: "24px",
+                fontWeight: "bold",
+              }}
+            >
+              All
+            </div>
+
+            {uniqueCategories.length > 0 ? (
+              uniqueCategories.map((category) => (
+                <div
+                  style={{
+                    padding: "10px 20px",
+                    cursor: "pointer",
+                    backgroundColor:
+                      activeTab === category ? "#1D5755" : "rgb(241, 239, 239)",
+                    color: activeTab === category ? "white" : "#969696",
+                    borderRadius: "40px",
+                    marginRight: "10px",
+                    fontWeight: "bold",
+                  }}
+                  key={category}
+                  onClick={() => handleTabClick(category)}
+                  className={`tab-item ${
+                    activeTab === category ? "active" : ""
+                  }`}
+                >
+                  {category}
+                </div>
+              ))
+            ) : (
+              <div className="tab-skeletons d-flex">
+                <Skeleton
+                  width="6rem"
+                  height="3rem"
+                  borderRadius="40px"
+                  className="me-2"
+                />
+                <Skeleton width="6rem" height="3rem" borderRadius="40px" />
+              </div>
+            )}
+          </div>
+
+          {/* Right Scroll Button */}
+          <FaChevronRight
+            className="scroll-icon right"
+            onClick={() => scrollTabs("right")}
+          />
+        </div>
+
+        {/* Books List */}
+        <div>
+          <Booksview book={{ books: getBooksByCategory(activeTab) }} />
+        </div>
       </div>
     </div>
   );

@@ -511,7 +511,7 @@ export default function Page() {
 
   const renderHeader = () => {
     return (
-      <div className="table-header" style={{ marginTop: "7rem" }}>
+      <div className="table-header">
         <div className="">
           <IconField iconPosition="left">
             <InputIcon className="pi pi-search"> </InputIcon>
@@ -530,9 +530,9 @@ export default function Page() {
   const header = renderHeader();
 
   return (
-    <div>
+    <div className="sm-ss-container">
       {loading ? (
-        <section>
+        <section className="">
           <div className="container ">
             <div className="mt-5">
               <div className="mb-4">
@@ -573,7 +573,7 @@ export default function Page() {
       ) : (
         <div className="container ">
           <div className="mt-5">
-            <div className="mb-4 sm-ss-container">
+            <div className="mb-4">
               <div className="main-content mb-4">
                 {header}
                 <div className="book-sdbjd">

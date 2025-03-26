@@ -19,9 +19,10 @@ export default function Home() {
       <div className="" style={{ overflowX: "hidden" }}>
         {/* <button className="btn btn-primary">sdsd</button> */}
         <Topbars />
+
         <Bannersection />
         <div className="sm-ss-container">
-          <div className="ms-0 ms-md-5 p-2 p-md-0 mt-5 ms-sm-3  me-md-5 ">
+          <div className="ms-0 ms-md-5 p-2 p-md-0  qoute-dnakjnaajkda  me-md-5">
             <Row className="">
               <Col sm={12} md={12} lg={5} className="">
                 <Quote />
@@ -38,9 +39,7 @@ export default function Home() {
           <Favoritesbooks />
           <Winingbooks />
         </div>
-
         <ScrollTop style={{ borderRadius: "50%", background: "#1D5755" }} />
-
         <Footer />
       </div>
     </>
