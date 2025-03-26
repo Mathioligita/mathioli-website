@@ -47,7 +47,7 @@ export default function BookStoreHeader() {
   return (
     <div>
       <header className="book-store-header ">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-xl sticky-top navbar-light bg-light">
           <div className="d-flex" style={{ justifyContent: "space-between" }}>
             <div>
               <button
@@ -65,7 +65,7 @@ export default function BookStoreHeader() {
                 <Logo />
               </Link>
             </div>
-            <div className="fav-wishlist" >
+            <div className="fav-wishlist">
               <div
                 className="fav-wishlist me-4  d-flex"
                 style={{ marginTop: "32px", display: "none" }}
@@ -87,8 +87,8 @@ export default function BookStoreHeader() {
               </div>
             </div>
           </div>
-
-          <Link className="m-3 m-lg-1 link-image" href="/">
+          {/* <div> */}
+          <Link className="m-3 m-lg-1 link-image  inksisksks" href="/">
             <Logo />
           </Link>
           <div
@@ -107,6 +107,7 @@ export default function BookStoreHeader() {
             </div>
             <SearchBar />
           </div>
+          {/* </div> */}
         </nav>
       </header>
 

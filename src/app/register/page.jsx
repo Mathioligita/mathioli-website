@@ -347,6 +347,14 @@ function Register({ visible, onHide }) {
         <Toast ref={toast} />
         <div className="modal-overlay" onClick={onHide}></div>
         <div className="login-modal">
+          <span
+            onClick={onHide}
+            className="ms-auto"
+            style={{ justifyContent: "end", display: "flex", fontSize: "15px" }}
+          >
+            {" "}
+            <i className="pi pi-times"></i>
+          </span>
           <div className="content p-1">
             <div className="d-flex justify-content-center">
               <img src="/image/Logo black.svg" alt="Logo" width={"200px"} />

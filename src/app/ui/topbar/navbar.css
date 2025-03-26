@@ -209,7 +209,10 @@ font-size: 12px;
     justify-content: left !important;
   }
   .collapse:not(.show) {
-    display: block !important;
+    display: none !important;
+  }
+  .dfghjgfllksjjss {
+    display: none;
   }
 }
 
@@ -222,7 +225,7 @@ font-size: 12px;
 
   .navbar {
     justify-content: space-between !important;
-    height: 100px;
+    height: 87px;
   }
 
   .language-selector {

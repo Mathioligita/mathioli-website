@@ -244,7 +244,7 @@ export default function Smartpage({ pathname }) {
 
   const renderHeader = () => {
     return (
-      <div className="table-header">
+      <div className="table-header" style={{ marginTop: "7rem" }}>
         <div className="">
           <IconField iconPosition="left">
             <InputIcon className="pi pi-search"> </InputIcon>

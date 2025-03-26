@@ -973,10 +973,10 @@ export default function Smartpage() {
   };
 
   return (
-    <div className="container">
-      <div className="pt-5">
+    <div className="container ">
+      <div className="pt-5" style={{ marginTop: "5rem" }}>
         <div className="mb-4">
-          <div className="main-content mb-4">
+          <div className="main-content mb-2">
             {header}
             <div className="book-sdbjd">
               {loading ? (

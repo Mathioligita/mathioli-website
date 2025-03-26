@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React from "react";
 import "./BannerSection.css"; // Import the CSS file
@@ -9,7 +9,7 @@ export default function Bannersection() {
   const router = useRouter();
 
   return (
-    <div className="banner-container">
+    <div className="banner-container" style={{ marginTop: "5rem" }}>
       <img
         src="/Assert/Frame 287 (1).png"
         alt="Banner"
@@ -26,11 +26,7 @@ export default function Bannersection() {
           </span>
         </h1>
         <div className="text-start">
-          <Button
-            className="btn-banner"
-            onClick={() => router.push("/book")}
-          
-          >
+          <Button className="btn-banner" onClick={() => router.push("/book")}>
             Explore Our Books
           </Button>
         </div>

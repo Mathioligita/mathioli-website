@@ -37,7 +37,7 @@ export default function Categories() {
   }
 
   return (
-    <div className="container pt-5">
+    <div className="container pt-5" style={{ marginTop: "7rem" }}>
       <h4>{BooksData[0]?.category || null}</h4>
 
       <div className="books-view ">

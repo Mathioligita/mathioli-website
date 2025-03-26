@@ -1716,10 +1716,18 @@ const CheckoutPage = () => {
                       Delivery to {""} {user?.firstName || usersdata?.firstName}
                     </span>
                     <br />
-                    <span style={{ color: "#1d5755", fontWeight: 600 }}>
+                    <span
+                      style={{
+                        color: "#1d5755",
+                        fontWeight: 600,
+                        display: "flex",
+
+                      }}
+                      
+                    >
                       <input
                         type="radio"
-                        className="radio-button"
+                        className="radio-button me-2"
                         name="address"
                         checked={activeAddress?._id}
                       />{" "}

@@ -173,7 +173,10 @@ export default function TabView({ data, book }) {
   const uniqueCategories = Array.from(new Set(book?.map((b) => b.category)));
 
   return (
-    <div className="ms-0 ms-md-5 p-2 p-md-0 mt-4">
+    <div
+      className="ms-0 ms-md-5 p-2 p-md-0 mt-4"
+      style={{ overflowX: "hidden" }}
+    >
       <div
         className="d-flex align-items-center mb-2"
         style={{ justifyContent: "space-between" }}

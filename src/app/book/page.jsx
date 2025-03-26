@@ -400,7 +400,7 @@ export default function Page() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 12;
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -511,7 +511,7 @@ export default function Page() {
 
   const renderHeader = () => {
     return (
-      <div className="table-header">
+      <div className="table-header" style={{ marginTop: "7rem" }}>
         <div className="">
           <IconField iconPosition="left">
             <InputIcon className="pi pi-search"> </InputIcon>
@@ -573,7 +573,7 @@ export default function Page() {
       ) : (
         <div className="container ">
           <div className="mt-5">
-            <div className="mb-4">
+            <div className="mb-4 sm-ss-container">
               <div className="main-content mb-4">
                 {header}
                 <div className="book-sdbjd">

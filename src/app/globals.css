@@ -212,7 +212,7 @@ i.pi.pi-star {
     /* margin-left: 12px; */
   }
   .Top-selling {
-    margin-left: 17px;
+    margin-left: 10px;
   }
   .top-selling-showall {
     margin-right: 0px !important;
@@ -259,6 +259,12 @@ i.pi.pi-star {
 .custom-radio .p-radiobutton-box.p-highlight::after {
   background-color: #1d5755 !important;
 }
+.navbar.sticky-top {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1050; /* Ensure it's above other content */
+}
 
 /* CustomRadioButton.css */
 .custom-radio input[type="radio"] {
@@ -303,6 +309,15 @@ i.pi.pi-star {
 }
 /* Media query for mobile devices */
 @media (max-width: 600px) {
+  .sm-ss-container {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+    margin-right: auto;
+    margin-left: auto;
+  }
   .catergories-jndnsjd .gap-1 {
     gap: 0px !important;
   }
@@ -319,6 +334,8 @@ i.pi.pi-star {
   }
   .p-icon-field-right > .p-inputtext {
     padding-right: 0px;
+    font-size: 11px;
+    font-weight: 400;
   }
 
   .p-toast-message {
@@ -381,7 +398,12 @@ i.pi.pi-star {
     flex-direction: row;
     align-items: center;
   }
-
+  .inksisksks {
+    display: none !important;
+  }
+  .collapse {
+    display: none !important;
+  }
   .custom-popup-images-data img {
     height: 62px !important;
   }
@@ -394,7 +416,7 @@ i.pi.pi-star {
     font-weight: 600;
   }
   .checkout-title-gdf {
-    font-size: 12px;
+    font-size: 8px;
   }
   .p-dialog {
     width: 87% !important;

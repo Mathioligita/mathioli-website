@@ -15,7 +15,7 @@ export default function Logo() {
     router.push("/book/addtocart");
   };
   return (
-    <div className="d-flex" style={{ justifyContent: "space-between" }}>
+    <div className="d-flex dfghjgfllksjjss" style={{ justifyContent: "space-between" }} >
       {/* // <div className="logo-container"> */}
 
       <>
@@ -23,7 +23,7 @@ export default function Logo() {
           // loading="lazy"
           src={"/image/Logo black.svg"}
           alt="Company name"
-          className="logo-text"
+          className=" dfghjgfllksjjss logo-text "
           // style={{width:"90%"}}
           // width={"80%"}
         />

@@ -27,7 +27,7 @@ export default function Layout({ children }) {
 
   return (
     <LoadingContext.Provider value={{ loading, setLoading }}>
-      <div className="layout-container">
+      <div className="layout-container" >
         <Topbars toggleSidebar={toggleSidebar} />
         <div className={`layout-sidebar ${isSidebarVisible ? "" : "hidden"}`}>
           {/* <Sidebar  /> */}
@@ -38,7 +38,7 @@ export default function Layout({ children }) {
           }`}
           // style={{ background: "#fff" }}
         > */}
-          <div className="layout-main" >
+          <div className="layout-main"  >
             {children}
              {/* {loading && <Loading />}{" "} */}
           </div>
