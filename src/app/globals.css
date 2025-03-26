@@ -303,6 +303,9 @@ i.pi.pi-star {
 }
 /* Media query for mobile devices */
 @media (max-width: 600px) {
+  .catergories-jndnsjd .gap-1 {
+    gap: 0px !important;
+  }
   .p-toast {
     max-width: 100% !important; /* Full width on mobile */
     font-size: 12px !important; /* Smaller font size for mobile */

@@ -354,7 +354,7 @@ export default function Smartpage({ pathname }) {
               ) : filteredBooks?.length > 0 ? (
                 <>
                   {Object.keys(groupedBooks)?.map((category, index) => (
-                    <div key={index}>
+                    <div key={index} className="catergories-jndnsjd">
                       <div className="d-flex mt-5">
                         <h3>{category}</h3>
                       </div>

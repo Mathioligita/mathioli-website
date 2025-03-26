@@ -153,6 +153,7 @@ export default function Page() {
                   md={4}
                   lg={2}
                   sm={6}
+                  xs={6}
                   key={book._id}
                   className=" p-1 p-md-0 book-mobile-card image-card-book"
                 >
@@ -234,7 +235,10 @@ export default function Page() {
                           /5
                         </span>
                       </div> */}
-                      <div className="d-flex book-value-gamda" style={{ position: "relative" }}>
+                      <div
+                        className="d-flex book-value-gamda"
+                        style={{ position: "relative" }}
+                      >
                         <h5
                           className="mb-2 hoverbooks-title-2"
                           style={{
