@@ -1271,15 +1271,7 @@ const Payment = ({
             }}
           >
             <Button
-              label={
-                !browserSupported
-                  ? "Browser Not Supported"
-                  : isProcessing
-                  ? "Processing..."
-                  : !sdkLoaded
-                  ? "Loading Payment..."
-                  : "Pay Now"
-              }
+              label={"Pay Now"}
               type="submit"
               style={{
                 background: "#396664",
@@ -1294,15 +1286,15 @@ const Payment = ({
                 isProcessing ||
                 !browserSupported
               }
-              icon={isProcessing ? "pi pi-spinner pi-spin" : "pi pi-lock"}
+              icon={isProcessing ? "pi pi-spinner pi-spin" : ""}
             />
           </form>
 
-          <div className="mt-3 text-center">
+          {/* <div className="mt-3 text-center">
             <small className="text-muted">
-              Secure payment powered by Razorpay  
+              Secure payment powered by Razorpay
             </small>
-          </div>
+          </div> */}
         </Row>
       </div>
     </div>
