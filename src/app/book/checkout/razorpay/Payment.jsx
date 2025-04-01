@@ -1300,7 +1300,7 @@ const Payment = ({
 
           <div className="mt-3 text-center">
             <small className="text-muted">
-              Secure payment powered by Razorpay
+              Secure payment powered by Razorpay  
             </small>
           </div>
         </Row>

@@ -434,7 +434,6 @@ const CheckoutPage = () => {
         orderItems: orderItem ? [orderItem] : [],
         shippingAddress: shippingAddress,
         totalAmount:
-          1 ||  
           shippingdata.totalAmount ||
           buysingleproducts?.totalPrice ||
           selectedhardcopy1?.totalPrice,
@@ -872,7 +871,6 @@ const CheckoutPage = () => {
               <Payment
                 shippingdata={shippingdata}
                 formData={formData}
-                
                 paynowbuttonsuccess={paynowbuttonsuccess}
                 PlaceOrders={handlePayment}
                 selectedProduct={checkout}
