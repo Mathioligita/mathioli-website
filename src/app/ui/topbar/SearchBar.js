@@ -33,8 +33,8 @@
 //     </div>
 //   );
 // }
-import React, { useState, useEffect, useRef } from 'react';
-import { Button } from 'primereact/button';
+import React, { useState, useEffect, useRef } from "react";
+import { Button } from "primereact/button";
 import SearchInput from "../searchbar/page";
 
 export default function SearchBar() {
@@ -49,31 +49,34 @@ export default function SearchBar() {
 
   useEffect(() => {
     if (show) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     } else {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [show]);
 
   return (
-    <div className="search-bar d-flex align-items-center ms-3" ref={searchBarRef}>
+    <div
+      className="search-bar d-flex align-items-center ms-3"
+      ref={searchBarRef}
+    >
       <div className="search-toggle-button">
         {!show ? (
           <Button
             icon="pi pi-search"
             className="search-button align-self-center text-danger fs-4"
-            style={{ all: 'unset', fontSize:"24px" }}
+            style={{ all: "unset", fontSize: "24px", cursor: "pointer" }}
             onClick={() => setShow(!show)}
           />
         ) : (
           <Button
             icon="pi pi-times"
             className="search-button align-self-center text-danger fs-4"
-            style={{ all: 'unset', fontSize:"24px" }}
+            style={{ all: "unset", fontSize: "24px", cursor: "pointer" }}
             onClick={() => setShow(!show)}
           />
         )}

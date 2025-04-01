@@ -25,7 +25,7 @@ const BookCard = ({ book }) => {
       sm={4}
       md={3}
       lg={2}
-      className="p-1 p-md-0 book-mobile-card image-card-book m-auto "
+      className="p-1 p-md-0 book-mobile-card image-card-book  "
     >
       <div
         className="book-card"

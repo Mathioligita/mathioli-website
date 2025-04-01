@@ -183,7 +183,7 @@ export default function Overlayaudio({
             <img
               src={
                 audioBookingdetails?.book?.bookimage[0] ||
-                audioBookingdetails?.bookimage[0]
+                audioBookingdetails?.bookimage
               }
               alt={
                 audioBookingdetails?.book?.title || audioBookingdetails?.title

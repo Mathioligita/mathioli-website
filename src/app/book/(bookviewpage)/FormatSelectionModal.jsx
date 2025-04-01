@@ -560,12 +560,16 @@ const FormatSelectionModal = ({
     const selected = Object.keys(selectedFormats).filter(
       (format) => selectedFormats[format]
     );
-    sessionStorage.setItem("paymentPageCheckout", false);
     if (selected.length > 0) {
       if (selectedFormats.hardcopy && !selectedFormats.audiobook) {
         handleSelection(selected);
-      } else if (selectedFormats.hardcopy && selectedFormats.audiobook) {
+      } else if (selectedFormats?.hardcopy && selectedFormats?.audiobook) {
         const session = JSON.parse(sessionStorage.getItem("buysinglebook"));
+        sessionStorage.setItem("paymentPageCheckout", false);
+        sessionStorage.setItem("selectedBook", JSON.stringify(book));
+        router.push("/book/checkout");
+        sessionStorage.setItem("selectedHardcopy", true);
+        sessionStorage.setItem("selectedaudiocopy", true);
         if (session) {
           sessionStorage.removeItem("buysinglebook");
           sessionStorage.removeItem("singleBookBuying");

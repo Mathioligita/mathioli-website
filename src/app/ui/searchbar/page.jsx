@@ -1,19 +1,19 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import { InputText } from "primereact/inputtext";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import "./searchbar.css";
-import { searchbarGet,  SearchLog } from "../../../../api/page";
+import { searchbarGet, SearchLog } from "../../../../api/page";
 import { Button } from "primereact/button";
 import { useRouter } from "next/navigation";
 
-const SearchInput = ({setShow}) => {
+const SearchInput = ({ setShow }) => {
   const [searchValue, setSearchValue] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [showAll, setShowAll] = useState(false);
-const router = useRouter() 
+  const router = useRouter();
   const handleViewAll = () => {
     setShowAll(true);
   };
@@ -53,9 +53,10 @@ const router = useRouter()
   };
 
   const itemsToShow = searchResults.Trending_searches?.filter((item) => {
-    const matchesSearchValue = item?.title.toLowerCase().includes(searchValue.toLowerCase()) ||
-                              item?.author.toLowerCase().includes(searchValue.toLowerCase()) ||
-                              item?.tags?.includes(searchValue);
+    const matchesSearchValue =
+      item?.title.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item?.author.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item?.tags?.includes(searchValue);
     return matchesSearchValue;
   }).slice(0, showAll ? undefined : 9);
 
@@ -94,7 +95,13 @@ const router = useRouter()
         <h6 className="trending-title">Trending searches</h6>
         <div className="trending-searches-container">
           {itemsToShow?.map((item, index) => (
-            <div key={index} className="trending-search" onClick={()=>{router.push(`/book/${item?.slug}`),setShow(false)}}>
+            <div
+              key={index}
+              className="trending-search"
+              onClick={() => {
+                router.push(`/book/${item?.slug}`), setShow(false);
+              }}
+            >
               {/* {console.log(item,"item")} */}
               <img
                 src={item.bookimage[0]}

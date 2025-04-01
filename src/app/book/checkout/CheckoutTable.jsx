@@ -14,26 +14,7 @@ export default function CheckoutTable({
   availabilityBodyTemplate,
   SingleBuyProductdata,
 }) {
-  //   const renderAvatar = (rowData) => (
-  //     <>
-  //     {console.log(rowData, "rowdata>>>>>>>>>>>")}
-  //     <Avatar
-  //       image={
-  //         rowData?.bookId?.bookimage[0] ||
-  //         rowData?.book?.bookimage[0] ||
-  //         rowData?.bookimage?.length>0 ? rowData?.bookimage[0] :''
-  //       }
-  //       size="larger"
-  //       className="avatarimage-valeues"
-  //       style={{
-  //           marginRight: "16px",
-  //           height: "90px",
-  //           width: "100%",
-  //           objectFit: "contain",
-  //         }}
-  //         />
-  //         </>
-  //   );
+
   const renderAvatar = (rowData) => (
     <>
       <div>
@@ -179,7 +160,7 @@ export default function CheckoutTable({
       </div>
       <div className="responsive-table">
         <div className="mobile-view">
-          {items.map((rowData) => (
+          {items?.map((rowData) => (
             <div key={rowData.id} className="mobile-item" style={tableStyle}>
               <div className="mobile-item-row ">
                 <div>{renderAvatar(rowData)}</div>
