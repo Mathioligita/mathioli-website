@@ -53,7 +53,7 @@ const ComingSoon = () => {
   return (
     <div className="bgimg">
       <div className="topleft">
-        <img src="/image/Final-Logo 2.png" alt="" style={{background:"white"}}/>
+        <img src="/image/memento 1.png" alt=""/>
       </div>
       <div className="middle">
         <h1>COMING SOON</h1>
