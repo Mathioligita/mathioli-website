@@ -130,7 +130,7 @@ export default function Overlayaudio({
   setShowaudioBooking,
   book,
 }) {
-  console.log(audioBookingdetails, "audioBookingdetails");
+  // console.log(audioBookingdetails, "audioBookingdetails");
   if (!audioBookingdetails) return null;
   const [razpay, setRazpay] = useState(null);
   const { loginpoup } = useContext(userContext);
@@ -141,9 +141,9 @@ export default function Overlayaudio({
       audioBookId: audioBookingdetails?.book?._id || audioBookingdetails?._id,
       booktype: audioBookingdetails?.bookType || "audioBook",
     };
-    console.log(data, "Sssssssssss");
+    // console.log(data, "Sssssssssss");
     const response = await bookingAudioBooking(data);
-    console.log(response, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    // console.log(response, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
     sessionStorage.setItem("AudioPay", JSON.stringify(response.data));
     if (response.success) {

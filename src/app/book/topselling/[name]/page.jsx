@@ -30,7 +30,7 @@ export default function Page() {
       try {
         const response = await CategoryAPI();
         const data = response?.data?.categories;
-        console.log("Fetched categories data:", data);
+        // console.log("Fetched categories data:", data);
         setCategoriesdata(data || null);
         setCategoriesData(data || null);
       } catch (error) {
@@ -41,12 +41,12 @@ export default function Page() {
   }, []);
 
   useEffect(() => {
-    console.log("Name parameter:", name);
+    // console.log("Name parameter:", name);
     if (name && name !== "all") {
       const category = categoriesdata.find(
         (cat) => cat.name.toLowerCase() === name.toLowerCase()
       );
-      console.log("Selected Category based on name:", category);
+      // console.log("Selected Category based on name:", category);
       setSelectedCategory(category);
     } else {
       setSelectedCategory(null);
@@ -58,12 +58,12 @@ export default function Page() {
       try {
         const response = await BookAPI();
         const data = response?.data?.books;
-        console.log("Fetched books data:", data);
+        // console.log("Fetched books data:", data);
         setBooksData(data); // Set the fetched data to the state
 
         // Filter top selling books
         const topSelling = data.filter((book) => book.isTopSelling);
-        console.log("Top Selling Books:", topSelling);
+        // console.log("Top Selling Books:", topSelling);
         setTopSellingBooks(topSelling);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -97,7 +97,7 @@ export default function Page() {
       book?.genre?.toLowerCase().includes(globalFilterValue?.toLowerCase()) ||
       book?.language?.toLowerCase().includes(globalFilterValue?.toLowerCase());
 
-    console.log("Category Match for book:", book.title, "is", categoryMatch);
+    // console.log("Category Match for book:", book.title, "is", categoryMatch);
     return (
       categoryMatch &&
       genreMatch &&

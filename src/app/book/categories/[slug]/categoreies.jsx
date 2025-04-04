@@ -7,9 +7,9 @@ import { Row } from "react-bootstrap";
 
 export default function Categories() {
   const { slug } = useParams();
-  console.log(slug, "Children");
+  // console.log(slug, "Children");
   const [BooksData, setBooksData] = useState([]);
-  console.log(BooksData);
+  // console.log(BooksData);
   useEffect(() => {
     const fetchBooks = async () => {
       try {

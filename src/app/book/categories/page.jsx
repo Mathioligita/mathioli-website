@@ -69,7 +69,7 @@ export default function Smartpage({ pathname }) {
         const response = await retryFetch(CategoryAPI);
         const data = response?.data?.categories;
 
-        console.log("Fetched categories data:", data);
+        // console.log("Fetched categories data:", data);
         setCategoriesdata(data || null);
         setCategoriesData(data || null);
       } catch (error) {
@@ -627,7 +627,7 @@ export default function Smartpage({ pathname }) {
                     ref={audioRef}
                     autoPlay
                     src={selectedBook.audiobookUpload[0]}
-                    onPlay={(e) => console.log("onPlay")}
+                    // onPlay={(e) => console.log("onPlay")}
                     onListen={handleTimeUpdate} // Track time and disable after 30 sec
                     controls
                     className="w-100"

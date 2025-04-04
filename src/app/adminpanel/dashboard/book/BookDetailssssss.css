@@ -1,0 +1,356 @@
+/* Main Container */
+.book-detail-container {
+  padding: 2rem 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Loading and Error States */
+.loading-container,
+.error-container,
+.not-found-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+
+.error-message {
+  color: #ef4444;
+  font-size: 1.2rem;
+}
+
+/* Book Grid Layout */
+.book-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .book-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Images Section */
+.book-images-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.book-galleria {
+  max-width: 100%;
+}
+
+.book-main-image {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.thumbnail-container {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.5rem 0;
+}
+
+.book-thumbnail {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.book-thumbnail:hover {
+  transform: scale(1.05);
+}
+
+.active-thumbnail {
+  border: 2px solid #1d5755;
+}
+
+/* Book Info Section */
+.book-info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.book-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1d5755;
+  margin-bottom: 0.5rem;
+}
+
+.author-rating-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.author-name {
+  font-size: 1.1rem;
+  color: #64748b;
+}
+
+.book-rating {
+  margin-left: 0.5rem;
+}
+
+.review-count {
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.tag-container {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.category-tag {
+  background-color: #e0f2fe;
+  color: #1d5755;
+}
+
+.genre-tag {
+  background-color: #dcfce7;
+  color: #1d5755;
+}
+
+.award-tag {
+  background-color: #fff9c4;
+  color: #1d5755;
+}
+
+.new-tag {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.book-price {
+  font-size: 2rem;
+  color: #1d5755;
+  margin: 0.5rem 0;
+}
+
+.book-meta {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-bottom: 1rem;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.cart-button {
+  background-color: #1d5755;
+  border: none;
+  color: white;
+}
+
+.cart-button:hover {
+  background-color: #164543 !important;
+}
+
+.cart-button .pi {
+  color: #ffeb3b;
+}
+
+.wishlist-button {
+  background-color: white;
+  color: #1d5755;
+  border: 1px solid #1d5755;
+}
+
+.wishlist-button:hover {
+  background-color: #f8fafc !important;
+}
+
+.share-button {
+  background-color: white;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+}
+
+.share-button:hover {
+  background-color: #f8fafc !important;
+}
+
+/* Availability Info */
+.availability-info {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.availability-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+.availability-icon {
+  color: #1d5755;
+}
+
+.delivery-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+.delivery-icon {
+  color: #1d5755;
+}
+
+/* Details Card */
+.details-card {
+  margin-top: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e0e0e0;
+}
+
+.book-tabview .p-tabview-nav {
+  background: transparent;
+  border: none;
+}
+
+.book-tabview .p-tabview-nav-link {
+  padding: 1rem 1.5rem;
+  font-weight: 500;
+  color: #1d5755;
+}
+
+.book-tabview .p-tabview-nav-link:not(.p-disabled):focus {
+  box-shadow: none;
+}
+
+.book-tabview .p-tabview-nav-link.p-highlight {
+  color: #1d5755;
+  border-color: #1d5755;
+}
+
+.tab-panel {
+  padding: 1.5rem 0;
+}
+
+/* Book Description */
+.book-description {
+  line-height: 1.8;
+  color: #334155;
+  white-space: pre-line;
+}
+
+.author-bio {
+  line-height: 1.8;
+  color: #334155;
+}
+
+/* Reviews Section */
+.reviews-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.review-card {
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  box-shadow: none;
+  border: 1px solid #e2e8f0;
+}
+
+.reviewer-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.reviewer-avatar {
+  background-color: #1d5755;
+  color: white;
+}
+
+.reviewer-name {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #1e293b;
+}
+
+.review-rating .p-rating-icon {
+  color: #ffeb3b;
+}
+
+.review-comment {
+  color: #475569;
+  margin-bottom: 0.5rem;
+}
+
+.review-date {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.no-reviews {
+  color: #64748b;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Details Section */
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .details-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.details-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.detail-label {
+  font-weight: 500;
+  color: #1d5755;
+}
+
+.detail-value {
+  color: #64748b;
+}

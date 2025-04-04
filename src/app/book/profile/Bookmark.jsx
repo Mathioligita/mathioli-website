@@ -200,7 +200,7 @@ export default function BookMark() {
   const [myorders, setMyorders] = useState([]);
   const [show, setShow] = useState(false);
   const [slug, setSlugname] = useState(null);
-  console.log(slug);
+  // console.log(slug);
 
   useEffect(() => {
     const fetchdata = async () => {

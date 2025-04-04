@@ -5,7 +5,7 @@ a:focus {
 }
 
 .vertical-tab {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat';
     display: table;
     padding-left: 10px;
 }

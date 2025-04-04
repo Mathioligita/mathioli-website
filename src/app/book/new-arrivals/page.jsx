@@ -276,7 +276,7 @@ const TabComponent = () => {
                     <div className="book-mobile-card">
                       <div className="new-arrivals-item new-books">
                         <img
-                          src={item.bookimage}
+                          src={item.bookimage[0]}
                           alt={`New Arrival ${item.title}`}
                           className="new-arrivals-img"
                           onClick={() => handleBookClick(item)}

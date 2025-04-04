@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function OtherBooks({ books }) {
-  console.log(books, "books");
+  // console.log(books, "books");
 
   const router = useRouter();
   const handleBookClick = (i) => {
@@ -11,14 +11,15 @@ export default function OtherBooks({ books }) {
   return (
     <>
       <div
-        className="d-flex"
+        className="d-flex "
         style={{ justifyContent: "space-evenly", cursor: "pointer" }}
       >
         {Array.isArray(books.relatedBooks) &&
           books.relatedBooks.slice(0, 3).map((i, index) => (
             <div
               key={i?.id || index}
-              className="d-flex"
+              className="d-flex me-auto"
+              style={{ justifyContent: "space-evenly" }}
               onClick={() => handleBookClick(i)}
             >
               {" "}

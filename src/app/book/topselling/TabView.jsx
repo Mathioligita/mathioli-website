@@ -167,7 +167,7 @@ export default function TabView({ data, book }) {
   };
 
   const locations = typeof window !== "undefined" ? location.pathname : null;
-  console.log(locations, "locations");
+  // console.log(locations, "locations");
 
   // Extract unique categories
   const uniqueCategories = Array.from(new Set(book?.map((b) => b.category)));

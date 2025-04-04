@@ -127,7 +127,7 @@ export default function Booksview({ book }) {
   const bookdata = book?.books || [];
   const location =
     typeof window !== "undefined" ? window.location.pathname : null;
-  console.log(location, "/book/topselling");
+  // console.log(location, "/book/topselling");
 
   // Check if bookdata is an array
   if (!Array.isArray(bookdata)) {

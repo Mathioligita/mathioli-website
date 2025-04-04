@@ -332,7 +332,7 @@ import Swal from "sweetalert2";
 
 const ProfileInformation = ({ isEditing, user, setIsEditing }) => {
   const { usersdata, setusersdata } = useContext(userContext);
-  console.log(usersdata, "da");
+  // console.log(usersdata, "da");
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -341,7 +341,7 @@ const ProfileInformation = ({ isEditing, user, setIsEditing }) => {
         const response = await ProfileUser();
         setusersdata(response?.data);
         setData(response.data);
-        console.log(response.data, "fetchdata");
+        // console.log(response.data, "fetchdata");
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -379,7 +379,7 @@ const ProfileInformation = ({ isEditing, user, setIsEditing }) => {
         });
 
         const response = await ProfileUserPatch(formData);
-        console.log("Profile updated:", response.data);
+        // console.log("Profile updated:", response.data);
 
         if (response.success) {
           Swal.fire("Success", "Success");

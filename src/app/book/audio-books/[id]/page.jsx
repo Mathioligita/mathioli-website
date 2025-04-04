@@ -67,7 +67,7 @@ export default function Page() {
   }
 
   const newimage = data?.book?.bookimage[0];
-console.log(newimage,"newimage");
+// console.log(newimage,"newimage");
 
   return (
     <div className="book-page">

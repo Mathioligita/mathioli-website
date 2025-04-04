@@ -28,7 +28,7 @@ const FavoritesBooks = () => {
         <div className="books-view ms-0 ms-md-5">
           <p className="Top-selling">Find your favorites Books</p>
           <Row className="mb-2">
-            {wishlistvalues.map((bookId, index) => (
+            {wishlistvalues?.map((bookId, index) => (
               <Col
                 xs={6}
                 sm={6}
@@ -39,7 +39,7 @@ const FavoritesBooks = () => {
               >
                 <div
                   className="book-card"
-                  onClick={() => handleBookClick(bookId.bookId)}
+                  onClick={() => handleBookClick(bookId?.bookId)}
                   // style={{
                   //   cursor: "pointer",
                   //   padding: "15px",
@@ -64,7 +64,7 @@ const FavoritesBooks = () => {
                     <img
                       src={
                         bookId?.bookId?.bookimage?.length > 0
-                          ? bookId.bookId.bookimage[0]
+                          ? bookId?.bookId?.bookimage[0]
                           : "/image/image 9.png"
                       }
                       alt={bookId?.bookId?.title}
@@ -145,10 +145,10 @@ const FavoritesBooks = () => {
                       <span className="ms-auto" style={{ fontSize: "10px" }}>
                         {bookId.bookId?.userReadingStatus?.length > 0
                           ? (
-                              bookId.bookId.userReadingStatus.reduce(
-                                (sum, item) => sum + item.ratings,
+                              bookId?.bookId?.userReadingStatus?.reduce(
+                                (sum, item) => sum + item?.ratings,
                                 0
-                              ) / bookId.bookId.userReadingStatus.length
+                              ) / bookId?.bookId?.userReadingStatus?.length
                             ).toFixed(1)
                           : 0}
                         /5
@@ -165,7 +165,7 @@ const FavoritesBooks = () => {
                         {Array.from({ length: 5 }, (_, index) => {
                           const rating =
                             bookId?.bookId?.userReadingStatus?.length > 0
-                              ? bookId.bookId.userReadingStatus[0].ratings
+                              ? bookId?.bookId?.userReadingStatus[0]?.ratings
                               : 0;
                           return (
                             <i

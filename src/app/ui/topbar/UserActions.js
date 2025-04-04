@@ -58,7 +58,7 @@ export default function UserActions() {
     try {
       const response = await CategoryAPI();
       const categories = response?.data?.categories;
-      console.log(categories, "categories");
+      // console.log(categories, "categories");
 
       setCategoriesdata(categories);
     } catch (error) {
@@ -117,7 +117,7 @@ export default function UserActions() {
       try {
         const response = await ProfileUser();
         setusersdata(response?.data);
-        console.log(response.data, "fetchdata");
+        // console.log(response.data, "fetchdata");
       } catch (error) {
         console.error("Error fetching user data:", error);
       }

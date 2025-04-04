@@ -603,39 +603,6 @@ export default function Page() {
                               />
                             </div>
                             <div className="book-info mt-2">
-                              {/* <div className="d-flex mt-4">
-                                <h5
-                                  className="mb-0"
-                                  style={{
-                                    fontFamily: "Inter",
-                                    fontSize: "15px",
-                                    fontWeight: "700",
-                                    color: "#4D4D4D",
-                                  }}
-                                >
-
-                                  {book.title.split(" ")[0] + "..."}
-                                </h5>
-                                <span
-                                  className="ms-auto"
-                                  style={{
-                                    fontSize: "10px",
-                                    justifyContent: "end",
-                                    textAlign: "end",
-                                  }}
-                                >
-                                  {book.userReadingStatus.length > 0
-                                    ? (
-                                        book.userReadingStatus.reduce(
-                                          (sum, item) => sum + item.ratings,
-                                          0
-                                        ) / book?.userReadingStatus?.length
-                                      ).toFixed(1)
-                                    : 0}
-                                  /5
-                                </span>
-                              </div> */}
-
                               <div className="d-flex justify-content-between align-items-center mt-4 book-value-gamda  ">
                                 {/* <h5 className="mb-0">{book.title.split(" ")[0] + "..."}</h5>
                                  */}
@@ -737,10 +704,11 @@ export default function Page() {
                   </Row>
                   {totalPages > 1 && (
                     <Paginator
-                      first={currentPage}
+                      first={currentPage * itemsPerPage - 1}
                       rows={itemsPerPage}
                       totalRecords={filteredBooks.length}
                       onPageChange={onPageChange}
+                      className="paginator-button"
                     ></Paginator>
                   )}
                 </div>

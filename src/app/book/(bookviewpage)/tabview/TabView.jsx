@@ -6,7 +6,7 @@ import { Col, Row } from "react-bootstrap";
 import Ratings from "./Ratings";
 import RelatedBooks from "./relatedBooks";
 export default function TabViews({ books, setShow, show }) {
-  console.log(books, "books");
+  // console.log(books, "books");
   return (
     <div>
       <TabView className="">

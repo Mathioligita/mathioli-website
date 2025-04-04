@@ -71,7 +71,7 @@ const fetchHandler = async ({
 	retries = 3,
 	backoff = 300,
 }) => {
-	console.log(API_BASE_URL, 'APIdata');
+	// console.log(API_BASE_URL, 'APIdata');
 	const API_BASE_URLS = `${API_BASE_URL}${endpoint}`;
 	const headers = {
 		'Content-Type': isFormData ? 'multipart/form-data' : 'application/json',
@@ -114,7 +114,7 @@ const fetchHandler = async ({
 				if (status === 429) {
 					const retryAfter = parseInt(headers['retry-after'], 10) || backoff * 2 ** i;
 					if (i < retries - 1) {
-						console.log(`Too Many Requests. Retrying in ${retryAfter}ms...`);
+						// console.log(`Too Many Requests. Retrying in ${retryAfter}ms...`);
 						await new Promise((res) => setTimeout(res, retryAfter));
 						continue; // Retry the request
 					} else {

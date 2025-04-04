@@ -14,7 +14,7 @@ export const addToCartAPI = async () => {
         });
         return response;
       } catch (error) {
-        console.log(object);
+        // console.log(object);
       }
     } else {
       try {
@@ -99,7 +99,7 @@ export const CartRemoveAPI = async (data) => {
 };
 
 export const cartUpdateAPIquanity = async (updatevalue) => {
-  console.log(updatevalue, "updatedvalues");
+  // console.log(updatevalue, "updatedvalues");
 
   try {
     const accessToken = Cookies.get("accessToken");
@@ -260,7 +260,7 @@ export const CategoryAPI = async () => {
       retries: 5, // Override default retries
       backoff: 500,
     });
-    console.log("categories", response);
+    // console.log("categories", response);
     return response;
   } catch (error) {
     // console.error("Unexpected error:", error);
@@ -501,7 +501,7 @@ export const StateAPI = async (data) => {
   } catch (error) {}
 };
 export const DistrictAPI = async (data) => {
-  console.log(data, "disctric");
+  // console.log(data, "disctric");
   try {
     const response = await fetchHandler({
       method: "GET",
@@ -514,7 +514,7 @@ export const DistrictAPI = async (data) => {
   } catch (error) {}
 };
 export const APIshippingdata = async (data) => {
-  console.log(data, "disctric");
+  // console.log(data, "disctric");
   try {
     const response = await fetchHandler({
       method: "POST",
@@ -527,7 +527,7 @@ export const APIshippingdata = async (data) => {
   } catch (error) {}
 };
 export const APIshippiAddressUpdate = async (data) => {
-  console.log(data, "disctric");
+  // console.log(data, "disctric");
   try {
     const response = await fetchHandler({
       method: "PUT",
@@ -540,7 +540,7 @@ export const APIshippiAddressUpdate = async (data) => {
   } catch (error) {}
 };
 export const PlaceOrderAPi = async (data) => {
-  console.log(data, "disctric");
+  // console.log(data, "disctric");
   try {
     const response = await fetchHandler({
       method: "POST",
@@ -604,7 +604,7 @@ export const bookingVerifypayment = async (data) => {
 //   }
 // }
 export const bookingAudioBooking = async (data) => {
-  console.log(data.booktype, "sdgdgsdsdsdsds>>>>>>>>>>>>>>>>>");
+  // console.log(data.booktype, "sdgdgsdsdsdsds>>>>>>>>>>>>>>>>>");
   // if (typeof window !== "undefined") {
   // console.log(`/user/order/buybooks?${data?.bookType}=?${data?.audioBookId}`,"dfghjk")
   try {

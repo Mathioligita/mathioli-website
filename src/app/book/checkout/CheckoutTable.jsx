@@ -18,7 +18,7 @@ export default function CheckoutTable({
   const renderAvatar = (rowData) => (
     <>
       <div>
-        {console.log(rowData, "rowdata>>>>>>>>>>>")}
+        {/* {console.log(rowData, "rowdata>>>>>>>>>>>")} */}
         <Avatar
           image={
             rowData?.bookId?.bookimage?.[0] ||

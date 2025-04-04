@@ -65,21 +65,21 @@ export default function SearchBar() {
       ref={searchBarRef}
     >
       <div className="search-toggle-button">
-        {!show ? (
-          <Button
-            icon="pi pi-search"
-            className="search-button align-self-center text-danger fs-4"
-            style={{ all: "unset", fontSize: "24px", cursor: "pointer" }}
-            onClick={() => setShow(!show)}
-          />
-        ) : (
-          <Button
-            icon="pi pi-times"
-            className="search-button align-self-center text-danger fs-4"
-            style={{ all: "unset", fontSize: "24px", cursor: "pointer" }}
-            onClick={() => setShow(!show)}
-          />
-        )}
+        {/* {!show ? ( */}
+        <Button
+          icon={show ? "pi pi-times" : "pi pi-search"}
+          className="search-button align-self-center text-danger fs-4"
+          style={{ all: "unset", fontSize: "24px", cursor: "pointer" }}
+          onClick={() => setShow(!show)}
+        />
+        {/* // ) : (
+        //   <Button
+        //     icon="pi pi-times"
+        //     className="search-button align-self-center text-danger fs-4"
+        //     style={{ all: "unset", fontSize: "24px", cursor: "pointer" }}
+        //     onClick={() => setShow(!show)}
+        //   />
+        // )} */}
       </div>
 
       {show && (

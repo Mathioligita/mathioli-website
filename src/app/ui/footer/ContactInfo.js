@@ -15,7 +15,7 @@ const ContactInfo = ({ address, email, phone }) => (
         href="/https://www.webdads2u.com/"
         // target="_blank"
         // rel="noopener noreferrer"
-        className=" text-white text-decoration-none"
+        className=" text-white text-decoration-none  dsdsdssds-fdfd"
       >
         WEBDADS2U
       </a>{" "}
@@ -46,7 +46,7 @@ const ContactInfo = ({ address, email, phone }) => (
           {" "}
           <Link
             href={`mailto:${email}`}
-            className="text-decoration-none text-white"
+            className="text-decoration-none text-white dsdsdssds-fdfd"
           >
             {email}
           </Link>

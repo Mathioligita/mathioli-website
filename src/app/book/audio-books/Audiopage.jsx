@@ -711,7 +711,7 @@ export default function Smartpage() {
         const response = await retryFetch(CategoryAPI);
         const data = response?.data?.categories;
 
-        console.log("Fetched categories data:", data);
+        // console.log("Fetched categories data:", data);
         setCategoriesdata(data || null);
         setCategoriesData(data || null);
       } catch (error) {

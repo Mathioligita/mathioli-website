@@ -329,7 +329,7 @@ function Register({ visible, onHide }) {
         });
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.current.show({
         severity: "error",
         summary: "Registration Failed",

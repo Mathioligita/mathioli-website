@@ -14,7 +14,7 @@ export default function MyEbook() {
 
     const handlePlayButtonClick = (book) => {
         // Implement the logic to handle the play button click
-        console.log("Play button clicked for:", book);
+        // console.log("Play button clicked for:", book);
     };
 
     return (

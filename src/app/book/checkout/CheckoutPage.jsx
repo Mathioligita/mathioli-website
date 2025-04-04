@@ -47,7 +47,7 @@ const CheckoutPage = () => {
   const guestId = Cookies.get("guestId");
   const router = useRouter();
   const toast = useRef(null);
-  console.log(SingleBuyProductdata, "SingleBuyProductdata");
+  // console.log(SingleBuyProductdata, "SingleBuyProductdata");
   const selecteditemhardcopy =
     typeof window !== "undefined"
       ? JSON.parse(sessionStorage.getItem("selectedBook"))
@@ -60,8 +60,8 @@ const CheckoutPage = () => {
     typeof window !== "undefined"
       ? JSON.parse(sessionStorage.getItem("buysinglebook"))
       : null;
-  console.log(selectedhardcopy1, "selected>>>>>>>>>>>>>>>.");
-  console.log(singleselectbooks, "selecteditemhardcopy");
+  // console.log(selectedhardcopy1, "selected>>>>>>>>>>>>>>>.");
+  // console.log(singleselectbooks, "selecteditemhardcopy");
 
   useEffect(() => {
     const selecteditemhardcopy =
@@ -75,7 +75,7 @@ const CheckoutPage = () => {
     sessionStorage.getItem("singleBookBuying");
 
     if (SingleBuyProduct && sessionStorage.getItem("singleBookBuying")) {
-      console.log(SingleBuyProduct, "SingleBuyProductdata");
+      // console.log(SingleBuyProduct, "SingleBuyProductdata");
       setCheckoutdata(SingleBuyProduct);
       setSingleBuyProduct(
         Array.isArray(SingleBuyProduct) ? SingleBuyProduct : [SingleBuyProduct]
@@ -186,7 +186,7 @@ const CheckoutPage = () => {
       },
       privacy_policy: "",
     });
-    console.log(user, "activeAddress");
+    // console.log(user, "activeAddress");
     if (user && user.shippingAddress && user.shippingAddress.length > 0) {
       const activeAddress =
         user?.shippingAddress.find((addr) => addr?.active) ||
@@ -244,7 +244,7 @@ const CheckoutPage = () => {
   };
 
   const removeFromCart = async (product) => {
-    console.log(product, "---------value for removeFromCart");
+    // console.log(product, "---------value for removeFromCart");
     if (
       sessionStorage.getItem("buysinglebook") &&
       sessionStorage.getItem("singleBookBuying")
@@ -379,7 +379,7 @@ const CheckoutPage = () => {
   //   }
   // };
 
-  console.log(usersdata, "usersdata?.shippingAddress?");
+  // console.log(usersdata, "usersdata?.shippingAddress?");
   const handlePayment = async () => {
     try {
       // const selectedItemIds = checkout.map((item) => item.bookId._id);
@@ -390,7 +390,7 @@ const CheckoutPage = () => {
       // : user.shippingAddress.find((addr) => addr.active) ||
       //   user.shippingAddress[0];
 
-      console.log(activeAddress, "activeAddress");
+      // console.log(activeAddress, "activeAddress");
 
       const shippingAddress = {
         name: !selecteditemhardcopy
@@ -405,7 +405,7 @@ const CheckoutPage = () => {
         phone: activeAddress?.phone || activeAddress?.phone,
       };
 
-      console.log(shippingAddress, "shippingAddress>>>>>>>>");
+      // console.log(shippingAddress, "shippingAddress>>>>>>>>");
       let orderItem = null;
 
       if (selecteditemhardcopy) {
@@ -480,7 +480,7 @@ const CheckoutPage = () => {
       //   // shippingAmount: 0,
       //   bookType: selecteditemhardcopy ? "hardcopy,audiobook" : null,
       // };
-      console.log(payload, "payload>>>>>>>>>>>");
+      // console.log(payload, "payload>>>>>>>>>>>");
       const response = await PlaceOrderAPi(payload);
 
       if (response?.success) {
@@ -518,13 +518,13 @@ const CheckoutPage = () => {
     handleClickOpen();
     handleCloseChangeAddress();
   };
-  console.log(singleselectbooks, "usersdata::::::::::::::::::::::::::::::::");
+  // console.log(singleselectbooks, "usersdata::::::::::::::::::::::::::::::::");
 
   const handlesubmit = async () => {
     const weight = selecteditemhardcopy?.weight;
     const unit = selecteditemhardcopy?.weightUnit;
 
-    console.log(weight, unit, "values");
+    // console.log(weight, unit, "values");
 
     const convertWeight = (weight, unit) => {
       switch (unit) {
@@ -612,7 +612,7 @@ const CheckoutPage = () => {
     </ul>
   );
 
-  console.log(SingleBuyProductdata, "SingleBuyProductdata");
+  // console.log(SingleBuyProductdata, "SingleBuyProductdata");
   return (
     <>
       <Toast ref={toast} />
@@ -673,23 +673,27 @@ const CheckoutPage = () => {
                       Delivery to {""} {user?.firstName || usersdata?.firstName}
                     </span>
                     <br />
-                    <span
-                      style={{
-                        color: "#1d5755",
-                        fontWeight: 600,
-                        display: "flex",
-                      }}
-                    >
-                      <input
-                        type="radio"
-                        className="radio-button me-2"
-                        name="address"
-                        checked={activeAddress?._id}
-                      />{" "}
-                      {activeAddress?.address},{activeAddress?.city},
-                      {activeAddress?.state},{activeAddress?.country},
-                      {activeAddress?.zipCode}
-                    </span>
+                    {activeAddress ? (
+                      <span
+                        style={{
+                          color: "#1d5755",
+                          fontWeight: 600,
+                          display: "flex",
+                        }}
+                      >
+                        <input
+                          type="radio"
+                          className="radio-button me-2"
+                          name="address"
+                          checked={activeAddress?._id}
+                        />{" "}
+                        {activeAddress?.address},{activeAddress?.city},
+                        {activeAddress?.state},{activeAddress?.country},
+                        {activeAddress?.zipCode}
+                      </span>
+                    ) : (
+                      "ADD the Address"
+                    )}
                   </div>
                   <div className="d-flex">
                     <div

@@ -1,7 +1,7 @@
 /* Main Page Styles */
 .book-page {
   padding: 20px;
-  font-family: "Arial", sans-serif;
+  /* font-family: "Arial"; */
   background-color: #f4f4f9;
   color: #333;
 }

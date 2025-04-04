@@ -26,7 +26,7 @@ const Payment = ({
   // } catch (error) {
   //   console.error("Failed to parse razorpayOrder from session storage:", error);
   // }
-  console.log(raso, "raso>>>>>>>>>>>>>>>");
+  // console.log(raso, "raso>>>>>>>>>>>>>>>");
 
   useEffect(() => {
     const loadRazorpayScript = () => {
@@ -48,7 +48,7 @@ const Payment = ({
   const handlePayment = async () => {
     PlaceOrders();
   };
-  console.log(paynowbuttonsuccess, "paynowbuttonsuccess");
+  // console.log(paynowbuttonsuccess, "paynowbuttonsuccess");
   useEffect(() => {
     if (paynowbuttonsuccess) {
       // console.log("paynowbuttonsuccess state updated:", paynowbuttonsuccess);
@@ -62,7 +62,7 @@ const Payment = ({
         order_id: raso?.order?.razorpayOrderId,
         // key_secret: "UVRURpVTJBiXiHQcET8ZBEUt",
         handler: async (response) => {
-          console.log(response, "responsepayementVerfity");
+          // console.log(response, "responsepayementVerfity");
           localStorage.setItem("verifypaymeny", response);
           if (response) {
             const paymentData = {
@@ -73,7 +73,7 @@ const Payment = ({
 
             try {
               const apiResponse = await bookingVerifypayment(paymentData);
-              console.log(apiResponse, "apiResponse");
+              // console.log(apiResponse, "apiResponse");
               if (apiResponse?.success) {
                 Swal.fire("Success", apiResponse.message, "success");
               } else {

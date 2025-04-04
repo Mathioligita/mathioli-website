@@ -31,16 +31,20 @@ const FooterSection = ({ title, items }) => {
     <section className="footer-section mt-5 transition-all duration-500   ">
       <h6 className="footer-section-title text-uppercase">{title}</h6>
       <ul className="list-unstyled">
-        {items?.map((item, index) => (
-          <li
-            key={index}
-            onClick={() => router.push(item.to)}
-            style={{ cursor: "pointer" }}
-            className="footer-item"
-          >
-            <span className="footer-content">{item.name}</span>
-          </li>
-        ))}
+        {items
+          ?.reverse()
+          ?.slice(0, 6)
+
+          ?.map((item, index) => (
+            <li
+              key={index}
+              onClick={() => router.push(item.to)}
+              style={{ cursor: "pointer" }}
+              className="footer-item"
+            >
+              <span className="footer-content">{item.name}</span>
+            </li>
+          ))}
       </ul>
     </section>
   );

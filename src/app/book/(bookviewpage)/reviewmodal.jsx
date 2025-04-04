@@ -220,7 +220,7 @@ export default function ReviewModal({
       };
       const response = await REviewBook(slug, data);
 
-      console.log(response.data, "response");
+      // console.log(response.data, "response");
       if (response.data) {
         setReviewdata(true);
       }

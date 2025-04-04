@@ -63,7 +63,7 @@ export default function Ebookpage( ) {
         const response = await retryFetch(CategoryAPI);
         const data = response?.data?.categories;
 
-        console.log("Fetched categories data:", data);
+        // console.log("Fetched categories data:", data);
         setCategoriesdata(data);
 
         // if (Array.isArray(data) && data.length > 0) {
@@ -232,7 +232,7 @@ export default function Ebookpage( ) {
 
   };
   const shouldRenderButtons = pathname;
-  console.log(shouldRenderButtons,)
+  // console.log(shouldRenderButtons,)
 
   return (
     <div className="container mt-4">

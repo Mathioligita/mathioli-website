@@ -112,7 +112,7 @@ const ProfilePage = (profileImage) => {
       try {
         const response = await ProfileUser();
         setusersdata(response?.data);
-        console.log(response.data, "fetchdata");
+        // console.log(response.data, "fetchdata");
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -121,7 +121,7 @@ const ProfilePage = (profileImage) => {
     // }
   }, []);
 
-  console.log(isEditing, "triggerFileInput");
+  // console.log(isEditing, "triggerFileInput");
   const renderSection = (sectionName) => {
     switch (sectionName) {
       case "Profile":

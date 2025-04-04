@@ -96,7 +96,7 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Submitted", formData);
+    // console.log("Form Submitted", formData);
 
     try {
       const response = await contactusAPi(formData);

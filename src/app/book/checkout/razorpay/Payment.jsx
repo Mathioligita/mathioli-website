@@ -1045,7 +1045,7 @@ const Payment = ({
   const loadRazorpayScript = useCallback(() => {
     return new Promise((resolve, reject) => {
       if (window.Razorpay) {
-        console.log("Razorpay SDK already loaded");
+        // console.log("Razorpay SDK already loaded");
         setSdkLoaded(true);
         resolve(true);
         return;
@@ -1057,7 +1057,7 @@ const Payment = ({
       script.id = "razorpay-script";
 
       script.onload = () => {
-        console.log("Razorpay SDK loaded successfully");
+        // console.log("Razorpay SDK loaded successfully");
         setSdkLoaded(true);
         resolve(true);
       };
@@ -1103,7 +1103,7 @@ const Payment = ({
         description: "Payment for your order",
         order_id: razorpayOrderId,
         handler: async (response) => {
-          console.log("Payment success response:", response);
+          // console.log("Payment success response:", response);
           try {
             const paymentData = {
               razorpayOrderId: response.razorpay_order_id,
@@ -1112,7 +1112,7 @@ const Payment = ({
             };
 
             const apiResponse = await bookingVerifypayment(paymentData);
-            console.log("Verification response:", apiResponse);
+            // console.log("Verification response:", apiResponse);
 
             if (apiResponse?.success) {
               Swal.fire({
@@ -1155,7 +1155,7 @@ const Payment = ({
         },
         modal: {
           ondismiss: () => {
-            console.log("Payment modal closed");
+            // console.log("Payment modal closed");
             setIsProcessing(false);
             setPaymentInitialized(false);
           },
@@ -1176,7 +1176,7 @@ const Payment = ({
       });
 
       rzp.on("payment.authorized", (response) => {
-        console.log("Payment authorized:", response);
+        // console.log("Payment authorized:", response);
       });
 
       setPaymentInitialized(true);

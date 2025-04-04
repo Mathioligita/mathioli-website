@@ -50,11 +50,11 @@ function Login({ visible, onHide }) {
     try {
       const response = await LoginAPi(payload);
       // const response = await axios.post(`${API_BASE_URL}/users/login`, payload);
-      console.log(response, "response");
+      // console.log(response, "response");
       if (response.success) {
-        console.log(response);
+        // console.log(response);
         const Data = response.data;
-        console.log(Data);
+        // console.log(Data);
         Cookies.set("refreshToken", Data.refreshToken);
         Cookies.set("accessToken", Data.accessToken);
 

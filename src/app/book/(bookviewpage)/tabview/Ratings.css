@@ -3,7 +3,7 @@
 /* Overall container */
 .ratings-container {
     padding: 20px;
-    font-family: Arial, sans-serif;
+    /* font-family: Arial, sans-serif; */
     background-color: #f4f4f9;
     max-width: 800px;
     /* margin: 0 auto; */

@@ -599,7 +599,7 @@ const FormatSelectionModal = ({
     booktype: "audioBook",
   };
 
-  console.log(book, "books");
+  // console.log(book, "books");
   return (
     <>
       <Modal show={show} onHide={handleClose} centered>

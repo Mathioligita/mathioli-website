@@ -14,6 +14,34 @@
   margin-bottom: 20px;
   border-radius: 10px;
 }
+/* In your CSS file */
+/* In your CSS file (e.g., App.css or custom stylesheet) */
+
+/* Default color for paginator buttons */
+.p-paginator .p-paginator-page {
+  /* background-color: black; */
+  color: rgb(0, 0, 0);
+  /* border: 1px solid black; Optional: border to match the black color */
+}
+
+/* Active page button - green background */
+/* .p-paginator .p-paginator-page.p-highlight {
+  background-color: green !important;
+  color: white !important;
+} */
+.p-paginator .p-paginator-page.p-highlight {
+  background-color: rgb(29, 87, 85) !important;
+  color: white !important;
+}
+/* Optional: Hover state to make the button slightly lighter */
+.p-paginator .p-paginator-page:hover {
+  background-color: darkgray;
+  color: white;
+}
+.p-paginator .p-paginator-page :active {
+  background-color: darkgray !important;
+  color: white !important;
+}
 
 .hoverbooks-title-2 {
   font-size: 12px !important;
@@ -92,7 +120,7 @@
 }
 
 .book-info h5 {
-  font-family: "Inter", sans-serif;
+  font-family: "Inter";
   font-size: 15px;
   font-weight: 700;
   color: #4d4d4d;

@@ -26,7 +26,7 @@ const SearchInput = ({ setShow }) => {
     e.preventDefault();
     const data = searchValue;
     const response = await searchbarGet(data);
-    console.log(response);
+    // console.log(response);
   };
 
   const fetchdata = async () => {
@@ -116,7 +116,19 @@ const SearchInput = ({ setShow }) => {
             </div>
           ))}
           {!showAll && searchResults?.Trending_searches?.length > 9 && (
-            <Button onClick={handleViewAll}>View All</Button>
+            <div className="ms-auto">
+              <Button
+                onClick={handleViewAll}
+                style={{
+                  background: "rgb(29, 87, 85)",
+                  fontSize: "12px",
+                  border: "1px solid rgb(29, 87, 85)",
+                  borderRadius: "6px",
+                }}
+              >
+                View All
+              </Button>
+            </div>
           )}
         </div>
       </div>

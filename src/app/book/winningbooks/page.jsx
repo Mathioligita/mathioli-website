@@ -115,11 +115,16 @@ import userContext from "../../UseContext/UseContext";
 import { Col, Row } from "react-bootstrap";
 import "./Winingbooks.css";
 import SkeletonPreloader from "../../../../components/SkeletonPreloader";
+import { useRouter } from "next/navigation";
 
 export default function Winingbooks() {
   const { booksdata } = useContext(userContext);
+  const router = useRouter();
   // console.log(booksdata, "booksdata");
-
+  const handleBookClick = (book) => {
+    // Use router.push to navigate to the dynamic book detail page
+    router.push(`/book/${book.slug}`); // Assuming book has a unique `slug` field
+  };
   // Filter booksdata to include only award-winning books
   const awardWinningBooks = booksdata?.filter((book) => book.awardWinningBook);
 
@@ -145,7 +150,7 @@ export default function Winingbooks() {
                     >
                       <div
                         className="book-card"
-                        onClick={() => handleBookClick(bookId.bookId)}
+                        onClick={() => handleBookClick(bookId)}
                       >
                         <div className="book-images">
                           {/* Render book image if available, otherwise a placeholder */}
