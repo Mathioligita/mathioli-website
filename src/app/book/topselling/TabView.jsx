@@ -182,7 +182,7 @@ export default function TabView({ data, book }) {
           className="d-flex align-items-center mb-2"
           style={{ justifyContent: "space-between" }}
         >
-          <span className="Top-selling">Top Selling</span>
+          <span className="Top-selling">Mathioli List of Books </span>
 
           {locations === "/book/topselling" ? null : (
             <Button

@@ -98,7 +98,7 @@ const BookForm = () => {
           icon: "success",
           confirmButtonText: "OK",
         });
-        window.location.href = "/dashboard/book";
+        window.location.href = "/adminpanel/dashboard/book";
         // alert();
         setFormData({
           title: "",

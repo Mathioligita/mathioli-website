@@ -935,7 +935,7 @@ export default function TopsellingAudioBooks() {
       <div className="mt-5">
         <div className="mb-4">
           <div className=" mb-4">
-            <span className="Top-selling ">Top Selling AudioBooks</span>
+            <span className="Top-selling ">AudioBooks</span>
             <div className="book-sdbjd mt-4">
               {loading ? (
                 <Row>

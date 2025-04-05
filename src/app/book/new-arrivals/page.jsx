@@ -223,7 +223,7 @@ const TabComponent = () => {
     <div className="tab-container">
       {/* Tab Buttons */}
       <div className="tab-buttons ms-3">
-        <button
+        {/* <button
           className={`new-arrivals-title ${
             activeTab === "newRelease" ? "active" : ""
           }`}
@@ -241,7 +241,7 @@ const TabComponent = () => {
           }}
         >
           New Arrivals
-        </button>
+        </button> */}
         {/* <button
           className={`new-arrivals-title ${activeTab === "recentEpisodes" ? "active" : ""}`}
           onClick={() => setActiveTab("recentEpisodes")}

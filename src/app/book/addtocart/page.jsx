@@ -1256,12 +1256,12 @@ export default function Addtocart() {
 
   const renderEmptyCart = () => (
     <div className="text-center py-5">
-      <img
+      {/* <img
         src="/image/empty-cart.png" // Replace with your empty cart image
         alt="Empty cart"
         style={{ width: "200px", opacity: 0.7 }}
         className="mb-4"
-      />
+      /> */}
       <h5>Your cart is empty</h5>
       <p className="text-muted mb-4">
         You haven't added any items to your cart yet

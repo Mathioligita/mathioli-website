@@ -853,12 +853,12 @@ export default function Wishlist() {
 
   const renderEmptyWishlist = () => (
     <div className="text-center py-5">
-      <img
+      {/* <img
         src="/image/empty-wishlist.png"
         alt="Empty wishlist"
         style={{ width: "200px", opacity: 0.7 }}
         className="mb-4"
-      />
+      /> */}
       <h5>Your Favourites is empty</h5>
       <p className="text-muted mb-4">
         You haven't added any items to your wishlist yet
