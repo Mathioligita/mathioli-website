@@ -43,7 +43,11 @@ export default function TabViews({ books, setShow, show }) {
                 </p>
                 <p>
                   <strong>Description :</strong>
-                  <span className="ms-2">{books?.book?.description}</span>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: books?.book?.description,
+                    }}
+                  />
                 </p>
               </div>
             </Col>

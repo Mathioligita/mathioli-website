@@ -10,8 +10,7 @@ export default function Overview({ books2 }) {
         <Col className="tab-publish ">
           Publish Date <br />
           <span style={{ color: "#F27851" }}>
-
-          {new Date(books2?.book?.publishDate).getFullYear()}
+            {new Date(books2?.book?.publishDate).getFullYear()}
           </span>
         </Col>
         <Col className="tab-publish">
@@ -35,7 +34,9 @@ export default function Overview({ books2 }) {
           <div>
             <strong> Previews available in</strong> :{" "}
             <span style={{ color: "#F27851" }}>Tamil</span>
-            <p className="mt-2">{books2?.book?.description}</p>
+            <div
+              dangerouslySetInnerHTML={{ __html: books2?.book?.description }}
+            />
           </div>
         </Col>
       </Row>
@@ -45,10 +46,7 @@ export default function Overview({ books2 }) {
             <h5>Book Details</h5>
 
             <p>
-              <strong>
-
-              Published in 
-              </strong>
+              <strong>Published in</strong>
               <br />
               <span>{books2?.book?.publisher}</span>{" "}
             </p>

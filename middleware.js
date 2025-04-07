@@ -71,7 +71,6 @@
 //     return NextResponse.next();
 // }
 
-
 // // ======================
 // // ======================
 // // ======================
@@ -87,25 +86,25 @@
 // //     return NextResponse.redirect(new URL('/', request.url));
 // // }
 
-
 // =============
 
-
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
 export function middleware(request) {
-    const userToken = request.cookies.get('token')?.value;
+  const userToken = request.cookies.get("token")?.value;
 
-    const { pathname } = request.nextUrl;
+  const { pathname } = request.nextUrl;
 
-    // Check if the path is allowed
-    const isAllowedPath = pathname === '/' || (pathname.startsWith('/book/') && pathname !== '/book/');
+  // Check if the path is allowed
+  const isAllowedPath =
+    pathname === "/" ||
+    (pathname.startsWith("/book/") && pathname !== "/book/");
 
-    if (!isAllowedPath) {
-        // Redirect to the home page if the path is not allowed
-        return NextResponse.redirect(new URL('/', request.url));
-    }
+  if (!isAllowedPath) {
+    // Redirect to the home page if the path is not allowed
+    return NextResponse.redirect(new URL("/", request.url));
+  }
 
-    // If the path is allowed or the token is present, allow access
-    return NextResponse.next();
+  // If the path is allowed or the token is present, allow access
+  return NextResponse.next();
 }

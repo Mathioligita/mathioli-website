@@ -14,6 +14,7 @@ import { Col, Row } from "react-bootstrap";
 import Cookies from "js-cookie";
 import "./createbook.css";
 import Swal from "sweetalert2";
+import { Editor } from "primereact/editor";
 
 const BookForm = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
@@ -386,16 +387,20 @@ const BookForm = () => {
             <Col sm={12}>
               <div className=" ">
                 <label>Description</label> <br />
-                <InputTextarea
+                <Editor
                   value={formData.description}
                   onChange={(e) =>
                     setFormData({ ...formData, description: e.target.value })
                   }
+                  style={{ height: "320px" }}
+                />
+                {/* <InputTextarea
+                  value={formData.description}
                   rows={5}
                   cols={30}
                   className="w-100"
                   placeholder="Enter book description"
-                />
+                /> */}
               </div>
             </Col>
           </Row>

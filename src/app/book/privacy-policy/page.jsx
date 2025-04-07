@@ -1,5 +1,12 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+export const metadata = {
+  title: "Tamil books buy online",
+  description:
+    "Buy Tamil books online across genres like literature, spirituality, novels, and more. Enjoy easy ordering, secure payment, and doorstep delivery.",
+  keywords:
+    "tamil books buy online,best book shop in chennai,tamilbooks, tamil bookstore, tamil story books, tamil novels and stories, best tamil novels, best tamil books to read, tamil books to read, best books to read in tamil, Online tamil books shopping, Tamil books online, Tamil Online Book Shop, Tamil books online shopping with discount, buy Tamil ",
+};
 
 export default function PrivacyPolicy() {
   return (

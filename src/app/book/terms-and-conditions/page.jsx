@@ -1,6 +1,11 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+export const metadata = {
+  title: "General books online",
+  description:
+    "Shop a wide range of general books online at great prices. From bestsellers to classics, find your next read with fast delivery and secure checkout.",
+  keywords: "general books online",
+};
 export default function TermsAndConditions() {
   return (
     <div className="mt-4">

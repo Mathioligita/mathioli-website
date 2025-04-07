@@ -19,7 +19,7 @@ export default function Editions({ books2 }) {
             {" "}
             {/* Use a unique key */}
             <img
-              src={i?.bookimage || "No image available."}
+              src={i?.bookimage[0] || "No image available."}
               className="author-image ms-3"
               alt="Book Image"
               width={"80px"}

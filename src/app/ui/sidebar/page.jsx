@@ -190,6 +190,14 @@ export default function Sidebar({ setIsOpen }) {
             router.push("/book"), setIsOpen(false);
           }}
         >
+          <i className="pi pi-home me-2"></i>Home
+        </li>
+        <li
+          className="fw-bold p-2 sidebar-values-adjustment"
+          onClick={() => {
+            router.push("/"), setIsOpen(false);
+          }}
+        >
           <i className="pi pi-book me-2"></i>Books
         </li>
         {/* <li onClick={() => router.push("/book/e-books")}>E-Books</li> */}
