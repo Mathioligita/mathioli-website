@@ -3094,6 +3094,14 @@ const EditBookForm = ({ id }) => {
                 cols={30}
                 className="w-100"
               /> */}
+              {/* <Editor
+                value={formData.description}
+                onTextChange={(e) =>
+                  setFormData({ ...formData, description: e.htmlValue })
+                }
+                style={{ height: "320px" }}
+                className="editor-container"
+              /> */}
               <Editor
                 value={formData.description}
                 onTextChange={(e) =>
