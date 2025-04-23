@@ -221,7 +221,10 @@ export default function Overlayaudio({
             </div>
           </div>
 
-          <Payment PlaceOrders={handleSubmit} paynowbuttonsuccess={audiopay} />
+          <Payment
+            handlePayment={handleSubmit}
+            paynowbuttonsuccess={audiopay}
+          />
         </div>
       </div>
     </div>

@@ -20,7 +20,7 @@
     "bootstrap": "^5.3.3",
     "canvas": "^3.1.0",
     "chart.js": "^4.4.8",
-    "dotenv": "^16.4.7",
+    "dotenv": "^16.5.0",
     "formik": "^2.4.6",
     "js-cookie": "^3.0.5",
     "jspdf": "^2.5.2",
@@ -32,6 +32,7 @@
     "primeicons": "^7.0.0",
     "primereact": "^10.9.4",
     "quill": "^2.0.3",
+    "razorpay": "^2.9.6",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.9",
     "react-chartjs-2": "^5.3.0",
@@ -46,5 +47,9 @@
     "uuid": "^11.0.3",
     "xlsx": "^0.18.5",
     "yup": "^1.6.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.14.1",
+    "typescript": "5.8.3"
   }
 }

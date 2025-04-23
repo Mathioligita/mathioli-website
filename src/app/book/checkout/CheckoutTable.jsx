@@ -14,7 +14,6 @@ export default function CheckoutTable({
   availabilityBodyTemplate,
   SingleBuyProductdata,
 }) {
-
   const renderAvatar = (rowData) => (
     <>
       <div>
@@ -160,8 +159,8 @@ export default function CheckoutTable({
       </div>
       <div className="responsive-table">
         <div className="mobile-view">
-          {items?.map((rowData) => (
-            <div key={rowData.id} className="mobile-item" style={tableStyle}>
+          {items?.map((rowData, index) => (
+            <div key={index} className="mobile-item" style={tableStyle}>
               <div className="mobile-item-row ">
                 <div>{renderAvatar(rowData)}</div>
                 <div>{renderTitle(rowData)}</div>

@@ -108,6 +108,7 @@ export default function RootLayout({ children }) {
           name="google-site-verification"
           content="LNCOwe5u3_0PFOt4pI9Vi_qcuPVp9GJCOV0N5L0jcZc"
         />
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
         <script id="gtm-init" strategy="afterInteractive">
           {`

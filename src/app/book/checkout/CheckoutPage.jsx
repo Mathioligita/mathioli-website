@@ -484,7 +484,7 @@ const CheckoutPage = () => {
       const response = await PlaceOrderAPi(payload);
 
       if (response?.success) {
-        setPaybuttonsuccess(response.data);
+        setPaybuttonsuccess(response.data.orders);
         typeof window !== "undefined"
           ? sessionStorage.setItem(
               "razorpayOrder",
@@ -674,7 +674,7 @@ const CheckoutPage = () => {
                     </span>
                     <br />
                     {activeAddress ? (
-                      <span
+                      <div
                         style={{
                           color: "#1d5755",
                           fontWeight: 600,
@@ -690,7 +690,7 @@ const CheckoutPage = () => {
                         {activeAddress?.address},{activeAddress?.city},
                         {activeAddress?.state},{activeAddress?.country},
                         {activeAddress?.zipCode}
-                      </span>
+                      </div>
                     ) : (
                       "ADD the Address"
                     )}

@@ -1,497 +1,5 @@
-// // // "use client";
-// // // import React, { useEffect, useState } from "react";
-// // // import Swal from "sweetalert2";
-// // // import { Col, Row } from "react-bootstrap";
-// // // import { bookingVerifypayment } from "../../../../../api/page"; // Import your API function
-// // // import { Button } from "primereact/button";
-
-// // // const Payment = ({
-// // //   PlaceOrders,
-// // //   formData,
-// // //   total,
-// // //   razopayshow,
-// // //   paynowbutton,
-// // //   paynowbuttonsuccess,
-// // //   shippingdata,
-// // // }) => {
-// // //   const [sdkLoaded, setSdkLoaded] = useState(false);
-// // //   const [isProcessing, setIsProcessing] = useState(false);
-
-// // //   // Get Razorpay order details from session storage
-// // //   let raso = {};
-// // //   raso =
-// // //     typeof window !== "undefined"
-// // //       ? JSON.parse(sessionStorage.getItem("razorpayOrder"))
-// // //       : null || {};
-// // //   // try {
-// // //   // } catch (error) {
-// // //   //   console.error("Failed to parse razorpayOrder from session storage:", error);
-// // //   // }
-// // //   // console.log(raso, "raso>>>>>>>>>>>>>>>");
-
-// // //   useEffect(() => {
-// // //     const loadRazorpayScript = () => {
-// // //       if (!window.Razorpay) {
-// // //         const script = document.createElement("script");
-// // //         script.src = "https://checkout.razorpay.com/v1/checkout.js";
-// // //         script.async = true;
-// // //         script.onload = () => setSdkLoaded(true);
-// // //         script.onerror = () => console.error("Failed to load Razorpay SDK");
-// // //         document.body.appendChild(script);
-// // //       } else {
-// // //         setSdkLoaded(true);
-// // //       }
-// // //     };
-
-// // //     loadRazorpayScript();
-// // //   }, []);
-
-// // //   const handlePayment = async () => {
-// // //     PlaceOrders();
-// // //   };
-// // //   useEffect(() => {
-// // //     if (paynowbuttonsuccess) {
-// // //       // console.log("paynowbuttonsuccess state updated:", paynowbuttonsuccess);
-// // //       // Proceed with Razorpay options
-// // //       const options = {
-// // //         key: "rzp_live_wJBFoukfvdWNdP",
-// // //         // amount:  (raso?.orders[0]?.orderTotal || 0) * 100,
-// // //         amount: (raso?.orders[0]?.orderTotal || 0) * 100,
-// // //         currency: "INR",
-// // //         name: "Mathioli ",
-// // //         order_id: raso?.orders?.razorpayOrderId,
-// // //         // key_secret: "UVRURpVTJBiXiHQcET8ZBEUt",
-// // //         handler: async (response) => {
-// // //           console.log(response, "responsepayementVerfity");
-// // //           localStorage.setItem("verifypaymeny", response);
-// // //           if (response) {
-// // //             const paymentData = {
-// // //               razorpayOrderId: response.razorpay_order_id,
-// // //               razorpayPaymentId: response.razorpay_payment_id,
-// // //               razorpaySignature: response.razorpay_signature,
-// // //             };
-
-// // //             try {
-// // //               const apiResponse = await bookingVerifypayment(paymentData);
-
-// // //               if (apiResponse?.data?.success) {
-// // //                 Swal.fire("Success", "Payment successful!", "success");
-// // //               } else {
-// // //                 Swal.fire(
-// // //                   "Error",
-// // //                   apiResponse?.data?.message || "Payment failed",
-// // //                   "error"
-// // //                 );
-// // //               }
-// // //             } catch (error) {}
-// // //             console.error("API error:", error);
-// // //             Swal.fire(
-// // //               "Error",
-// // //               "Unable to verify payment. Please try again.",
-// // //               "error"
-// // //             );
-// // //           }
-// // //         },
-// // //         prefill: {
-// // //           name: raso?.order?.shippingInfo?.firstname,
-// // //           email: raso?.order?.shippingInfo?.email,
-// // //           contact: raso?.order?.shippingInfo?.phone,
-// // //         },
-// // //         theme: { color: "#396664" },
-// // //       };
-// // //       const rzp = new window.Razorpay(options);
-// // //       rzp.on("payment.failed", (response) => {
-// // //         Swal.fire(
-// // //           "Error",
-// // //           response.error.description || "Payment failed.",
-// // //           "error"
-// // //         );
-// // //       });
-// // //       rzp.open();
-// // //     }
-// // //   }, [paynowbuttonsuccess]);
-
-// // //   return (
-// // //     <div className="" style={{ fontFamily: "Poppins" }}>
-// // //       <div className=" booking-detailssssss">
-// // //         <Row>
-// // //           <form
-// // //             onSubmit={(e) => {
-// // //               e.preventDefault();
-// // //               setIsProcessing(true);
-// // //               handlePayment().finally(() => setIsProcessing(false));
-// // //             }}
-// // //           >
-// // //             <Button
-// // //               label={
-// // //                 isProcessing
-// // //                   ? "Processing..."
-// // //                   : sdkLoaded
-// // //                   ? "Pay Now"
-// // //                   : "Loading Payment..."
-// // //               }
-// // //               type="submit"
-// // //               // className="place-order"
-// // //               style={{ background: "#396664" }}
-// // //               className="rounded-2 m-2 w-100"
-// // //               disabled={
-// // //                 !formData.privacy_policy ||
-// // //                 !shippingdata ||
-// // //                 // !paynowbutton ||
-// // //                 !sdkLoaded ||
-// // //                 isProcessing
-// // //               }
-// // //             ></Button>
-// // //           </form>
-// // //         </Row>
-// // //       </div>
-// // //     </div>
-// // //   );
-// // // };
-
-// // // export default Payment;
 // // "use client";
-// // import React, { useEffect, useState } from "react";
-// // import Swal from "sweetalert2";
-// // import { Col, Row } from "react-bootstrap";
-// // import { bookingVerifypayment } from "../../../../../api/page"; // Import your API function
-// // import { Button } from "primereact/button";
-
-// // const Payment = ({
-// //   PlaceOrders,
-// //   formData,
-// //   total,
-// //   razopayshow,
-// //   paynowbutton,
-// //   paynowbuttonsuccess,
-// //   shippingdata,
-// // }) => {
-// //   const [sdkLoaded, setSdkLoaded] = useState(false);
-// //   const [isProcessing, setIsProcessing] = useState(false);
-
-// //   // Get Razorpay order details from session storage
-// //   let raso = {};
-// //   if (typeof window !== "undefined") {
-// //     try {
-// //       raso = JSON.parse(sessionStorage.getItem("razorpayOrder")) || {};
-// //     } catch (error) {
-// //       console.error(
-// //         "Failed to parse razorpayOrder from session storage:",
-// //         error
-// //       );
-// //     }
-// //   }
-
-// //   useEffect(() => {
-// //     const loadRazorpayScript = () => {
-// //       if (!window.Razorpay) {
-// //         const script = document.createElement("script");
-// //         script.src = "https://checkout.razorpay.com/v1/checkout.js";
-// //         script.async = true;
-// //         script.onload = () => {
-// //           console.log("Razorpay SDK loaded successfully");
-// //           setSdkLoaded(true);
-// //         };
-// //         script.onerror = () => {
-// //           console.error("Failed to load Razorpay SDK");
-// //         };
-// //         document.body.appendChild(script);
-// //       } else {
-// //         console.log("Razorpay SDK already loaded");
-// //         setSdkLoaded(true);
-// //       }
-// //     };
-
-// //     loadRazorpayScript();
-// //   }, []);
-
-// //   const handlePayment = async () => {
-// //     PlaceOrders();
-// //   };
-
-// //   useEffect(() => {
-// //     if (paynowbuttonsuccess) {
-// //       // const options = {
-// //       //   key: process.env.RAZORPAY_KEY_ID,
-// //       //   amount: (raso?.orders[0]?.orderTotal || 0) * 100,
-// //       //   currency: "INR",
-// //       //   name: "Mathioli",
-// //       //   order_id: raso?.orders?.razorpayOrderId,
-// //       //   handler: async (response) => {
-// //       //     console.log(response, "responsepayementVerfity");
-// //       //     localStorage.setItem("verifypaymeny", response);
-// //       //     if (response) {
-// //       //       const paymentData = {
-// //       //         razorpayOrderId: response.razorpay_order_id,
-// //       //         razorpayPaymentId: response.razorpay_payment_id,
-// //       //         razorpaySignature: response.razorpay_signature,
-// //       //       };
-
-// //       //       try {
-// //       //         const apiResponse = await bookingVerifypayment(paymentData);
-
-// //       //         if (apiResponse?.data?.success) {
-// //       //           Swal.fire("Success", "Payment successful!", "success");
-// //       //         } else {
-// //       //           Swal.fire(
-// //       //             "Error",
-// //       //             apiResponse?.data?.message || "Payment failed",
-// //       //             "error"
-// //       //           );
-// //       //         }
-// //       //       } catch (error) {
-// //       //         console.error("API error:", error);
-// //       //         Swal.fire(
-// //       //           "Error",
-// //       //           "Unable to verify payment. Please try again.",
-// //       //           "error"
-// //       //         );
-// //       //       }
-// //       //     }
-// //       //   },
-// //       //   prefill: {
-// //       //     name: raso?.order?.shippingInfo?.firstname,
-// //       //     email: raso?.order?.shippingInfo?.email,
-// //       //     contact: raso?.order?.shippingInfo?.phone,
-// //       //   },
-// //       //   theme: { color: "#396664" },
-// //       // };
-// //       const options = {
-// //         key: process.env.RAZORPAY_KEY_ID, // Ensure this key is correctly set
-// //         amount: (raso?.orders[0]?.orderTotal || 0) * 100,
-// //         currency: "INR",
-// //         name: "Mathioli",
-// //         order_id: raso?.orders?.razorpayOrderId,
-// //         handler: async (response) => {
-// //           // Handler code
-// //         },
-// //         prefill: {
-// //           name: raso?.order?.shippingInfo?.firstname,
-// //           email: raso?.order?.shippingInfo?.email,
-// //           contact: raso?.order?.shippingInfo?.phone,
-// //         },
-// //         theme: { color: "#396664" },
-// //       };
-
-// //       const rzp = new window.Razorpay(options);
-// //       rzp.on("payment.failed", (response) => {
-// //         Swal.fire(
-// //           "Error",
-// //           response.error.description || "Payment failed.",
-// //           "error"
-// //         );
-// //       });
-// //       rzp.open();
-// //     }
-// //   }, [paynowbuttonsuccess]);
-
-// //   return (
-// //     <div className="" style={{ fontFamily: "Poppins" }}>
-// //       <div className=" booking-detailssssss">
-// //         <Row>
-// //           <form
-// //             onSubmit={(e) => {
-// //               e.preventDefault();
-// //               setIsProcessing(true);
-// //               handlePayment().finally(() => setIsProcessing(false));
-// //             }}
-// //           >
-// //             <Button
-// //               label={
-// //                 isProcessing
-// //                   ? "Processing..."
-// //                   : sdkLoaded
-// //                   ? "Pay Now"
-// //                   : "Loading Payment..."
-// //               }
-// //               type="submit"
-// //               style={{ background: "#396664" }}
-// //               className="rounded-2 m-2 w-100"
-// //               disabled={
-// //                 !formData.privacy_policy ||
-// //                 !shippingdata ||
-// //                 !sdkLoaded ||
-// //                 isProcessing
-// //               }
-// //             ></Button>
-// //           </form>
-// //         </Row>
-// //       </div>
-// //     </div>
-// //   );
-// // };
-
-// // export default Payment;
-// // "use client";
-// // import React, { useEffect, useState } from "react";
-// // import Swal from "sweetalert2";
-// // import { Col, Row } from "react-bootstrap";
-// // import { bookingVerifypayment } from "../../../../../api/page"; // Import your API function
-// // import { Button } from "primereact/button";
-
-// // const Payment = ({
-// //   PlaceOrders,
-// //   formData,
-// //   total,
-// //   razopayshow,
-// //   paynowbutton,
-// //   paynowbuttonsuccess,
-// //   shippingdata,
-// // }) => {
-// //   const [sdkLoaded, setSdkLoaded] = useState(false);
-// //   const [isProcessing, setIsProcessing] = useState(false);
-
-// //   // Get Razorpay order details from session storage
-// //   let raso = {};
-// //   if (typeof window !== "undefined") {
-// //     try {
-// //       raso = JSON.parse(sessionStorage.getItem("razorpayOrder")) || {};
-// //     } catch (error) {
-// //       console.error(
-// //         "Failed to parse razorpayOrder from session storage:",
-// //         error
-// //       );
-// //     }
-// //   }
-
-// //   useEffect(() => {
-// //     const loadRazorpayScript = () => {
-// //       if (!window.Razorpay) {
-// //         const script = document.createElement("script");
-// //         script.src = "https://checkout.razorpay.com/v1/checkout.js";
-// //         script.async = true;
-// //         script.onload = () => {
-// //           console.log("Razorpay SDK loaded successfully");
-// //           setSdkLoaded(true);
-// //         };
-// //         script.onerror = () => {
-// //           console.error("Failed to load Razorpay SDK");
-// //         };
-// //         document.body.appendChild(script);
-// //       } else {
-// //         console.log("Razorpay SDK already loaded");
-// //         setSdkLoaded(true);
-// //       }
-// //     };
-
-// //     loadRazorpayScript();
-// //   }, []);
-
-// //   const handlePayment = async () => {
-// //     PlaceOrders();
-// //   };
-// //   console.log(paynowbuttonsuccess, "raso>>>>>>>>>>>>>>>>>>>>>>>>>>>.");
-// //   useEffect(() => {
-// //     if (paynowbuttonsuccess) {
-// //       const razorpayKey = "rzp_live_wJBFoukfvdWNdP";
-// //       console.log("Razorpay Key:", razorpayKey); // Debugging statement
-
-// //       // if (!paynowbuttonsuccess?.orders?.razorpayOrderId) {
-// //       //   console.error("Razorpay Order ID is missing");
-// //       //   return;
-// //       // }
-
-// //       const options = {
-// //         key: razorpayKey,
-// //         amount: (paynowbuttonsuccess?.orders[0].orderTotal || 0) * 100,
-// //         currency: "INR",
-// //         name: "Mathioli",
-// //         order_id: paynowbuttonsuccess?.orders[0]?.razorpayOrderId,
-// //         handler: async (response) => {
-// //   console.log(response, "responsepayementVerfity");
-// //   localStorage.setItem("verifypaymeny", response);
-// //   if (response) {
-// //     const paymentData = {
-// //       razorpayOrderId: response.razorpay_order_id,
-// //       razorpayPaymentId: response.razorpay_payment_id,
-// //       razorpaySignature: response.razorpay_signature,
-// //     };
-
-// //     try {
-// //       const apiResponse = await bookingVerifypayment(paymentData);
-
-// //       console.log(apiResponse);
-// //       if (apiResponse?.success) {
-// //         Swal.fire("Success", apiResponse?.message, "success");
-// //         sessionStorage.removeItem("razorpayOrder");
-// //         sessionStorage.removeItem("buysinglebook");
-// //         window.location.href = "/";
-// //       } else {
-// //         Swal.fire(
-// //           "Error",
-// //           apiResponse?.data?.message || "Payment failed",
-// //           "error"
-// //         );
-// //       }
-// //     } catch (error) {
-// //       console.error("API error:", error);
-// //       Swal.fire(
-// //         "Error",
-// //         "Unable to verify payment. Please try again.",
-// //         "error"
-// //       );
-// //     }
-// //   }
-// // },
-// //         prefill: {
-// //           name: raso?.order?.shippingInfo?.firstname,
-// //           email: raso?.order?.shippingInfo?.email,
-// //           contact: raso?.order?.shippingInfo?.phone,
-// //         },
-// //         theme: { color: "#396664" },
-// //       };
-
-// //       const rzp = new window.Razorpay(options);
-// //       rzp.on("payment.failed", (response) => {
-// //         Swal.fire(
-// //           "Error",
-// //           response.error.description || "Payment failed.",
-// //           "error"
-// //         );
-// //       });
-// //       rzp.open();
-// //     }
-// //   }, [paynowbuttonsuccess]);
-
-// //   return (
-// //     <div className="" style={{ fontFamily: "Poppins" }}>
-// //       <div className=" booking-detailssssss">
-// //         <Row>
-// //           <form
-// //             onSubmit={(e) => {
-// //               e.preventDefault();
-// //               setIsProcessing(true);
-// //               handlePayment().finally(() => setIsProcessing(false));
-// //             }}
-// //           >
-// //             <Button
-// //               label={
-// //                 isProcessing
-// //                   ? "Processing..."
-// //                   : sdkLoaded
-// //                   ? "Pay Now"
-// //                   : "Loading Payment..."
-// //               }
-// //               type="submit"
-// //               style={{ background: "#396664" }}
-// //               className="rounded-2 m-2 w-100"
-// //               disabled={
-// //                 !formData.privacy_policy ||
-// //                 !shippingdata ||
-// //                 !sdkLoaded ||
-// //                 isProcessing
-// //               }
-// //             ></Button>
-// //           </form>
-// //         </Row>
-// //       </div>
-// //     </div>
-// //   );
-// // };
-
-// // export default Payment;
-// // "use client";
-// // import React, { useEffect, useState } from "react";
+// // import React, { useEffect, useState, useCallback } from "react";
 // // import Swal from "sweetalert2";
 // // import { Col, Row } from "react-bootstrap";
 // // import { bookingVerifypayment } from "../../../../../api/page";
@@ -509,29 +17,46 @@
 // //   const [sdkLoaded, setSdkLoaded] = useState(false);
 // //   const [isProcessing, setIsProcessing] = useState(false);
 // //   const [browserSupported, setBrowserSupported] = useState(true);
+// //   const [paymentInitialized, setPaymentInitialized] = useState(false);
+// //   const [raso, setRaso] = useState({});
+
+// //   // Define checkBrowserSupport inside the component
+// //   const checkBrowserSupport = useCallback(() => {
+// //     if (typeof window === "undefined") return true;
+
+// //     const userAgent = navigator.userAgent;
+// //     // Supported browsers: Chrome, Firefox, Safari, Edge (not IE, Opera Mini, etc.)
+// //     const isSupported =
+// //       /chrome|firefox|safari|edge/i.test(userAgent) &&
+// //       !/opera|opr|ie|trident/i.test(userAgent);
+
+// //     // Additional check for mobile browsers
+// //     if (/android|iphone|ipad|ipod/i.test(userAgent)) {
+// //       // Additional checks for mobile browser support if needed
+// //     }
+
+// //     return isSupported;
+// //   }, []);
 
 // //   // Get Razorpay order details from session storage
-// //   let raso = {};
-// //   if (typeof window !== "undefined") {
-// //     try {
-// //       raso = JSON.parse(sessionStorage.getItem("razorpayOrder")) || {};
-// //     } catch (error) {
-// //       console.error("Failed to parse razorpayOrder:", error);
+// //   useEffect(() => {
+// //     if (typeof window !== "undefined") {
+// //       try {
+// //         const razorpayOrder = sessionStorage.getItem("razorpayOrder");
+// //         if (razorpayOrder) {
+// //           setRaso(JSON.parse(razorpayOrder));
+// //         }
+// //       } catch (error) {
+// //         console.error("Failed to parse razorpayOrder:", error);
+// //       }
 // //     }
-// //   }
+// //   }, []);
 
-// //   const isBrowserSupported = () => {
-// //     const userAgent = navigator.userAgent;
-// //     return (
-// //       /chrome|firefox|safari|edge/i.test(userAgent) &&
-// //       !/opera|opr|ie|trident/i.test(userAgent)
-// //     );
-// //   };
-
-// //   const loadRazorpayScript = () => {
+// //   const loadRazorpayScript = useCallback(() => {
 // //     return new Promise((resolve, reject) => {
 // //       if (window.Razorpay) {
-// //         console.log("Razorpay SDK already loaded");
+// //         // console.log("Razorpay SDK already loaded");
+// //         setSdkLoaded(true);
 // //         resolve(true);
 // //         return;
 // //       }
@@ -539,137 +64,534 @@
 // //       const script = document.createElement("script");
 // //       script.src = "https://checkout.razorpay.com/v1/checkout.js";
 // //       script.async = true;
+// //       script.id = "razorpay-script";
 
 // //       script.onload = () => {
-// //         console.log("Razorpay SDK loaded successfully");
+// //         // console.log("Razorpay SDK loaded successfully");
 // //         setSdkLoaded(true);
 // //         resolve(true);
 // //       };
 
-// //       script.onerror = () => {
-// //         console.error("Failed to load Razorpay SDK");
+// //       script.onerror = (error) => {
+// //         console.error("Failed to load Razorpay SDK", error);
+// //         setSdkLoaded(false);
 // //         reject(new Error("Failed to load Razorpay SDK"));
 // //       };
 
 // //       document.body.appendChild(script);
 // //     });
-// //   };
+// //   }, []);
+
+// //   const initializePayment = useCallback(async () => {
+// //     if (
+// //       !paynowbuttonsuccess ||
+// //       !sdkLoaded ||
+// //       !browserSupported ||
+// //       paymentInitialized
+// //     ) {
+// //       return;
+// //     }
+
+// //     try {
+// //       if (!window.Razorpay) {
+// //         throw new Error("Razorpay not available");
+// //       }
+
+// //       const razorpayKey = process.env.RAZORPAY_KEY || "rzp_live_wJBFoukfvdWNdP";
+// //       const orderTotal = paynowbuttonsuccess?.orders[0]?.orderTotal || 0;
+// //       const razorpayOrderId = paynowbuttonsuccess?.orders[0]?.razorpayOrderId;
+
+// //       if (!razorpayOrderId) {
+// //         throw new Error("Razorpay Order ID is missing");
+// //       }
+
+// //       const options = {
+// //         key: razorpayKey,
+// //         amount: Math.round(orderTotal * 100),
+// //         currency: "INR",
+// //         name: "Mathioli",
+// //         description: "Payment for your order",
+// //         order_id: razorpayOrderId,
+// //         handler: async (response) => {
+// //           // console.log("Payment success response:", response);
+// //           try {
+// //             const paymentData = {
+// //               razorpayOrderId: response.razorpay_order_id,
+// //               razorpayPaymentId: response.razorpay_payment_id,
+// //               razorpaySignature: response.razorpay_signature,
+// //             };
+
+// //             const apiResponse = await bookingVerifypayment(paymentData);
+// //             // console.log("Verification response:", apiResponse);
+
+// //             if (apiResponse?.success) {
+// //               Swal.fire({
+// //                 title: "Success",
+// //                 text: apiResponse?.message || "Payment successful!",
+// //                 icon: "success",
+// //                 confirmButtonText: "Continue",
+// //               }).then(() => {
+// //                 sessionStorage.removeItem("razorpayOrder");
+// //                 sessionStorage.removeItem("buysinglebook");
+// //                 window.location.href = "/";
+// //               });
+// //             } else {
+// //               Swal.fire(
+// //                 "Verification Failed",
+// //                 apiResponse?.data?.message || "Payment verification failed",
+// //                 "error"
+// //               );
+// //             }
+// //           } catch (error) {
+// //             console.error("Verification error:", error);
+// //             Swal.fire(
+// //               "Error",
+// //               "Unable to verify payment. Please contact support.",
+// //               "error"
+// //             );
+// //           }
+// //         },
+// //         prefill: {
+// //           name: raso?.order?.shippingInfo?.firstname || "",
+// //           email: raso?.order?.shippingInfo?.email || "",
+// //           contact: raso?.order?.shippingInfo?.phone || "",
+// //         },
+// //         notes: {
+// //           orderId: paynowbuttonsuccess?.orders[0]?.orderId,
+// //         },
+// //         theme: {
+// //           color: "#396664",
+// //           hide_topbar: false,
+// //         },
+// //         modal: {
+// //           ondismiss: () => {
+// //             // console.log("Payment modal closed");
+// //             setIsProcessing(false);
+// //             setPaymentInitialized(false);
+// //           },
+// //         },
+// //       };
+
+// //       const rzp = new window.Razorpay(options);
+
+// //       rzp.on("payment.failed", (response) => {
+// //         console.error("Payment failed:", response.error);
+// //         Swal.fire(
+// //           "Payment Failed",
+// //           response.error.description || "Payment could not be completed",
+// //           "error"
+// //         );
+// //         setIsProcessing(false);
+// //         setPaymentInitialized(false);
+// //       });
+
+// //       rzp.on("payment.authorized", (response) => {
+// //         // console.log("Payment authorized:", response);
+// //       });
+
+// //       setPaymentInitialized(true);
+// //       rzp.open();
+// //     } catch (error) {
+// //       console.error("Payment initialization error:", error);
+// //       Swal.fire(
+// //         "Payment Error",
+// //         error.message || "Unable to initialize payment. Please try again.",
+// //         "error"
+// //       );
+// //       setIsProcessing(false);
+// //       setPaymentInitialized(false);
+// //     }
+// //   }, [
+// //     paynowbuttonsuccess,
+// //     sdkLoaded,
+// //     browserSupported,
+// //     paymentInitialized,
+// //     raso,
+// //   ]);
 
 // //   const handlePayment = async () => {
 // //     try {
 // //       setIsProcessing(true);
-// //       if (!isBrowserSupported()) {
-// //         throw new Error("Unsupported browser");
+
+// //       if (!checkBrowserSupport()) {
+// //         throw new Error("Unsupported browser detected");
 // //       }
+
 // //       await loadRazorpayScript();
-// //       PlaceOrders();
+// //       await PlaceOrders();
 // //     } catch (error) {
-// //       console.error("Payment initialization failed:", error);
+// //       console.error("Payment process failed:", error);
 // //       Swal.fire(
-// //         "Browser Issue",
-// //         "Please try payment in Chrome or Firefox browser.",
+// //         "Payment Error",
+// //         error.message || "Unable to process payment. Please try again.",
 // //         "error"
 // //       );
 // //       setBrowserSupported(false);
-// //     } finally {
 // //       setIsProcessing(false);
 // //     }
 // //   };
 
 // //   useEffect(() => {
 // //     if (typeof window !== "undefined") {
-// //       setBrowserSupported(isBrowserSupported());
+// //       setBrowserSupported(checkBrowserSupport());
+
+// //       return () => {
+// //         const script = document.getElementById("razorpay-script");
+// //         if (script) {
+// //           document.body.removeChild(script);
+// //         }
+// //       };
+// //     }
+// //   }, [checkBrowserSupport]);
+
+// //   useEffect(() => {
+// //     if (
+// //       paynowbuttonsuccess &&
+// //       sdkLoaded &&
+// //       browserSupported &&
+// //       !paymentInitialized
+// //     ) {
+// //       initializePayment();
+// //     }
+// //   }, [
+// //     paynowbuttonsuccess,
+// //     sdkLoaded,
+// //     browserSupported,
+// //     paymentInitialized,
+// //     initializePayment,
+// //   ]);
+
+// //   return (
+// //     <div className="payment-container" style={{ fontFamily: "Poppins" }}>
+// //       <div className="booking-details">
+// //         <Row>
+// //           {!browserSupported && (
+// //             <div className="alert alert-warning mb-3">
+// //               <strong>Browser Not Supported:</strong> For the best payment
+// //               experience, please use Google Chrome or Mozilla Firefox.
+// //             </div>
+// //           )}
+
+// //           <form
+// //             onSubmit={(e) => {
+// //               e.preventDefault();
+// //               if (browserSupported && !isProcessing) {
+// //                 handlePayment();
+// //               }
+// //             }}
+// //           >
+// //             <Button
+// //               label={"Pay Now"}
+// //               type="submit"
+// //               style={{
+// //                 background: "#396664",
+// //                 border: "none",
+// //                 padding: "12px 24px",
+// //                 fontSize: "16px",
+// //               }}
+// //               className="rounded-2 m-2 w-100"
+// //               disabled={
+// //                 !formData.privacy_policy ||
+// //                 !shippingdata ||
+// //                 isProcessing ||
+// //                 !browserSupported
+// //               }
+// //               icon={isProcessing ? "pi pi-spinner pi-spin" : ""}
+// //             />
+// //           </form>
+
+// //           {/* <div className="mt-3 text-center">
+// //             <small className="text-muted">
+// //               Secure payment powered by Razorpay
+// //             </small>
+// //           </div> */}
+// //         </Row>
+// //       </div>
+// //     </div>
+// //   );
+// // };
+
+// // export default Payment;
+// // "use client";
+// // import React, { useEffect, useState, useCallback } from "react";
+// // import Swal from "sweetalert2";
+// // import { Col, Row } from "react-bootstrap";
+// // import { bookingVerifypayment } from "../../../../../api/page";
+// // import { Button } from "primereact/button";
+
+// // const Payment = ({
+// //   PlaceOrders,
+// //   formData,
+// //   total,
+// //   razopayshow,
+// //   paynowbutton,
+// //   paynowbuttonsuccess,
+// //   shippingdata,
+// // }) => {
+// //   const [sdkLoaded, setSdkLoaded] = useState(false);
+// //   const [isProcessing, setIsProcessing] = useState(false);
+// //   const [browserSupported, setBrowserSupported] = useState(true);
+// //   const [paymentInitialized, setPaymentInitialized] = useState(false);
+// //   const [raso, setRaso] = useState({});
+
+// //   // ✅ Feature-based browser support check
+// //   const checkBrowserSupport = useCallback(() => {
+// //     if (typeof window === "undefined") return true;
+
+// //     try {
+// //       const requiredFeatures = [
+// //         "Promise",
+// //         "fetch",
+// //         "URL",
+// //         "FormData",
+// //         "CustomEvent",
+// //         "IntersectionObserver",
+// //       ];
+
+// //       const isMissingFeature = requiredFeatures.some(
+// //         (feature) => !(feature in window)
+// //       );
+
+// //       if (isMissingFeature) return false;
+
+// //       const userAgent = navigator.userAgent.toLowerCase();
+// //       const isUnsupportedBrowser = /msie|trident|edge\/1[0-7]/i.test(userAgent); // IE or old Edge only
+
+// //       return !isUnsupportedBrowser;
+// //     } catch (e) {
+// //       console.error("Browser support check error:", e);
+// //       return true;
 // //     }
 // //   }, []);
 
+// //   // ✅ Get Razorpay order data from session
 // //   useEffect(() => {
-// //     if (paynowbuttonsuccess && sdkLoaded && browserSupported) {
+// //     if (typeof window !== "undefined") {
 // //       try {
-// //         if (!window.Razorpay) {
-// //           throw new Error("Razorpay not available");
+// //         const razorpayOrder = sessionStorage.getItem("razorpayOrder");
+// //         if (razorpayOrder) {
+// //           setRaso(JSON.parse(razorpayOrder));
 // //         }
-
-// //         const razorpayKey = "rzp_live_wJBFoukfvdWNdP";
-// //         const options = {
-// //           key: razorpayKey,
-// //           amount: (paynowbuttonsuccess?.orders[0].orderTotal || 0) * 100,
-// //           currency: "INR",
-// //           name: "Mathioli",
-// //           order_id: paynowbuttonsuccess?.orders[0]?.razorpayOrderId,
-// //           handler: async (response) => {
-// //             console.log(response, "responsepayementVerfity");
-// //             localStorage.setItem("verifypaymeny", response);
-// //             if (response) {
-// //               const paymentData = {
-// //                 razorpayOrderId: response.razorpay_order_id,
-// //                 razorpayPaymentId: response.razorpay_payment_id,
-// //                 razorpaySignature: response.razorpay_signature,
-// //               };
-
-// //               try {
-// //                 const apiResponse = await bookingVerifypayment(paymentData);
-
-// //                 console.log(apiResponse);
-// //                 if (apiResponse?.success) {
-// //                   Swal.fire("Success", apiResponse?.message, "success");
-// //                   sessionStorage.removeItem("razorpayOrder");
-// //                   sessionStorage.removeItem("buysinglebook");
-// //                   window.location.href = "/";
-// //                 } else {
-// //                   Swal.fire(
-// //                     "Error",
-// //                     apiResponse?.data?.message || "Payment failed",
-// //                     "error"
-// //                   );
-// //                 }
-// //               } catch (error) {
-// //                 console.error("API error:", error);
-// //                 Swal.fire(
-// //                   "Error",
-// //                   "Unable to verify payment. Please try again.",
-// //                   "error"
-// //                 );
-// //               }
-// //             }
-// //           },
-// //           prefill: {
-// //             name: raso?.order?.shippingInfo?.firstname,
-// //             email: raso?.order?.shippingInfo?.email,
-// //             contact: raso?.order?.shippingInfo?.phone,
-// //           },
-// //           theme: { color: "#396664" },
-// //         };
-
-// //         const rzp = new window.Razorpay(options);
-// //         rzp.on("payment.failed", (response) => {
-// //           Swal.fire(
-// //             "Error",
-// //             response.error.description || "Payment failed.",
-// //             "error"
-// //           );
-// //         });
-// //         rzp.open();
 // //       } catch (error) {
-// //         console.error("Payment initialization error:", error);
-// //         Swal.fire(
-// //           "Browser Not Supported",
-// //           "Please try payment in Chrome or Firefox browser.",
-// //           "error"
-// //         );
+// //         console.error("Failed to parse razorpayOrder:", error);
 // //       }
 // //     }
-// //   }, [paynowbuttonsuccess, sdkLoaded, browserSupported]);
+// //   }, []);
+
+// //   // ✅ Load Razorpay script
+// //   const loadRazorpayScript = useCallback(() => {
+// //     return new Promise((resolve, reject) => {
+// //       if (window.Razorpay) {
+// //         setSdkLoaded(true);
+// //         resolve(true);
+// //         return;
+// //       }
+
+// //       const script = document.createElement("script");
+// //       script.src = "https://checkout.razorpay.com/v1/checkout.js";
+// //       script.async = true;
+// //       script.id = "razorpay-script";
+// //       script.crossOrigin = "anonymous";
+
+// //       script.onload = () => {
+// //         setSdkLoaded(true);
+// //         resolve(true);
+// //       };
+
+// //       script.onerror = (error) => {
+// //         console.error("Failed to load Razorpay SDK", error);
+// //         setSdkLoaded(false);
+// //         reject(new Error("Failed to load Razorpay SDK"));
+// //       };
+
+// //       document.body.appendChild(script);
+// //     });
+// //   }, []);
+
+// //   // ✅ Initialize Razorpay payment
+// //   const initializePayment = useCallback(async () => {
+// //     if (
+// //       !paynowbuttonsuccess ||
+// //       !sdkLoaded ||
+// //       !browserSupported ||
+// //       paymentInitialized
+// //     ) {
+// //       return;
+// //     }
+
+// //     try {
+// //       if (!window.Razorpay) {
+// //         await loadRazorpayScript();
+// //         if (!window.Razorpay) throw new Error("Razorpay not available");
+// //       }
+
+// //       const razorpayKey = process.env.RAZORPAY_KEY || "rzp_live_wJBFoukfvdWNdP";
+// //       const orderTotal = paynowbuttonsuccess?.orders[0]?.orderTotal || 0;
+// //       const razorpayOrderId = paynowbuttonsuccess?.orders[0]?.razorpayOrderId;
+
+// //       if (!razorpayOrderId) throw new Error("Razorpay Order ID is missing");
+
+// //       const options = {
+// //         key: razorpayKey,
+// //         amount: Math.round(orderTotal * 100),
+// //         currency: "INR",
+// //         name: "Mathioli",
+// //         description: "Payment for your order",
+// //         order_id: razorpayOrderId,
+// //         handler: async (response) => {
+// //           try {
+// //             const paymentData = {
+// //               razorpayOrderId: response.razorpay_order_id,
+// //               razorpayPaymentId: response.razorpay_payment_id,
+// //               razorpaySignature: response.razorpay_signature,
+// //             };
+
+// //             const apiResponse = await bookingVerifypayment(paymentData);
+
+// //             if (apiResponse?.success) {
+// //               Swal.fire({
+// //                 title: "Success",
+// //                 text: apiResponse?.message || "Payment successful!",
+// //                 icon: "success",
+// //                 confirmButtonText: "Continue",
+// //               }).then(() => {
+// //                 sessionStorage.removeItem("razorpayOrder");
+// //                 sessionStorage.removeItem("buysinglebook");
+// //                 window.location.href = "/";
+// //               });
+// //             } else {
+// //               Swal.fire(
+// //                 "Verification Failed",
+// //                 apiResponse?.data?.message || "Payment verification failed",
+// //                 "error"
+// //               );
+// //             }
+// //           } catch (error) {
+// //             console.error("Verification error:", error);
+// //             Swal.fire(
+// //               "Error",
+// //               "Unable to verify payment. Please contact support.",
+// //               "error"
+// //             );
+// //           } finally {
+// //             setIsProcessing(false);
+// //             setPaymentInitialized(false);
+// //           }
+// //         },
+// //         prefill: {
+// //           name: raso?.order?.shippingInfo?.firstname || "",
+// //           email: raso?.order?.shippingInfo?.email || "",
+// //           contact: raso?.order?.shippingInfo?.phone || "",
+// //         },
+// //         notes: {
+// //           orderId: paynowbuttonsuccess?.orders[0]?.orderId,
+// //         },
+// //         theme: {
+// //           color: "#396664",
+// //           hide_topbar: false,
+// //         },
+// //         modal: {
+// //           ondismiss: () => {
+// //             setIsProcessing(false);
+// //             setPaymentInitialized(false);
+// //           },
+// //         },
+// //       };
+
+// //       const rzp = new window.Razorpay(options);
+
+// //       rzp.on("payment.failed", (response) => {
+// //         console.error("Payment failed:", response.error);
+// //         Swal.fire(
+// //           "Payment Failed",
+// //           response.error.description || "Payment could not be completed",
+// //           "error"
+// //         );
+// //         setIsProcessing(false);
+// //         setPaymentInitialized(false);
+// //       });
+
+// //       setPaymentInitialized(true);
+// //       rzp.open();
+// //     } catch (error) {
+// //       console.error("Payment initialization error:", error);
+// //       Swal.fire(
+// //         "Payment Error",
+// //         error.message || "Unable to initialize payment. Please try again.",
+// //         "error"
+// //       );
+// //       setIsProcessing(false);
+// //       setPaymentInitialized(false);
+// //     }
+// //   }, [
+// //     paynowbuttonsuccess,
+// //     sdkLoaded,
+// //     browserSupported,
+// //     paymentInitialized,
+// //     raso,
+// //     loadRazorpayScript,
+// //   ]);
+
+// //   // ✅ Begin payment after placing order
+// //   const handlePayment = async () => {
+// //     try {
+// //       setIsProcessing(true);
+// //       await loadRazorpayScript();
+// //       await PlaceOrders();
+// //     } catch (error) {
+// //       console.error("Payment process failed:", error);
+// //       Swal.fire(
+// //         "Payment Error",
+// //         error.message || "Unable to process payment. Please try again.",
+// //         "error"
+// //       );
+// //       setIsProcessing(false);
+// //     }
+// //   };
+
+// //   // ✅ Check browser support once
+// //   useEffect(() => {
+// //     if (typeof window !== "undefined") {
+// //       const isSupported = checkBrowserSupport();
+// //       setBrowserSupported(isSupported);
+
+// //       return () => {
+// //         const script = document.getElementById("razorpay-script");
+// //         if (script) document.body.removeChild(script);
+// //       };
+// //     }
+// //   }, [checkBrowserSupport]);
+
+// //   // ✅ Trigger payment if ready
+// //   useEffect(() => {
+// //     if (
+// //       paynowbuttonsuccess &&
+// //       sdkLoaded &&
+// //       browserSupported &&
+// //       !paymentInitialized
+// //     ) {
+// //       initializePayment();
+// //     }
+// //   }, [
+// //     paynowbuttonsuccess,
+// //     sdkLoaded,
+// //     browserSupported,
+// //     paymentInitialized,
+// //     initializePayment,
+// //   ]);
 
 // //   return (
-// //     <div className="" style={{ fontFamily: "Poppins" }}>
-// //       <div className=" booking-detailssssss">
+// //     <div className="payment-container" style={{ fontFamily: "Poppins" }}>
+// //       <div className="booking-details">
 // //         <Row>
 // //           {!browserSupported && (
-// //             <div className="alert alert-warning">
-// //               Your browser is not fully supported. For best results, please use
-// //               Chrome or Firefox.
+// //             <div className="alert alert-warning mb-3">
+// //               <strong>Note:</strong> Your browser is not supported. Please use
+// //               the latest Chrome, Firefox, Safari, or Edge for a smooth payment
+// //               experience.
 // //             </div>
 // //           )}
+
 // //           <form
 // //             onSubmit={(e) => {
 // //               e.preventDefault();
@@ -677,25 +599,19 @@
 // //             }}
 // //           >
 // //             <Button
-// //               label={
-// //                 !browserSupported
-// //                   ? "Browser Not Supported"
-// //                   : isProcessing
-// //                   ? "Processing..."
-// //                   : sdkLoaded
-// //                   ? "Pay Now"
-// //                   : "Loading Payment..."
-// //               }
+// //               label={"Pay Now"}
 // //               type="submit"
-// //               style={{ background: "#396664" }}
+// //               style={{
+// //                 background: "#396664",
+// //                 border: "none",
+// //                 padding: "12px 24px",
+// //                 fontSize: "16px",
+// //               }}
 // //               className="rounded-2 m-2 w-100"
 // //               disabled={
-// //                 !formData.privacy_policy ||
-// //                 !shippingdata ||
-// //                 !sdkLoaded ||
-// //                 isProcessing ||
-// //                 !browserSupported
+// //                 !formData.privacy_policy || !shippingdata || isProcessing
 // //               }
+// //               icon={isProcessing ? "pi pi-spinner pi-spin" : ""}
 // //             />
 // //           </form>
 // //         </Row>
@@ -706,7 +622,7 @@
 
 // // export default Payment;
 // "use client";
-// import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState, useCallback } from "react";
 // import Swal from "sweetalert2";
 // import { Col, Row } from "react-bootstrap";
 // import { bookingVerifypayment } from "../../../../../api/page";
@@ -725,43 +641,35 @@
 //   const [isProcessing, setIsProcessing] = useState(false);
 //   const [browserSupported, setBrowserSupported] = useState(true);
 //   const [paymentInitialized, setPaymentInitialized] = useState(false);
-
-//   // Get Razorpay order details from session storage
 //   const [raso, setRaso] = useState({});
+//   const [rzpInstance, setRzpInstance] = useState(null);
 
-//   useEffect(() => {
-//     if (typeof window !== "undefined") {
-//       try {
-//         const razorpayOrder = sessionStorage.getItem("razorpayOrder");
-//         if (razorpayOrder) {
-//           setRaso(JSON.parse(razorpayOrder));
-//         }
-//       } catch (error) {
-//         console.error("Failed to parse razorpayOrder:", error);
-//       }
+//   const checkBrowserSupport = useCallback(() => {
+//     try {
+//       const requiredFeatures = [
+//         "Promise",
+//         "fetch",
+//         "URL",
+//         "FormData",
+//         "CustomEvent",
+//         "IntersectionObserver",
+//       ];
+//       const isMissingFeature = requiredFeatures.some(
+//         (feature) => !(feature in window)
+//       );
+//       const userAgent = navigator.userAgent.toLowerCase();
+//       const isUnsupported = /msie|trident|edge\/1[0-7]/i.test(userAgent);
+//       return !(isMissingFeature || isUnsupported);
+//     } catch (e) {
+//       console.error("Browser support check error:", e);
+//       return false;
 //     }
 //   }, []);
 
-//   const checkBrowserSupport = () => {
-//     if (typeof window === "undefined") return true;
-
-//     const userAgent = navigator.userAgent;
-//     // Supported browsers: Chrome, Firefox, Safari, Edge (not IE, Opera Mini, etc.)
-//     const isSupported = /chrome|firefox|safari|edge/i.test(userAgent) &&
-//                       !/opera|opr|ie|trident/i.test(userAgent);
-
-//     // Additional check for mobile browsers
-//     if (/android|iphone|ipad|ipod/i.test(userAgent)) {
-//       // Additional checks for mobile browser support if needed
-//     }
-
-//     return isSupported;
-//   };
-
-//   const loadRazorpayScript = () => {
+//   const loadRazorpayScript = useCallback(() => {
 //     return new Promise((resolve, reject) => {
 //       if (window.Razorpay) {
-//         console.log("Razorpay SDK already loaded");
+//         console.log("Razorpay already loaded");
 //         setSdkLoaded(true);
 //         resolve(true);
 //         return;
@@ -770,6 +678,8 @@
 //       const script = document.createElement("script");
 //       script.src = "https://checkout.razorpay.com/v1/checkout.js";
 //       script.async = true;
+//       script.id = "razorpay-script";
+//       script.crossOrigin = "anonymous";
 
 //       script.onload = () => {
 //         console.log("Razorpay SDK loaded successfully");
@@ -778,41 +688,57 @@
 //       };
 
 //       script.onerror = (error) => {
-//         console.error("Failed to load Razorpay SDK", error);
+//         console.error("Razorpay SDK load error:", error);
 //         setSdkLoaded(false);
 //         reject(new Error("Failed to load Razorpay SDK"));
 //       };
 
 //       document.body.appendChild(script);
 //     });
-//   };
+//   }, []);
 
-//   const initializePayment = async () => {
-//     if (!paynowbuttonsuccess || !sdkLoaded || !browserSupported) return;
+//   const cleanupRazorpay = useCallback(() => {
+//     if (rzpInstance) {
+//       console.log("Cleaning up Razorpay instance");
+//       rzpInstance.close();
+//       setRzpInstance(null);
+//     }
+//     setIsProcessing(false);
+//     setPaymentInitialized(false);
+//   }, [rzpInstance]);
+
+//   const initializePayment = useCallback(async () => {
+//     if (
+//       !paynowbuttonsuccess ||
+//       !sdkLoaded ||
+//       !browserSupported ||
+//       paymentInitialized
+//     ) {
+//       console.log("Payment not initialized due to unmet conditions");
+//       return;
+//     }
 
 //     try {
-//       if (!window.Razorpay) {
-//         throw new Error("Razorpay not available");
+//       const razorpayKey =
+//         process.env.RAZORPAY_KEY || "rzp_test_your_test_key_here";
+//       const order = paynowbuttonsuccess?.orders?.[0];
+
+//       if (!order || !order.razorpayOrderId) {
+//         throw new Error("Missing Razorpay Order ID");
 //       }
 
-//       const razorpayKey = process.env.RAZORPAY_KEY || "rzp_live_wJBFoukfvdWNdP";
-//       const orderTotal = paynowbuttonsuccess?.orders[0]?.orderTotal || 0;
-//       const razorpayOrderId = paynowbuttonsuccess?.orders[0]?.razorpayOrderId;
-
-//       if (!razorpayOrderId) {
-//         throw new Error("Razorpay Order ID is missing");
-//       }
+//       console.log("Initializing payment with order:", order);
 
 //       const options = {
-//         key: razorpayKey,
-//         amount: Math.round(orderTotal * 100), // Convert to paise
-//         currency: "INR",
-//         name: "Mathioli",
+// key: razorpayKey,
+// amount: Math.round(order.orderTotal * 100),
+// currency: "INR",
+// name: "Mathioli",
 //         description: "Payment for your order",
-//         order_id: razorpayOrderId,
+//         order_id: order.razorpayOrderId,
 //         handler: async (response) => {
-//           console.log("Payment success response:", response);
 //           try {
+//             console.log("Payment successful, verifying...", response);
 //             const paymentData = {
 //               razorpayOrderId: response.razorpay_order_id,
 //               razorpayPaymentId: response.razorpay_payment_id,
@@ -820,8 +746,6 @@
 //             };
 
 //             const apiResponse = await bookingVerifypayment(paymentData);
-//             console.log("Verification response:", apiResponse);
-
 //             if (apiResponse?.success) {
 //               Swal.fire({
 //                 title: "Success",
@@ -840,461 +764,364 @@
 //                 "error"
 //               );
 //             }
-//           } catch (error) {
-//             console.error("Verification error:", error);
+//           } catch (err) {
+//             console.error("Payment verification error:", err);
 //             Swal.fire(
 //               "Error",
 //               "Unable to verify payment. Please contact support.",
 //               "error"
 //             );
+//           } finally {
+//             cleanupRazorpay();
 //           }
 //         },
 //         prefill: {
-//           name: raso?.order?.shippingInfo?.firstname || "",
-//           email: raso?.order?.shippingInfo?.email || "",
-//           contact: raso?.order?.shippingInfo?.phone || "",
+//           name: raso?.order?.shippingInfo?.firstname || "Customer",
+//           email: raso?.order?.shippingInfo?.email || "customer@example.com",
+//           contact: raso?.order?.shippingInfo?.phone || "9999999999",
 //         },
 //         notes: {
-//           orderId: paynowbuttonsuccess?.orders[0]?.orderId,
+//           orderId: order.orderId,
 //         },
 //         theme: {
 //           color: "#396664",
-//           hide_topbar: false,
 //         },
 //         modal: {
 //           ondismiss: () => {
-//             console.log("Payment modal closed");
-//             setIsProcessing(false);
+//             console.log("Modal dismissed by user");
+//             Swal.fire({
+//               title: "Payment Cancelled",
+//               text: "You cancelled the payment process",
+//               icon: "info",
+//               confirmButtonText: "OK",
+//             });
+//             cleanupRazorpay();
 //           },
+//           escape: true,
+//           backdropclose: true,
 //         },
 //       };
 
+//       console.log("Creating Razorpay instance with options:", options);
 //       const rzp = new window.Razorpay(options);
+//       setRzpInstance(rzp);
 
 //       rzp.on("payment.failed", (response) => {
 //         console.error("Payment failed:", response.error);
 //         Swal.fire(
 //           "Payment Failed",
-//           response.error.description || "Payment could not be completed",
+//           response.error.description || "Payment failed. Please try again.",
 //           "error"
 //         );
-//         setIsProcessing(false);
+//         cleanupRazorpay();
 //       });
 
-//       rzp.on("payment.authorized", (response) => {
-//         console.log("Payment authorized:", response);
+//       rzp.on("modal.close", () => {
+//         console.log("Modal explicitly closed");
+//         cleanupRazorpay();
 //       });
 
 //       setPaymentInitialized(true);
 //       rzp.open();
+//       console.log("Razorpay modal opened");
 //     } catch (error) {
-//       console.error("Payment initialization error:", error);
+//       console.error("Payment initialization failed:", error);
 //       Swal.fire(
-//         "Payment Error",
-//         error.message || "Unable to initialize payment. Please try again.",
+//         "Error",
+//         error.message || "Payment initialization failed",
 //         "error"
 //       );
-//       setIsProcessing(false);
+//       cleanupRazorpay();
 //     }
-//   };
+//   }, [
+//     paynowbuttonsuccess,
+//     sdkLoaded,
+//     browserSupported,
+//     paymentInitialized,
+//     raso,
+//     cleanupRazorpay,
+//   ]);
 
 //   const handlePayment = async () => {
 //     try {
 //       setIsProcessing(true);
-
-//       if (!checkBrowserSupport()) {
-//         throw new Error("Unsupported browser detected");
-//       }
-
 //       await loadRazorpayScript();
 //       await PlaceOrders();
 //     } catch (error) {
-//       console.error("Payment process failed:", error);
-//       Swal.fire(
-//         "Payment Error",
-//         error.message || "Unable to process payment. Please try again.",
-//         "error"
-//       );
-//       setBrowserSupported(false);
-//       setIsProcessing(false);
+//       console.error("handlePayment error:", error);
+//       Swal.fire("Error", error.message || "Payment failed", "error");
+//       cleanupRazorpay();
 //     }
 //   };
 
+//   // Load Razorpay Order from session (used for prefill)
 //   useEffect(() => {
 //     if (typeof window !== "undefined") {
-//       setBrowserSupported(checkBrowserSupport());
+//       const data = sessionStorage.getItem("razorpayOrder");
+//       if (data) {
+//         try {
+//           const parsedData = JSON.parse(data);
+//           console.log("Loaded Razorpay order from session:", parsedData);
+//           setRaso(parsedData);
+//         } catch (err) {
+//           console.error("Failed to parse razorpayOrder from sessionStorage");
+//         }
+//       }
 //     }
 //   }, []);
 
 //   useEffect(() => {
-//     initializePayment();
-//   }, [paynowbuttonsuccess, sdkLoaded, browserSupported]);
+//     const isSupported = checkBrowserSupport();
+//     setBrowserSupported(isSupported);
+//     console.log("Browser supported:", isSupported);
+
+//     return () => {
+//       cleanupRazorpay();
+//       const script = document.getElementById("razorpay-script");
+//       if (script) {
+//         console.log("Removing Razorpay script");
+//         document.body.removeChild(script);
+//       }
+//     };
+//   }, [checkBrowserSupport, cleanupRazorpay]);
+
+//   useEffect(() => {
+//     if (
+//       paynowbuttonsuccess &&
+//       sdkLoaded &&
+//       browserSupported &&
+//       !paymentInitialized
+//     ) {
+//       console.log("Conditions met, initializing payment");
+//       initializePayment();
+//     }
+//   }, [
+//     paynowbuttonsuccess,
+//     sdkLoaded,
+//     browserSupported,
+//     paymentInitialized,
+//     initializePayment,
+//   ]);
 
 //   return (
 //     <div className="payment-container" style={{ fontFamily: "Poppins" }}>
-//       <div className="booking-details">
-//         <Row>
-//           {!browserSupported && (
-//             <div className="alert alert-warning mb-3">
-//               <strong>Browser Not Supported:</strong> For the best payment experience,
-//               please use Google Chrome or Mozilla Firefox.
-//             </div>
-//           )}
-
-//           <form
-//             onSubmit={(e) => {
-//               e.preventDefault();
-//               if (browserSupported && !isProcessing) {
-//                 handlePayment();
-//               }
-//             }}
-//           >
-//             <Button
-//               label={
-//                 !browserSupported ? "Browser Not Supported" :
-//                 isProcessing ? "Processing..." :
-//                 !sdkLoaded ? "Loading Payment..." :
-//                 "Pay Now"
-//               }
-//               type="submit"
-//               style={{
-//                 background: "#396664",
-//                 border: "none",
-//                 padding: "12px 24px",
-//                 fontSize: "16px",
-//               }}
-//               className="rounded-2 m-2 w-100"
-//               disabled={
-//                 !formData.privacy_policy ||
-//                 !shippingdata ||
-//                 !sdkLoaded ||
-//                 isProcessing ||
-//                 !browserSupported
-//               }
-//               icon={isProcessing ? "pi pi-spinner pi-spin" : "pi pi-lock"}
-//             />
-//           </form>
-
-//           <div className="mt-3 text-center">
-//             <small className="text-muted">
-//               Secure payment powered by Razorpay
-//             </small>
+//       <Row>
+//         {!browserSupported && (
+//           <div className="alert alert-warning mb-3">
+//             <strong>Note:</strong> Your browser is not supported. Please use the
+//             latest Chrome, Firefox, Safari, or Edge.
 //           </div>
-//         </Row>
-//       </div>
+//         )}
+//         <form
+//           onSubmit={(e) => {
+//             e.preventDefault();
+//             handlePayment();
+//           }}
+//         >
+//           <Button
+//             label="Pay Now"
+//             type="submit"
+//             style={{
+//               background: "#396664",
+//               border: "none",
+//               padding: "12px 24px",
+//               fontSize: "16px",
+//             }}
+//             className="rounded-2 m-2 w-100"
+//             disabled={
+//               !formData?.privacy_policy || !shippingdata || isProcessing
+//             }
+//             icon={isProcessing ? "pi pi-spinner pi-spin" : ""}
+//           />
+//         </form>
+//       </Row>
 //     </div>
 //   );
 // };
 
 // export default Payment;
+// ============================================================================================================================
+// ============================================================================================================================
+// ============================================================================================================================
+// ============================================================================================================================
+// ============================================================================================================================
+// ============================================================================================================================
+// ============================================================================================================================
+// ============================================================================================================================
+// ============================================================================================================================
 
 "use client";
-import React, { useEffect, useState, useCallback } from "react";
-import Swal from "sweetalert2";
-import { Col, Row } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import { Button, Row } from "react-bootstrap";
 import { bookingVerifypayment } from "../../../../../api/page";
-import { Button } from "primereact/button";
 
-const Payment = ({
-  PlaceOrders,
-  formData,
-  total,
-  razopayshow,
-  paynowbutton,
-  paynowbuttonsuccess,
-  shippingdata,
-}) => {
+const Payment = ({ PlaceOrders, paynowbuttonsuccess = [] }) => {
   const [sdkLoaded, setSdkLoaded] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [browserSupported, setBrowserSupported] = useState(true);
-  const [paymentInitialized, setPaymentInitialized] = useState(false);
-  const [raso, setRaso] = useState({});
 
-  // Define checkBrowserSupport inside the component
-  const checkBrowserSupport = useCallback(() => {
-    if (typeof window === "undefined") return true;
-
-    const userAgent = navigator.userAgent;
-    // Supported browsers: Chrome, Firefox, Safari, Edge (not IE, Opera Mini, etc.)
-    const isSupported =
-      /chrome|firefox|safari|edge/i.test(userAgent) &&
-      !/opera|opr|ie|trident/i.test(userAgent);
-
-    // Additional check for mobile browsers
-    if (/android|iphone|ipad|ipod/i.test(userAgent)) {
-      // Additional checks for mobile browser support if needed
-    }
-
-    return isSupported;
-  }, []);
-
-  // Get Razorpay order details from session storage
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      try {
-        const razorpayOrder = sessionStorage.getItem("razorpayOrder");
-        if (razorpayOrder) {
-          setRaso(JSON.parse(razorpayOrder));
+    const loadRazorpayScript = () => {
+      return new Promise((resolve) => {
+        if (window.Razorpay) {
+          setSdkLoaded(true);
+          return resolve();
         }
-      } catch (error) {
-        console.error("Failed to parse razorpayOrder:", error);
-      }
-    }
+
+        const script = document.createElement("script");
+        script.src = "https://checkout.razorpay.com/v1/checkout.js";
+        script.async = true;
+
+        script.onload = () => {
+          setSdkLoaded(true);
+          resolve();
+        };
+
+        script.onerror = () => {
+          console.error("Razorpay SDK failed to load");
+          Swal.fire(
+            "Error",
+            "Payment gateway failed to load. Please refresh the page.",
+            "error"
+          );
+        };
+
+        document.body.appendChild(script);
+      });
+    };
+
+    loadRazorpayScript();
   }, []);
 
-  const loadRazorpayScript = useCallback(() => {
-    return new Promise((resolve, reject) => {
-      if (window.Razorpay) {
-        // console.log("Razorpay SDK already loaded");
-        setSdkLoaded(true);
-        resolve(true);
-        return;
-      }
-
-      const script = document.createElement("script");
-      script.src = "https://checkout.razorpay.com/v1/checkout.js";
-      script.async = true;
-      script.id = "razorpay-script";
-
-      script.onload = () => {
-        // console.log("Razorpay SDK loaded successfully");
-        setSdkLoaded(true);
-        resolve(true);
-      };
-
-      script.onerror = (error) => {
-        console.error("Failed to load Razorpay SDK", error);
-        setSdkLoaded(false);
-        reject(new Error("Failed to load Razorpay SDK"));
-      };
-
-      document.body.appendChild(script);
-    });
-  }, []);
-
-  const initializePayment = useCallback(async () => {
-    if (
-      !paynowbuttonsuccess ||
-      !sdkLoaded ||
-      !browserSupported ||
-      paymentInitialized
-    ) {
+  const initiatePayment = async () => {
+    if (!sdkLoaded) {
+      Swal.fire(
+        "Error",
+        "Payment gateway is still loading. Please wait.",
+        "error"
+      );
       return;
     }
 
+    // if (paynowbuttonsuccess.length === 0) {
+    //   Swal.fire("Info", "Please select at least one product", "info");
+    //   return;
+    // }
+
+    setIsProcessing(true);
+
     try {
-      if (!window.Razorpay) {
-        throw new Error("Razorpay not available");
+      const res = await PlaceOrders();
+      console.log("Order response:", res);
+
+      const orderData = res?.orders?.[0];
+      if (!orderData?.razorpayOrderId) {
+        throw new Error("Failed to create Razorpay order");
       }
 
-      const razorpayKey = process.env.RAZORPAY_KEY || "rzp_live_wJBFoukfvdWNdP";
-      const orderTotal = paynowbuttonsuccess?.orders[0]?.orderTotal || 0;
-      const razorpayOrderId = paynowbuttonsuccess?.orders[0]?.razorpayOrderId;
-
-      if (!razorpayOrderId) {
-        throw new Error("Razorpay Order ID is missing");
-      }
+      console.log("Razorpay SDK Loaded:", !!window.Razorpay);
 
       const options = {
-        key: razorpayKey,
-        amount: Math.round(orderTotal * 100),
+        key: "rzp_live_wJBFoukfvdWNdP", // Use live/test key accordingly
+        amount: Math.round(orderData.orderTotal * 100), // In paise
         currency: "INR",
         name: "Mathioli",
-        description: "Payment for your order",
-        order_id: razorpayOrderId,
+        description: `Order #${orderData.orderId}`,
+        order_id: orderData.razorpayOrderId,
         handler: async (response) => {
-          // console.log("Payment success response:", response);
           try {
             const paymentData = {
               razorpayOrderId: response.razorpay_order_id,
               razorpayPaymentId: response.razorpay_payment_id,
               razorpaySignature: response.razorpay_signature,
+              orderId: orderData.orderId,
             };
 
-            const apiResponse = await bookingVerifypayment(paymentData);
-            // console.log("Verification response:", apiResponse);
-
-            if (apiResponse?.success) {
+            const verification = await bookingVerifypayment(paymentData);
+            if (verification?.success) {
               Swal.fire({
-                title: "Success",
-                text: apiResponse?.message || "Payment successful!",
                 icon: "success",
-                confirmButtonText: "Continue",
-              }).then(() => {
-                sessionStorage.removeItem("razorpayOrder");
-                sessionStorage.removeItem("buysinglebook");
-                window.location.href = "/";
+                title: "Payment Successful!",
+                text: `Order #${orderData.orderId} has been placed`,
+                confirmButtonColor: "#0C8040",
               });
             } else {
-              Swal.fire(
-                "Verification Failed",
-                apiResponse?.data?.message || "Payment verification failed",
-                "error"
+              throw new Error(
+                verification?.message || "Payment verification failed"
               );
             }
           } catch (error) {
             console.error("Verification error:", error);
             Swal.fire(
               "Error",
-              "Unable to verify payment. Please contact support.",
+              error.message || "Payment verification failed",
               "error"
             );
           }
         },
-        prefill: {
-          name: raso?.order?.shippingInfo?.firstname || "",
-          email: raso?.order?.shippingInfo?.email || "",
-          contact: raso?.order?.shippingInfo?.phone || "",
-        },
-        notes: {
-          orderId: paynowbuttonsuccess?.orders[0]?.orderId,
-        },
         theme: {
-          color: "#396664",
-          hide_topbar: false,
+          color: "#0c8040",
         },
         modal: {
           ondismiss: () => {
-            // console.log("Payment modal closed");
             setIsProcessing(false);
-            setPaymentInitialized(false);
+            console.log("Payment modal closed");
           },
         },
       };
+
+      console.log("Razorpay options:", options);
 
       const rzp = new window.Razorpay(options);
 
       rzp.on("payment.failed", (response) => {
         console.error("Payment failed:", response.error);
-        Swal.fire(
-          "Payment Failed",
-          response.error.description || "Payment could not be completed",
-          "error"
-        );
+        Swal.fire("Payment Failed", response.error.description, "error");
         setIsProcessing(false);
-        setPaymentInitialized(false);
       });
 
-      rzp.on("payment.authorized", (response) => {
-        // console.log("Payment authorized:", response);
-      });
+      // Attempt to open the modal
+      setTimeout(() => {
+        console.log("Attempting to open payment modal...");
+        rzp.open();
 
-      setPaymentInitialized(true);
-      rzp.open();
+        // Check fallback in case modal fails to render
+        setTimeout(() => {
+          if (!document.querySelector(".razorpay-container")) {
+            console.warn("Modal not detected, retrying...");
+            const rzpRetry = new window.Razorpay(options);
+            rzpRetry.open();
+          }
+        }, 1000);
+      }, 300);
     } catch (error) {
-      console.error("Payment initialization error:", error);
+      console.error("Payment error:", error);
       Swal.fire(
-        "Payment Error",
-        error.message || "Unable to initialize payment. Please try again.",
+        "Error",
+        error.message || "Failed to initiate payment",
         "error"
       );
-      setIsProcessing(false);
-      setPaymentInitialized(false);
-    }
-  }, [
-    paynowbuttonsuccess,
-    sdkLoaded,
-    browserSupported,
-    paymentInitialized,
-    raso,
-  ]);
-
-  const handlePayment = async () => {
-    try {
-      setIsProcessing(true);
-
-      if (!checkBrowserSupport()) {
-        throw new Error("Unsupported browser detected");
-      }
-
-      await loadRazorpayScript();
-      await PlaceOrders();
-    } catch (error) {
-      console.error("Payment process failed:", error);
-      Swal.fire(
-        "Payment Error",
-        error.message || "Unable to process payment. Please try again.",
-        "error"
-      );
-      setBrowserSupported(false);
       setIsProcessing(false);
     }
   };
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setBrowserSupported(checkBrowserSupport());
-
-      return () => {
-        const script = document.getElementById("razorpay-script");
-        if (script) {
-          document.body.removeChild(script);
-        }
-      };
-    }
-  }, [checkBrowserSupport]);
-
-  useEffect(() => {
-    if (
-      paynowbuttonsuccess &&
-      sdkLoaded &&
-      browserSupported &&
-      !paymentInitialized
-    ) {
-      initializePayment();
-    }
-  }, [
-    paynowbuttonsuccess,
-    sdkLoaded,
-    browserSupported,
-    paymentInitialized,
-    initializePayment,
-  ]);
-
   return (
-    <div className="payment-container" style={{ fontFamily: "Poppins" }}>
-      <div className="booking-details">
+    <div style={{ fontFamily: "Poppins" }}>
+      <div className="booking-detailssssss">
         <Row>
-          {!browserSupported && (
-            <div className="alert alert-warning mb-3">
-              <strong>Browser Not Supported:</strong> For the best payment
-              experience, please use Google Chrome or Mozilla Firefox.
-            </div>
-          )}
-
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (browserSupported && !isProcessing) {
-                handlePayment();
-              }
+          <Button
+            variant="contained"
+            style={{
+              color: "#fff",
+              width: "100%",
+              borderRadius: "15px",
+              marginTop: "10px",
+              background: "red",
             }}
+            onClick={initiatePayment}
           >
-            <Button
-              label={"Pay Now"}
-              type="submit"
-              style={{
-                background: "#396664",
-                border: "none",
-                padding: "12px 24px",
-                fontSize: "16px",
-              }}
-              className="rounded-2 m-2 w-100"
-              disabled={
-                !formData.privacy_policy ||
-                !shippingdata ||
-                isProcessing ||
-                !browserSupported
-              }
-              icon={isProcessing ? "pi pi-spinner pi-spin" : ""}
-            />
-          </form>
-
-          {/* <div className="mt-3 text-center">
-            <small className="text-muted">
-              Secure payment powered by Razorpay
-            </small>
-          </div> */}
+            {isProcessing ? "Processing..." : "Pay Now"}
+          </Button>
         </Row>
       </div>
     </div>
@@ -1302,3 +1129,298 @@ const Payment = ({
 };
 
 export default Payment;
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+// ==============================================================================================================
+
+// "use client";
+// import React, { useEffect, useState } from "react";
+// import Swal from "sweetalert2/dist/sweetalert2.js";
+// import { Button, Row } from "react-bootstrap";
+// import { bookingVerifypayment } from "../../../../../api/page";
+
+// const Payment = ({ handlePayment, paynowbuttonsuccess = [] }) => {
+//   const [sdkLoaded, setSdkLoaded] = useState(false);
+//   const [isProcessing, setIsProcessing] = useState(false);
+
+//   useEffect(() => {
+//     // const loadRazorpayScript = () => {
+//     //   return new Promise((resolve) => {
+//     //     if (window.Razorpay) {
+//     //       setSdkLoaded(true);
+//     //       return resolve();
+//     //     }
+
+//     //     const script = document.createElement("script");
+//     //     script.src = "https://checkout.razorpay.com/v1/checkout.js";
+//     //     script.async = true;
+
+//     //     script.onload = () => {
+//     //       setSdkLoaded(true);
+//     //       resolve();
+//     //     };
+
+//     //     script.onerror = () => {
+//     //       console.error("Razorpay SDK failed to load");
+//     //       Swal.fire(
+//     //         "Error",
+//     //         "Payment gateway failed to load. Please refresh the page.",
+//     //         "error"
+//     //       );
+//     //     };
+
+//     //     document.body.appendChild(script);
+//     //   });
+//     // };
+
+//     const loadRazorpayScript = () => {
+//           if (!window.Razorpay) {
+//             const script = document.createElement('script');
+//             script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+//             script.async = true;
+//             script.onload = () => setSdkLoaded(true);
+//             script.onerror = () => console.error('Failed to load Razorpay SDK');
+//             document.body.appendChild(script);
+//           } else {
+//             setSdkLoaded(true);
+//           }
+//         };
+
+//     loadRazorpayScript();
+//   }, []);
+
+//   // const initiatePayment = async () => {
+//   //   if (!sdkLoaded) {
+//   //     Swal.fire(
+//   //       "Error",
+//   //       "Payment gateway is still loading. Please wait.",
+//   //       "error"
+//   //     );
+//   //     return;
+//   //   }
+//     const initiatePayment = async () => {
+//       const res = await handlePayment();
+
+//       if (paynowbuttonsuccess.length === 0) {
+//         Swal.fire({
+//           title: 'info',
+//           text: 'Please select the product',
+//           timer: 3000,
+//           // confirm: true,
+//         });
+//         return;
+//       }
+
+//       if (res) {
+//         if (!sdkLoaded || !window.Razorpay) {
+//           Swal.fire(
+//             'Error',
+//             'Razorpay SDK not loaded. Please refresh and try again.',
+//             'error'
+//           );
+//           return;
+//         }
+
+//         const options = {
+//           key: 'rzp_test_KSAPXNLwGmp9M2', // Replace with your Razorpay Key ID
+//           amount: (res?.orderTotalAmount || 0) * 100, // Convert amount to paise
+//           currency: 'INR',
+//           name: 'Selli Trader ',
+//           order_id: res?.razorpayOrderId, // Order ID from backend
+//           handler: async (response) => {
+//             const paymentData = {
+//               orderId: response.razorpay_order_id,
+//               paymentId: response.razorpay_payment_id,
+//               signature: response.razorpay_signature,
+//             };
+
+//             try {
+//               const apiResponse = await bookingVerifypayment(paymentData);
+//               if (apiResponse?.data?.success) {
+//                 Swal.fire('Success', 'Payment successful!', 'success');
+//               } else {
+//                 Swal.fire(
+//                   'Error',
+//                   apiResponse?.data?.message || 'Payment failed',
+//                   'error'
+//                 );
+//               }
+//             } catch (error) {
+//               console.error('API error:', error);
+//               Swal.fire('Error', 'Unable to verify payment. Please try again.', 'error');
+//             }
+//           },
+//           // prefill: {
+//           // 	name: razorpayOrder?.order?.shippingInfo?.firstname,
+//           // 	email: razorpayOrder?.order?.shippingInfo?.email,
+//           // 	contact: razorpayOrder?.order?.shippingInfo?.phone,
+//           // },
+//           theme: { color: '#F37254' },
+//         };
+
+//         const rzp = new window.Razorpay(options);
+//         rzp.on('payment.failed', (response) => {
+//           Swal.fire('Error', response.error.description || 'Payment failed.', 'error');
+//         });
+
+//         rzp.open();
+//       }
+//     };
+
+//     // if (paynowbuttonsuccess.length === 0) {
+//     //   Swal.fire("Info", "Please select at least one product", "info");
+//     //   return;
+//     // }
+
+//     setIsProcessing(true);
+
+//     try {
+//       const res = await PlaceOrders();
+//       console.log("Order response:", res);
+
+//       const orderData = res?.orders?.[0];
+//       if (!orderData?.razorpayOrderId) {
+//         throw new Error("Failed to create Razorpay order");
+//       }
+
+//       console.log("Razorpay SDK Loaded:", !!window.Razorpay);
+
+//       const options = {
+//         key: "rzp_live_wJBFoukfvdWNdP", // Use live/test key accordingly
+//         amount: Math.round(orderData.orderTotal * 100), // In paise
+//         currency: "INR",
+//         name: "Mathioli",
+//         description: `Order #${orderData.orderId}`,
+//         order_id: orderData.razorpayOrderId,
+//         handler: async (response) => {
+//           try {
+//             const paymentData = {
+//               razorpayOrderId: response.razorpay_order_id,
+//               razorpayPaymentId: response.razorpay_payment_id,
+//               razorpaySignature: response.razorpay_signature,
+//               orderId: orderData.orderId,
+//             };
+
+//             const verification = await bookingVerifypayment(paymentData);
+//             if (verification?.success) {
+//               Swal.fire({
+//                 icon: "success",
+//                 title: "Payment Successful!",
+//                 text: `Order #${orderData.orderId} has been placed`,
+//                 confirmButtonColor: "#0C8040",
+//               });
+//             } else {
+//               throw new Error(
+//                 verification?.message || "Payment verification failed"
+//               );
+//             }
+//           } catch (error) {
+//             console.error("Verification error:", error);
+//             Swal.fire(
+//               "Error",
+//               error.message || "Payment verification failed",
+//               "error"
+//             );
+//           }
+//         },
+//         theme: {
+//           color: "#0c8040",
+//         },
+//         modal: {
+//           ondismiss: () => {
+//             setIsProcessing(false);
+//             console.log("Payment modal closed");
+//           },
+//         },
+//       };
+
+//       console.log("Razorpay options:", options);
+
+//       const rzp = new window.Razorpay(options);
+
+//       rzp.on("payment.failed", (response) => {
+//         console.error("Payment failed:", response.error);
+//         Swal.fire("Payment Failed", response.error.description, "error");
+//         setIsProcessing(false);
+//       });
+
+//       // Attempt to open the modal
+//       setTimeout(() => {
+//         console.log("Attempting to open payment modal...");
+//         rzp.open();
+
+//         // Check fallback in case modal fails to render
+//         setTimeout(() => {
+//           if (!document.querySelector(".razorpay-container")) {
+//             console.warn("Modal not detected, retrying...");
+//             const rzpRetry = new window.Razorpay(options);
+//             rzpRetry.open();
+//           }
+//         }, 1000);
+//       }, 300);
+//     } catch (error) {
+//       console.error("Payment error:", error);
+//       Swal.fire(
+//         "Error",
+//         error.message || "Failed to initiate payment",
+//         "error"
+//       );
+//       setIsProcessing(false);
+//     }
+//   }
+
+//   return (
+//     <div style={{ fontFamily: "Poppins" }}>
+//       <div className="booking-detailssssss">
+//         <Row>
+//           <Button
+//             variant="contained"
+//             style={{
+//               color: "#fff",
+//               width: "100%",
+//               borderRadius: "15px",
+//               marginTop: "10px",
+//               background: "red",
+//             }}
+//             onClick={initiatePayment}
+//           >
+//             {isProcessing ? "Processing..." : "Pay Now"}
+//           </Button>
+//         </Row>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Payment;
