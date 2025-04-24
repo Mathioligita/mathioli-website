@@ -102,7 +102,7 @@ export default function RootLayout({ children }) {
         
         /> */}
         <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-        <title> Mathioli Gita</title>
+        {/* <title> Mathioli Gita</title> */}
         <link rel="icon" href="/Fav icon.svg" type="image/x-icon" sizes="any" />
         <meta
           name="google-site-verification"
