@@ -9,7 +9,7 @@ import "primeicons/primeicons.css";
 import { v4 as uuidv4 } from "uuid";
 import UserContext from "./UseContext/UseContext"; // Ensure c
 import Cookies from "js-cookie";
-import { config } from "@fortawesome/fontawesome-svg-core";
+// import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 // import Loading from "../../components/Loading";
 // Import the Loading component
