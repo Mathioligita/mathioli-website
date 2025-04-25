@@ -81,8 +81,10 @@ export default function LoginPage() {
     <main className="flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden m-auto">
       <div className="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
         <div className="text-center mb-5 col-6">
-          <div className="text-900 text-3xl font-medium mb-3">Welcome!</div>
-          <span className="text-600 font-medium">Sign in to continue</span>
+          <img src="/svg/Final-Logo 2.png" alt="" width={400} /> <br />
+          {/* <div className="text-900 text-3xl font-medium mb-3">Welcome!</div> */}
+          <span className="text-600 font-medium">Sign in to continue</span>{" "}
+          <br />
         </div>
         <div className="flex flex-column align-items-center justify-content-center col-6">
           <div

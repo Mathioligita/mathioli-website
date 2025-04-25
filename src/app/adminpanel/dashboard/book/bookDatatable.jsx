@@ -306,7 +306,7 @@ const BookTable = () => {
     try {
       const headers = { Authorization: `Bearer ${accessToken}` };
       const response = await axios.get(`${API_BASE_URL}/book`, { headers });
-      setBooks(response.data.data.books);
+      setBooks(response.data.data.books.reverse());
     } catch (error) {
       console.error(error);
     }
@@ -480,19 +480,17 @@ const BookTable = () => {
           </div>
           <div>
             <DataTable
-              value={books
-                .reverse()
-                .filter((category) =>
-                  globalFilter
-                    ? category.title
-                        .toLowerCase()
-                        .includes(globalFilter.toLowerCase()) ||
-                      category.price
-                        .toString()
-                        .toLowerCase()
-                        .includes(globalFilter.toLowerCase())
-                    : true
-                )}
+              value={books.filter((category) =>
+                globalFilter
+                  ? category.title
+                      .toLowerCase()
+                      .includes(globalFilter.toLowerCase()) ||
+                    category.price
+                      .toString()
+                      .toLowerCase()
+                      .includes(globalFilter.toLowerCase())
+                  : true
+              )}
               paginator
               rows={5}
             >
