@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 export const metadata = {
-  title: "Tamil books buy online",
+  title: "Tamil books buy online | Uthiradam Books",
   description:
     "Buy Tamil books online across genres like literature, spirituality, novels, and more. Enjoy easy ordering, secure payment, and doorstep delivery.",
   keywords:

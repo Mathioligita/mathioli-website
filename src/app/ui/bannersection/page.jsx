@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React from "react";
 import "./BannerSection.css"; // Import the CSS file
@@ -16,6 +16,17 @@ export default function Bannersection() {
         className="banner-image"
       />
       <div className="banner-text">
+        <span
+          style={{
+            textAlign: "start",
+            color: "#1d5755",
+            fontSize: "18px",
+            fontWeight: "700",
+          }}
+          className="ms-auto"
+        >
+          Uthiradam Books
+        </span>
         <h1>
           <span className="line1">
             Read and Dream it
@@ -26,11 +37,7 @@ export default function Bannersection() {
           </span>
         </h1>
         <div className="text-start">
-          <Button
-            className="btn-banner"
-            onClick={() => router.push("/book")}
-          
-          >
+          <Button className="btn-banner" onClick={() => router.push("/book")}>
             Explore Our Books
           </Button>
         </div>

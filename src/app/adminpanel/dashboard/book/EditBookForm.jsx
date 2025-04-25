@@ -2735,7 +2735,7 @@ const EditBookForm = ({ id }) => {
           icon: "success",
           confirmButtonText: "OK",
         });
-        router.push("/dashboard/book");
+        router.push("/adminpanel/dashboard/book");
       } else {
         Swal.fire({
           title: "Error!",
