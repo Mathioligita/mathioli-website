@@ -1428,6 +1428,20 @@ export default function Addtocart() {
           </div>
         ))}
       </Row>
+      <div className="text-end mt-3 mb-5">
+        <h5 className="ms-auto">
+          Estimate total: {formatCurrency(calculateTotal())}
+        </h5>
+        <div>
+          <p>Taxes, Discounts and shipping calculated at checkout</p>
+          <Button
+            onClick={Checkoutnavigate}
+            label="Proceed to Checkout"
+            style={{ background: "#396664" }}
+            className="rounded-2 m-2"
+          />
+        </div>
+      </div>
     </div>
   );
 

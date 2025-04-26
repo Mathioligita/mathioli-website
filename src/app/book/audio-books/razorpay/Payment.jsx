@@ -6,7 +6,7 @@ import { bookingVerifypayment } from "../../../../../api/page"; // Import your A
 import { Button } from "primereact/button";
 
 const Payment = ({
-  PlaceOrders,
+  handlePayment,
   // formData,
   // total,
   // razopayshow,
@@ -30,7 +30,7 @@ const Payment = ({
 
   useEffect(() => {
     const loadRazorpayScript = () => {
-      if (!window.Razorpay) {
+      if (window.Razorpay) {
         const script = document.createElement("script");
         script.src = "https://checkout.razorpay.com/v1/checkout.js";
         script.async = true;
@@ -45,9 +45,9 @@ const Payment = ({
     loadRazorpayScript();
   }, []);
 
-  const handlePayment = async () => {
-    PlaceOrders();
-  };
+  // const handlePayment = async () => {
+  //   handlePayment();
+  // };
   // console.log(paynowbuttonsuccess, "paynowbuttonsuccess");
   useEffect(() => {
     if (paynowbuttonsuccess) {

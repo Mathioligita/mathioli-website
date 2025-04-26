@@ -569,20 +569,20 @@ export const audiobooksMy = async () => {
 // razopay
 
 export const bookingVerifypayment = async (data) => {
-  if (typeof window !== "undefined") {
-    try {
-      const response = await fetchHandler({
-        method: "POST",
-        endpoint: "/user/order/verify-payment",
-        data,
-        retries: 5, // Override default retries
-        backoff: 500,
-      });
-      return response;
-    } catch (error) {
-      console.error(error);
-    }
+  // if (typeof window !== "undefined") {
+  try {
+    const response = await fetchHandler({
+      method: "POST",
+      endpoint: "/user/order/verify-payment",
+      data,
+      retries: 5, // Override default retries
+      backoff: 500,
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
   }
+  // }
 };
 
 // Audio Booking api
