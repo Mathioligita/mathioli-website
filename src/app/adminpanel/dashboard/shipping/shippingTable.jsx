@@ -79,7 +79,7 @@ export default function ShippingTable() {
         cancelButtonColor: "#3085d6",
         confirmButtonText: "Yes, delete it!",
       });
-      if (result) {
+      if (result.isConfirmed) {
         const headers = {
           Authorization: `Bearer ${accessToken}`,
           "Content-Type": "application/json",

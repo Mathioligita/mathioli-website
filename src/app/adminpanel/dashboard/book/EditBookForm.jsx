@@ -2675,6 +2675,7 @@ const EditBookForm = ({ id }) => {
     slug: "",
     _id: "",
   });
+  console.log(formData);
 
   const audioRef = useRef(null);
 

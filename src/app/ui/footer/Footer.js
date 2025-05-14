@@ -18,6 +18,7 @@ const Footer = () => {
     { name: "Privacy Policy", to: "/book/privacy-policy" },
     { name: "Contact Us", to: "/book/contact-us" },
     { name: "Terms and Condition", to: "/book/terms-and-conditions" },
+    { name: "Return Policy", to: "/book/return-policy" },
   ];
 
   const categories = categoriesdata?.map((item) => ({
