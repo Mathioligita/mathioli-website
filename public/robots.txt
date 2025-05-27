@@ -1,9 +1,15 @@
 # *
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /account
+Disallow: /cart
+Disallow: /checkout
+Disallow: /thank-you
 
 # Host
-Host: https://www.mathioligita.com
+Host: https://www.mathioligita.com/
 
 # Sitemaps
 Sitemap: https://www.mathioligita.com/sitemap.xml
+Sitemap: https://www.mathioligita.com//server-sitemap.xml

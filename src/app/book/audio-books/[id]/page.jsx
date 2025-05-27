@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useParams } from "next/navigation";
@@ -67,10 +66,10 @@ export default function Page() {
   }
 
   const newimage = data?.book?.bookimage[0];
-// console.log(newimage,"newimage");
+  // console.log(newimage,"newimage");
 
   return (
-    <div className="book-page">
+    <div className="">
       <div className="book-page-container ">
         <Row>
           <Col md={2}>
@@ -84,9 +83,12 @@ export default function Page() {
               </p>
               <p className="book-info">Audiobook</p>
               <p className="book-info">
-                ${data?.book?.price} ({data?.book?.quantity} copies available)
+                ₹{data?.book?.price} ({data?.book?.quantity} copies available)
               </p>
-              <p className="book-info">{data?.book?.description}</p>
+              <p
+                className=""
+                dangerouslySetInnerHTML={{ __html: data?.book?.description }}
+              ></p>
               {/* <button className="listen-button">Listen</button> */}
             </div>
           </Col>
@@ -115,10 +117,11 @@ export default function Page() {
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
                   }}
-                  onClick={() => openPopup({ ...data.book, audiobookUpload: [audio] })}
+                  onClick={() =>
+                    openPopup({ ...data.book, audiobookUpload: [audio] })
+                  }
                 >
                   <p>Episode {index + 1}</p>
-                  
                 </div>
               ))}
             </div>
