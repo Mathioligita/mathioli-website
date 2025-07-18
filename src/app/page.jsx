@@ -88,7 +88,7 @@ export default function Home() {
           <Winingbooks />
         </div>
         <ScrollTop style={{ borderRadius: "50%", background: "#1D5755" }} />
-        <Footer />
+        <Footer/>
       </div>
     </>
   );

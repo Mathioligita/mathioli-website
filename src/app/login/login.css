@@ -26,6 +26,21 @@
   animation: fadeIn 0.3s ease-in-out;
 }
 
+.forgot-password-link,
+.back-to-login-link,
+.signup-link {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+.forgot-password-link:hover,
+.back-to-login-link:hover,
+.signup-link:hover {
+  text-decoration: none;
+}
+
 /* Animation for fading in */
 @keyframes fadeIn {
   0% {
@@ -41,10 +56,10 @@
     text-align: center;
   }
    */
-.login-modal img {
+/* .login-modal img {
   /* width: 100% !important; */
   /* margin-bottom: 20px; */
-}
+/* } */ 
 
 /* .login-modal p {
     font-size: 1.2rem;

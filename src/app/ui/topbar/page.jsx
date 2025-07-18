@@ -1,18 +1,11 @@
-
 "use client";
-import React from "react";
+// import React, { useEffect, useState } from "rea/ct";
 import BookStoreHeader from "./BookStoreHeader";
 
-
 export default function Topbars() {
- 
-
-
-
-  
   return (
-    <div>
+    <>
       <BookStoreHeader />
-    </div>
+    </>
   );
 }

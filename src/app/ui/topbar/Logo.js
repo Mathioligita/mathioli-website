@@ -1,3 +1,4 @@
+"use client "
 import userContext from "../../../app/UseContext/UseContext";
 import { Badge } from "primereact/badge";
 import React, { useContext } from "react";
@@ -24,8 +25,8 @@ export default function Logo() {
           src={"/image/Logo black.svg"}
           alt="Company name"
           className="logo-text"
-          // style={{width:"90%"}}
-          // width={"80%"}
+        // style={{width:"45%"}}
+        // width={"80%"}
         />
       </>
       {/* <div className="fav-wishlist">

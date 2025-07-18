@@ -40,8 +40,7 @@ const Footer = () => {
               width={"100%"}
             />
             <p className="footer-description">
-              Mathioli Gita is an attempt to
-               reach the words of Guru Pujyashri
+              Mathioli Gita is an attempt to reach the words of Guru Pujyashri
               Mathioli Saraswathy to the reading public. The books written by
               Her provide people with a guide to improve their lives and make it
               more meaningful.

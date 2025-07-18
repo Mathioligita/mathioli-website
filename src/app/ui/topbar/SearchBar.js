@@ -33,6 +33,7 @@
 //     </div>
 //   );
 // }
+ 'use client'
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "primereact/button";
 import SearchInput from "../searchbar/page";
