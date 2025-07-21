@@ -1,9 +1,10 @@
 "use client"
 
 import React from "react";
-import AboutUs from "../book/about-us/abouts";
-import Navbar from "../CommonPages/Navbar/Navbar";
+import AboutUs from "./abouts";
+
 import Footer from "../CommonPages/Footer/footer";
+import Navbar from "../CommonPages/Navbar/navbar";
 
 // export const metadata = {
 //   title: "Story book online | Kids books online",

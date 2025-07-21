@@ -12,13 +12,13 @@ const Footer = () => {
   const { categoriesdata } = useContext(userContext);
 
   const companyLinks = [
-    { name: "About Us", to: "/book/about-us" },
+    { name: "About Us", to: "/about-us" },
     // { name: "Blog", to: "/book/blog" },
-    { name: "Payment Policy", to: "/book/payment-policy" },
-    { name: "Privacy Policy", to: "/book/privacy-policy" },
-    { name: "Contact Us", to: "/book/contact-us" },
-    { name: "Terms and Condition", to: "/book/terms-and-conditions" },
-    { name: "Return Policy", to: "/book/return-policy" },
+    { name: "Payment Policy", to: "/payment-policy" },
+    { name: "Privacy Policy", to: "/privacy-policy" },
+    { name: "Contact Us", to: "/contact-us" },
+    { name: "Terms and Condition", to: "/terms-and-conditions" },
+    { name: "Return Policy", to: "/return-policy" },
   ];
 
   const categories = categoriesdata?.map((item) => ({

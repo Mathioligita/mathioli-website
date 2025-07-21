@@ -26,14 +26,14 @@ export default function Sidebar({ setIsOpen }) {
 
   const aboutItems = [
     // { label: 'Rate us on Playstore', to: '/playstore' },
-    { label: "About Us", to: "/book/about-us" },
+    { label: "About Us", to: "/about-us" },
   ];
 
   const legalItems = [
-    { label: "Contact Us", to: "/book/contact-us" },
-    { label: "Payment Policy", to: "/book/payment-policy" },
-    { label: "Privacy Policy", to: "/book/privacy-policy" },
-    { label: "Terms and Conditions", to: "/book/terms-and-conditions" },
+    { label: "Contact Us", to: "/contact-us" },
+    { label: "Payment Policy", to: "/payment-policy" },
+    { label: "Privacy Policy", to: "/privacy-policy" },
+    { label: "Terms and Conditions", to: "  /terms-and-conditions" },
   ];
 
   const handleLogout = () => {

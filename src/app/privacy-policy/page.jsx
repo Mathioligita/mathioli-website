@@ -1,9 +1,10 @@
 "use client"
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Navbar from "../CommonPages/Navbar/Navbar";
-import Footer from "../CommonPages/Footer/Footer";
+
 import { usePathname } from "next/navigation";
+import Navbar from "../CommonPages/Navbar/navbar";
+import Footer from "../CommonPages/Footer/footer";
 
 export default function PrivacyPolicy() {
   const location = usePathname();
