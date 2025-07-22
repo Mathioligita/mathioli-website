@@ -1,8 +1,8 @@
 'use client';
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Navbar from "../CommonPages/Navbar/Navbar";
-import Footer from "../CommonPages/Footer/Footer";
+import Navbar from "../CommonPages/Navbar/navbar";
+import Footer from "../CommonPages/Footer/footer";
 import { usePathname } from "next/navigation";
 
 export default function TermsAndConditions() {
