@@ -1,9 +1,4 @@
-# *
 User-agent: *
-Allow: /
+Disallow:
 
-# Host
-Host: https://www.mathioligita.com
-
-# Sitemaps
 Sitemap: https://www.mathioligita.com/sitemap_index.xml
