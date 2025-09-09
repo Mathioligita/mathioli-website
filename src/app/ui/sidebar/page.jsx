@@ -62,7 +62,7 @@ export default function Sidebar({ setIsOpen }) {
       <div className="d-flex" style={{ justifyContent: "space-between" }}>
         <span>
           <img
-            src="/image/Logo black.svg"
+            src="/image/logo-black.svg"
             className="logo-text"
             alt="Logo"
             width="100%"

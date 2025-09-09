@@ -358,7 +358,7 @@ function Login({ visible, onHide }) {
             ):(
               <>
             <div className="d-flex justify-content-center">
-              <img src="/image/Logo black.svg" alt="Logo" width={"200px"} />
+              <img src="/image/logo-black.svg" alt="Logo" width={"200px"} />
             </div> 
              <p className="text-center fs-5" style={{ color: "#4D4D4D" }}>
               {getViewTitle()}

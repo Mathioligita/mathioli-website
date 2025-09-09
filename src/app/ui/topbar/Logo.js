@@ -22,7 +22,7 @@ export default function Logo() {
       <>
         <img
           // loading="lazy"
-          src={"/image/Logo black.svg"}
+          src={"/image/logo-black.svg"}
           alt="Company name"
           className="logo-text"
         // style={{width:"45%"}}

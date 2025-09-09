@@ -77,7 +77,8 @@ import React, { useState } from "react";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import Link from "next/link";
-import { FaFacebookF, FaLinkedinIn, FaYoutube } from "react-icons/fa";
+import { FaFacebookF, FaYoutube } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { RiInstagramFill } from "react-icons/ri";
 import "./footer-sec.css";
 import { NewsletterFormS } from "../../../../api/page";
@@ -160,6 +161,11 @@ const NewsletterForm = () => {
             target="_blank"
           >
             <FaYoutube />
+          </Link>
+        </div>
+        <div className="btn-item-icon">
+          <Link href={"https://x.com/mathioligita"} target="_blank">
+            <FaXTwitter />
           </Link>
         </div>
       </div>

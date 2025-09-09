@@ -101,6 +101,88 @@ export default function RootLayout({ children }) {
           integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         
         /> */}
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              name: "Uthiradam Books",
+              image: "https://www.mathioligita.com/",
+              "@id": "https://www.mathioligita.com/",
+              url: "https://share.google/H9NYqep59bngJ3joD",
+              telephone: "+91-9884810585",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress:
+                  "Shanthi Vihar Complex, No 11 Luz Ginza complex - old, 140, Royapettah High Rd, Luz, Mylapore",
+                addressLocality: "Chennai",
+                postalCode: "600004",
+                addressCountry: "IN",
+              },
+              openingHoursSpecification: [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  dayOfWeek: "Sunday",
+                  opens: "Closed",
+                  closes: "Closed",
+                },
+                {
+                  "@type": "OpeningHoursSpecification",
+                  dayOfWeek: "Monday",
+                  opens: "09:00",
+                  closes: "20:00",
+                },
+                {
+                  "@type": "OpeningHoursSpecification",
+                  dayOfWeek: [
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday",
+                  ],
+                  opens: "11:00",
+                  closes: "20:00",
+                },
+              ],
+              sameAs: [
+                "https://x.com/mathioligita",
+                "https://www.instagram.com/mathioligita/",
+                "https://www.youtube.com/@uthiradambooks",
+                "https://www.facebook.com/mathioligita",
+              ],
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Uthiradam Books",
+              alternateName: "Mathioli Gita",
+              url: "https://www.mathioligita.com",
+              logo: "https://www.mathioligita.com/image/logo-black.svg",
+              sameAs: [
+                "https://www.facebook.com/mathioligita",
+                "https://www.instagram.com/mathioligita/",
+                "https://x.com/mathioligita",
+                "https://www.youtube.com/@uthiradambooks",
+              ],
+              contactPoint: {
+                "@type": "ContactPoint",
+                telephone: "+91-9884810585",
+                contactType: "Customer Service",
+                areaServed: "IN",
+                availableLanguage: ["en", "ta"],
+              },
+            }),
+          }}
+        />
+
         <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
         {/* <title> Mathioli Gita</title> */}
         <link rel="icon" href="/Fav icon.svg" type="image/x-icon" sizes="any" />
