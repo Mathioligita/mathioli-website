@@ -19,6 +19,8 @@ const BookCard = ({ book }) => {
   if (!book) {
     return <p>no data</p>;
   }
+
+  console.log(book, "bookimageAltTag");
   return (
     <Col
       xs={6}
@@ -39,7 +41,7 @@ const BookCard = ({ book }) => {
                 ? book.bookimage[0]
                 : "/image/image 9.png"
             }
-            alt={book.title}
+            alt={book?.imageAltTag[0] || ""}
             width={"100%"}
           />
         </div>

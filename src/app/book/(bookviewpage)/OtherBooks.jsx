@@ -26,7 +26,7 @@ export default function OtherBooks({ books }) {
               {/* Use a unique key */}
               <img
                 src={i?.bookimage || "No image available."}
-                className="author-image"
+                className={i.imageAltTag[0]}
                 alt="Book Image"
                 width={"80px"}
               />

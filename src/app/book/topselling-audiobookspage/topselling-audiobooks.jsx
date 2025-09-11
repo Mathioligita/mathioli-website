@@ -299,196 +299,198 @@ export default function TopsellingAudioBooks() {
 
   return (
     <>
-    <Head>
+      <Head>
         {paginatedBooks?.length > 0 && (
           <script type="application/ld+json">{generateJsonLd()}</script>
         )}
       </Head>
-    <div className="ms-0 ms-md-5 p-2 p-md-0 mt-4">
-      <div className="mt-5">
-        <div className="mb-4">
-          <div className=" mb-4">
-            <span className="Top-selling ">AudioBooks</span>
-            <div className="book-sdbjd mt-4">
-              {loading ? (
-                <Row>
-                  {[...Array(itemsPerPage)].map((_, index) => (
-                    <Col
-                      xs={6}
-                      sm={4}
-                      md={3}
-                      lg={2}
-                      key={index}
-                      className="p-1 p-md-0 book-mobile-card image-card-book"
-                    >
-                      <SkeletonPreloader />
-                    </Col>
-                  ))}
-                </Row>
-              ) : filteredBooks?.length > 0 ? (
-                <>
-                  {Object.keys(groupedBooks)?.map((category, index) => (
-                    <div key={index}>
-                      <Row className="gap-1">
-                        {groupedBooks[category]?.map(
-                          (book) =>
-                            book.isAudiobookAvailable && (
-                              <Col
-                                md={4}
-                                lg={2}
-                                sm={6}
-                                key={book._id}
-                                className="p-1 p-md-0 book-mobile-card image-card-book"
-                              >
-                                <div
-                                  className="book-card book-adio"
-                                  onClick={() => handleBookClick(book)}
-                                  style={{
-                                    cursor: "pointer",
-                                    justifyContent: "space-between",
-                                    padding: "0px 15px",
-                                    borderRadius: "6px",
-                                    flexDirection: "column",
-                                  }}
+      <div className="ms-0 ms-md-5 p-2 p-md-0 mt-4">
+        <div className="mt-5">
+          <div className="mb-4">
+            <div className=" mb-4">
+              <span className="Top-selling ">AudioBooks</span>
+              <div className="book-sdbjd mt-4">
+                {loading ? (
+                  <Row>
+                    {[...Array(itemsPerPage)].map((_, index) => (
+                      <Col
+                        xs={6}
+                        sm={4}
+                        md={3}
+                        lg={2}
+                        key={index}
+                        className="p-1 p-md-0 book-mobile-card image-card-book"
+                      >
+                        <SkeletonPreloader />
+                      </Col>
+                    ))}
+                  </Row>
+                ) : filteredBooks?.length > 0 ? (
+                  <>
+                    {Object.keys(groupedBooks)?.map((category, index) => (
+                      <div key={index}>
+                        <Row className="gap-1">
+                          {groupedBooks[category]?.map(
+                            (book) =>
+                              book.isAudiobookAvailable && (
+                                <Col
+                                  md={4}
+                                  lg={2}
+                                  sm={6}
+                                  key={book._id}
+                                  className="p-1 p-md-0 book-mobile-card image-card-book"
                                 >
                                   <div
-                                    className="book-images card text-center"
+                                    className="book-card book-adio"
+                                    onClick={() => handleBookClick(book)}
                                     style={{
-                                      flex: "1 0 auto",
-                                      background: "#ffff",
-                                      boxShadow:
-                                        "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+                                      cursor: "pointer",
+                                      justifyContent: "space-between",
+                                      padding: "0px 15px",
                                       borderRadius: "6px",
-                                      padding: "15px",
-                                      justifyContent: "center",
-                                      display: "flex",
+                                      flexDirection: "column",
                                     }}
                                   >
-                                    <img
-                                      src={
-                                        book.bookimage &&
-                                        book.bookimage.length > 0
-                                          ? book.bookimage[0]
-                                          : "/image/image 9.png"
-                                      }
-                                      alt={book.title}
-                                      width={"100%"}
-                                    />
-
-                                    {book.isAudiobookAvailable && (
-                                      <button
-                                        className="play-button"
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          handlePlayButtonClick(book);
-                                        }}
-                                      >
-                                        ▶
-                                      </button>
-                                    )}
-                                  </div>
-                                  <div className="book-info mt-3 mb-">
-                                    <div className="d-flex justify-content-between align-items-center mt-4 book-value-gamda">
-                                      <div className="d-flex">
-                                        <h5
-                                          className="mb-2 hoverbooks-title-2"
-                                          style={{
-                                            fontFamily: "Inter",
-                                            fontSize: "15px",
-                                            fontWeight: "700",
-                                            color: "#4D4D4D",
-                                          }}
-                                        >
-                                          {book.title.split(" ")[0] + "..."}
-                                        </h5>
-                                        <h5
-                                          className="mb-2 hoverbooks-title"
-                                          style={{
-                                            fontFamily: "Inter",
-                                            fontSize: "15px",
-                                            fontWeight: "700",
-                                            color: "white",
-                                            position: "absolute",
-                                            top: "0",
-                                            maxWidth: "900px",
-                                          }}
-                                        >
-                                          {book.title
-                                            .split(" ")
-                                            .map((word, index) => (
-                                              <span key={index}>
-                                                {word} <br />
-                                              </span>
-                                            ))}
-                                        </h5>
-                                      </div>
-                                      <span
-                                        className="ms-auto"
-                                        style={{ fontSize: "10px" }}
-                                      >
-                                        {book.userReadingStatus.length > 0
-                                          ? (
-                                              book.userReadingStatus.reduce(
-                                                (sum, item) =>
-                                                  sum + item.ratings,
-                                                0
-                                              ) / book.userReadingStatus.length
-                                            ).toFixed(1)
-                                          : 0}
-                                        /5
-                                      </span>
-                                    </div>
                                     <div
-                                      className="ratings mt-1 mb-2 d-flex"
+                                      className="book-images card text-center"
                                       style={{
-                                        marginTop: "5px",
-                                        fontSize: "12px",
+                                        flex: "1 0 auto",
+                                        background: "#ffff",
+                                        boxShadow:
+                                          "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+                                        borderRadius: "6px",
+                                        padding: "15px",
+                                        justifyContent: "center",
+                                        display: "flex",
                                       }}
                                     >
-                                      <span>{book?.author}</span>
-                                      <span
-                                        className="ms-auto rate-values"
-                                        style={{ fontSize: "4px" }}
+                                      <img
+                                        src={
+                                          book.bookimage &&
+                                          book.bookimage.length > 0
+                                            ? book.bookimage[0]
+                                            : "/image/image 9.png"
+                                        }
+                                        alt={book.imageAltTag[index]}
+                                        width={"100%"}
+                                      />
+
+                                      {book.isAudiobookAvailable && (
+                                        <button
+                                          className="play-button"
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            handlePlayButtonClick(book);
+                                          }}
+                                        >
+                                          ▶
+                                        </button>
+                                      )}
+                                    </div>
+                                    <div className="book-info mt-3 mb-">
+                                      <div className="d-flex justify-content-between align-items-center mt-4 book-value-gamda">
+                                        <div className="d-flex">
+                                          <h5
+                                            className="mb-2 hoverbooks-title-2"
+                                            style={{
+                                              fontFamily: "Inter",
+                                              fontSize: "15px",
+                                              fontWeight: "700",
+                                              color: "#4D4D4D",
+                                            }}
+                                          >
+                                            {book.title.split(" ")[0] + "..."}
+                                          </h5>
+                                          <h5
+                                            className="mb-2 hoverbooks-title"
+                                            style={{
+                                              fontFamily: "Inter",
+                                              fontSize: "15px",
+                                              fontWeight: "700",
+                                              color: "white",
+                                              position: "absolute",
+                                              top: "0",
+                                              maxWidth: "900px",
+                                            }}
+                                          >
+                                            {book.title
+                                              .split(" ")
+                                              .map((word, index) => (
+                                                <span key={index}>
+                                                  {word} <br />
+                                                </span>
+                                              ))}
+                                          </h5>
+                                        </div>
+                                        <span
+                                          className="ms-auto"
+                                          style={{ fontSize: "10px" }}
+                                        >
+                                          {book.userReadingStatus.length > 0
+                                            ? (
+                                                book.userReadingStatus.reduce(
+                                                  (sum, item) =>
+                                                    sum + item.ratings,
+                                                  0
+                                                ) /
+                                                book.userReadingStatus.length
+                                              ).toFixed(1)
+                                            : 0}
+                                          /5
+                                        </span>
+                                      </div>
+                                      <div
+                                        className="ratings mt-1 mb-2 d-flex"
+                                        style={{
+                                          marginTop: "5px",
+                                          fontSize: "12px",
+                                        }}
                                       >
-                                        {Array.from(
-                                          { length: 5 },
-                                          (_, index) => {
-                                            const rating =
-                                              book.userReadingStatus?.length > 0
-                                                ? book.userReadingStatus[0]
-                                                    .ratings
-                                                : 0;
-                                            return (
-                                              <i
-                                                key={index}
-                                                className={`pi ${
-                                                  index < rating
-                                                    ? "pi-star-fill"
-                                                    : "pi-star"
-                                                }`}
-                                                style={{
-                                                  color:
+                                        <span>{book?.author}</span>
+                                        <span
+                                          className="ms-auto rate-values"
+                                          style={{ fontSize: "4px" }}
+                                        >
+                                          {Array.from(
+                                            { length: 5 },
+                                            (_, index) => {
+                                              const rating =
+                                                book.userReadingStatus?.length >
+                                                0
+                                                  ? book.userReadingStatus[0]
+                                                      .ratings
+                                                  : 0;
+                                              return (
+                                                <i
+                                                  key={index}
+                                                  className={`pi ${
                                                     index < rating
-                                                      ? "#FFCB45"
-                                                      : "inherit",
-                                                  fontSize: "12px",
-                                                  margin: "1px",
-                                                }}
-                                              ></i>
-                                            );
-                                          }
-                                        )}
-                                      </span>
+                                                      ? "pi-star-fill"
+                                                      : "pi-star"
+                                                  }`}
+                                                  style={{
+                                                    color:
+                                                      index < rating
+                                                        ? "#FFCB45"
+                                                        : "inherit",
+                                                    fontSize: "12px",
+                                                    margin: "1px",
+                                                  }}
+                                                ></i>
+                                              );
+                                            }
+                                          )}
+                                        </span>
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                              </Col>
-                            )
-                        )}
-                      </Row>
-                    </div>
-                  ))}
-                  {/* {totalPages > 1 && (
+                                </Col>
+                              )
+                          )}
+                        </Row>
+                      </div>
+                    ))}
+                    {/* {totalPages > 1 && (
                     <Paginator
                       first={currentPage}
                       rows={itemsPerPage}
@@ -496,166 +498,166 @@ export default function TopsellingAudioBooks() {
                       onPageChange={onPageChange}
                     ></Paginator>
                   )} */}
-                </>
-              ) : (
-                <div className="no-books-message">
-                  <p>Sorry, no books are available at the moment.</p>
-                  <p>
-                    Please check back later, as new books are added regularly.
-                  </p>
-                  <p>
-                    In the meantime, explore our other sections or let us know
-                    what you'd like to see!
-                  </p>
-                </div>
-              )}
+                  </>
+                ) : (
+                  <div className="no-books-message">
+                    <p>Sorry, no books are available at the moment.</p>
+                    <p>
+                      Please check back later, as new books are added regularly.
+                    </p>
+                    <p>
+                      In the meantime, explore our other sections or let us know
+                      what you'd like to see!
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {showaudioBooking && (
-        <Overlayaudio
-          audioBookingdetails={audioBookingdetails}
-          setShowaudioBooking={setShowaudioBooking}
-        />
-      )}
+        {showaudioBooking && (
+          <Overlayaudio
+            audioBookingdetails={audioBookingdetails}
+            setShowaudioBooking={setShowaudioBooking}
+          />
+        )}
 
-      {showPopup && (
-        // <div className="popup">
-        //   <div className="popup-content p-3">
-        //     {/* <Row> */}
-        //     {/* Book Image and Title */}
-        //     {/* <Col md={12} sm={12} lg={12}> */}
-        //     <Row >
-        //       <Col md={2}>
-        //         <div>
-        //           <img
-        //             src={selectedBook.bookimage[0]}
-        //             alt="Book Cover"
-        //             style={{
-        //               height: "100px",
-        //               objectFit: "cover",
-        //               borderRadius: "15px",
-        //               padding: "2px",
-        //             }}
-        //           />
-        //         </div>
-        //       </Col>
-        //       <Col md={2}  style={{ textAlign: "center" }}>
-        //         <div className="" style={{ textAlign: "center" }}>
-        //           <h4 className="">{selectedBook.title}</h4>
-        //         </div>
-        //       </Col>
-        //       <Col md={2}>
-        //         <div className="d-flex">
-        //           <div
-        //             style={{
-        //               pointerEvents: isDisabled ? "none" : "auto",
-        //               opacity: isDisabled ? 0.5 : 1,
-        //             }}
-        //           >
-        //             <AudioPlayer
-        //               ref={audioRef}
-        //               autoPlay
-        //               src={selectedBook.audiobookUpload[0]}
-        //               onPlay={() => console.log("onPlay")}
-        //               onListen={handleTimeUpdate}
-        //               controls
-        //               // className="w-100"
-        //             />
-        //           </div>
-        //           <div className="my-auto">
-        //             <i
-        //               className="pi pi-times fs-4 cursor-pointer"
-        //               onClick={() => setShowPopup(false)}
-        //             ></i>
-        //           </div>
-        //         </div>
-        //       </Col>
-        //     </Row>
-        //     {/* </Col> */}
+        {showPopup && (
+          // <div className="popup">
+          //   <div className="popup-content p-3">
+          //     {/* <Row> */}
+          //     {/* Book Image and Title */}
+          //     {/* <Col md={12} sm={12} lg={12}> */}
+          //     <Row >
+          //       <Col md={2}>
+          //         <div>
+          //           <img
+          //             src={selectedBook.bookimage[0]}
+          //             alt="Book Cover"
+          //             style={{
+          //               height: "100px",
+          //               objectFit: "cover",
+          //               borderRadius: "15px",
+          //               padding: "2px",
+          //             }}
+          //           />
+          //         </div>
+          //       </Col>
+          //       <Col md={2}  style={{ textAlign: "center" }}>
+          //         <div className="" style={{ textAlign: "center" }}>
+          //           <h4 className="">{selectedBook.title}</h4>
+          //         </div>
+          //       </Col>
+          //       <Col md={2}>
+          //         <div className="d-flex">
+          //           <div
+          //             style={{
+          //               pointerEvents: isDisabled ? "none" : "auto",
+          //               opacity: isDisabled ? 0.5 : 1,
+          //             }}
+          //           >
+          //             <AudioPlayer
+          //               ref={audioRef}
+          //               autoPlay
+          //               src={selectedBook.audiobookUpload[0]}
+          //               onPlay={() => console.log("onPlay")}
+          //               onListen={handleTimeUpdate}
+          //               controls
+          //               // className="w-100"
+          //             />
+          //           </div>
+          //           <div className="my-auto">
+          //             <i
+          //               className="pi pi-times fs-4 cursor-pointer"
+          //               onClick={() => setShowPopup(false)}
+          //             ></i>
+          //           </div>
+          //         </div>
+          //       </Col>
+          //     </Row>
+          //     {/* </Col> */}
 
-        //     {/* Audio Player */}
-        //     {/* <Col
-        //         md={2}
-        //         sm={2}
-        //         lg={2}
-        //         className="text-center"
-        //         style={{
-        //           pointerEvents: isDisabled ? "none" : "auto",
-        //           opacity: isDisabled ? 0.5 : 1,
-        //         }}
-        //       >
-        //         <AudioPlayer
-        //           ref={audioRef}
-        //           autoPlay
-        //           src={selectedBook.audiobookUpload[0]}
-        //           onPlay={() => console.log("onPlay")}
-        //           onListen={handleTimeUpdate}
-        //           controls
-        //           // className="w-100"
-        //         />
-        //       </Col> */}
-        //     {/* <Col md={2}>
-        // <i
-        //   className="pi pi-times fs-4 cursor-pointer"
-        //   onClick={() => setShowPopup(false)}
-        // ></i>
-        //       </Col> */}
-        //     {/* </Row> */}
-        //   </div>
-        // </div>
-        <div className="custom-popups">
-          <div className="custom-popup-contents p-3">
-            <div className="text-end">
-              <i
-                className="pi pi-times fs-4 cursor-pointers-kkk"
-                onClick={() => setShowPopup(false)}
-              ></i>
-            </div>
-            <div className="d-flex align-items-center justify-content-center flex-wrap">
-              <div className="text-center mx-2">
-                <img
-                  src={selectedBook.bookimage[0]}
-                  alt="Book Cover"
-                  style={{
-                    height: "100px",
-                    objectFit: "cover",
-                    borderRadius: "15px",
-                    padding: "2px",
-                  }}
-                />
+          //     {/* Audio Player */}
+          //     {/* <Col
+          //         md={2}
+          //         sm={2}
+          //         lg={2}
+          //         className="text-center"
+          //         style={{
+          //           pointerEvents: isDisabled ? "none" : "auto",
+          //           opacity: isDisabled ? 0.5 : 1,
+          //         }}
+          //       >
+          //         <AudioPlayer
+          //           ref={audioRef}
+          //           autoPlay
+          //           src={selectedBook.audiobookUpload[0]}
+          //           onPlay={() => console.log("onPlay")}
+          //           onListen={handleTimeUpdate}
+          //           controls
+          //           // className="w-100"
+          //         />
+          //       </Col> */}
+          //     {/* <Col md={2}>
+          // <i
+          //   className="pi pi-times fs-4 cursor-pointer"
+          //   onClick={() => setShowPopup(false)}
+          // ></i>
+          //       </Col> */}
+          //     {/* </Row> */}
+          //   </div>
+          // </div>
+          <div className="custom-popups">
+            <div className="custom-popup-contents p-3">
+              <div className="text-end">
+                <i
+                  className="pi pi-times fs-4 cursor-pointers-kkk"
+                  onClick={() => setShowPopup(false)}
+                ></i>
               </div>
-              <div className="text-center mx-2">
-                <h4>{selectedBook.title}</h4>
-              </div>
-              <div className="text-center mx-2">
-                <div
-                  style={{
-                    pointerEvents: isDisabled ? "none" : "auto",
-                    opacity: isDisabled ? 0.5 : 1,
-                  }}
-                >
-                  <AudioPlayer
-                    ref={audioRef}
-                    autoPlay
-                    src={selectedBook.audiobookUpload[0]}
-                    onPlay={() => console.log("onPlay")}
-                    onListen={handleTimeUpdate}
-                    controls
+              <div className="d-flex align-items-center justify-content-center flex-wrap">
+                <div className="text-center mx-2">
+                  <img
+                    src={selectedBook.bookimage[0]}
+                    alt="Book Cover"
+                    style={{
+                      height: "100px",
+                      objectFit: "cover",
+                      borderRadius: "15px",
+                      padding: "2px",
+                    }}
                   />
                 </div>
+                <div className="text-center mx-2">
+                  <h4>{selectedBook.title}</h4>
+                </div>
+                <div className="text-center mx-2">
+                  <div
+                    style={{
+                      pointerEvents: isDisabled ? "none" : "auto",
+                      opacity: isDisabled ? 0.5 : 1,
+                    }}
+                  >
+                    <AudioPlayer
+                      ref={audioRef}
+                      autoPlay
+                      src={selectedBook.audiobookUpload[0]}
+                      onPlay={() => console.log("onPlay")}
+                      onListen={handleTimeUpdate}
+                      controls
+                    />
+                  </div>
+                </div>
+                <i
+                  className="pi pi-times fs-4 cursor-pointers-eee"
+                  onClick={() => setShowPopup(false)}
+                ></i>
               </div>
-              <i
-                className="pi pi-times fs-4 cursor-pointers-eee"
-                onClick={() => setShowPopup(false)}
-              ></i>
             </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
     </>
   );
 }

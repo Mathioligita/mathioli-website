@@ -74,7 +74,7 @@ const AudioPlayerModal = ({ isOpen, onClose, audioSrc }) => {
         if (audio.currentTime >= 30) {
           audio.pause();
           setIsPlaying(false);
-          onClose()
+          onClose();
           setShowToast(!true);
         }
       });
@@ -92,7 +92,7 @@ const AudioPlayerModal = ({ isOpen, onClose, audioSrc }) => {
       <div className="modalContent">
         <img
           src={audioSrc.bookimage[0]}
-          alt="Book Cover"
+          alt={audioSrc?.imageAltTag[0]}
           className="bookCover"
           width={"100%"}
         />

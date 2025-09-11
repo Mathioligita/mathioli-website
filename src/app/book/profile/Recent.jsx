@@ -204,7 +204,7 @@ export default function Recent() {
                         ? book.bookimage[0]
                         : "https://via.placeholder.com/150"
                     }
-                    alt={book.title}
+                    alt={book.imageAltTag[0]}
                     style={{ maxWidth: "100%", height: "183px" }}
                   />
                   {book.isAudiobookAvailable && (

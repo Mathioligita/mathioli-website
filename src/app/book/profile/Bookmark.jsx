@@ -396,7 +396,7 @@ export default function BookMark() {
                             src={
                               book.bookimage?.[0] || "/images/default-book.png"
                             }
-                            alt={book.title}
+                            alt={book.imageAltTag[0]}
                             className="product-image img-fluid"
                             onClick={() => router.push(`/books/${book.slug}`)}
                             style={{ cursor: "pointer" }}

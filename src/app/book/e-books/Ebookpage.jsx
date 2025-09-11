@@ -511,7 +511,7 @@ export default function Ebookpage( ) {
                                     ? book.bookimage[0]
                                     : "https://via.placeholder.com/150"
                                 }
-                                alt={book.title}
+                                alt={book.imageAltTag[0]}
                                 width={"100%"}
                                 style={{objectFit: "cover"}}
                               />

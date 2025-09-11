@@ -1376,7 +1376,7 @@ export default function Addtocart() {
                       src={
                         product?.bookId?.bookimage[0] || "/image/image 9.png"
                       }
-                      alt="Product"
+                      alt={product.bookId.imageAltTag[0]}
                       style={{ width: "35px" }}
                       className="mr-3"
                     />

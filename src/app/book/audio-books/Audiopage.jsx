@@ -426,7 +426,7 @@ export default function Smartpage() {
                                           ? book.bookimage[0]
                                           : "/image/image 9.png"
                                       }
-                                      alt={book.title}
+                                      alt={book.imageAltTag[0]}
                                       width={"100%"}
                                     />
 
@@ -705,7 +705,7 @@ export default function Smartpage() {
                   <div className="text-center mx-2">
                     <img
                       src={selectedBook.bookimage[0]}
-                      alt="Book Cover"
+                      alt={selectedBook.imageAltTag[0]}
                       style={{
                         height: "100px",
                         objectFit: "cover",

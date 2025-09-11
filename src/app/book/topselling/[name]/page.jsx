@@ -188,7 +188,7 @@ export default function Page() {
                             : "https://via.placeholder.com/150"
                         }
                         // style={{margin: '-2px'}}
-                        alt={book.title}
+                        alt={book.imageAltTag[0]}
                         // width={"100%"}
                       />
                     </div>

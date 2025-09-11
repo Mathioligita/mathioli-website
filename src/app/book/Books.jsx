@@ -563,7 +563,7 @@ export default function Books() {
                                   ? book.bookimage[0]
                                   : "/image/image 9.png"
                               }
-                              alt={book.title}
+                              alt={book.imageAltTag[0]}
                             />
                           </div>
                           <div className="book-info mt-2">

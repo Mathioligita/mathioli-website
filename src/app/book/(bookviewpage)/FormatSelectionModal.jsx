@@ -613,7 +613,7 @@ const FormatSelectionModal = ({
                 {/* Book Image */}
                 <img
                   src={book?.bookimage[0] || book?.bookimage[0]}
-                  alt={book?.title || book?.title}
+                  alt={book?.imageAltTag[0] || book?.title}
                   className="img-thumbnail me-3"
                   style={{ width: "80px", height: "110px" }}
                 />

@@ -186,7 +186,7 @@ export default function Overlayaudio({
                 audioBookingdetails?.bookimage
               }
               alt={
-                audioBookingdetails?.book?.title || audioBookingdetails?.title
+                audioBookingdetails?.book?.imageAltTag[0] || audioBookingdetails?.title
               }
               className="img-thumbnail me-3"
               style={{ width: "80px", height: "110px" }}

@@ -165,7 +165,7 @@ export default function Winingbooks() {
                             //     ? bookId.bookId.bookimage[0]
                             //     : "https://via.placeholder.com/150"
                             // }
-                            alt={bookId?.bookId?.title}
+                            alt={bookId?.bookId?.imageAltTag[0]}
                             width={"100%"}
                             // height={"123px"}
                             style={{ objectFit: "cover" }}

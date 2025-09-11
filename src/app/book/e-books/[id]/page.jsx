@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useParams } from "next/navigation";
@@ -38,7 +37,13 @@ export default function Page() {
       <Toolbar>
         {(slots) => {
           const { Download, Print, OpenFile, ...rest } = slots;
-          return <>{Object.values(rest).map((slot, index) => <div key={index}>{slot}</div>)}</>;
+          return (
+            <>
+              {Object.values(rest).map((slot, index) => (
+                <div key={index}>{slot}</div>
+              ))}
+            </>
+          );
         }}
       </Toolbar>
     ),
@@ -149,7 +154,7 @@ export default function Page() {
                   <div>
                     <img
                       src={selectedBook.bookimage[0]}
-                      alt=""
+                      alt={selectedBook.imageAltTag[0]}
                       style={{
                         height: "100px",
                         objectFit: "cover",

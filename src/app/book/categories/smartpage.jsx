@@ -634,7 +634,7 @@ export default function Smartpage({ pathname }) {
                       <div>
                         <img
                           src={selectedBook.bookimage[0]}
-                          alt=""
+                          alt={selectedBook.imageAltTag[0]}
                           style={{
                             height: "100px",
                             objectFit: "cover",
