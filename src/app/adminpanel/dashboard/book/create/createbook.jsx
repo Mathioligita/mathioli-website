@@ -1,4 +1,3 @@
-
 // "use client";
 // import React, { useState, useEffect } from "react";
 // import { InputText } from "primereact/inputtext";
@@ -19,7 +18,7 @@
 // import * as yup from "yup";
 // import { useFormik } from "formik";
 
-// const BookForm = () => {
+// const BookForm = ({ id }) => {
 //   const [isPopupVisible, setIsPopupVisible] = useState(false);
 //   const [categories, setCategories] = useState([]);
 //   const accessToken = Cookies.get("accessToken");
@@ -62,7 +61,6 @@
 //       .required("Author biography is required")
 //       .min(50, "Author biography should be at least 50 characters"),
 //     description: yup.string().required("Description is required"),
-//     // .min(100, "Description should be at least 100 characters"),
 //     books: yup
 //       .array()
 //       .min(1, "At least one book image is required")
@@ -75,7 +73,15 @@
 //         "fileType",
 //         "Only image files are allowed",
 //         (value) =>
-//           !value || value.every((file) => file.type.startsWith("image/"))
+//           !value || value.every((file) => file?.type?.startsWith("image/"))
+//       ),
+//     imageAltTag: yup
+//       .array()
+//       .of(yup.string().required("Alt tag is required"))
+//       .test(
+//         "alt-tag-length",
+//         "Alt tag is required for each image",
+//         (value) => value.length === formik.values.books.length
 //       ),
 //     audiobookPrice: yup.number().when("isAudiobookAvailable", {
 //       is: true,
@@ -98,59 +104,25 @@
 //       .required("Weight is required")
 //       .positive("Weight must be positive"),
 //     weightUnit: yup.string().required("Weight unit is required"),
-//     audiobooks: yup.array().when("isAudiobookAvailable", {
-//       is: true,
-//       then: yup
-//         .array()
-//         .min(1, "At least one audiobook file is required")
-//         .test(
-//           "fileSize",
-//           "Each file must be less than 10MB",
-//           (value) => !value || value.every((file) => file.size <= 10000000)
-//         )
-//         .test(
-//           "fileType",
-//           "Only audio files are allowed",
-//           (value) =>
-//             !value || value.every((file) => file.type.startsWith("audio/"))
-//         ),
-//     }),
-//     ebooks: yup.array().when("isEBookAvailable", {
-//       is: true,
-//       then: yup
-//         .array()
-//         .min(1, "At least one ebook file is required")
-//         .test(
-//           "fileSize",
-//           "Each file must be less than 5MB",
-//           (value) => !value || value.every((file) => file.size <= 5000000)
-//         )
-//         .test(
-//           "fileType",
-//           "Only PDF or EPUB files are allowed",
-//           (value) =>
-//             !value ||
-//             value.every(
-//               (file) =>
-//                 file.type === "application/pdf" ||
-//                 file.name.endsWith(".epub") ||
-//                 file.type === "application/epub+zip"
-//             )
-//         ),
-//     }),
+//     genre: yup.string(),
+//     status: yup.number(),
+//     metaTitle: yup.string(),
+//     metaDescription: yup.string(),
+//     canonicalTag: yup.string(),
+//     keywords: yup.array().of(yup.string()),
 //   });
 
 //   const formik = useFormik({
 //     initialValues: {
 //       title: "",
-//       author: "Mathioli",
+//       author: "Mathioli Gita",
 //       authorBiography:
 //         "Mathioli Gita is an attempt to reach the words of Guru Pujyashri Mathioli Saraswathy to the reading public. The books written by Her provide people with a guide to improve their lives and make it more meaningful.Her thoughts are interwoven with stories in each chapter to make the reading simple and easy to understand. Reflecting or contemplating on the stories and underlying principles, will transform a person from within and make it easy for us to understand life and its vicissitudes.",
 //       genre: "",
 //       category: "",
 //       publishDate: null,
-//       publisher: "Mathioli",
-//       language: "",
+//       publisher: "Uthiradam Books",
+//       language: "English",
 //       quantity: "",
 //       pages: "",
 //       description: "",
@@ -168,16 +140,22 @@
 //       slug: "",
 //       awardWinningBook: false,
 //       newArrival: false,
+//       status: 0,
+//       imageAltTag: [],
+//       metaTitle: "",
+//       metaDescription: "",
+//       canonicalTag: "",
+//       keywords: [],
 //     },
 //     validationSchema,
 //     onSubmit: async (values) => {
 //       try {
 //         const payload = new FormData();
 //         Object.keys(values).forEach((key) => {
-//           if (values[key]) {
+//           if (values[key] !== null && values[key] !== undefined) {
 //             if (Array.isArray(values[key])) {
-//               values[key].forEach((file, index) => {
-//                 payload.append(`${key}`, file);
+//               values[key].forEach((item) => {
+//                 payload.append(key, item);
 //               });
 //             } else {
 //               payload.append(key, values[key]);
@@ -185,7 +163,10 @@
 //           }
 //         });
 
-//         const response = await axios.post(`${API_BASE_URL}/book`, payload, {
+//         const url = id ? `${API_BASE_URL}/book/${id}` : `${API_BASE_URL}/book`;
+//         const method = id ? "patch" : "post";
+
+//         const response = await axios[method](url, payload, {
 //           headers: {
 //             "Content-Type": "multipart/form-data",
 //             Authorization: `Bearer ${accessToken}`,
@@ -201,33 +182,24 @@
 //           });
 //           window.location.href = "/adminpanel/dashboard/book";
 //         } else {
-//           Swal.fire("Error creating book");
+//           Swal.fire(id ? "Error updating book" : "Error creating book");
 //         }
 //       } catch (error) {
-//         console.error("Error creating book:", error);
+//         console.error(
+//           id ? "Error updating book:" : "Error creating book:",
+//           error
+//         );
 //         Swal.fire({
 //           title: "Error!",
-//           text: error.response?.data?.message || "Error creating book",
+//           text:
+//             error.response?.data?.message ||
+//             (id ? "Error updating book" : "Error creating book"),
 //           icon: "error",
 //           confirmButtonText: "OK",
 //         });
 //       }
 //     },
 //   });
-
-//   const handleFileUpload = (files, setter) => {
-//     formik.setFieldValue(setter, [...formik.values[setter], ...files]);
-//   };
-
-//   const handleFileChange = (event, setter) => {
-//     const files = Array.from(event.target.files);
-//     handleFileUpload(files, setter);
-//   };
-
-//   const handleRemoveImage = (index, setter) => {
-//     const updatedFiles = formik.values[setter].filter((_, i) => i !== index);
-//     formik.setFieldValue(setter, updatedFiles);
-//   };
 
 //   const fetchCategories = async () => {
 //     try {
@@ -239,9 +211,93 @@
 //     }
 //   };
 
+//   const fetchBookData = async () => {
+//     try {
+//       const headers = { Authorization: `Bearer ${accessToken}` };
+//       const response = await axios.get(`${API_BASE_URL}/book/${id}`, {
+//         headers,
+//       });
+//       console.log(response.data.data, "resoins");
+//       const book = response.data.data;
+//       console.log(book, "bookData");
+//       formik.setValues({
+//         title: book.title || "",
+//         author: book.author || "",
+//         authorBiography: book.authorBiography || "",
+//         genre: book.genre || "",
+//         quantity: book.quantity || "",
+//         category: book.category || "",
+//         publishDate: book.publishDate ? new Date(book.publishDate) : null,
+//         publisher: book.publisher || "",
+//         language: book.language || "",
+//         pages: book.pages || "",
+//         newArrival: book.newArrival || false,
+//         description: book.description || "",
+//         price: book.price || "",
+//         isHardCopyAvailable: book.isHardCopyAvailable || false,
+//         awardWinningBook: book.awardWinningBook || false,
+//         isAudiobookAvailable: book.isAudiobookAvailable || false,
+//         isEBookAvailable: book.isEBookAvailable || false,
+//         books: book.bookimage || [],
+//         audiobooks: book.audiobookUpload || [],
+//         ebooks: book.EbookUpload || [],
+//         audiobookPrice: book.audiobookPrice || "",
+//         ebookPrice: book.ebookPrice || "",
+//         weightUnit: book.weightUnit || "kg",
+//         weight: book.weight || "",
+//         slug: book.slug || "",
+//         _id: book._id || "",
+//         imageAltTag: book.imageAltTag || [],
+//         metaTitle: book.metaTitle || "",
+//         metaDescription: book.metaDescription || "",
+//         canonicalTag: book.canonicalTag || "",
+//         keywords: book.keywords || [],
+//       });
+//     } catch (error) {
+//       console.error("Error fetching book data:", error);
+//     }
+//   };
+
 //   useEffect(() => {
 //     fetchCategories();
-//   }, []);
+//     if (id) fetchBookData();
+//   }, [id]);
+
+//   const handleFileUpload = (files, setter) => {
+//     formik.setFieldValue(setter, [...formik.values[setter], ...files]);
+//   };
+
+//   const handleFileChange = (event, setter) => {
+//     const files = Array.from(event.target.files);
+//     handleFileUpload(files, setter);
+//     const newAltTags = [...formik.values.imageAltTag];
+//     files.forEach(() => newAltTags.push(""));
+//     formik.setFieldValue("imageAltTag", newAltTags);
+//   };
+
+//   const handleRemoveImage = async (index) => {
+//     try {
+//       const headers = { Authorization: `Bearer ${accessToken}` };
+//       const imageUrlToRemove = formik.values.books[index];
+//       const response = await axios.delete(`${API_BASE_URL}/book/${id}/image`, {
+//         headers,
+//         data: { bookImageUrl: imageUrlToRemove },
+//       });
+
+//       if (response.data.success) {
+//         const updatedBooks = formik.values.books.filter((_, i) => i !== index);
+//         const updatedAltTags = formik.values.imageAltTag.filter(
+//           (_, i) => i !== index
+//         );
+//         formik.setFieldValue("books", updatedBooks);
+//         formik.setFieldValue("imageAltTag", updatedAltTags);
+//       } else {
+//         console.error("Failed to remove image:", response.data.message);
+//       }
+//     } catch (error) {
+//       console.error("Error removing image:", error);
+//     }
+//   };
 
 //   return (
 //     <div className="p-5 m-2">
@@ -250,12 +306,12 @@
 //       </div>
 //       <div className="m-2">
 //         <div className="m-auto" style={{ maxWidth: "1000px" }}>
-//           <h4>Create Book</h4>
+//           <h4>{id ? "Edit Book" : "Create Book"}</h4>
 //           <form onSubmit={formik.handleSubmit}>
 //             <Row>
 //               <Col sm={12} md={12}>
 //                 <div className="mb-3">
-//                   <label>Upload Book Images</label> <br />
+//                   <label>Upload Book Images*</label> <br />
 //                   <input
 //                     type="file"
 //                     accept="image/*"
@@ -265,22 +321,41 @@
 //                   {formik.touched.books && formik.errors.books && (
 //                     <div className="text-danger">{formik.errors.books}</div>
 //                   )}
-//                   {formik.values.books.length > 0 && (
-//                     <div className="mt-2">
-//                       {formik.values.books.map((file, index) => (
+//                   {console.log(formik.values.books, "formik.values.books")}
+//                   {formik?.values?.books?.length > 0 && (
+//                     <div className="mt-2 d-flex flex-wrap">
+//                       {formik?.values?.books.map((file, index) => (
 //                         <div
 //                           key={index}
 //                           style={{
 //                             position: "relative",
-//                             display: "inline-block",
-//                             margin: "5px",
+//                             margin: "10px",
+//                             textAlign: "center",
 //                           }}
 //                         >
 //                           <img
-//                             src={URL.createObjectURL(file)}
+//                             src={file}
 //                             alt={`Preview ${index}`}
-//                             style={{ width: "100px", height: "100px" }}
+//                             style={{
+//                               width: "100px",
+//                               height: "100px",
+//                               objectFit: "cover",
+//                             }}
 //                           />
+//                           <div>
+//                             <InputText
+//                               placeholder="Alt tag"
+//                               value={formik.values.imageAltTag[index] || ""}
+//                               onChange={(e) => {
+//                                 const newAltTags = [
+//                                   ...formik.values.imageAltTag,
+//                                 ];
+//                                 newAltTags[index] = e.target.value;
+//                                 formik.setFieldValue("imageAltTag", newAltTags);
+//                               }}
+//                               style={{ width: "100px", marginTop: "5px" }}
+//                             />
+//                           </div>
 //                           <button
 //                             style={{
 //                               position: "absolute",
@@ -292,7 +367,9 @@
 //                               borderRadius: "50%",
 //                               cursor: "pointer",
 //                             }}
-//                             onClick={() => handleRemoveImage(index, "books")}
+//                             onClick={() => {
+//                               handleRemoveImage(index, "books");
+//                             }}
 //                           >
 //                             X
 //                           </button>
@@ -343,7 +420,6 @@
 //                 </div>
 //               </Col>
 //             </Row>
-
 //             <Row>
 //               <Col>
 //                 <div className="mb-3">
@@ -387,7 +463,6 @@
 //                 </div>
 //               </Col>
 //             </Row>
-
 //             <Row>
 //               <Col>
 //                 <div className="mb-3">
@@ -435,7 +510,6 @@
 //                 </div>
 //               </Col>
 //             </Row>
-
 //             <Row>
 //               <Col>
 //                 <div className="mb-3">
@@ -478,7 +552,6 @@
 //                 </div>
 //               </Col>
 //             </Row>
-
 //             <Row>
 //               <Col>
 //                 <div className="mb-3">
@@ -521,7 +594,34 @@
 //                 </div>
 //               </Col>
 //             </Row>
-
+//             <Row>
+//               <Col>
+//                 <div className="mb-3">
+//                   <label>Genre</label> <br />
+//                   <InputText
+//                     name="genre"
+//                     value={formik.values.genre}
+//                     onChange={formik.handleChange}
+//                     onBlur={formik.handleBlur}
+//                     className="w-100"
+//                     placeholder="Enter genre"
+//                   />
+//                 </div>
+//               </Col>
+//               <Col>
+//                 <div className="mb-3">
+//                   <label>Status</label> <br />
+//                   <InputText
+//                     name="status"
+//                     value={formik.values.status}
+//                     onChange={formik.handleChange}
+//                     onBlur={formik.handleBlur}
+//                     className="w-100"
+//                     placeholder="Enter status"
+//                   />
+//                 </div>
+//               </Col>
+//             </Row>
 //             <Row>
 //               <Col sm={12}>
 //                 <div className="mb-3">
@@ -574,7 +674,67 @@
 //                 </div>
 //               </Col>
 //             </Row>
-
+//             <Row>
+//               <Col sm={12}>
+//                 <div className="mb-3">
+//                   <label>Meta Title</label> <br />
+//                   <InputText
+//                     name="metaTitle"
+//                     value={formik.values.metaTitle}
+//                     onChange={formik.handleChange}
+//                     onBlur={formik.handleBlur}
+//                     className="w-100"
+//                     placeholder="Enter meta title"
+//                   />
+//                 </div>
+//               </Col>
+//               <Col sm={12}>
+//                 <div className="mb-3">
+//                   <label>Meta Description</label> <br />
+//                   <InputText
+//                     name="metaDescription"
+//                     value={formik.values.metaDescription}
+//                     onChange={formik.handleChange}
+//                     onBlur={formik.handleBlur}
+//                     className="w-100"
+//                     placeholder="Enter meta description"
+//                   />
+//                 </div>
+//               </Col>
+//             </Row>
+//             <Row>
+//               <Col sm={12}>
+//                 <div className="mb-3">
+//                   <label>Canonical Tag</label> <br />
+//                   <InputText
+//                     name="canonicalTag"
+//                     value={formik.values.canonicalTag}
+//                     onChange={formik.handleChange}
+//                     onBlur={formik.handleBlur}
+//                     className="w-100"
+//                     placeholder="Enter canonical tag"
+//                   />
+//                 </div>
+//               </Col>
+//               <Col sm={12}>
+//                 <div className="mb-3">
+//                   <label>Keywords (comma separated)</label> <br />
+//                   <InputText
+//                     name="keywords"
+//                     value={formik.values.keywords.join(", ")}
+//                     onChange={(e) =>
+//                       formik.setFieldValue(
+//                         "keywords",
+//                         e.target.value.split(",").map((k) => k.trim())
+//                       )
+//                     }
+//                     onBlur={formik.handleBlur}
+//                     className="w-100"
+//                     placeholder="Enter keywords"
+//                   />
+//                 </div>
+//               </Col>
+//             </Row>
 //             <Row className="mb-3">
 //               <Col>
 //                 <div className="d-flex align-items-center">
@@ -625,7 +785,6 @@
 //                 </div>
 //               </Col>
 //             </Row>
-
 //             {formik.values.isAudiobookAvailable && (
 //               <Row className="mb-3">
 //                 <Col sm={12} md={6}>
@@ -670,7 +829,6 @@
 //                 </Col>
 //               </Row>
 //             )}
-
 //             {formik.values.isEBookAvailable && (
 //               <Row className="mb-3">
 //                 <Col sm={12} md={6}>
@@ -711,7 +869,6 @@
 //                 </Col>
 //               </Row>
 //             )}
-
 //             <Row>
 //               <Col>
 //                 <div className="mb-3">
@@ -759,11 +916,10 @@
 //                 </div>
 //               </Col>
 //             </Row>
-
 //             <div className="p-grid mt-4">
 //               <Button
 //                 type="submit"
-//                 label="Submit"
+//                 label={id ? "Update" : "Submit"}
 //                 className="p-button-primary"
 //                 disabled={!formik.isValid || formik.isSubmitting}
 //               />
@@ -801,7 +957,7 @@ import { Editor } from "primereact/editor";
 import * as yup from "yup";
 import { useFormik } from "formik";
 
-const BookForm = () => {
+const BookForm = ({ id }) => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [categories, setCategories] = useState([]);
   const accessToken = Cookies.get("accessToken");
@@ -844,95 +1000,18 @@ const BookForm = () => {
       .required("Author biography is required")
       .min(50, "Author biography should be at least 50 characters"),
     description: yup.string().required("Description is required"),
-    books: yup
-      .array()
-      .min(1, "At least one book image is required")
-      .test(
-        "fileSize",
-        "Each file must be less than 2MB",
-        (value) => !value || value.every((file) => file.size <= 2000000)
-      )
-      .test(
-        "fileType",
-        "Only image files are allowed",
-        (value) =>
-          !value || value.every((file) => file.type.startsWith("image/"))
-      ),
-    imageAltTag: yup
-      .array()
-      .of(yup.string().required("Alt tag is required"))
-      .test(
-        "alt-tag-length",
-        "Alt tag is required for each image",
-        (value) => value.length === formik.values.books.length
-      ),
-    audiobookPrice: yup.number().when("isAudiobookAvailable", {
-      is: true,
-      then: yup
-        .number()
-        .required("Audiobook price is required when audiobook is available")
-        .positive("Audiobook price must be positive")
-        .typeError("Audiobook price must be a number"),
-    }),
-    ebookPrice: yup.number().when("isEBookAvailable", {
-      is: true,
-      then: yup
-        .number()
-        .required("Ebook price is required when ebook is available")
-        .positive("Ebook price must be positive")
-        .typeError("Ebook price must be a number"),
-    }),
+    books: yup.array().min(1, "At least one book image is required"),
     weight: yup
       .number()
       .required("Weight is required")
       .positive("Weight must be positive"),
     weightUnit: yup.string().required("Weight unit is required"),
-    audiobooks: yup.array().when("isAudiobookAvailable", {
-      is: true,
-      then: yup
-        .array()
-        .min(1, "At least one audiobook file is required")
-        .test(
-          "fileSize",
-          "Each file must be less than 10MB",
-          (value) => !value || value.every((file) => file.size <= 10000000)
-        )
-        .test(
-          "fileType",
-          "Only audio files are allowed",
-          (value) =>
-            !value || value.every((file) => file.type.startsWith("audio/"))
-        ),
-    }),
-    ebooks: yup.array().when("isEBookAvailable", {
-      is: true,
-      then: yup
-        .array()
-        .min(1, "At least one ebook file is required")
-        .test(
-          "fileSize",
-          "Each file must be less than 5MB",
-          (value) => !value || value.every((file) => file.size <= 5000000)
-        )
-        .test(
-          "fileType",
-          "Only PDF or EPUB files are allowed",
-          (value) =>
-            !value ||
-            value.every(
-              (file) =>
-                file.type === "application/pdf" ||
-                file.name.endsWith(".epub") ||
-                file.type === "application/epub+zip"
-            )
-        ),
-    }),
     genre: yup.string(),
     status: yup.number(),
     metaTitle: yup.string(),
     metaDescription: yup.string(),
     canonicalTag: yup.string(),
-    keywords: yup.array().of(yup.string()),
+    // keywords: yup.array().of(yup.string()),
   });
 
   const formik = useFormik({
@@ -968,73 +1047,138 @@ const BookForm = () => {
       metaTitle: "",
       metaDescription: "",
       canonicalTag: "",
-      keywords: [],
+      keywords: "",
     },
     validationSchema,
+    // onSubmit: async (values) => {
+    //   try {
+    //     const payload = new FormData();
+    //     Object.keys(values).forEach((key) => {
+    //       if (values[key] !== null && values[key] !== undefined) {
+    //         if (Array.isArray(values[key])) {
+    //           values[key].forEach((item) => {
+    //             payload.append(key, item);
+    //           });
+    //         } else {
+    //           payload.append(key, values[key]);
+    //         }
+    //       }
+    //     });
+    //     const url = id ? `${API_BASE_URL}/book/${id}` : `${API_BASE_URL}/book`;
+    //     const method = id ? "patch" : "post";
+    //     const response = await axios[method](url, payload, {
+    //       headers: {
+    //         "Content-Type": "multipart/form-data",
+    //         Authorization: `Bearer ${accessToken}`,
+    //       },
+    //     });
+    //     if (response.data.success) {
+    //       // Swal.fire({
+    //       //   title: "Success!",
+    //       //   text: response.data.data.message,
+    //       //   icon: "success",
+    //       //   confirmButtonText: "OK",
+    //       // });
+    //       // window.location.href = "/adminpanel/dashboard/book";
+    //     } else {
+    //       Swal.fire({
+    //         title: "Error!",
+    //         text:
+    //           response.data.message ||
+    //           (id ? "Error updating book" : "Error creating book"),
+    //         icon: "error",
+    //         confirmButtonText: "OK",
+    //       });
+    //     }
+    //   } catch (error) {
+    //     console.error(
+    //       id ? "Error updating book:" : "Error creating book:",
+    //       error
+    //     );
+    //     Swal.fire({
+    //       title: "Error!",
+    //       text:
+    //         error.response?.data?.message ||
+    //         (id ? "Error updating book" : "Error creating book"),
+    //       icon: "error",
+    //       confirmButtonText: "OK",
+    //     });
+    //   }
+    // },
     onSubmit: async (values) => {
       try {
         const payload = new FormData();
+
+        // Handle normal fields
         Object.keys(values).forEach((key) => {
+          if (["books", "imageAltTag"].includes(key)) return; // skip these, handle below
+
           if (values[key] !== null && values[key] !== undefined) {
             if (Array.isArray(values[key])) {
-              values[key].forEach((item, index) => {
-                payload.append(`${key}`, item);
+              values[key].forEach((item) => {
+                payload.append(key, item);
               });
             } else {
               payload.append(key, values[key]);
             }
           }
         });
-        const response = await axios.post(`${API_BASE_URL}/book`, payload, {
+
+        // Handle books (images) with alt tags by index
+        values.books.forEach((file, index) => {
+          if (file) {
+            payload.append(`books`, file); // image
+            payload.append(
+              `imageAltTag.${index}`,
+              values.imageAltTag[index] || ""
+            ); // alt tag
+          }
+        });
+
+        const url = id ? `${API_BASE_URL}/book/${id}` : `${API_BASE_URL}/book`;
+        const method = id ? "patch" : "post";
+
+        const response = await axios[method](url, payload, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${accessToken}`,
           },
         });
+
         if (response.data.success) {
           Swal.fire({
             title: "Success!",
-            text: response.data.data.message,
+            text: response.data.data.message || "Book saved successfully",
             icon: "success",
             confirmButtonText: "OK",
           });
           window.location.href = "/adminpanel/dashboard/book";
         } else {
-          Swal.fire("Error creating book");
+          Swal.fire({
+            title: "Error!",
+            text:
+              response.data.message ||
+              (id ? "Error updating book" : "Error creating book"),
+            icon: "error",
+            confirmButtonText: "OK",
+          });
         }
       } catch (error) {
-        console.error("Error creating book:", error);
+        console.error(
+          id ? "Error updating book:" : "Error creating book:",
+          error
+        );
         Swal.fire({
           title: "Error!",
-          text: error.response?.data?.message || "Error creating book",
+          text:
+            error.response?.data?.message ||
+            (id ? "Error updating book" : "Error creating book"),
           icon: "error",
           confirmButtonText: "OK",
         });
       }
     },
   });
-
-  const handleFileUpload = (files, setter) => {
-    formik.setFieldValue(setter, [...formik.values[setter], ...files]);
-  };
-
-  const handleFileChange = (event, setter) => {
-    const files = Array.from(event.target.files);
-    handleFileUpload(files, setter);
-
-    // Add empty alt tags for new images
-    const newAltTags = [...formik.values.imageAltTag];
-    files.forEach(() => newAltTags.push(""));
-    formik.setFieldValue("imageAltTag", newAltTags);
-  };
-
-  const handleRemoveImage = (index, setter) => {
-    const updatedFiles = formik.values[setter].filter((_, i) => i !== index);
-    formik.setFieldValue(setter, updatedFiles);
-
-    const updatedAltTags = formik.values.imageAltTag.filter((_, i) => i !== index);
-    formik.setFieldValue("imageAltTag", updatedAltTags);
-  };
 
   const fetchCategories = async () => {
     try {
@@ -1043,12 +1187,201 @@ const BookForm = () => {
       setCategories(response.data.data.categories);
     } catch (error) {
       console.error("Error fetching categories:", error);
+      Swal.fire({
+        title: "Error!",
+        text: error.response?.data?.message || "Failed to fetch categories",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
+  };
+
+  const fetchBookData = async () => {
+    try {
+      const headers = { Authorization: `Bearer ${accessToken}` };
+      const response = await axios.get(`${API_BASE_URL}/book/${id}`, {
+        headers,
+      });
+      const book = response.data.data;
+      formik.setValues({
+        title: book.title || "",
+        author: book.author || "",
+        authorBiography: book.authorBiography || "",
+        genre: book.genre || "",
+        category: book.category || "",
+        publishDate: book.publishDate ? new Date(book.publishDate) : null,
+        publisher: book.publisher || "",
+        language: book.language || "",
+        pages: book.pages || "",
+        quantity: book.quantity || "",
+        description: book.description || "",
+        price: book.price || "",
+        isHardCopyAvailable: book.isHardCopyAvailable || false,
+        isAudiobookAvailable: book.isAudiobookAvailable || false,
+        isEBookAvailable: book.isEBookAvailable || false,
+        books: book.bookimage || [],
+        audiobooks: book.audiobookUpload || [],
+        ebooks: book.EbookUpload || [],
+        audiobookPrice: book.audiobookPrice || "",
+        ebookPrice: book.ebookPrice || "",
+        weightUnit: book.weightUnit || "kg",
+        weight: book.weight || "",
+        slug: book.slug || "",
+        awardWinningBook: book.awardWinningBook || false,
+        newArrival: book.newArrival || false,
+        status: book.status || 0,
+        imageAltTag: book?.imageAltTag || [],
+        metaTitle: book.metaTitle || "",
+        metaDescription: book.metaDescription || "",
+        canonicalTag: book.canonicalTag || "",
+        keywords: book.keywords || [],
+      });
+    } catch (error) {
+      console.error("Error fetching book data:", error);
+      Swal.fire({
+        title: "Error!",
+        text: error.response?.data?.message || "Failed to fetch book data",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
     }
   };
 
   useEffect(() => {
-    fetchCategories();
-  }, []);
+    const fetchInitialData = async () => {
+      try {
+        await fetchCategories();
+        if (id) await fetchBookData();
+      } catch (error) {
+        console.error("Error in useEffect:", error);
+        Swal.fire({
+          title: "Error!",
+          text: "Failed to load initial data",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      }
+    };
+    fetchInitialData();
+  }, [id]);
+
+  const handleFileUpload = (files, setter) => {
+    const currentFiles = formik.values[setter] || [];
+    formik.setFieldValue(setter, [...currentFiles, ...files]);
+  };
+
+  const handleFileChange = (event, setter) => {
+    const files = Array.from(event.target.files);
+    handleFileUpload(files, setter);
+    const newAltTags = [...formik.values.imageAltTag];
+    files.forEach(() => newAltTags.push(""));
+    formik.setFieldValue("imageAltTag", newAltTags);
+  };
+
+  // const handleRemoveImage = async (index) => {
+  //   try {
+  //     const updatedBooks = formik.values.books.filter((_, i) => i !== index);
+  //     const updatedAltTags = formik.values.imageAltTag.filter(
+  //       (_, i) => i !== index
+  //     );
+  //     formik.setFieldValue("books", updatedBooks);
+  //     formik.setFieldValue("imageAltTag", updatedAltTags);
+
+  //     if (id) {
+  //       const headers = { Authorization: `Bearer ${accessToken}` };
+  //       const imageUrlToRemove = formik.values.books[index];
+  //       const response = await axios.delete(
+  //         `${API_BASE_URL}/book/${id}/image`,
+  //         {
+  //           headers,
+  //           data: { bookImageUrl: imageUrlToRemove },
+  //         }
+  //       );
+  //       if (!response.data.success) {
+  //         console.error("Failed to remove image:", response.data.message);
+  //         Swal.fire({
+  //           title: "Error!",
+  //           text: response.data.message || "Failed to remove image from server",
+  //           icon: "error",
+  //           confirmButtonText: "OK",
+  //         });
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error("Error removing image:", error);
+  //     Swal.fire({
+  //       title: "Error!",
+  //       text: error.response?.data?.message || "Error removing image",
+  //       icon: "error",
+  //       confirmButtonText: "OK",
+  //     });
+  //   }
+  // };
+
+  const handleRemoveImage = async (index) => {
+    try {
+      const confirmResult = await Swal.fire({
+        title: "Are you sure?",
+        text: "Do you really want to remove this image?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, remove it",
+        cancelButtonText: "Cancel",
+      });
+
+      if (!confirmResult.isConfirmed) {
+        return; // Stop if user cancels
+      }
+
+      // Remove from local form state
+      const updatedBooks = formik.values.books.filter((_, i) => i !== index);
+      const updatedAltTags = formik.values.imageAltTag.filter(
+        (_, i) => i !== index
+      );
+      formik.setFieldValue("books", updatedBooks);
+      formik.setFieldValue("imageAltTag", updatedAltTags);
+
+      // Remove from server only if id exists
+      if (id) {
+        const headers = { Authorization: `Bearer ${accessToken}` };
+        const imageUrlToRemove = formik.values.books[index];
+        const response = await axios.delete(
+          `${API_BASE_URL}/book/${id}/image`,
+          {
+            headers,
+            data: { bookImageUrl: imageUrlToRemove },
+          }
+        );
+
+        if (!response.data.success) {
+          console.error("Failed to remove image:", response.data.message);
+          Swal.fire({
+            title: "Error!",
+            text: response.data.message || "Failed to remove image from server",
+            icon: "error",
+            confirmButtonText: "OK",
+          });
+        } else {
+          Swal.fire({
+            title: "Deleted!",
+            text: "The image has been removed successfully.",
+            icon: "success",
+            confirmButtonText: "OK",
+          });
+        }
+      }
+    } catch (error) {
+      console.error("Error removing image:", error);
+      Swal.fire({
+        title: "Error!",
+        text: error.response?.data?.message || "Error removing image",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
+  };
 
   return (
     <div className="p-5 m-2">
@@ -1057,7 +1390,7 @@ const BookForm = () => {
       </div>
       <div className="m-2">
         <div className="m-auto" style={{ maxWidth: "1000px" }}>
-          <h4>Create Book</h4>
+          <h4>{id ? "Edit Book" : "Create Book"}</h4>
           <form onSubmit={formik.handleSubmit}>
             <Row>
               <Col sm={12} md={12}>
@@ -1072,9 +1405,9 @@ const BookForm = () => {
                   {formik.touched.books && formik.errors.books && (
                     <div className="text-danger">{formik.errors.books}</div>
                   )}
-                  {formik.values.books.length > 0 && (
+                  {formik?.values?.books?.length > 0 && (
                     <div className="mt-2 d-flex flex-wrap">
-                      {formik.values.books.map((file, index) => (
+                      {formik?.values?.books.map((file, index) => (
                         <div
                           key={index}
                           style={{
@@ -1084,16 +1417,26 @@ const BookForm = () => {
                           }}
                         >
                           <img
-                            src={URL.createObjectURL(file)}
+                            src={
+                              typeof file === "string"
+                                ? file
+                                : URL.createObjectURL(file)
+                            }
                             alt={`Preview ${index}`}
-                            style={{ width: "100px", height: "100px", objectFit: "cover" }}
+                            style={{
+                              width: "100px",
+                              height: "100px",
+                              objectFit: "cover",
+                            }}
                           />
                           <div>
                             <InputText
                               placeholder="Alt tag"
                               value={formik.values.imageAltTag[index] || ""}
                               onChange={(e) => {
-                                const newAltTags = [...formik.values.imageAltTag];
+                                const newAltTags = [
+                                  ...formik.values.imageAltTag,
+                                ];
                                 newAltTags[index] = e.target.value;
                                 formik.setFieldValue("imageAltTag", newAltTags);
                               }}
@@ -1111,9 +1454,7 @@ const BookForm = () => {
                               borderRadius: "50%",
                               cursor: "pointer",
                             }}
-                            onClick={() => {
-                              handleRemoveImage(index, "books");
-                            }}
+                            onClick={() => handleRemoveImage(index)}
                           >
                             X
                           </button>
@@ -1465,9 +1806,9 @@ const BookForm = () => {
                   <label>Keywords (comma separated)</label> <br />
                   <InputText
                     name="keywords"
-                    value={formik.values.keywords.join(", ")}
+                    value={formik?.values?.keywords}
                     onChange={(e) =>
-                      formik.setFieldValue("keywords", e.target.value.split(",").map((k) => k.trim()))
+                      formik.setFieldValue("keywords", e.target.value)
                     }
                     onBlur={formik.handleBlur}
                     className="w-100"
@@ -1660,7 +2001,7 @@ const BookForm = () => {
             <div className="p-grid mt-4">
               <Button
                 type="submit"
-                label="Submit"
+                label={id ? "Update" : "Submit"}
                 className="p-button-primary"
                 disabled={!formik.isValid || formik.isSubmitting}
               />
