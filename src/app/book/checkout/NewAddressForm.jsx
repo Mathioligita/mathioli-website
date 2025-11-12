@@ -107,6 +107,7 @@ const NewAddressForm = ({
             <InputText
               id="phone"
               name="phone"
+              maxLength={10}
               value={formData.phone}
               onChange={handleChange}
               placeholder="Enter your phone"
@@ -213,7 +214,7 @@ const NewAddressForm = ({
                 borderRadius: "6px",
               }}
               className="p-button-text"
-              // outlined
+            // outlined
             />
             <Button
               label="Add Address"

@@ -419,7 +419,7 @@ const CheckoutPage = () => {
                 minHeight: "70px",
               }}
             >
-              <div className="d-flex" style={{ justifyContent: "space-between" }}>
+              <div className="d-flex align-items-center" style={{ justifyContent: "space-between" }}>
                 <div>
                   {
                     activeAddress ?
@@ -445,18 +445,15 @@ const CheckoutPage = () => {
                 </div>
 
                 <Button
-                  className="p-button-outlined change-buttons-hovera p-0 ms-4 cursor-pointer"
                   onClick={handleChangeAddress}
+                  className="checkout-out-delivery bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded-md border-0 transition-colors mt-1"
                   style={{
-                    color: "#0C8040",
-                    border: "0px",
-                    all: "unset",
+                    border: "none",
                   }}
                 >
-                  {
-                    activeAddress ? "Change Address" : "Add Address"
-                  }
+                  {activeAddress ? "Change Address" : "Add Address"}
                 </Button>
+
               </div>
             </div>
             <CheckoutTable
