@@ -1,8 +1,3 @@
-// --------------------------------------------------------------------------------------------------------------
-// --------------------------------------------------------------------------------------------------------------
-// --------------------------------------entire forgot password flow with reusbale verify otp component------------------------------------------------------------------------
-// --------------------------------------------------------------------------------------------------------------
-// --------------------------------------------------------------------------------------------------------------
 "use client";
 import React, { useContext, useRef, useState } from "react";
 import { Button } from "primereact/button";
@@ -20,15 +15,15 @@ function Login({ visible, onHide }) {
   const toast = useRef(null);
   const { registerpoup, closeLoginPopup } = useContext(userContext);
   const guest = Cookies.get("guestId");
-  
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  
+
   const [loading, setLoading] = useState(false);
   const [currentView, setCurrentView] = useState("login");
-  
+
   // Forgot password states
   const [forgotPasswordEmail, setForgotPasswordEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -46,7 +41,7 @@ function Login({ visible, onHide }) {
     e.preventDefault();
     setLoading(true);
     const payload = { email: formData.email, password: formData.password, guestId: guest };
-    
+
     try {
       const response = await LoginAPi(payload);
       if (response.success) {
@@ -150,7 +145,7 @@ function Login({ visible, onHide }) {
 
     setLoading(true);
     try {
-      const payload = { 
+      const payload = {
         email: forgotPasswordEmail,
         newPassword,
         confirmPassword
@@ -348,28 +343,28 @@ function Login({ visible, onHide }) {
       <>
         <Toast ref={toast} />
         <div className="modal-overlay" onClick={onHide}></div>
-         <div className="login-modal">
+        <div className="login-modal">
           <div className="d-flex" style={{ justifyContent: "end" }} onClick={onHide}>
             <i className="pi pi-times" style={{ color: "rgb(177 181 184)" }}></i>
           </div>
           <div className="content p-1">
-            { currentView === "verify" ? (
+            {currentView === "verify" ? (
               ""
-            ):(
+            ) : (
               <>
-            <div className="d-flex justify-content-center">
-              <img src="/image/logo-black.svg" alt="Logo" width={"200px"} />
-            </div> 
-             <p className="text-center fs-5" style={{ color: "#4D4D4D" }}>
-              {getViewTitle()}
-            </p>
-            <span
-              className="d-flex justify-content-center"
-              style={{ fontSize: "12px", color: "#4D4D4D", fontWeight: "200" }}
-            >
-              {getViewSubtitle()}
-            </span> 
-            </>
+                <div className="d-flex justify-content-center">
+                  <img src="/image/logo-black.svg" alt="Logo" width={"200px"} />
+                </div>
+                <p className="text-center fs-5" style={{ color: "#4D4D4D" }}>
+                  {getViewTitle()}
+                </p>
+                <span
+                  className="d-flex justify-content-center"
+                  style={{ fontSize: "12px", color: "#4D4D4D", fontWeight: "200" }}
+                >
+                  {getViewSubtitle()}
+                </span>
+              </>
             )
 
             }

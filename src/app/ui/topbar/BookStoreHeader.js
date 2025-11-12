@@ -13,23 +13,30 @@ import Link from "next/link";
 import userContext from "../../../app/UseContext/UseContext";
 import { Badge } from "primereact/badge";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+import { addToCartAPI } from "api/page";
 
 export default function BookStoreHeader() {
   const [isOpen, setIsOpen] = useState(false);
   const sidebarRef = useRef(null); // Create a ref for the sidebar
   const { cart, wishlistvalues } = useContext(userContext);
   const router = useRouter();
-  // const accessToken = Cookies.get("accessToken");
+  const accessToken = Cookies.get("accessToken");
   const wishlistcount = wishlistvalues?.length || 0;
   const cart1 = cart?.length || 0;
   const handleWishlist = () => {
     router.push("/book/wishlist");
   };
 
+  useEffect(() => {
+    if (accessToken) {
+      addToCartAPI();
+    }
+  }, [accessToken, wishlistvalues, cart]);
+
   const handleAddToCart = () => {
     router.push("/book/addtocart");
   };
-  // Close the sidebar when clicked outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
@@ -65,7 +72,7 @@ export default function BookStoreHeader() {
                 <Logo />
               </Link>
             </div>
-            <div className="fav-wishlist" >
+            <div className="fav-wishlist">
               <div
                 className="fav-wishlist me-4  d-flex"
                 style={{ marginTop: "32px", display: "none" }}

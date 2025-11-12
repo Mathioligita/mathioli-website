@@ -2,7 +2,6 @@ import React from "react";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
-// import { useMediaQuery } from "react-responsive";
 
 const ShippingForm = ({
   open,
@@ -12,10 +11,6 @@ const ShippingForm = ({
   errors,
   handleSubmit,
 }) => {
-  // const isMobile = useMediaQuery({ query: "(max-width: 600px)" });
-  // {
-    // console.log(formData, "Formdata");
-  // }
   return (
     <Dialog
       header="Update Shipping Information"
@@ -238,13 +233,6 @@ const ShippingForm = ({
           </div>
 
           <div className="p-dialog-footer mt-4">
-            {/* <Button
-              label="Cancel"
-              icon="pi pi-times"
-              onClick={handleClose}
-              className="p-button-text text-dark"
-              outlined
-            /> */}
             <Button
               label="Update"
               icon="pi pi-check"
