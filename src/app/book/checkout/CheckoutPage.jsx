@@ -61,12 +61,14 @@ const CheckoutPage = () => {
   }, []);
 
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    fullName: "",
     email: "",
     phone: "",
     shippingAddress: {
-      street: "",
+      fullName: "",
+      phone: "",
+      email: "",
+      address: "",
       city: "",
       state: "",
       zipCode: "",
@@ -74,6 +76,9 @@ const CheckoutPage = () => {
     },
     privacy_policy: false,
   });
+
+
+
 
   const [errors, setErrors] = useState({ privacy_policy: "" });
 
@@ -126,12 +131,14 @@ const CheckoutPage = () => {
       user?.shippingAddress?.[0];
 
     setFormData({
-      firstName: user?.firstName || usersdata?.firstName || "",
-      lastName: user?.lastName || usersdata?.lastName || "",
+      fullName: activeAddr?.fullName || `${user?.firstName} ${user?.lastName}`.trim(),
       email: user?.email || usersdata?.email || "",
       phone: user?.mobile || usersdata?.mobile || "",
       shippingAddress: {
-        street: activeAddr?.address || "",
+        fullName: activeAddr?.fullName || "",
+        phone: activeAddr?.phone || "",
+        email: activeAddr?.email || "",
+        address: activeAddr?.address || "",
         city: activeAddr?.city || "",
         state: activeAddr?.state || "",
         zipCode: activeAddr?.zipCode || "",
@@ -301,14 +308,14 @@ const CheckoutPage = () => {
     const payload = {
       addressId: editshippingfromdata,
       shippingAddress: {
-        fullName: `${formData.firstName} ${formData.lastName}`,
-        address: formData.shippingAddress.street,
+        fullName: formData.shippingAddress.fullName,
+        address: formData.shippingAddress.address,
         city: formData.shippingAddress.city,
         state: formData.shippingAddress.state,
         zipCode: formData.shippingAddress.zipCode,
         country: formData.shippingAddress.country,
-        phone: formData.phone,
-        email: formData.email,
+        phone: formData.shippingAddress.phone,
+        email: formData.shippingAddress.email,
       },
     };
     const res = await APIshippiAddressUpdate(payload);
@@ -355,17 +362,18 @@ const CheckoutPage = () => {
     user?.shippingAddress?.[0] ||
     null;
 
+
   const richUserData = (user?.shippingAddress || usersdata?.shippingAddress || []).map((addr) => ({
     _id: addr._id,
     active: addr.active,
-    fullName: `${user?.firstName || usersdata?.firstName || ""} ${user?.lastName || usersdata?.lastName || ""
-      }`.trim(),
+    fullName: addr.fullName,
     address: addr.address,
     city: addr.city,
     state: addr.state,
     zipCode: addr.zipCode,
     country: addr.country || "India",
   }));
+
 
   return (
     <>
@@ -424,7 +432,7 @@ const CheckoutPage = () => {
                   {
                     activeAddress ?
                       <span style={{ color: "#838483" }}>
-                        Delivery to {user?.firstName || usersdata?.firstName}
+                        Delivery to {activeAddress.fullName}
                       </span>
                       : "No address added yet"}
 
@@ -435,13 +443,14 @@ const CheckoutPage = () => {
                         type="radio"
                         className="radio-button me-2"
                         name="address"
-                        defaultChecked
+                        checked={!!activeAddress} // true when activeAddress exists
+                        readOnly // prevents React warning for controlled input
                       />
-                      {activeAddress.address}, {activeAddress.city},{" "}
-                      {activeAddress.state}, {activeAddress.country},{" "}
-                      {activeAddress.zipCode}
+                      {activeAddress.address}, {activeAddress.city}, {activeAddress.state},{" "}
+                      {activeAddress.country}, {activeAddress.zipCode}
                     </div>
                   )}
+
                 </div>
 
                 <Button
@@ -456,6 +465,7 @@ const CheckoutPage = () => {
 
               </div>
             </div>
+
             <CheckoutTable
               checkout={checkout}
               singleselectbooks={singleselectbooks}

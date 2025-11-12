@@ -11,6 +11,16 @@ const ShippingForm = ({
   errors,
   handleSubmit,
 }) => {
+  const handleChange = (field, value) => {
+    setFormData({
+      ...formData,
+      shippingAddress: {
+        ...formData.shippingAddress,
+        [field]: value,
+      },
+    });
+  };
+
   return (
     <Dialog
       header="Update Shipping Information"
@@ -21,46 +31,26 @@ const ShippingForm = ({
     >
       <form onSubmit={handleSubmit}>
         <div className="p-fluid">
+          {/* Full Name */}
           <div className="p-field">
-            <label htmlFor="firstName" className="p-d-block">
-              First Name
+            <label htmlFor="fullName" className="p-d-block">
+              Full Name
             </label>
             <InputText
-              id="firstName"
-              name="firstName"
-              value={formData.firstName}
-              onChange={(e) =>
-                setFormData({ ...formData, firstName: e.target.value })
-              }
-              placeholder="Enter your first name"
+              id="fullName"
+              name="fullName"
+              value={formData.shippingAddress.fullName || ""}
+              onChange={(e) => handleChange("fullName", e.target.value)}
+              placeholder="Enter your full name"
               required
-              className={errors.firstName ? "p-invalid" : ""}
+              className={errors.fullName ? "p-invalid" : ""}
             />
-            {errors.firstName && (
-              <small className="p-error">{errors.firstName}</small>
+            {errors.fullName && (
+              <small className="p-error">{errors.fullName}</small>
             )}
           </div>
 
-          <div className="p-field">
-            <label htmlFor="lastName" className="p-d-block">
-              Last Name
-            </label>
-            <InputText
-              id="lastName"
-              name="lastName"
-              value={formData.lastName}
-              onChange={(e) =>
-                setFormData({ ...formData, lastName: e.target.value })
-              }
-              placeholder="Enter your last name"
-              required
-              className={errors.lastName ? "p-invalid" : ""}
-            />
-            {errors.lastName && (
-              <small className="p-error">{errors.lastName}</small>
-            )}
-          </div>
-
+          {/* Email */}
           <div className="p-field">
             <label htmlFor="email" className="p-d-block">
               Email
@@ -69,10 +59,8 @@ const ShippingForm = ({
               id="email"
               name="email"
               type="email"
-              value={formData.email}
-              onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
-              }
+              value={formData.shippingAddress.email || ""}
+              onChange={(e) => handleChange("email", e.target.value)}
               placeholder="Enter your email"
               required
               className={errors.email ? "p-invalid" : ""}
@@ -80,6 +68,7 @@ const ShippingForm = ({
             {errors.email && <small className="p-error">{errors.email}</small>}
           </div>
 
+          {/* Phone */}
           <div className="p-field">
             <label htmlFor="phone" className="p-d-block">
               Phone
@@ -87,10 +76,8 @@ const ShippingForm = ({
             <InputText
               id="phone"
               name="phone"
-              value={formData.phone}
-              onChange={(e) =>
-                setFormData({ ...formData, phone: e.target.value })
-              }
+              value={formData.shippingAddress.phone || ""}
+              onChange={(e) => handleChange("phone", e.target.value)}
               placeholder="Enter your phone number"
               required
               className={errors.phone ? "p-invalid" : ""}
@@ -98,32 +85,22 @@ const ShippingForm = ({
             {errors.phone && <small className="p-error">{errors.phone}</small>}
           </div>
 
+          {/* Address */}
           <div className="p-field">
-            <label htmlFor="street" className="p-d-block">
-              Street
+            <label htmlFor="address" className="p-d-block">
+              Address
             </label>
             <InputText
-              id="street"
-              name="street"
-              value={formData.shippingAddress.street}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  shippingAddress: {
-                    ...formData.shippingAddress,
-                    street: e.target.value,
-                  },
-                })
-              }
-              placeholder="Enter your street address"
+              id="address"
+              name="address"
+              value={formData.shippingAddress.address || ""}
+              onChange={(e) => handleChange("address", e.target.value)}
+              placeholder="Enter your full address"
               required
-              className={errors.shippingAddress?.street ? "p-invalid" : ""}
             />
-            {errors.shippingAddress?.street && (
-              <small className="p-error">{errors.shippingAddress.street}</small>
-            )}
           </div>
 
+          {/* City */}
           <div className="p-field">
             <label htmlFor="city" className="p-d-block">
               City
@@ -131,25 +108,14 @@ const ShippingForm = ({
             <InputText
               id="city"
               name="city"
-              value={formData.shippingAddress.city}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  shippingAddress: {
-                    ...formData.shippingAddress,
-                    city: e.target.value,
-                  },
-                })
-              }
+              value={formData.shippingAddress.city || ""}
+              onChange={(e) => handleChange("city", e.target.value)}
               placeholder="Enter your city"
               required
-              className={errors.shippingAddress?.city ? "p-invalid" : ""}
             />
-            {errors.shippingAddress?.city && (
-              <small className="p-error">{errors.shippingAddress.city}</small>
-            )}
           </div>
 
+          {/* State */}
           <div className="p-field">
             <label htmlFor="state" className="p-d-block">
               State
@@ -157,25 +123,14 @@ const ShippingForm = ({
             <InputText
               id="state"
               name="state"
-              value={formData.shippingAddress.state}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  shippingAddress: {
-                    ...formData.shippingAddress,
-                    state: e.target.value,
-                  },
-                })
-              }
+              value={formData.shippingAddress.state || ""}
+              onChange={(e) => handleChange("state", e.target.value)}
               placeholder="Enter your state"
               required
-              className={errors.shippingAddress?.state ? "p-invalid" : ""}
             />
-            {errors.shippingAddress?.state && (
-              <small className="p-error">{errors.shippingAddress.state}</small>
-            )}
           </div>
 
+          {/* Postal Code */}
           <div className="p-field">
             <label htmlFor="zipCode" className="p-d-block">
               Postal Code
@@ -183,27 +138,14 @@ const ShippingForm = ({
             <InputText
               id="zipCode"
               name="zipCode"
-              value={formData.shippingAddress.zipCode}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  shippingAddress: {
-                    ...formData.shippingAddress,
-                    zipCode: e.target.value,
-                  },
-                })
-              }
+              value={formData.shippingAddress.zipCode || ""}
+              onChange={(e) => handleChange("zipCode", e.target.value)}
               placeholder="Enter your postal code"
               required
-              className={errors.shippingAddress?.zipCode ? "p-invalid" : ""}
             />
-            {errors.shippingAddress?.zipCode && (
-              <small className="p-error">
-                {errors.shippingAddress.zipCode}
-              </small>
-            )}
           </div>
 
+          {/* Country */}
           <div className="p-field">
             <label htmlFor="country" className="p-d-block">
               Country
@@ -211,27 +153,14 @@ const ShippingForm = ({
             <InputText
               id="country"
               name="country"
-              value={formData.shippingAddress.country}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  shippingAddress: {
-                    ...formData.shippingAddress,
-                    country: e.target.value,
-                  },
-                })
-              }
+              value={formData.shippingAddress.country || ""}
+              onChange={(e) => handleChange("country", e.target.value)}
               placeholder="Enter your country"
               required
-              className={errors.shippingAddress?.country ? "p-invalid" : ""}
             />
-            {errors.shippingAddress?.country && (
-              <small className="p-error">
-                {errors.shippingAddress.country}
-              </small>
-            )}
           </div>
 
+          {/* Submit Button */}
           <div className="p-dialog-footer mt-4">
             <Button
               label="Update"
