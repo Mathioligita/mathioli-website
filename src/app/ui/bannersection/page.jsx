@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import "./BannerSection.css"; // Import the CSS file
+import "./BannerSection.css";
 import { Button } from "primereact/button";
 import { useRouter } from "next/navigation";
 
