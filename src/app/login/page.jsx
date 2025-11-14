@@ -44,35 +44,47 @@ function Login({ visible, onHide }) {
 
     try {
       const response = await LoginAPi(payload);
+
       if (response.success) {
         Cookies.set("refreshToken", response.data.refreshToken);
         Cookies.set("accessToken", response.data.accessToken);
+
         toast.current.show({
           severity: "success",
           summary: "Login Successful",
           detail: "Login successfully",
           life: 3000,
         });
+
         setTimeout(() => onHide(), 1000);
-        window.location.reload()
-      } else {
+        window.location.reload();
+      }
+      else {
         toast.current.show({
           severity: "error",
-          detail: response.data,
+          summary: "Error",
+          detail:
+            typeof response.data === "string"
+              ? response.data
+              : response.data?.message ||
+              response.data?.errors ||
+              "Something went wrong",
           life: 3000,
         });
       }
+
     } catch (error) {
       toast.current.show({
         severity: "error",
         summary: "Login Failed",
-        detail: "An error occurred during login.",
+        detail: error?.message || "An error occurred during login.",
         life: 3000,
       });
     } finally {
       setLoading(false);
     }
   };
+
 
   const handleForgotPassword = async () => {
     if (!forgotPasswordEmail) {
@@ -234,7 +246,7 @@ function Login({ visible, onHide }) {
             }}
             className="signup-link"
           >
-            signup
+            Signup
           </span>{" "}
           here
         </p>

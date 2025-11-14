@@ -212,12 +212,12 @@ const CheckoutPage = () => {
 
     if (activeAddr) setEditshippingfromdata(activeAddr._id);
     setOpen(true);
-    setShippingFormOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
-    setShippingFormOpen(false);
+    Finance(false);
+
   };
 
   const handleChangeAddress = () => setChangeAddressOpen(true);
@@ -662,6 +662,7 @@ const CheckoutPage = () => {
           fetchData={fetchData}
           handleOpenForm={() => {
             handleClickOpen();
+            Finance(true);
             handleCloseChangeAddress();
           }}
         />
