@@ -1,14 +1,14 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
 import { InputText } from "primereact/inputtext";
 import { useRouter } from "next/navigation";
 import { ResendOTPAPI, VerifyOTPAPI, VerifyForgotPasswordOTPAPI } from "api/verifyOTP";
-
-function VerifyOTP({ 
-  email, 
-  onVerifySuccess, 
+import userContext from "../../UseContext/UseContext";
+function VerifyOTP({
+  email,
+  onVerifySuccess,
   onBack,
   mode = "register", // 'register' or 'forgot-password'
   title = "Verify Your Email",
@@ -18,6 +18,7 @@ function VerifyOTP({
   const [loading, setLoading] = useState(false);
   const [resendLoading, setResendLoading] = useState(false);
   const [countdown, setCountdown] = useState(30);
+  const { regsiterPopup, loginpoup } = useContext(userContext);
   const toast = useRef(null);
   const router = useRouter();
   const inputRefs = useRef([]);
@@ -25,7 +26,7 @@ function VerifyOTP({
   // Function to mask email
   const maskEmail = (email) => {
     if (!email) return '';
-    
+
     const atIndex = email.indexOf('@');
     if (atIndex <= 5) {
       // If @ is within first 5 characters, show first 3 characters
@@ -46,12 +47,12 @@ function VerifyOTP({
   // Handle OTP input change
   const handleChange = (e, index) => {
     const value = e.target.value;
-    
+
     if (/^\d*$/.test(value) && value.length <= 1) {
       const newOtp = [...otp];
       newOtp[index] = value;
       setOtp(newOtp);
-      
+
       if (value && index < 5) {
         inputRefs.current[index + 1].focus();
       }
@@ -82,9 +83,9 @@ function VerifyOTP({
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    
+
     const otpCode = otp.join('');
-    
+
     if (otpCode.length !== 6) {
       toast.current.show({
         severity: "error",
@@ -101,11 +102,10 @@ function VerifyOTP({
         email: email,
         otp: otpCode
       };
-      
+
       let response;
       if (mode === "forgot-password") {
         response = await VerifyForgotPasswordOTPAPI(payload);
-        console.log("payload ",payload)
       } else {
         response = await VerifyOTPAPI(payload);
       }
@@ -115,13 +115,16 @@ function VerifyOTP({
           severity: "success",
           summary: "Verification Successful",
           detail: response?.message || "Verification successful",
-          life: 3000,
+          life: 1500,
         });
 
         setTimeout(() => {
           onVerifySuccess();
-        }, 3000);
-      } else {
+          regsiterPopup();
+          loginpoup();
+        }, 1500);
+      }
+      else {
         toast.current.show({
           severity: "error",
           summary: "Verification Failed",
@@ -146,14 +149,14 @@ function VerifyOTP({
     setResendLoading(true);
     try {
       const payload = { email: email };
-      
+
       let response;
       if (mode === "forgot-password") {
         response = await ResendOTPAPI(payload);
       } else {
         response = await ResendOTPAPI(payload);
       }
-      
+
       if (response.success) {
         toast.current.show({
           severity: "success",
@@ -161,10 +164,10 @@ function VerifyOTP({
           detail: response.message || "A new OTP has been sent to your email",
           life: 3000,
         });
-        
+
         setCountdown(30);
         setOtp(["", "", "", "", "", ""]);
-        
+
         if (inputRefs.current[0]) {
           inputRefs.current[0].focus();
         }
@@ -211,10 +214,10 @@ function VerifyOTP({
       >
         {subtitle} {maskedEmail}
       </span>
-      
+
       <form onSubmit={handleSubmit} className="m-auto mt-4">
         <div className="d-flex justify-content-center gap-2 mb-4">
-          {otp.map((digit, index) => (
+          {otp?.map((digit, index) => (
             <InputText
               key={index}
               value={digit}
@@ -228,7 +231,7 @@ function VerifyOTP({
             />
           ))}
         </div>
-        
+
         <Button
           label="Verify"
           className="w-100 mt-2"
@@ -236,7 +239,7 @@ function VerifyOTP({
           loading={loading}
           style={{ background: "#396664" }}
         />
-        
+
         <div className="mt-3 text-center">
           {countdown > 0 ? (
             <p style={{ fontSize: "14px", color: "#6c757d" }}>
@@ -249,12 +252,12 @@ function VerifyOTP({
               onClick={handleResendOTP}
               loading={resendLoading}
               disabled={resendLoading}
-              style={{color:"#396664"}}
+              style={{ color: "#396664" }}
             />
           )}
         </div>
       </form>
-      
+
       <div className="mt-4 text-center">
         <p>
           Wrong email?{" "}
@@ -262,7 +265,6 @@ function VerifyOTP({
             onClick={onBack}
             style={{
               cursor: "pointer",
-              // textDecoration: "underline",
               color: "blue",
             }}
           >

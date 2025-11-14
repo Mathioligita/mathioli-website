@@ -1,13 +1,13 @@
 "use client";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState, useCallback } from "react";
 import { Col, Row } from "react-bootstrap";
-import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { Checkbox } from "primereact/checkbox";
 import { Toast } from "primereact/toast";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import "./checkout.scss";
+
 import userContext from "../../UseContext/UseContext";
 import {
   addToCartAPI,
@@ -17,6 +17,7 @@ import {
   Checkout,
   PlaceOrderAPi,
 } from "../../../../api/page";
+
 import Payment from "./razorpay/Payment";
 import ChangeAddress from "./ChangeAddress";
 import ShippingForm from "./ShippingForm";
@@ -29,7 +30,7 @@ const CheckoutPage = () => {
   const [checkoutdata, setCheckoutdata] = useState(null);
   const [open, setOpen] = useState(false);
   const [changeAddressOpen, setChangeAddressOpen] = useState(false);
-  const [shippingFormOpen, setShippingFormOpen] = useState(false);
+  const [shippingFormOpen, Finance] = useState(false);
   const [paynowbutton, setPaybutton] = useState(false);
   const [editshippingfromdata, setEditshippingfromdata] = useState(null);
   const [singleselectbooks, setSingleselectBooks] = useState([]);
@@ -77,9 +78,6 @@ const CheckoutPage = () => {
     privacy_policy: false,
   });
 
-
-
-
   const [errors, setErrors] = useState({ privacy_policy: "" });
 
   const accessToken = Cookies.get("accessToken");
@@ -99,9 +97,7 @@ const CheckoutPage = () => {
           const firstActive =
             res?.data?.user?.shippingAddress?.find((a) => a.active) ||
             res?.data?.user?.shippingAddress?.[0];
-          if (firstActive) {
-            setEditshippingfromdata(firstActive._id);
-          }
+          if (firstActive) setEditshippingfromdata(firstActive._id);
         }
       }
     } catch (e) {
@@ -122,13 +118,80 @@ const CheckoutPage = () => {
   const hardcopyPrice = selecteditemhardcopy?.price || 0;
   const subtotalSingle = audiobookPrice + hardcopyPrice;
 
-  const handleClickOpen = () => {
-    setErrors({ privacy_policy: "" });
-
-    const activeAddr =
+  const getActiveAddress = useCallback(() => {
+    return (
       user?.shippingAddress?.find((a) => a.active) ||
       usersdata?.shippingAddress?.find((a) => a.active) ||
-      user?.shippingAddress?.[0];
+      user?.shippingAddress?.[0]
+    );
+  }, [user, usersdata]);
+
+  const fetchShippingData = useCallback(async () => {
+    const activeAddr = getActiveAddress();
+
+    if (!activeAddr?.zipCode) {
+      setShippingdata(null);
+      setPaybutton(false);
+      return;
+    }
+
+    const payload = {
+      postalCode: activeAddr.zipCode,
+      weight:
+        checkoutdata?.totalWeight ||
+        selecteditemhardcopy?.weight ||
+        selectedhardcopy1?.weight,
+      subtotal:
+        checkoutdata?.total || subtotalSingle || selectedhardcopy1?.totalPrice,
+    };
+    ;
+
+    try {
+      const res = await APIshippingdata(payload);
+      console.log(res.data);
+
+      if (res?.success) {
+        setShippingdata(res.data);
+        setPaybutton(true);
+      } else {
+        setShippingdata(null);
+        setPaybutton(false);
+        toast.current?.show({
+          severity: "error",
+          summary: "Shipping Error",
+          detail: res?.data?.message || "Shipping not available Pls Change the Pin code",
+          life: 3000,
+        });
+      }
+    } catch (e) {
+      console.error("Shipping API error:", e);
+      setShippingdata(null);
+      setPaybutton(false);
+      toast.current?.show({
+        severity: "error",
+        summary: "API Error",
+        detail: "Unable to fetch shipping data",
+        life: 3000,
+      });
+    }
+  }, [
+    getActiveAddress,
+    checkoutdata,
+    selecteditemhardcopy,
+    selectedhardcopy1,
+    subtotalSingle,
+  ]);
+
+  useEffect(() => {
+    if (!user && !usersdata) return;
+    if (!checkoutdata && !selecteditemhardcopy && !selectedhardcopy1) return;
+
+    fetchShippingData();
+  }, [fetchShippingData]);
+
+  const handleClickOpen = () => {
+    setErrors({ privacy_policy: "" });
+    const activeAddr = getActiveAddress();
 
     setFormData({
       fullName: activeAddr?.fullName || `${user?.firstName} ${user?.lastName}`.trim(),
@@ -147,10 +210,7 @@ const CheckoutPage = () => {
       privacy_policy: true,
     });
 
-    if (activeAddr) {
-      setEditshippingfromdata(activeAddr._id);
-    }
-
+    if (activeAddr) setEditshippingfromdata(activeAddr._id);
     setOpen(true);
     setShippingFormOpen(true);
   };
@@ -165,9 +225,13 @@ const CheckoutPage = () => {
 
   const removeFromCart = async (product) => {
     if (sessionStorage.getItem("buysinglebook") && sessionStorage.getItem("singleBookBuying")) {
-      ["selectedBook", "selectedaudiocopy", "selectedHardcopy", "buysinglebook", "singleBookBuying"].forEach(
-        (k) => sessionStorage.removeItem(k)
-      );
+      [
+        "selectedBook",
+        "selectedaudiocopy",
+        "selectedHardcopy",
+        "buysinglebook",
+        "singleBookBuying",
+      ].forEach((k) => sessionStorage.removeItem(k));
       toast.current?.show({
         severity: "warn",
         summary: "Removed",
@@ -180,13 +244,25 @@ const CheckoutPage = () => {
 
     setCart((prev) => prev.filter((i) => i._id !== product._id));
     try {
-      await CartRemoveAPI({ bookId: product?.bookId?._id || selecteditemhardcopy?._id });
-      toast.current?.show({ severity: "warn", summary: "Removed", detail: "Item removed.", life: 3000 });
+      await CartRemoveAPI({
+        bookId: product?.bookId?._id || selecteditemhardcopy?._id,
+      });
+      toast.current?.show({
+        severity: "warn",
+        summary: "Removed",
+        detail: "Item removed.",
+        life: 3000,
+      });
       fetchData();
       const cartRes = await addToCartAPI();
       setCart(cartRes?.data?.cart || []);
     } catch (e) {
-      toast.current?.show({ severity: "error", summary: "Error", detail: "Failed to remove.", life: 3000 });
+      toast.current?.show({
+        severity: "error",
+        summary: "Error",
+        detail: "Failed to remove.",
+        life: 3000,
+      });
     }
   };
 
@@ -204,7 +280,10 @@ const CheckoutPage = () => {
 
   const validateForm = () => {
     if (!formData.privacy_policy) {
-      setErrors({ privacy_policy: "You must agree to the Privacy Policy and Terms & Conditions" });
+      setErrors({
+        privacy_policy:
+          "You must agree to the Privacy Policy and Terms & Conditions",
+      });
       return false;
     }
     setErrors({});
@@ -214,10 +293,7 @@ const CheckoutPage = () => {
   const handlePayment = async () => {
     if (!validateForm()) return { razorpayOrderId: "", orderTotalAmount: 0 };
 
-    const activeAddr =
-      user?.shippingAddress?.find((a) => a.active) ||
-      usersdata?.shippingAddress?.find((a) => a.active) ||
-      user?.shippingAddress?.[0];
+    const activeAddr = getActiveAddress();
 
     const shippingAddress = {
       name: activeAddr?.fullName || `${user?.firstName} ${user?.lastName}`,
@@ -255,10 +331,14 @@ const CheckoutPage = () => {
     const payload = {
       orderItems,
       shippingAddress,
-      totalAmount: shippingdata?.totalAmount || selectedhardcopy1?.totalPrice || subtotalSingle,
+      totalAmount:
+        shippingdata?.totalAmount ||
+        selectedhardcopy1?.totalPrice ||
+        subtotalSingle,
       terms_condition: true,
       privacy_policy: true,
-      subTotal: shippingdata?.subtotal || subtotalSingle || selectedhardcopy1?.subTotal,
+      subTotal:
+        shippingdata?.subtotal || subtotalSingle || selectedhardcopy1?.subTotal,
       shippingAmount: shippingdata?.freight_charge,
       ...(selecteditemhardcopy && { bookType: "hardcopy,audiobook" }),
     };
@@ -274,33 +354,6 @@ const CheckoutPage = () => {
       alert("Payment processing error");
     }
     return { razorpayOrderId: "", orderTotalAmount: 0 };
-  };
-
-  const handlesubmit = async () => {
-    const activeAddr =
-      user?.shippingAddress?.find((a) => a.active) ||
-      usersdata?.shippingAddress?.find((a) => a.active) ||
-      user?.shippingAddress?.[0];
-
-    const data = {
-      postalCode: activeAddr?.zipCode,
-      weight:
-        checkoutdata?.totalWeight ||
-        selecteditemhardcopy?.weight ||
-        selectedhardcopy1?.weight,
-      subtotal:
-        checkoutdata?.total || subtotalSingle || selectedhardcopy1?.totalPrice,
-    };
-
-    try {
-      const res = await APIshippingdata(data);
-      if (res.success) {
-        setShippingdata(res.data);
-        setPaybutton(true);
-      }
-    } catch (e) {
-      console.error(e);
-    }
   };
 
   const handlesubmitShppingForm = async (e) => {
@@ -320,19 +373,16 @@ const CheckoutPage = () => {
     };
     const res = await APIshippiAddressUpdate(payload);
     if (res.success) {
-      if (toast.current) {
-        toast.current.show({
-          severity: "success",
-          summary: "Updated",
-          detail: "Address updated successfully!",
-          life: 3000,
-        });
-      }
+      toast.current?.show({
+        severity: "success",
+        summary: "Updated",
+        detail: "Address updated successfully!",
+        life: 3000,
+      });
       fetchData();
       handleClose();
     }
   };
-
 
   const renderAvailability = (label, price) => (
     <div className="d-flex" style={{ textAlign: "center" }}>
@@ -343,7 +393,7 @@ const CheckoutPage = () => {
     </div>
   );
 
-  const availabilityBodyTemplate = (product) => (
+  const availabilityBodyTemplate = () => (
     <ul className="">
       {renderAvailability(
         "Hard Copy",
@@ -356,14 +406,11 @@ const CheckoutPage = () => {
     </ul>
   );
 
-  const activeAddress =
-    user?.shippingAddress?.find((a) => a.active) ||
-    usersdata?.shippingAddress?.find((a) => a.active) ||
-    user?.shippingAddress?.[0] ||
-    null;
+  const activeAddress = getActiveAddress();
 
-
-  const richUserData = (user?.shippingAddress || usersdata?.shippingAddress || []).map((addr) => ({
+  const richUserData = (
+    user?.shippingAddress || usersdata?.shippingAddress || []
+  ).map((addr) => ({
     _id: addr._id,
     active: addr.active,
     fullName: addr.fullName,
@@ -373,7 +420,6 @@ const CheckoutPage = () => {
     zipCode: addr.zipCode,
     country: addr.country || "India",
   }));
-
 
   return (
     <>
@@ -427,42 +473,48 @@ const CheckoutPage = () => {
                 minHeight: "70px",
               }}
             >
-              <div className="d-flex align-items-center" style={{ justifyContent: "space-between" }}>
+              <div
+                className="d-flex align-items-center"
+                style={{ justifyContent: "space-between" }}
+              >
                 <div>
-                  {
-                    activeAddress ?
-                      <span style={{ color: "#838483" }}>
-                        Delivery to {activeAddress.fullName}
-                      </span>
-                      : "No address added yet"}
-
+                  {activeAddress ? (
+                    <span style={{ color: "#838483" }}>
+                      Delivery to {activeAddress.fullName}
+                    </span>
+                  ) : (
+                    <div className="text-danger pt-3">No address available. Pls add an address!</div>
+                  )}
                   <br />
                   {activeAddress && (
-                    <div style={{ color: "#1d5755", fontWeight: 600, display: "flex" }}>
+                    <div
+                      style={{
+                        color: "#1d5755",
+                        fontWeight: 600,
+                        display: "flex",
+                      }}
+                    >
                       <input
                         type="radio"
                         className="radio-button me-2"
                         name="address"
-                        checked={!!activeAddress} // true when activeAddress exists
-                        readOnly // prevents React warning for controlled input
+                        checked={!!activeAddress}
+                        readOnly
                       />
-                      {activeAddress.address}, {activeAddress.city}, {activeAddress.state},{" "}
-                      {activeAddress.country}, {activeAddress.zipCode}
+                      {activeAddress.address}, {activeAddress.city},{" "}
+                      {activeAddress.state}, {activeAddress.country},{" "}
+                      {activeAddress.zipCode}
                     </div>
                   )}
-
                 </div>
 
                 <Button
                   onClick={handleChangeAddress}
                   className="checkout-out-delivery bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded-md border-0 transition-colors mt-1"
-                  style={{
-                    border: "none",
-                  }}
+                  style={{ border: "none" }}
                 >
                   {activeAddress ? "Change Address" : "Add Address"}
                 </Button>
-
               </div>
             </div>
 
@@ -485,27 +537,16 @@ const CheckoutPage = () => {
                 borderRadius: "8px",
               }}
             >
-              <div className="d-flex">
-                <h6
-                  style={{
-                    fontWeight: 500,
-                    marginBottom: "10px",
-                    fontFamily: "Poppins",
-                    textAlign: "center",
-                  }}
-                >
-                  Order Summary
-                </h6>
-                <div className="ms-auto">
-                  <Button
-                    onClick={handlesubmit}
-                    className="checkout-out-delivery"
-                    disabled={!activeAddress}
-                  >
-                    Delivery to this Address
-                  </Button>
-                </div>
-              </div>
+              <h6
+                style={{
+                  fontWeight: 500,
+                  marginBottom: "10px",
+                  fontFamily: "Poppins",
+                  textAlign: "center",
+                }}
+              >
+                Order Summary
+              </h6>
 
               <hr />
               <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -519,10 +560,16 @@ const CheckoutPage = () => {
                 </p>
               </div>
 
-              <div style={{ display: "flex", justifyContent: "space-between", marginTop: "8px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  marginTop: "8px",
+                }}
+              >
                 <p style={{ fontWeight: 400, fontSize: "14px" }}>Shipping</p>
                 <p style={{ fontWeight: 400, fontSize: "14px" }}>
-                  {shippingdata?.freight_charge || "--"}
+                  {shippingdata?.freight_charge ?? "--"}
                 </p>
               </div>
 
@@ -530,13 +577,13 @@ const CheckoutPage = () => {
                 <span className="fw-light text-success">
                   {shippingdata?.estimated_delivery_days
                     ? `( Delivery Within ${shippingdata.estimated_delivery_days} days )`
-                    : "Select the delivery address"}
+                    : activeAddress ? "Calculating..." : "Select address"}
                 </span>
               </div>
 
               <hr />
               <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <p style={{ fontWeight: "bold" }}>Total</p>
+                <n style={{ fontWeight: "bold" }}>Total</n>
                 <p style={{ fontWeight: "bold" }}>
                   ₹
                   {(shippingdata?.totalAmount ||
@@ -553,13 +600,23 @@ const CheckoutPage = () => {
                       checked={formData.privacy_policy}
                       onChange={handleChange}
                     />
-                    <label htmlFor="privacy" className="ms-2" style={{ fontSize: "12px" }}>
+                    <label
+                      htmlFor="privacy"
+                      className="ms-2"
+                      style={{ fontSize: "12px" }}
+                    >
                       I agree to the{" "}
-                      <a href="/book/terms-and-conditions" className="text-decoration-none">
+                      <a
+                        href="/book/terms-and-conditions"
+                        className="text-decoration-none"
+                      >
                         Terms & Conditions
                       </a>{" "}
                       &{" "}
-                      <a href="/book/privacy-policy" className="text-decoration-none">
+                      <a
+                        href="/book/privacy-policy"
+                        className="text-decoration-none"
+                      >
                         Privacy Policy
                       </a>
                     </label>
