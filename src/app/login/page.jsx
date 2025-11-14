@@ -54,6 +54,7 @@ function Login({ visible, onHide }) {
           life: 3000,
         });
         setTimeout(() => onHide(), 1000);
+        window.location.reload()
       } else {
         toast.current.show({
           severity: "error",

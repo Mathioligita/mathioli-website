@@ -242,7 +242,7 @@ export default function Addtocart() {
       />
       <div className="text-start">
         <h6 className="mb-1" style={{ fontSize: "14px" }}>
-          {product?.bookId?.title.length > 20
+          {product?.bookId?.title?.length > 20
             ? `${product?.bookId?.title.substring(0, 20)}...`
             : product?.bookId?.title}
         </h6>
@@ -459,7 +459,7 @@ export default function Addtocart() {
               />
             </div>
 
-            {carts.length > 0 ? (
+            {carts?.length > 0 ? (
               <>
                 <DataTable
                   value={carts}

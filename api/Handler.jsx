@@ -22,7 +22,7 @@ const fetchHandler = async ({
 		headers['Authorization'] = `Bearer ${accessToken}`;
 	}
 
-	
+
 	const options = {
 		method,
 		url,
@@ -47,17 +47,10 @@ const fetchHandler = async ({
 			const { status, data, headers } = error.response;
 
 			if (status === 401) {
-				if (!localStorage.getItem("handled401")) {
-					localStorage.setItem("handled401", "true");
-
-					localStorage.removeItem("accessToken");
-					localStorage.removeItem("refreshToken");
-					Cookies.remove("accessToken");
-					Cookies.remove("refreshToken");
-					alert("Your session has expired. Please log in again.");
-					window.location.href = "/";
-				}
-				return { isError: true, data: "Unauthorized" };
+				localStorage.removeItem("accessToken");
+				localStorage.removeItem("refreshToken");
+				Cookies.remove("accessToken");
+				Cookies.remove("refreshToken");
 			}
 
 			if (status === 404) {

@@ -8,7 +8,6 @@ const ProfileSidebar = ({ onNavigate, user, triggerFileInput }) => {
   const router = useRouter();
   const handleLogout = () => {
     Cookies.remove("accessToken");
-    localStorage.removeItem("handled401", "true")
     router.push("/");
   };
   return (
